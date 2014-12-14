@@ -1,0 +1,13 @@
+{% extends "adm/base/generic/update.html" %}
+
+{% load static %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'adm/js/app/pagemap/form.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <div id="id_page_pk" class="hidden">{{ object.pk }}</div>
+{% endblock %}

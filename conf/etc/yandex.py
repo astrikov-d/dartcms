@@ -1,0 +1,7 @@
+__author__ = 'astrikov'
+
+# Yandex OAUTH data for metric app.
+
+YANDEX_OAUTH_APP_ID = '05d6ccbf63de484d906a734287cdf5d3'
+YANDEX_OAUTH_APP_PSWD = '9ded6e39a6b34b69b751f072111432bc'
+YANDEX_OAUTH_ACCESS_TOKEN = 'f63b6c28bed64d52b7263abe3731209b'

@@ -1,0 +1,25 @@
+{% extends "adm/base/generic/grid.html" %}
+
+{% block breadcrumbs_current_path %}
+    {{ block.super }}
+    <li class="active">Изменить запись</li>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ page_header|capfirst }} <small>Изменить запись</small></h1>
+    <div class="well well-sm">
+        <form method="POST" class="form-horizontal" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include "adm/forms/horizontal.html" %}
+            {% block additional_form_fields %}{% endblock %}
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    {% block form_actions %}
+                        <button type="submit" class="btn btn-primary">Изменить</button>
+                        <a href="{{ index_url }}" class="btn btn-link">Отмена</a>
+                    {% endblock %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

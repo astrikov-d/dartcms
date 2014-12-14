@@ -1,0 +1,22 @@
+{% extends "adm/base/generic/grid.html" %}
+
+{% block breadcrumbs_current_path %}
+    {{ block.super }}
+    <li class="active">Удалить запись</li>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ page_header|capfirst }}
+        <small>Удалить запись {{ object }}</small>
+    </h1>
+    <div class="well well-sm">
+        <form method="POST" class="form-horizontal">
+            {% csrf_token %}
+            <div class="alert alert-danger">
+                Удаление записи необратимо. Вы уверены, что хотите продолжить?
+            </div>
+            <button type="submit" class="btn btn-danger">Да</button>
+            <a href="{{ index_url }}" class="btn btn-link">Отмена</a>
+        </form>
+    </div>
+{% endblock %}

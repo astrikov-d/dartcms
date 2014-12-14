@@ -1,0 +1,36 @@
+{% load startswith %}
+
+<ul class="sidebar-menu">
+    {% if video_categories %}
+        {% url "video:index" as root_video_url %}
+        <li {% ifstartswith request.path root_video_url %}class="active open"{% endifstartswith %}>
+            <a href="#" class="sidebar-dropdown-toggle">
+                <i class="fa fa-chevron-down sidebar-toggle-icon"></i>
+                <i class="fa fa-youtube-play category-icon"></i> Видео
+            </a>
+            <ul>
+                {% for category in video_categories %}
+                    {% url 'video:category' category_slug=category.slug as root_video_category_url %}
+                    <li {% ifstartswith request.path root_video_category_url %}class="active"{% endifstartswith %}>
+                        <a href="{{ root_video_category_url }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+    {% if article_categories %}
+        <li>
+            <a href="#" class="sidebar-dropdown-toggle">
+                <i class="fa fa-chevron-down sidebar-toggle-icon"></i>
+                <i class="fa fa-th-large category-icon"></i> Журнал
+            </a>
+            <ul>
+                {% for category in article_categories %}
+                    <li>
+                        <a href="#">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>

@@ -1,0 +1,64 @@
+{% extends "site/base/inner.html" %}
+
+{% load static feeds youtube thumbnail %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'site/js/lib/gridalicious/jquery.gridalicious.min.js' %}"></script>
+
+    <script src="{% static 'site/js/app/homepage/gridalicious.init.js' %}"></script>
+    <script src="{% static 'site/js/app/homepage/prettyphoto.init.js' %}"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{% url 'homepage' %}">Главная</a></li>
+            <li class="active">Поиск</li>
+        </ol>
+        <div class="page-header">
+            <h1>Результаты поиска по запросу &laquo;{{ q }}&raquo;</h1>
+        </div>
+        <div data-toggle="gridalicious" data-gridalicious-width="280" data-gridalicious-gutter="15" class="hide2">
+            {% for result in search_results %}
+                <div class="widget widget-heading-simple widget-body-white widget-pinterest active">
+                    <div class="widget-body padding-none">
+                        {% with content_type=result.object.search_content_type %}
+                            {% if content_type == 'video' %}
+                                {% url "video:detail" category_slug=result.object.category.slug video_slug=result.object.slug as object_url %}
+
+                                <a href="{{ object_url }}" class="thumb">
+                                    <i class="fa fa-youtube-play video-play-icon"></i>
+
+                                    <div class="widget-video-summary">
+                                        <div class="pull-right">
+                                            {% if result.object.duration %}
+                                                <i class="fa fa-clock-o"></i> {{ result.object.duration }}
+                                            {% endif %}
+                                        </div>
+                                        <i class="fa fa-eye"></i> {{ result.object.views_count }}
+                                    </div>
+                                    <img src="{% if result.object.picture %}{{ result.object.picture|thumbnail:"640x480" }}{% else %}{{ result.object|get_youtube_thumbnail }}{% endif %}"
+                                         alt="photo"/>
+                                </a>
+
+                            {% elif content_type == 'articles' %}
+                                <a href="{{ object_url }}" class="thumb">
+                                    <div class="widget-video-summary">
+                                        <i class="fa fa-eye"></i> {{ result.object.views_count }}
+                                    </div>
+                                    <img src="{{ result.object.picture|thumbnail:"640x480" }}" alt="photo"/>
+                                </a>
+                            {% endif %}
+                            <div class="description">
+                                <h5 class="text-uppercase">{{ result.object.name }}</h5>
+
+                                {{ result.object.short_text|safe }}
+                            </div>
+                        {% endwith %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

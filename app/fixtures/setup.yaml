@@ -1,0 +1,65 @@
+- model: app.advplace
+  pk: 1
+  fields:
+    name: Баннер
+    slug: banner_place
+    is_enabled: True
+
+- model: app.advsection
+  pk: 1
+  fields:
+    name: Не главная
+    is_enabled: True
+
+- model: app.advsection
+  pk: 2
+  fields:
+    name: Главная
+    is_enabled: True
+
+#############################
+
+- model: app.pagemodule
+  pk: 1
+  fields:
+    slug: home
+    name: Главная страница
+    is_enabled: false
+
+- model: app.pagemodule
+  pk: 2
+  fields:
+    slug: pagemap
+    name: Статическая страница
+
+- model: app.pagemodule
+  pk: 3
+  fields:
+    slug: feeds
+    name: Ленты
+
+
+##############################
+
+- model: app.page
+  pk: 1
+  fields:
+    title: Главная страница
+    header: Главная страница
+    adv_section: 2
+    url: /
+    module: 1
+
+##############################
+
+- model: app.feedtype
+  pk: 1
+  fields:
+    name: Новости
+    slug: news
+
+- model: app.feedtype
+  pk: 2
+  fields:
+    name: Статьи
+    slug: articles

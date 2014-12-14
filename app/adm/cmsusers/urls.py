@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Dmitry Astrikov'
+
+from django.conf.urls import patterns, url, include
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.forms.models import modelform_factory
+
+from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
+from views import ChangePasswordView
+
+Form = modelform_factory(User, exclude=('password', 'last_login', 'date_joined', 'user_permissions', 'groups'))
+
+kwargs = {
+    'model': User,
+    'form_class': Form,
+    'grid_columns': (
+        ('username', u'Имя пользователя', 'string', '40%'),
+        ('last_login', u'Последний раз заходил', 'datetime', '20%'),
+        ('is_staff', u'Менеджер', 'boolean', '10%'),
+        ('is_active', u'Активный', 'boolean', '10%'),
+    ),
+}
+
+grid_kwargs = kwargs.copy()
+grid_kwargs.update({
+   'template_name': 'adm/cmsusers/grid.html'
+})
+
+urlpatterns = patterns('',
+   url(r'^$', login_required(GridView.as_view(**grid_kwargs)), name='index'),
+   url(r'^page/(?P<page>\d+)/$', login_required(GridView.as_view(**grid_kwargs)), name='index'),
+   url(r'^insert/$', login_required(InsertObjectView.as_view(**kwargs)), name='insert'),
+   url(r'^update/(?P<pk>\d+)/$', login_required(UpdateObjectView.as_view(**kwargs)), name='update'),
+   url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(**kwargs)), name='delete'),
+   url(r'^change-password/(?P<pk>\d+)/$', login_required(ChangePasswordView.as_view()),
+       name='change_password'),
+)

@@ -1,0 +1,13 @@
+Django
+Markdown
+Pillow
+PyYAML
+django-debug-toolbar
+django-filter
+django-gravatar2
+django-subdomains
+django-widget-tweaks
+psycopg2
+requests
+pytils
+django-watson

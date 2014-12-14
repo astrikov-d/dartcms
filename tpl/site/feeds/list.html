@@ -1,0 +1,48 @@
+{% extends "site/base/inner.html" %}
+
+{% load thumbnail %}
+
+{% block last_news %}{% endblock %}
+
+{% block page_content %}
+    {{ request.page.before_content|safe }}
+    {% if object_list %}
+        {% for item in object_list %}
+            {% url "feeds:detail" page_slug=request.page.slug pk=item.pk as item_url %}
+            <div class="media">
+                {% if item.picture %}
+                    <a class="pull-left" href="{{ item_url }}">
+                        {% if item.picture.width > item.picture.height %}
+                            <img class="media-object img-thumbnail" src="{{ item.picture|thumbnail:"90x70" }}"
+                                 alt="{{ item.name }}">
+                        {% elif item.picture.width < item.picture.height %}
+                            <img class="media-object img-thumbnail" src="{{ item.picture|thumbnail:"90x120" }}"
+                                 alt="{{ item.name }}">
+                        {% else %}
+                            <img class="media-object img-thumbnail" src="{{ item.picture|thumbnail:"90x90" }}"
+                                 alt="{{ item.name }}">
+                        {% endif %}
+                    </a>
+                {% endif %}
+
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="{{ item_url }}">{{ item.name }}</a>
+                    </h4>
+                    {% block date %}
+                        <p class="date">{{ item.date_published|date:"d M Y" }}</p>
+                    {% endblock %}
+                    {{ item.short_text|safe }}
+                </div>
+            </div>
+        {% endfor %}
+        {% if is_paginated %}
+            {% with request.page.url as pagination_url %}
+                {% include 'site/lists/pagination.html' %}
+            {% endwith %}
+        {% endif %}
+    {% else %}
+        <p>Новостей пока нет</p>
+    {% endif %}
+    {{ request.page.after_content|safe }}
+{% endblock %}

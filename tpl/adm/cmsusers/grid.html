@@ -1,0 +1,8 @@
+{% extends "adm/base/generic/grid.html" %}
+
+{% block grid_controls %}
+    {{ block.super }}
+    <a href="{{ request.path }}change-password/" class="btn btn-info btn-children btn-disabled">
+        <i class="fa fa-lock"></i> Изменить/Задать пароль
+    </a>&nbsp;
+{% endblock %}

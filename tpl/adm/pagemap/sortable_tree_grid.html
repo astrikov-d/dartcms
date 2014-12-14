@@ -1,0 +1,21 @@
+{% extends "adm/base/generic/sortable_tree_grid.html" %}
+
+{% load static recursive_tree %}
+
+{% block object_list %}
+    <ul class="pagemap-root">
+        <li>
+            <div class="sortable-tree-row clickable-row" data-pk="1">
+                <div class="sortable-tree-row-content">
+                    Главная страница
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="sortable-tree">
+                {% for object in object_list %}
+                    {% recursive_tree %}
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}

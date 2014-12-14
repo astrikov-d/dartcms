@@ -1,0 +1,43 @@
+{% extends "site/base/inner.html" %}
+
+{% load static embed_video_tags %}
+
+{% block js %}
+    {{ block.super }}
+    {# <script src="{% static 'site/assets/flowplayer/flowplayer-3.2.13.min.js' %}"></script> #}
+    <script src="http://vjs.zencdn.net/4.10/video.js"></script>
+    <script src="{% static 'site/js/lib/videojs-ads/videojs.ads.js' %}"></script>
+    <script src="{% static 'site/js/app/feeds/detail.js' %}"></script>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link href="http://vjs.zencdn.net/4.10/video-js.css" rel="stylesheet">
+    <link href="{% static 'site/js/lib/videojs-preroll/src/videojs-preroll.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block inline_js %}
+    <script>
+        $(function () {
+            videojs('id-video', {}, function () {
+                var player = this;
+                player.prerollAds();
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>{{ object.name }}</h1>
+    </div>
+    <video id="id-video" class="video-js vjs-default-skin" controls width="640" height="264">
+        <source src="{{ video_url }}" type='video/mp4'/>
+        <p>
+            Ваш браузер устарел. Пожалуйста <a href="http://browsehappy.com/">обновите ваш браузер</a> чтобы посмотреть
+            видео.
+        </p>
+    </video>
+    {{ object.full_text|safe }}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "adm/base/index.html" %}
+
+{% block content %}
+    {% if result %}
+        {% if result == 'success' %}
+            <div class="alert alert-success">Настройки сохранены</div>
+        {% else %}
+            <div class="alert alert-success">Ошибка сохранения настроек</div>
+        {% endif %}
+    {% endif %}
+    <form method="POST" class="form-horizontal">
+        {% csrf_token %}
+        {% include "adm/forms/horizontal.html" %}
+        <div class="form-group">
+            <div class="col-xs-9 col-xs-offset-3">
+                {% block form_actions %}
+                    <button type="submit" class="btn btn-primary">Принять изменения</button>
+                {% endblock %}
+            </div>
+        </div>
+    </form>
+{% endblock %}

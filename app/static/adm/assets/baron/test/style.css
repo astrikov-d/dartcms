@@ -1,0 +1,230 @@
+html, body {margin: 0; padding: 0;height: 100%; font-family: Verdana;}
+
+.test {
+    z-index: 0;
+    display: inline-block;
+    margin: 5px;
+    width: 30%;
+    height: 400px;
+    background: #eee;
+    box-shadow: 0 0 4px #ccc;
+    vertical-align: top;
+}
+
+.test_flex {
+    height: 40%;
+}
+.test_flex .wrapper {
+    height: 70%;
+}
+.test_flex-headers {
+    height: 40%;
+}
+.test_flex-headers .wrapper {
+    height: 70%;
+}
+
+.wrapper {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    margin: 1px auto;
+    height: 200px;
+    border: 1px solid #fc9;
+    background: #fff;
+    box-shadow:
+        0 5px 15px -3px rgba(0, 0, 0, .7),
+        0 0 0 1px rgba(0, 0, 0, .05);
+}
+.scroller {
+    display: block;
+    padding: 0;
+    height: 100%;
+}
+.scroller::-moz-focus-inner {
+    padding: 10px; 
+    border: 10px solid red;
+}
+.scroller:focus {
+    outline: none;
+}
+.scroller::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.scroller__bar-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    bottom: 10px;
+    z-index: 1;
+    display: none;
+    width: 8px;
+    border-radius: 5px;
+    background: #ddf;
+    background: rgba(0, 0, 255, .1);
+}
+.scroller__track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+}
+.scroller__track-visual {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 10px;
+    background: rgba(255, 100, 100, .2);
+}
+.scroller__track-visual:active {
+    box-shadow: 0 0 7px rgba(0, 0, 0, .4) inset;
+}
+.scroller__track_h {
+    bottom: auto;
+    left: 0;
+    width: auto;
+}
+.scroller__bar {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    width: 8px;
+    border-radius: 3px;
+    background: #987;
+    opacity: .6;
+    -webkit-transition: width .2s linear;
+    transition: width .2s linear;
+}
+.wrapper_very-simple .scroller__bar {
+    display: block;
+}
+.scroller__bar:hover {
+    opacity: .8;
+}
+.baron .scroller__bar {
+    display: block;
+}
+.hbaron .scroller__bar_h {
+    display: block;
+}
+.baron .scroller__bar-wrapper {
+    display: block;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.header {
+    /*height: 20px;*/
+}
+.performance .header {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 1);
+}
+.header__title {
+    /*height: 20px;*/
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    background: #ebe7e4;
+    background-color: rgba(200, 255, 250, 1);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .05);
+    color: #222;
+    font-size: 14px;
+    opacity: 1;
+}
+.header__title_state_fixed {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(220, 229, 250, .6);
+    text-shadow: 0 0 5px #fff;
+}
+.header__title_position_top {
+    background: rgba(255, 229, 250, .6);
+}
+.header__title_position_bottom {
+    background: rgba(220, 255, 250, .6);
+}
+.header__title_group_top {
+    color: red;
+}
+.header__title_group_bottom {
+    color: green;
+}
+
+.text {
+    overflow: hidden;
+    margin: 10px;
+    font-size: 12px;
+}
+
+
+.test_horizontal .scroller {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: auto;
+    height: 100%;
+    white-space: nowrap;
+}
+.test_horizontal .container {
+    display: inline-block;
+    height: 100%;
+}
+.test_horizontal .header {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    white-space: normal;
+}
+.test_horizontal .text {
+    display: inline-block;
+    width: 800px;
+    vertical-align: top;
+    white-space: normal;
+}
+.test_horizontal .header__title {
+    width: 20px;
+    height: 100%;
+}
+
+.test_textarea .scroller__bar {
+    display: block;
+}
+
+/* Controls */
+.scroller__control {
+    position: absolute;
+    z-index: 4;
+    width: 20px;
+    height: 20px;
+    background: #fc9;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.scroller__up {
+    top: 0;
+    right: 0;
+}
+.scroller__down {
+    right: 0;
+    bottom: 0;
+}
+
+.scroller__pull {
+    background: red;
+}
+
+.anim {
+    height: 0px;
+    background: red;
+    transition: all 1s linear;
+}
+.anim._visible {
+    height: 1000px;
+}

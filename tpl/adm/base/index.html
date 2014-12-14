@@ -1,0 +1,163 @@
+{% extends "adm/base/base.html" %}
+
+{% load startswith static gravatar subdomainurls %}
+
+{% block title %}
+    {% if active_module %}
+        {{ active_module.name }} / {{ active_module.group.name }}
+    {% else %}
+        Стартовая
+    {% endif %}
+{% endblock %}
+
+{% block inline_js %}
+    {{ block.super }}
+    <script type="text/javascript">
+        function mceInit() {
+            tinymce.init({
+                selector: ".rte",
+                plugins: 'advlist autolink link image lists charmap print preview',
+                file_browser_callback: filebrowserCallback,
+                relative_urls: false,
+                remove_script_host: false
+            });
+        }
+
+        function filebrowserCallback(field_name, url, type, win) {
+            tinymce.activeEditor.windowManager.open({
+                file: '{% url 'filemanager:index' %}',// use an absolute path!
+                title: 'Filemanager',
+                width: 900,
+                height: 450,
+                resizable: 'yes'
+            }, {
+                setUrl: function (url) {
+                    win.document.getElementById(field_name).value = url;
+                }
+            });
+            return false;
+        }
+        mceInit();
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        {% block wrapper %}
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Включить навигацию</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'dashboard' %}">
+                            <img src="{% static 'adm/img/cms_logo.png' %}" height="20px;"/>
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_superuser %}
+                                <li>
+                                    <a href="/secret/" class="tt" data-toggle="tooltip" data-placement="bottom"
+                                       data-title="Панель суперпользователя">
+                                        <i class="fa fa-cogs hidden-xs"></i>
+                                        <span class="visible-xs">Панель суперпользователя</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="http://{{ site.domain }}" class="tt" data-toggle="tooltip"
+                                   data-placement="bottom" data-title="Перейти на сайт">
+                                    <i class="fa fa-mail-forward hidden-xs"></i>
+                                    <span class="visible-xs">Перейти на сайт</span>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-user hidden-xs"></i> <span class="caret hidden-xs"></span>
+                                    <span class="visible-xs">Настройки профиля <span class="caret"></span></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Изменить пароль</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}" class="tt" data-toggle="tooltip" data-placement="bottom"
+                                   data-title="Выйти">
+                                    <i class="fa fa-power-off hidden-xs"></i>
+                                    <span class="visible-xs">Выйти</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="nav-side-menu">
+                <div class="nav-side-menu-content">
+                    <div class="hello-wrapper">
+                        <div class="hello-gravatar">
+                            <img src="{% gravatar_url request.user.email 50 %}" class="img-circle tt"
+                                 data-toggle="tooltip"
+                                 data-title="Вы можете поменять ваш аватар на сайте www.gravatar.com"
+                                 data-placement="right"/>
+                        </div>
+                        <h2>Вы вошли как <strong>{{ request.user.username }}</strong></h2>
+                        <span class="label label-success">online</span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <ul class="nav nav-side-menu-nav">
+                        {% for group in cms_module_groups %}
+                            {% if group.cmsmodules.all %}
+                                <li class="dropdown {% if active_module.group_id == group.slug %}active open{% endif %}">
+                                    <a href="#" class="dropdown-toggle">
+                                        <i class="fa {{ group.fa }}"></i> {{ group.name }}
+                                        <i class="fa fa-chevron-circle-right drop-icon"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        {% for module in group.cmsmodules.all %}
+                                            {% if module.is_enabled %}
+                                                {% with module_url="/"|add:module.slug|add:"/" %}
+                                                    <li {% ifstartswith request.path module_url %}class="active"{% endifstartswith %}>
+                                                        <a href="{{ module_url }}">{{ module.name }}</a></li>
+                                                {% endwith %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="content-area">
+                <div class="container-fluid">
+                    {% block breadcrumbs %}
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'dashboard' %}">CMS</a></li>
+                            {% if active_module %}
+                                <li>{{ active_module.group.name }}</li>
+                            {% endif %}
+                            {% block breadcrumbs_current_path %}
+                                {% if active_module %}
+                                    <li class="active">{{ active_module.name }}</li>
+                                {% else %}
+                                    <li class="active">Стартовая</li>
+                                {% endif %}
+                            {% endblock %}
+                        </ol>
+                    {% endblock %}
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+
+        {% endblock %}
+    </div>
+{% endblock %}
