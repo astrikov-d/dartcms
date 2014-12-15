@@ -1,0 +1,13 @@
+.grid-controls {
+    margin: @grid-controls-margin;
+}
+
+tr.clickable-row {
+    cursor: pointer;
+  &:hover {
+    background: @clickable-row-bg;
+  }
+  &.selected {
+    background: @clickable-selected-row-bg !important;
+  }
+}

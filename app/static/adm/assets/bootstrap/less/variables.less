@@ -15,10 +15,10 @@
 @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 
 @brand-primary:         darken(#428bca, 6.5%);
-@brand-success:         #5cb85c;
+@brand-success:         #31A831;
 @brand-info:            #5bc0de;
-@brand-warning:         #f0ad4e;
-@brand-danger:          #d9534f;
+@brand-warning:         #ff851b;
+@brand-danger:          #ff4136;
 
 
 //== Scaffolding
@@ -42,7 +42,9 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic-ext,cyrillic);
+
+@font-family-sans-serif:  "PT Sans", Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -102,9 +104,9 @@
 @line-height-large:         1.33;
 @line-height-small:         1.5;
 
-@border-radius-base:        4px;
-@border-radius-large:       6px;
-@border-radius-small:       3px;
+@border-radius-base:        3px;
+@border-radius-large:       4px;
+@border-radius-small:       2px;
 
 //** Global color for active items (e.g., navs or dropdowns).
 @component-active-color:    #fff;
@@ -142,7 +144,17 @@
 //
 //## For each of Bootstrap's buttons, define text, background and border color.
 
-@btn-font-weight:                normal;
+@btn-font-size:                  12px;
+@btn-font-weight:                700;
+
+@btn-padding-base-vertical:      10px;
+@btn-padding-base-horizontal:    12px;
+
+@btn-padding-lg-vertical:        14px;
+@btn-padding-lg-horizontal:      12px;
+
+@btn-padding-xs-vertical:        9px;
+@btn-padding-xs-horizontal:      10px;
 
 @btn-default-color:              #333;
 @btn-default-bg:                 #fff;
@@ -354,15 +366,15 @@
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 @navbar-collapse-max-height:       340px;
 
-@navbar-default-color:             #777;
-@navbar-default-bg:                #f8f8f8;
+@navbar-default-color:             #fff;
+@navbar-default-bg:                #39546F;
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
-@navbar-default-link-color:                #777;
-@navbar-default-link-hover-color:          #333;
+@navbar-default-link-color:                #fff;
+@navbar-default-link-hover-color:          #f5f5f5;
 @navbar-default-link-hover-bg:             transparent;
-@navbar-default-link-active-color:         #555;
+@navbar-default-link-active-color:         #f5f5f5;
 @navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
 @navbar-default-link-disabled-color:       #ccc;
 @navbar-default-link-disabled-bg:          transparent;
@@ -749,8 +761,8 @@
 //
 //##
 
-@well-bg:                     #f5f5f5;
-@well-border:                 darken(@well-bg, 7%);
+@well-bg:                     #fff;
+@well-border:                 transparent;
 
 
 //== Badges
@@ -776,10 +788,10 @@
 //
 //##
 
-@breadcrumb-padding-vertical:   8px;
-@breadcrumb-padding-horizontal: 15px;
+@breadcrumb-padding-vertical:   0;
+@breadcrumb-padding-horizontal: 0;
 //** Breadcrumb background color
-@breadcrumb-bg:                 #f5f5f5;
+@breadcrumb-bg:                 transparent;
 //** Breadcrumb text color
 @breadcrumb-color:              #ccc;
 //** Text color of current page in the breadcrumb

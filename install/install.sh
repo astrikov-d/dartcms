@@ -30,12 +30,15 @@ echo "Loading fixtures"
 python manage.py loaddata app/fixtures/setup.yaml
 echo "Success"
 
-read -p "Initial install is done. Do you want to install nodejs packages for Bootstrap? (y/n)" -n 1 -r
+read -p "Initial install is done. Do you want to install nodejs packages for admin app? (y/n)" -n 1 -r
 echo 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing node packages.."
     cd $project_root/app/static/adm/assets/bootstrap
+    npm install
+    echo "Success.."
+    cd $project_root/app/static/adm/css
     npm install
     echo "Success.."
 fi

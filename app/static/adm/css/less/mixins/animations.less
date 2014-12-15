@@ -1,0 +1,19 @@
+.pulse {
+  -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+  -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+  transition: transform ease-out 0.1s, background 0.2s;
+}
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+  -moz-transition: @transition;
+  -ms-transition: @transition;
+  -o-transition: @transition;
+  transition: @transition;
+}
+
+.transform(@transform) {
+  -ms-transform: @transform; /* IE 9 */
+  -webkit-transform: @transform; /* Chrome, Safari, Opera */
+  transform: @transform;
+}

@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^pagemap/', include('app.adm.pagemap.urls', namespace='pagemap')),
     url(r'^metrics/', include('app.adm.metrics.urls', namespace='metrics')),
     url(r'^filemanager/', include('app.adm.filemanager.urls', namespace='filemanager')),
+    url(r'^', include('app.adm.adv.urls', namespace='adv')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
