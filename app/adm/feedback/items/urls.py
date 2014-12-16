@@ -7,21 +7,21 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
-from app.models import FeedItem as Model
+from app.models import FeedbackMessage as Model
 from forms import Form
 
 grid_columns = (
-    ('name', _(u"Name"), 'string', '40%'),
-    ('date_published', _(u"Date of Publication"), 'datetime', '40%'),
-    ('is_visible', _(u"Show on Site"), 'boolean', '20%'),
+    ('author', _(u"Author"), 'string', '40%'),
+    ('email', _(u"Email"), 'string', '40%'),
+    ('date_created', _(u"Date of Creation"), 'datetime', '20%'),
 )
 
 kwargs = {
     'grid_columns': grid_columns,
     'model': Model,
     'form_class': Form,
-    'parent_kwarg_name': 'feed',
-    'parent_model_fk': 'feed_id'
+    'parent_kwarg_name': 'feedback_type',
+    'parent_model_fk': 'feedback_type_id'
 }
 
 urlpatterns = patterns('',

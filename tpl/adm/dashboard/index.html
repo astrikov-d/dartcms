@@ -1,8 +1,12 @@
 {% extends "adm/base/index.html" %}
 
+{% load i18n %}
+
 {% block content %}
-    <h1>Здравствуйте, {{ request.user }}!</h1>
+    <h1>
+        {% blocktrans with username=request.user %}Hello, {{ username }}!{% endblocktrans %}
+    </h1>
     <div class="well">
-        Для начала работы воспользуйтесь боковым меню
+        {% trans 'To start work, use the side menu.' %}
     </div>
 {% endblock %}
