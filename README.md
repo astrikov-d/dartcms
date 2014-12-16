@@ -36,6 +36,8 @@ Installation
 You need the virtualenv package to start. Also, of course you need to create the database and database user before you'll
 run the installation script.
 
+If you want to change the LESS sources, you'll need to install the NodeJS and Grunt.
+
 Clone this repository to your local machine and rename conf/dev/project_settings_template.py
 to /conf/dev/project_settings.py. This is the start point for your project - settings file. Tune it and run the
 install/install.sh script. This script will install virtual environment for your project and all necessary dependencies
