@@ -17,6 +17,19 @@ Features
 - Custom filemanager to work with TinyMCE
 
 
+Modules
+-------
+
+At the moment, only few modules are included:
+
+- Site Structure
+- CMS Users
+- Metrics (based on the Yandex.Metrika API)
+- Site Settings
+- News and Articles
+- Advertising (ads, ad places and ad sections)
+
+
 Installation
 ------------
 
