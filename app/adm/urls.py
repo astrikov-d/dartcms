@@ -14,16 +14,17 @@ admin.autodiscover()
 #handler404 = 'app.admin.pages.views.error404'
 
 urlpatterns = patterns('',
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^secret/', include(admin.site.urls)),
     url(r'^$', login_required(DashBoardIndex.as_view()), name='dashboard'),
     url(r'^auth/', include('app.adm.auth.urls')),
     url(r'^cms-users/', include('app.adm.cmsusers.urls', namespace='cmsusers')),
     url(r'^site-settings/', include('app.adm.sitesettings.urls', namespace='sitesettings')),
     url(r'^feeds/', include('app.adm.feeds.urls', namespace='feeds')),
-    url(r'^projects/', include('app.adm.projects.urls', namespace='projects')),
     url(r'^pagemap/', include('app.adm.pagemap.urls', namespace='pagemap')),
     url(r'^metrics/', include('app.adm.metrics.urls', namespace='metrics')),
     url(r'^filemanager/', include('app.adm.filemanager.urls', namespace='filemanager')),
+    url(r'^profile/', include('app.adm.profile.urls', namespace='profile')),
     url(r'^', include('app.adm.adv.urls', namespace='adv')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

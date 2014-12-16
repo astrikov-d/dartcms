@@ -1,10 +1,8 @@
 {% extends "adm/base/index.html" %}
 
-{% load static %}
-{% load widget_tweaks %}
-{% load metrics %}
+{% load static widget_tweaks metrics i18n %}
 
-{% block title %}Статистика посещаемости / {% endblock %}
+{% block title %}{% trans 'Metrics' %} / {% endblock %}
 
 {% block js %}
     {{ block.super }}
@@ -18,7 +16,7 @@
         $(function () {
             var data = [
                         {
-                            label: 'Уникальные посетители',
+                            label: '{% trans 'Unique Users' %}',
                             data: [
                                 {% for item in traffic.data reversed %}
                                     [gd({{ item.date|ymdate|date:"Y" }}, {{ item.date|ymdate|date:"m" }}, {{ item.date|ymdate|date:"d" }}), {{ item.visitors }}]{% if not forloop.last %},{% endif %}
@@ -26,7 +24,7 @@
                             ]
                         },
                         {
-                            label: 'Посещения',
+                            label: '{% trans 'Visits' %}',
                             data: [
                                 {% for item in traffic.data reversed %}
                                     [gd({{ item.date|ymdate|date:"Y" }}, {{ item.date|ymdate|date:"m" }}, {{ item.date|ymdate|date:"d" }}), {{ item.visits }}]{% if not forloop.last %},{% endif %}
@@ -34,7 +32,7 @@
                             ]
                         },
                         {
-                            label: 'Просмотры страниц',
+                            label: '{% trans 'Page Views' %}',
                             data: [
                                 {% for item in traffic.data reversed %}
                                     [gd({{ item.date|ymdate|date:"Y" }}, {{ item.date|ymdate|date:"m" }}, {{ item.date|ymdate|date:"d" }}), {{ item.page_views }}]{% if not forloop.last %},{% endif %}
@@ -58,67 +56,54 @@
 {% endblock %}
 
 {% block breadcrumbs_current_path %}
-    <li class="active">Статистика посещаемости</li>
+    <li class="active">{% trans 'Metrics' %}</li>
 {% endblock %}
 
 {% block content %}
-    {% if not counter_exists %}
-        <div class="alert alert-warning">
-            Счетчик посещаемости для вашего сайта пока не создан. Чтобы просматривать статистику посещаемости, сначала
-            нужно
-            <a href="{% url 'cp_metrics:counters:index' %}">установить счетчик</a>.
-        </div>
-    {% else %}
-        <div class="well">
-            <div id="id-chart" style="width:100%;height:300px; margin-bottom:40px;"></div>
-            <form class="form-inline" role="form" method="GET">
-                <div class="form-group">
-                    {{ form.date_start|add_class:"form-control" }}
-                </div>
-                &nbsp;
-                <div class="form-group">
-                    {{ form.date_end|add_class:"form-control" }}
-                </div>
-                &nbsp;
-                <button type="submit" class="btn btn-primary">Запросить статистику</button>
-            </form>
-        </div>
-        <table class="table table-striped table-condensed" style="font-size:12px;">
-            <tr>
-                <th>Дата</th>
-                <th>Уникальные посетители</th>
-                <th>Просмотры страниц</th>
-                <th>Посетители</th>
-                <th>Средняя глубина просмотра</th>
-                <th>Новые посетители</th>
-                <th>Процент новых посетителей</th>
-            </tr>
-            <tbody>
-            {% if traffic.data %}
-                {% for item in traffic.data %}
-                    <tr>
-                        <td>{{ item.date|ymdate|date:"d.m.Y" }}</td>
-                        <td>{{ item.visitors }}</td>
-                        <td>{{ item.page_views }}</td>
-                        <td>{{ item.visits }}</td>
-                        <td>{{ item.depth }}</td>
-                        <td>{{ item.new_visitors }}</td>
-                        <td>{{ item.new_visitors_perc }}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
+    <div class="well">
+        <div id="id-chart" style="width:100%;height:300px; margin-bottom:40px;"></div>
+        <form class="form-inline" role="form" method="GET">
+            <div class="form-group">
+                {{ form.date_start|add_class:"form-control" }}
+            </div>
+            &nbsp;
+            <div class="form-group">
+                {{ form.date_end|add_class:"form-control" }}
+            </div>
+            &nbsp;
+            <button type="submit" class="btn btn-primary">{% trans 'Load Data' %}</button>
+        </form>
+    </div>
+    <table class="table table-striped table-condensed" style="font-size:12px;">
+        <tr>
+            <th>{% trans 'Date' %}</th>
+            <th>{% trans 'Unique Users' %}</th>
+            <th>{% trans 'Page Views' %}</th>
+            <th>{% trans 'Visitors' %}</th>
+            <th>{% trans 'Average Depth' %}</th>
+            <th>{% trans 'New Visitors' %}</th>
+            <th>{% trans 'Percent of New Users' %}</th>
+        </tr>
+        <tbody>
+        {% if traffic.data %}
+            {% for item in traffic.data %}
                 <tr>
-                    <td colspan="7">
-                        Данные за указанный период не найдены
-                    </td>
+                    <td>{{ item.date|ymdate|date:"d.m.Y" }}</td>
+                    <td>{{ item.visitors }}</td>
+                    <td>{{ item.page_views }}</td>
+                    <td>{{ item.visits }}</td>
+                    <td>{{ item.depth }}</td>
+                    <td>{{ item.new_visitors }}</td>
+                    <td>{{ item.new_visitors_perc }}</td>
                 </tr>
-            {% endif %}
-            </tbody>
-
-        </table>
-        <p class="help-block">
-            Не знаете что означают те или иные показатели посещаемости? Посетите официальную документацию сервиса <a
-                href="http://help.yandex.ru/metrika/" target="_blank">&laquo;Яндекс.Метрика&raquo;</a>.
-        </p>
-    {% endif %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7">
+                    {% trans 'Data for specified period not found' %}
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

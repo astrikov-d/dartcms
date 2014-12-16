@@ -5,13 +5,14 @@ from django.views.generic import FormView
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
+from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import AdminMixin
 
 
 class ChangePasswordView(AdminMixin, FormView):
     form_class = AdminPasswordChangeForm
-    page_header = u'Пользователи'
+    page_header = _(u'Users')
     template_name = "adm/base/generic/change_password.html"
 
     def get_form_kwargs(self):

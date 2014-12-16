@@ -42,7 +42,7 @@ TIME_ZONE = 'Asia/Krasnoyarsk'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'ru_RU'
+LANGUAGE_CODE = 'ru'
 LANGUAGES = (('ru', 'Russian'),)
 
 # If you set this to False, Django will make some optimizations so as not
@@ -97,7 +97,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'lib.processors.context.template_variables',
-    'lib.processors.admin.context.template_variables'
+    'lib.processors.adm.context.template_variables'
 )
 
 MIDDLEWARE_CLASSES = (

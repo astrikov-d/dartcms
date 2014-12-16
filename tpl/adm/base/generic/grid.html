@@ -1,6 +1,6 @@
 {% extends "adm/base/index.html" %}
 
-{% load attribute list %}
+{% load attribute list i18n %}
 
 {% block breadcrumbs_current_path %}
     <li class="active">{{ page_header|capfirst }}</li>
@@ -12,25 +12,25 @@
         {% block grid_controls %}
             {% if parent_url %}
                 <a href="{{ parent_url }}" class="btn btn-default">
-                    <i class="fa fa-arrow-left"></i> Вернуться назад
+                    <i class="fa fa-arrow-left"></i> {% trans 'Back' %}
                 </a>&nbsp;
             {% endif %}
 
             {% if allow_insert %}
                 <a href="{{ request.path }}insert/" class="btn btn-success">
-                    <i class="fa fa-plus-square"></i> Добавить
+                    <i class="fa fa-plus-square"></i> {% trans 'Add Record' %}
                 </a>&nbsp;
             {% endif %}
 
             {% if allow_update %}
                 <a href="{{ request.path }}update/" class="btn btn-warning btn-disabled btn-update">
-                    <i class="fa fa-pencil-square"></i> Редактировать
+                    <i class="fa fa-pencil-square"></i> {% trans 'Edit' %}
                 </a>&nbsp;
             {% endif %}
 
             {% if allow_delete %}
                 <a href="{{ request.path }}delete/" class="btn btn-danger btn-disabled btn-delete">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="fa fa-trash"></i> {% trans 'Delete' %}
                 </a>&nbsp;
             {% endif %}
 
@@ -58,7 +58,7 @@
                         {% endif %}
                     </div>&nbsp;
                 {% endfor %}
-                <input type="submit" name="search" class="btn btn-primary" value="Поиск"/>
+                <input type="submit" name="search" class="btn btn-primary" value="{% trans 'Search' %}"/>
             </form>
         </div>
     {% endif %}
@@ -104,7 +104,7 @@
                     {% include 'adm/lists/pagination.html' %}
                 {% endif %}
             {% else %}
-                <p>Записи не найдены</p>
+                <p>{% trans 'Records not found.' %}</p>
             {% endif %}
         {% endblock %}
     </div>

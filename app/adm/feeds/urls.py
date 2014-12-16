@@ -4,6 +4,7 @@ __author__ = 'Dmitry Astrikov'
 
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
 from django.forms.models import modelform_factory
@@ -12,11 +13,11 @@ from app.models import Feed as Model
 Form = modelform_factory(Model)
 
 grid_columns = (
-    ('name', u"Название", 'string', '100%'),
+    ('name', _(u"Name"), 'string', '100%'),
 )
 
 object_actions = (
-    (u'Записи', u'items', u'fa-list-alt'),
+    (_(u'Records'), u'items', u'fa-list-alt'),
 )
 
 kwargs = {

@@ -3,6 +3,7 @@ __author__ = 'Dmitry Astrikov'
 
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
 from forms import Form
@@ -12,13 +13,13 @@ urlpatterns = patterns('',
     url(r'^$', login_required(GridView.as_view(
         model=AdvSection,
         grid_columns = (
-            ('name', u"Название", 'string', '80%'),
+            ('name', _(u"Name"), 'string', '80%'),
         ),
     )), name='index'),
     url(r'^page/(?P<page>\d+)/$', login_required(GridView.as_view(
         model=AdvSection,
         grid_columns = (
-            ('name', u"Название", 'string', '80%'),
+            ('name', _(u"Name"), 'string', '80%'),
         ),
     )), name='index'),
     url(r'^insert/$', login_required(InsertObjectView.as_view(

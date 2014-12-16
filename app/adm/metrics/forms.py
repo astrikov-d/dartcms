@@ -2,6 +2,7 @@
 __author__ = 'Dmitry Astrikov'
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 
 class MStatsForm(forms.Form):
@@ -9,15 +10,15 @@ class MStatsForm(forms.Form):
     date_start = forms.DateField(
         widget=forms.DateInput(attrs={
             'class': 'date',
-            'placeholder': 'Дата начала'
+            'placeholder': _(u'Date of Start')
         }, format='%d.%m.%Y'),
-        label='Дата начала'
+        label=_(u'Date of Start')
     )
 
     date_end = forms.DateField(
         widget=forms.DateInput(attrs={
             'class': 'date',
-            'placeholder': 'Дата окончания'
+            'placeholder':  _(u'Date of End')
         }, format='%d.%m.%Y'),
-        label='Дата окончания'
+        label=_(u'Date of End')
     )

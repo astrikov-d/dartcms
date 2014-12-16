@@ -3,6 +3,7 @@ __author__ = 'Dmitry Astrikov'
 
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import SortableTreeGridMoveView, InsertObjectView, UpdateObjectView, DeleteObjectView
 from forms import Form
@@ -14,17 +15,17 @@ urlpatterns = patterns('',
     url(r'^insert/$', login_required(InsertObjectView.as_view(
         model=Page,
         template_name="adm/pagemap/insert.html",
-        page_header=u"Структура сайта",
+        page_header=_(u"Site Structure"),
         form_class=Form
     )), name='insert'),
     url(r'^update/(?P<pk>\d+)/$', login_required(UpdateObjectView.as_view(
         model=Page,
         template_name="adm/pagemap/update.html",
-        page_header=u"Структура сайта",
+        page_header=_(u"Site Structure"),
         form_class=Form
     )), name='update'),
     url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(
-        page_header=u"Структура сайта",
+        page_header=_(u"Site Structure"),
         model=Page
     )), name='delete'),
     url(r'^move/(?P<pk>\d+)/$', login_required(SortableTreeGridMoveView.as_view(

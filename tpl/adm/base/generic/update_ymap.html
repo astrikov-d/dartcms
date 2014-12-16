@@ -51,11 +51,11 @@
 
 {% block additional_form_fields %}
     <div class="form-group">
-        <label class="col-xs-3 control-label">Отметить адрес на карте</label>
+        <label class="col-xs-3 control-label">{% trans 'Mark address on the map' %}</label>
 
         <div class="col-xs-9">
             <div id="map" class="map-holder" style="width:100%; height:450px;"></div>
-            <p class="help-block">Щелкните по карте, чтобы поставить метку.</p>
+            <p class="help-block">{% trans 'Click on map to add the point.' %}</p>
         </div>
     </div>
 {% endblock %}

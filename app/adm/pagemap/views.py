@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from django.utils.translation import ugettext as _
+
 from app.models import Page, PageModule
 from lib.views.adm.generic import SortableTreeGridView
 from lib.views.generic import AjaxRequestView
@@ -8,9 +10,9 @@ from lib.views.generic import AjaxRequestView
 class PagemapView(SortableTreeGridView):
     model = Page
     template_name = "adm/pagemap/sortable_tree_grid.html"
-    page_header = u"Структура сайта"
+    page_header = _(u"Site Structure")
     grid_columns = (
-        ('title', u"Название"),
+        ('title', _(u"Name")),
     )
 
     def get_queryset(self):

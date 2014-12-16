@@ -9,11 +9,6 @@ from app.models import SiteSettings
 class SiteSettingsForm(forms.ModelForm):
     class Meta:
         model = SiteSettings
-
-    footer_content = forms.CharField(
-        widget=forms.Textarea(attrs={
-            'class': 'rte'
-        }),
-        label='Содержимое футера',
-        required=False
-    )
+        widgets = {
+            'footer_content': forms.Textarea(attrs={'class': 'rte'})
+        }

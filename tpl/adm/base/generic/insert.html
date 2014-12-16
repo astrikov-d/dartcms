@@ -1,14 +1,16 @@
 {% extends "adm/base/generic/grid.html" %}
 
+{% load i18n %}
+
 {% block breadcrumbs_current_path %}
     {{ block.super }}
-    <li class="active">Добавить запись</li>
+    <li class="active">{% trans 'Add Record' %}</li>
 {% endblock %}
 
 {% block content %}
     <h1>
         {{ page_header|capfirst }}
-        <small>Добавить запись</small>
+        <small>{% trans 'Add Record' %}</small>
     </h1>
     <div class="well well-sm">
         <form method="POST" class="form-horizontal" enctype="multipart/form-data">
@@ -18,8 +20,8 @@
             <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
                     {% block form_actions %}
-                        <button type="submit" class="btn btn-primary">Добавить</button>
-                        <a href="{{ index_url }}" class="btn btn-link">Отмена</a>
+                        <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
+                        <a href="{{ index_url }}" class="btn btn-link">{% trans 'Cancel' %}</a>
                     {% endblock %}
                 </div>
             </div>

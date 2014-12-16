@@ -17,7 +17,7 @@ MEDIA_ROOT = '%s/www/data/' % PROJECT_ROOT
 STATIC_ROOT = '%s/www/static/' % PROJECT_ROOT
 
 LOCALE_PATHS = (
-    '%s/locale/' % PROJECT_ROOT
+    '%s/app/locale/' % PROJECT_ROOT,
 )
 
 TEMPLATE_DIRS = (
@@ -42,8 +42,11 @@ TIME_ZONE = 'Asia/Krasnoyarsk'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'ru_RU'
-LANGUAGES = (('ru', 'Russian'),)
+LANGUAGE_CODE = 'ru'
+LANGUAGES = (
+    ('ru', 'Russian'),
+    ('en', 'English'),
+)
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -97,7 +100,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'lib.processors.context.template_variables',
-    'lib.processors.admin.context.template_variables'
+    'lib.processors.adm.context.template_variables'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -126,6 +129,8 @@ INSTALLED_APPS = (
     'widget_tweaks',
     # https://pypi.python.org/pypi/django-gravatar2
     'django_gravatar',
+    # https://github.com/mbi/django-rosetta
+    'rosetta',
 
     # Lib
     'lib',

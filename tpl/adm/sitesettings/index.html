@@ -1,22 +1,34 @@
-{% extends "adm/base/index.html" %}
+{% extends "adm/base/generic/update.html" %}
+
+{% load i18n %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a></li>
+        <li class="active">{% trans 'Change Site Settings' %}</li>
+    </ol>
+{% endblock %}
 
 {% block content %}
-    {% if result %}
-        {% if result == 'success' %}
-            <div class="alert alert-success">Настройки сохранены</div>
-        {% else %}
-            <div class="alert alert-success">Ошибка сохранения настроек</div>
+    <h1>{% trans 'Change Site Settings' %}</h1>
+    <div class="well well-sm">
+        {% if result %}
+            {% if result == 'success' %}
+                <div class="alert alert-success">{% trans 'Settings are saved' %}</div>
+            {% else %}
+                <div class="alert alert-success">{% trans 'Error during saving' %}</div>
+            {% endif %}
         {% endif %}
-    {% endif %}
-    <form method="POST" class="form-horizontal">
-        {% csrf_token %}
-        {% include "adm/forms/horizontal.html" %}
-        <div class="form-group">
-            <div class="col-xs-9 col-xs-offset-3">
-                {% block form_actions %}
-                    <button type="submit" class="btn btn-primary">Принять изменения</button>
-                {% endblock %}
+        <form method="POST" class="form-horizontal">
+            {% csrf_token %}
+            {% include "adm/forms/horizontal.html" %}
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    {% block form_actions %}
+                        <button type="submit" class="btn btn-primary">{% trans 'Accept Changes' %}</button>
+                    {% endblock %}
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms.models import modelform_factory
+from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
 from views import ChangePasswordView
@@ -15,10 +16,10 @@ kwargs = {
     'model': User,
     'form_class': Form,
     'grid_columns': (
-        ('username', u'Имя пользователя', 'string', '40%'),
-        ('last_login', u'Последний раз заходил', 'datetime', '20%'),
-        ('is_staff', u'Менеджер', 'boolean', '10%'),
-        ('is_active', u'Активный', 'boolean', '10%'),
+        ('username', _(u'Username'), 'string', '40%'),
+        ('last_login', _(u'Last Login'), 'datetime', '20%'),
+        ('is_staff', _(u'Staff'), 'boolean', '10%'),
+        ('is_active', _(u'Active'), 'boolean', '10%'),
     ),
 }
 

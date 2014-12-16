@@ -6,6 +6,7 @@ import string
 from pytils.translit import slugify
 import watson
 
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
@@ -18,48 +19,58 @@ from lib.utils.hash import random_string
 
 class CMSModuleGroup(models.Model):
     class Meta:
-        verbose_name_plural = "Группы модулей CMS"
-        verbose_name = "Группа модулей CMS"
+        verbose_name_plural = _(u"CMS Module Groups")
+        verbose_name = _(u"CMS Module Group")
         ordering = ['sort']
 
     def __unicode__(self):
-        return self.name
+        lang = get_language()
+        if lang == settings.LANGUAGE_CODE:
+            return self.name
+        else:
+            return self.name_en
 
-    slug = models.SlugField(unique=True, verbose_name="Идентификатор")
-    name = models.CharField(max_length=64, verbose_name="Название")
-    fa = models.SlugField(verbose_name="FontAwesome class")
-    sort = models.IntegerField(default=1, verbose_name="Сортировка")
-    description = models.TextField(default='', verbose_name="Описание", blank=True)
+    slug = models.SlugField(unique=True, verbose_name=_(u"Slug"))
+    name = models.CharField(max_length=64, verbose_name=_(u"Name (RU)"))
+    name_en = models.CharField(max_length=64, verbose_name=_(u"Name (EN)"))
+    fa = models.SlugField(verbose_name=_(u"FontAwesome class"))
+    sort = models.IntegerField(default=1, verbose_name=_(u"Sort"))
+    description = models.TextField(default='', verbose_name=_(u"Description"), blank=True)
 
 
 class CMSModule(models.Model):
     class Meta:
-        verbose_name_plural = "Модули CMS"
-        verbose_name = "Модуль CMS"
+        verbose_name_plural = _(u"CMS Modules")
+        verbose_name = _(u"CMS Module")
         ordering = ['group', 'sort']
 
     def __unicode__(self):
-        return self.group.name + " / " + self.name
+        lang = get_language()
+        if lang == settings.LANGUAGE_CODE:
+            return self.group.name + " / " + self.name
+        else:
+            return self.group.name_en + " / " + self.name_en
 
-    group = models.ForeignKey(CMSModuleGroup, to_field='slug', verbose_name="Группа", related_name="cmsmodules")
-    name = models.CharField(max_length=64, verbose_name="Название")
-    sort = models.IntegerField(default=1, verbose_name="Сортировка")
-    description = models.TextField(default='', verbose_name="Описание", blank=True)
-    slug = models.SlugField(unique=True, verbose_name="Идентификатор")
-    is_enabled = models.BooleanField(default=True, verbose_name="Включен")
+    group = models.ForeignKey(CMSModuleGroup, to_field='slug', verbose_name=_(u"Group"), related_name="cmsmodules")
+    name = models.CharField(max_length=64, verbose_name=_(u"Name (RU)"))
+    name_en = models.CharField(max_length=64, verbose_name=_(u"Name (EN)"))
+    sort = models.IntegerField(default=1, verbose_name=_(u"Sort"))
+    description = models.TextField(default='', verbose_name=_(u"Description"), blank=True)
+    slug = models.SlugField(unique=True, verbose_name=_(u"Slug"))
+    is_enabled = models.BooleanField(default=True, verbose_name=_(u"Is Enabled"))
 
 
 class Folder(models.Model):
     class Meta:
-        verbose_name = "папка"
-        verbose_name_plural = "папки"
+        verbose_name = _(u"folder")
+        verbose_name_plural = _(u"folders")
         ordering = ['name']
         unique_together = ('name',)
 
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=255, verbose_name='Название')
+    name = models.CharField(max_length=255, verbose_name=_(u'Name'))
     date_created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now())
 
 
@@ -78,15 +89,18 @@ def files_delete(sender, instance, **kwargs):
 
 
 class SiteSettings(models.Model):
+    """
+    Site Settings
+    """
     site_title = models.CharField(
         max_length=255,
-        default="",
-        verbose_name="Название сайта",
+        default=u"",
+        verbose_name=_(u"Site Name"),
     )
     site_description = models.TextField(
-        verbose_name="Описание сайта"
+        verbose_name=_(u"Site Description")
     )
-    footer_content = models.TextField(default="", verbose_name="Содержимое футера")
+    footer_content = models.TextField(default=u"", verbose_name=_(u"Footer Content"))
 
 
 class AdvPlace(models.Model):
@@ -95,16 +109,16 @@ class AdvPlace(models.Model):
     """
 
     class Meta:
-        verbose_name = "рекламное место"
-        verbose_name_plural = "рекламные места"
+        verbose_name = _(u"ad place")
+        verbose_name_plural = _(u"ad places")
         ordering = ['name']
 
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=255, verbose_name=u'Название')
+    name = models.CharField(max_length=255, verbose_name=_(u'Name'))
     slug = models.SlugField(unique=True)
-    is_enabled = models.BooleanField(default=True, verbose_name=u'Включено')
+    is_enabled = models.BooleanField(default=True, verbose_name=_(u'Is Enabled'))
 
 
 class AdvSection(models.Model):
@@ -113,15 +127,15 @@ class AdvSection(models.Model):
     """
 
     class Meta:
-        verbose_name = "рекламный раздел"
-        verbose_name_plural = "рекламные разделы"
+        verbose_name = _(u"ad section")
+        verbose_name_plural = _(u"ad sections")
         ordering = ['name']
 
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=255, verbose_name=u'Название')
-    is_enabled = models.BooleanField(default=True, verbose_name=u'Включено')
+    name = models.CharField(max_length=255, verbose_name=_(u'Name'))
+    is_enabled = models.BooleanField(default=True, verbose_name=_(u'Is Enabled'))
 
 
 class Adv(models.Model):
@@ -130,23 +144,23 @@ class Adv(models.Model):
     """
 
     class Meta:
-        verbose_name = "рекламный баннер"
-        verbose_name_plural = "рекламные баннеры"
+        verbose_name = _(u"banner")
+        verbose_name_plural = _(u"banners")
         ordering = ['name']
 
-    date_from = models.DateTimeField(default=datetime.date.today(), verbose_name=u'Дата начала размещения')
+    date_from = models.DateTimeField(default=datetime.date.today(), verbose_name=_(u'Start Date'))
     date_to = models.DateTimeField(
         default=datetime.date.today() + datetime.timedelta(days=30),
-        verbose_name=u'Дата окончания размещения')
-    name = models.CharField(max_length=255, verbose_name=u'Заголовок')
-    title = models.TextField(default='', blank=True, verbose_name=u'Текст')
-    link = models.URLField(default='', blank=True, verbose_name=u'Ссылка')
-    code = models.TextField(default='', blank=True, verbose_name=u'Код баннера')
-    bg = models.CharField(default='', blank=True, max_length=255, verbose_name=u'Цвет фона')
-    place = models.ForeignKey(AdvPlace, verbose_name=u'Место размещения')
-    section = models.ManyToManyField(AdvSection, verbose_name=u'Раздел')
-    picture = models.FileField(upload_to="b/%Y/%m/%d", null=True, blank=True, verbose_name=u'Изображение')
-    is_enabled = models.BooleanField(default=True, verbose_name=u'Включено')
+        verbose_name=_(u'End Date'))
+    name = models.CharField(max_length=255, verbose_name=_(u'Name'))
+    title = models.TextField(default='', blank=True, verbose_name=_(u'Ad Text'))
+    link = models.URLField(default='', blank=True, verbose_name=_(u'Ad Link'))
+    code = models.TextField(default='', blank=True, verbose_name=_(u'Embed Code'))
+    bg = models.CharField(default='', blank=True, max_length=255, verbose_name=_(u'Background Color'))
+    place = models.ForeignKey(AdvPlace, verbose_name=_(u'Ad Place'))
+    section = models.ManyToManyField(AdvSection, verbose_name=_(u'Section'))
+    picture = models.FileField(upload_to="b/%Y/%m/%d", null=True, blank=True, verbose_name=_(u'Picture'))
+    is_enabled = models.BooleanField(default=True, verbose_name=_(u'Is Enabled'))
     date_created = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
 
@@ -158,15 +172,20 @@ class PageModule(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name_plural = u"Функциональные модули"
-        verbose_name = u"Функциональный модуль"
+        verbose_name_plural = _(u"Modules")
+        verbose_name = _(u"Module")
 
     def __unicode__(self):
-        return self.name
+        lang = get_language()
+        if lang == settings.LANGUAGE_CODE:
+            return self.name
+        else:
+            return self.name_en
 
-    slug = models.SlugField(unique=True, verbose_name=u"Идентификатор")
-    name = models.CharField(max_length=64, verbose_name=u"Название")
-    is_enabled = models.BooleanField(default=True, verbose_name=u"Включен")
+    slug = models.SlugField(unique=True, verbose_name=_(u"Slug"))
+    name = models.CharField(max_length=64, verbose_name=_(u"Name (RU)"))
+    name_en = models.CharField(max_length=64, verbose_name=_(u"Name (EN)"))
+    is_enabled = models.BooleanField(default=True, verbose_name=_(u"Is Enabled"))
 
 
 class Page(models.Model):
@@ -176,8 +195,8 @@ class Page(models.Model):
 
     class Meta:
         ordering = ['sort']
-        verbose_name = "страница"
-        verbose_name_plural = "страницы"
+        verbose_name = _(u"page")
+        verbose_name_plural = _(u"pages")
         unique_together = ['module', 'slug']
 
     def __unicode__(self):
@@ -189,27 +208,27 @@ class Page(models.Model):
             parent = parent.parent
         return string.join(reversed(page_names), " / ")
 
-    parent = models.ForeignKey("self", null=True, related_name='children', verbose_name="Родительская страница")
-    title = models.CharField(max_length=255, verbose_name=u'Название (отображается в title)')
-    header = models.CharField(max_length=255, verbose_name=u'Заголовок на странице')
-    menu_name = models.CharField(max_length=255, default='', verbose_name=u'Название пункта меню')
-    menu_url = models.CharField(max_length=255, blank=True, default='', verbose_name=u'Прямой url c пункта меню')
-    slug = models.SlugField(default='', verbose_name=u'Имя для URL')
+    parent = models.ForeignKey("self", null=True, related_name='children', verbose_name=_(u"Parent Page"))
+    title = models.CharField(max_length=255, verbose_name=_(u'Title'), help_text=_(u'Shows inside the <title/> tag'))
+    header = models.CharField(max_length=255, verbose_name=_(u'Page Header'))
+    menu_name = models.CharField(max_length=255, default='', verbose_name=_(u'Menu name'))
+    menu_url = models.CharField(max_length=255, blank=True, default='', verbose_name=_(u'URL for Redirect'))
+    slug = models.SlugField(default='', verbose_name=_(u'URL'))
     url = models.CharField(max_length=512)
     sort = models.IntegerField(default=1)
-    module = models.ForeignKey(PageModule, verbose_name=u"Функциональный модуль")
+    module = models.ForeignKey(PageModule, verbose_name=_(u"Module"))
     module_params = models.CharField(max_length=128, blank=True, null=True, default=None,
-                                     verbose_name=u'Параметры модуля')
-    before_content = models.TextField(default='', blank=True, verbose_name=u'Содержимое до контента')
-    after_content = models.TextField(default='', blank=True, verbose_name=u'Содержимое после контента')
+                                     verbose_name=_(u'Module parameters'))
+    before_content = models.TextField(default='', blank=True, verbose_name=_(u'Before Content'))
+    after_content = models.TextField(default='', blank=True, verbose_name=_(u'After Content'))
     date_created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
     date_changed = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
-    keywords = models.TextField(default='', blank=True, verbose_name=u'Ключевые слова (meta keywords)')
-    description = models.TextField(default='', blank=True, verbose_name=u'Описание (meta description)')
-    adv_section = models.ForeignKey(AdvSection, verbose_name=u'Реклама')
-    is_enabled = models.BooleanField(default=True, verbose_name=u'Включена')
-    is_in_menu = models.BooleanField(default=True, verbose_name=u'Показывать в меню')
-    is_locked = models.BooleanField(default=False, verbose_name=u'Только для авторизованных пользователей')
+    keywords = models.TextField(default='', blank=True, verbose_name=_(u'Keywords (meta keywords)'))
+    description = models.TextField(default='', blank=True, verbose_name=_(u'Description (meta description)'))
+    adv_section = models.ForeignKey(AdvSection, verbose_name=_(u'Ads'))
+    is_enabled = models.BooleanField(default=True, verbose_name=_(u'Is Enabled'))
+    is_in_menu = models.BooleanField(default=True, verbose_name=_(u'Show in Menu'))
+    is_locked = models.BooleanField(default=False, verbose_name=_(u'Only for Authorized Users'))
 
     def get_menu_url(self):
         if self.menu_url:
@@ -281,35 +300,35 @@ class Page(models.Model):
 
 class FeedType(models.Model):
     class Meta:
-        verbose_name = "Тип ленты"
-        verbose_name_plural = "Типы лент"
+        verbose_name = _(u"feed type")
+        verbose_name_plural = _(u"feed types")
 
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=255, verbose_name="Название типа")
-    slug = models.SlugField(verbose_name="Идентификатор")
+    name = models.CharField(max_length=255, verbose_name=_(u"Name"))
+    slug = models.SlugField(verbose_name=_(u"Slug"))
 
 
 class Feed(models.Model):
     class Meta:
-        verbose_name = "категория новостей"
-        verbose_name_plural = "категории новостей"
+        verbose_name = _(u"feed category")
+        verbose_name_plural = _(u"feed categories")
         ordering = ['name']
         unique_together = ['type', 'slug']
 
     def __unicode__(self):
         return self.name
 
-    type = models.ForeignKey(FeedType, verbose_name="Тип", related_name="feeds")
-    name = models.CharField(max_length=255, verbose_name="Название категории")
-    slug = models.SlugField(verbose_name="Имя для URL")
+    type = models.ForeignKey(FeedType, verbose_name=_(u"Type"), related_name="feeds")
+    name = models.CharField(max_length=255, verbose_name=_(u"Name"))
+    slug = models.SlugField(verbose_name=_(u"URL"))
 
 
 class FeedItem(models.Model):
     class Meta:
-        verbose_name = "запись ленты"
-        verbose_name_plural = "записи ленты"
+        verbose_name = _(u"feed item")
+        verbose_name_plural = _(u"feed items")
         ordering = ['-date_published']
 
     @property
@@ -327,75 +346,25 @@ class FeedItem(models.Model):
                 break
         super(FeedItem, self).save()
 
-    feed = models.ForeignKey(Feed, verbose_name="Лента")
-    name = models.CharField(max_length=1024, verbose_name="Заголовок")
-    slug = models.SlugField(unique=True, verbose_name="Текстовый идентификатор")
-    short_text = models.TextField(verbose_name="Анонс")
-    full_text = models.TextField(verbose_name="Полный текст")
-    picture = models.ImageField(verbose_name="Изображение", upload_to="feeds/%Y/%m/%d")
+    feed = models.ForeignKey(Feed, verbose_name=_(u"Feed"))
+    name = models.CharField(max_length=1024, verbose_name=_(u"Title"))
+    slug = models.SlugField(unique=True, verbose_name=_(u"Slug"))
+    short_text = models.TextField(verbose_name=_(u"Short Text"))
+    full_text = models.TextField(verbose_name=_(u"Full Text"))
+    picture = models.ImageField(verbose_name=_(u"Picture"), upload_to="feeds/%Y/%m/%d")
     seo_keywords = models.TextField(
-        verbose_name="Ключевые слова (SEO)",
-        help_text="Не рекомендуется использовать более 255 символов",
+        verbose_name=_(u"Keywords"),
+        help_text=_(u"Don't use more than 255 symbols"),
         blank=True
     )
     seo_description = models.TextField(
-        verbose_name="Описание (SEO)",
-        help_text="Не рекомендуется использовать более 1024 символов",
+        verbose_name=_(u"Description"),
+        help_text=_(u"Don't use more than 1024 symbols"),
         blank=True
     )
-    is_visible = models.BooleanField(default=True, verbose_name="Отображать на сайте")
-    date_published = models.DateTimeField(default=datetime.datetime.now, verbose_name="Дата публикации")
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    is_visible = models.BooleanField(default=True, verbose_name=_(u"Show on Site"))
+    date_published = models.DateTimeField(default=datetime.datetime.now, verbose_name=_(u"Date of Publication"))
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name=_(u"Date of Creation"))
+
 
 watson.register(FeedItem)
-
-
-class ProjectType(models.Model):
-    class Meta:
-        verbose_name = "тип проекта"
-        verbose_name_plural = "типы проектов"
-        ordering = ['name']
-
-    name = models.CharField(max_length=255, verbose_name="Название")
-    slug = models.SlugField(verbose_name="Идентификатор")
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-
-
-class Project(models.Model):
-    class Meta:
-        verbose_name = "проект"
-        verbose_name_plural = "проекты"
-        ordering = ['-date_published']
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        self.slug = slugify(self.name)
-        while True:
-            try:
-                Project.objects.get(slug=self.slug)
-                self.slug = u"%s-%s" % (self.slug, datetime.datetime.today().strftime("%Y%m%d%H%M%S"))
-            except Project.DoesNotExist:
-                break
-        super(Project, self).save()
-
-    project_type = models.ForeignKey(ProjectType, related_name='projects')
-    name = models.CharField(max_length=1024, verbose_name="Заголовок")
-    url = models.URLField(verbose_name="URL")
-    slug = models.SlugField(unique=True, verbose_name="Текстовый идентификатор")
-    short_text = models.TextField(verbose_name="Анонс")
-    full_text = models.TextField(verbose_name="Полный текст")
-    picture = models.ImageField(verbose_name="Изображение", upload_to="feeds/%Y/%m/%d")
-    page_preview_picture = models.ImageField(verbose_name="Изображение для фона", upload_to="feeds/%Y/%m/%d")
-    seo_keywords = models.TextField(
-        verbose_name="Ключевые слова (SEO)",
-        help_text="Не рекомендуется использовать более 255 символов",
-        blank=True
-    )
-    seo_description = models.TextField(
-        verbose_name="Описание (SEO)",
-        help_text="Не рекомендуется использовать более 1024 символов",
-        blank=True
-    )
-    is_visible = models.BooleanField(default=True, verbose_name="Отображать на сайте")
-    date_published = models.DateTimeField(default=datetime.datetime.now, verbose_name="Дата публикации")
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")

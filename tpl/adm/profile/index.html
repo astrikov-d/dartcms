@@ -1,0 +1,41 @@
+{% extends "adm/base/generic/update.html" %}
+
+{% load i18n %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a></li>
+        <li class="active">{% trans 'Change Profile Settings' %}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Change Profile Settings' %}</h1>
+    <div class="well well-sm">
+        <form method="POST" class="form-horizontal" enctype="multipart/form-data" action="{% url 'set_language' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_language" class="control-label col-xs-3">{% trans 'Choose Language' %}</label>
+
+                <div class="col-xs-9">
+                    <select name="language" class="form-control" id="id_language">
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                    selected="selected"{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    {% block form_actions %}
+                        <button type="submit" class="btn btn-primary">{% trans 'Accept Changes' %}</button>
+                    {% endblock %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

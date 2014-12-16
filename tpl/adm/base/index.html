@@ -1,12 +1,16 @@
 {% extends "adm/base/base.html" %}
 
-{% load startswith static gravatar subdomainurls %}
+{% load startswith static gravatar subdomainurls i18n %}
 
 {% block title %}
     {% if active_module %}
-        {{ active_module.name }} / {{ active_module.group.name }}
+        {% if LANGUAGE_CODE == 'en' %}
+            {{ active_module.name_en }} / {{ active_module.group.name_en }}
+        {% else %}
+            {{ active_module.name }} / {{ active_module.group.name }}
+        {% endif %}
     {% else %}
-        Стартовая
+        {% trans 'Dashboard' %}
     {% endif %}
 {% endblock %}
 
@@ -50,7 +54,7 @@
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
                                 data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Включить навигацию</span>
+                            <span class="sr-only">{% trans 'Toggle Navigation' %}</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -64,33 +68,42 @@
                             {% if request.user.is_superuser %}
                                 <li>
                                     <a href="/secret/" class="tt" data-toggle="tooltip" data-placement="bottom"
-                                       data-title="Панель суперпользователя">
+                                       data-title="{% trans 'Superuser Panel' %}">
                                         <i class="fa fa-cogs hidden-xs"></i>
-                                        <span class="visible-xs">Панель суперпользователя</span>
+                                        <span class="visible-xs">{% trans 'Superuser Panel' %}</span>
                                     </a>
                                 </li>
                             {% endif %}
                             <li>
                                 <a href="http://{{ site.domain }}" class="tt" data-toggle="tooltip"
-                                   data-placement="bottom" data-title="Перейти на сайт">
+                                   data-placement="bottom" data-title="{% trans 'Enter Site' %}">
                                     <i class="fa fa-mail-forward hidden-xs"></i>
-                                    <span class="visible-xs">Перейти на сайт</span>
+                                    <span class="visible-xs">{% trans 'Enter Site' %}</span>
                                 </a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-user hidden-xs"></i> <span class="caret hidden-xs"></span>
-                                    <span class="visible-xs">Настройки профиля <span class="caret"></span></span>
+                                    <span class="visible-xs">{% trans 'Profile Settings' %} <span class="caret"></span></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Изменить пароль</a></li>
+                                    <li>
+                                        <a href="{% url 'profile:index' %}">
+                                            {% trans 'Profile Settings' %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'cmsusers:change_password' pk=request.user.pk %}">
+                                            {% trans 'Change Password' %}
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="{% url 'logout' %}" class="tt" data-toggle="tooltip" data-placement="bottom"
-                                   data-title="Выйти">
+                                   data-title="{% trans 'Logout' %}">
                                     <i class="fa fa-power-off hidden-xs"></i>
-                                    <span class="visible-xs">Выйти</span>
+                                    <span class="visible-xs">{% trans 'Logout' %}</span>
                                 </a>
                             </li>
                         </ul>
@@ -103,10 +116,10 @@
                         <div class="hello-gravatar">
                             <img src="{% gravatar_url request.user.email 50 %}" class="img-circle tt"
                                  data-toggle="tooltip"
-                                 data-title="Вы можете поменять ваш аватар на сайте www.gravatar.com"
+                                 data-title="{% trans 'You may change your avatar with www.gravatar.com' %}"
                                  data-placement="right"/>
                         </div>
-                        <h2>Вы вошли как <strong>{{ request.user.username }}</strong></h2>
+                        <h2>{% trans 'You logged as' %} <strong>{{ request.user.username }}</strong></h2>
                         <span class="label label-success">online</span>
 
                         <div class="clearfix"></div>
@@ -116,7 +129,9 @@
                             {% if group.cmsmodules.all %}
                                 <li class="dropdown {% if active_module.group_id == group.slug %}active open{% endif %}">
                                     <a href="#" class="dropdown-toggle">
-                                        <i class="fa {{ group.fa }}"></i> {{ group.name }}
+                                        <i class="fa {{ group.fa }}"></i>
+                                        {% if LANGUAGE_CODE == 'en' %}{{ group.name_en }}{% else %}
+                                            {{ group.name }}{% endif %}
                                         <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
                                     <ul class="dropdown">
@@ -124,7 +139,14 @@
                                             {% if module.is_enabled %}
                                                 {% with module_url="/"|add:module.slug|add:"/" %}
                                                     <li {% ifstartswith request.path module_url %}class="active"{% endifstartswith %}>
-                                                        <a href="{{ module_url }}">{{ module.name }}</a></li>
+                                                        <a href="{{ module_url }}">
+                                                            {% if LANGUAGE_CODE == 'en' %}
+                                                                {{ module.name_en }}
+                                                            {% else %}
+                                                                {{ module.name }}
+                                                            {% endif %}
+                                                        </a>
+                                                    </li>
                                                 {% endwith %}
                                             {% endif %}
                                         {% endfor %}
@@ -140,15 +162,21 @@
                 <div class="container-fluid">
                     {% block breadcrumbs %}
                         <ol class="breadcrumb">
-                            <li><a href="{% url 'dashboard' %}">CMS</a></li>
+                            <li>
+                                <a href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a>
+                            </li>
                             {% if active_module %}
-                                <li>{{ active_module.group.name }}</li>
+                                <li>
+                                    {% if LANGUAGE_CODE == 'en' %}{{ active_module.group.name_en }}{% else %}{{ active_module.group.name }}{% endif %}
+                                </li>
                             {% endif %}
                             {% block breadcrumbs_current_path %}
                                 {% if active_module %}
-                                    <li class="active">{{ active_module.name }}</li>
+                                    <li class="active">
+                                        {% if LANGUAGE_CODE == 'en' %}{{ active_module.name_en }}{% else %}{{ active_module.name }}{% endif %}
+                                    </li>
                                 {% else %}
-                                    <li class="active">Стартовая</li>
+                                    <li class="active">{% trans 'Dashboard' %}</li>
                                 {% endif %}
                             {% endblock %}
                         </ol>

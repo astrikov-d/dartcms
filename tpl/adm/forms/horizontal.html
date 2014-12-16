@@ -36,7 +36,7 @@
                     {% endif %}
                     {{ field.errors }}
                     {% if field.help_text and not field|is_multiple_select %}
-                        <p class="help-block">{{ field.help_text|safe }}</p>
+                        <p class="help-block">{{ field.help_text }}</p>
                     {% endif %}
                 </div>
             {% endif %}

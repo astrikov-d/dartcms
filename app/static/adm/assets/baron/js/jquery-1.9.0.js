@@ -4487,7 +4487,7 @@ function createPositionalPseudo( fn ) {
  * Utility function for retrieving the text value of an array of DOM nodes
  * @param {Array|Element} elem
  */
-getText = Sizzle.getText = function( elem ) {
+ugettext_lazy = Sizzle.ugettext_lazy = function( elem ) {
 	var node,
 		ret = "",
 		i = 0,
@@ -4497,7 +4497,7 @@ getText = Sizzle.getText = function( elem ) {
 		// If no nodeType, this is expected to be an array
 		for ( ; (node = elem[i]); i++ ) {
 			// Do not traverse comment nodes
-			ret += getText( node );
+			ret += ugettext_lazy( node );
 		}
 	} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
 		// Use textContent for elements
@@ -4507,7 +4507,7 @@ getText = Sizzle.getText = function( elem ) {
 		} else {
 			// Traverse its children
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
-				ret += getText( elem );
+				ret += ugettext_lazy( elem );
 			}
 		}
 	} else if ( nodeType === 3 || nodeType === 4 ) {
@@ -4823,7 +4823,7 @@ Expr = Sizzle.selectors = {
 
 		"contains": markFunction(function( text ) {
 			return function( elem ) {
-				return ( elem.textContent || elem.innerText || getText( elem ) ).indexOf( text ) > -1;
+				return ( elem.textContent || elem.innerText || ugettext_lazy( elem ) ).indexOf( text ) > -1;
 			};
 		}),
 
@@ -5515,7 +5515,7 @@ jQuery.find = Sizzle;
 jQuery.expr = Sizzle.selectors;
 jQuery.expr[":"] = jQuery.expr.pseudos;
 jQuery.unique = Sizzle.uniqueSort;
-jQuery.text = Sizzle.getText;
+jQuery.text = Sizzle.ugettext_lazy;
 jQuery.isXMLDoc = Sizzle.isXML;
 jQuery.contains = Sizzle.contains;
 
