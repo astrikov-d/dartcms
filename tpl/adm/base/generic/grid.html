@@ -35,7 +35,8 @@
             {% endif %}
 
             {% for action in object_actions %}
-                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/{% else %}{{ request.path }}children/{% endif %}"
+                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/
+                    {% else %}{{ request.path }}children/{% endif %}"
                    class="btn btn-{% if action.3 %}{{ action.3 }}{% else %}info{% endif %} btn-children btn-disabled">
                     {% if action.2 %}<i class="fa {{ action.2 }}"></i>{% endif %} {{ action.0 }}
                 </a>&nbsp;
@@ -49,12 +50,19 @@
                 {% for field in search_by %}
                     <div class="form-group">
                         {% if field.2 == 'text' or not field.2 %}
-                            <input type="text" name="{{ field.0 }}" placeholder="{{ field.1 }}" class="form-control" value="{{ search_values|lookup:forloop.counter0 }}"/>
+                            <input type="text" name="{{ field.0 }}" placeholder="{{ field.1 }}" class="form-control"
+                                   value="{{ search_values|lookup:forloop.counter0 }}"/>
                         {% elif field.2 == 'datetime' %}
-                            <input type="text" name="{{ field.0 }}_from" placeholder="{{ field.1 }} от" class="form-control datetime" value="{{ search_values|lookup:forloop.counter0|lookup:0 }}"/>&nbsp;
-                            <input type="text" name="{{ field.0 }}_to" placeholder="{{ field.1 }} до" class="form-control datetime" value="{{ search_values|lookup:forloop.counter0|lookup:1 }}"/>
+                            <input type="text" name="{{ field.0 }}_from" placeholder="{{ field.1 }} от"
+                                   class="form-control datetime"
+                                   value="{{ search_values|lookup:forloop.counter0|lookup:0 }}"/>&nbsp;
+                            <input type="text" name="{{ field.0 }}_to" placeholder="{{ field.1 }} до"
+                                   class="form-control datetime"
+                                   value="{{ search_values|lookup:forloop.counter0|lookup:1 }}"/>
                         {% elif field.2 == 'boolean' %}
-                            <label><input type="checkbox" name="{{ field.0 }}" {% if search_values|lookup:forloop.counter0 %}checked="checked"{% endif %}/> {{ field.1 }}</label>
+                            <label><input type="checkbox" name="{{ field.0 }}"
+                                          {% if search_values|lookup:forloop.counter0 %}checked="checked"{% endif %}/> {{ field.1 }}
+                            </label>
                         {% endif %}
                     </div>&nbsp;
                 {% endfor %}

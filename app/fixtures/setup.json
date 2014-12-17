@@ -25,7 +25,7 @@
     },
     {
         "fields": {
-            "sort": 3,
+            "sort": 4,
             "description": "",
             "fa": "fa-rocket",
             "name_en": "Advertising",
@@ -34,6 +34,18 @@
         },
         "model": "app.cmsmodulegroup",
         "pk": 3
+    },
+    {
+        "fields": {
+            "sort": 3,
+            "description": "",
+            "fa": "fa-cog",
+            "name_en": "Services",
+            "slug": "service",
+            "name": "\u0421\u0435\u0440\u0432\u0438\u0441\u044b"
+        },
+        "model": "app.cmsmodulegroup",
+        "pk": 4
     },
     {
         "fields": {
@@ -141,6 +153,19 @@
     },
     {
         "fields": {
+            "sort": 1,
+            "is_enabled": true,
+            "group": "service",
+            "name": "\u041e\u0431\u0440\u0430\u0442\u043d\u0430\u044f \u0441\u0432\u044f\u0437\u044c",
+            "name_en": "Feedback",
+            "slug": "feedback",
+            "description": ""
+        },
+        "model": "app.cmsmodule",
+        "pk": 9
+    },
+    {
+        "fields": {
             "is_enabled": true,
             "name": "\u0411\u0430\u043d\u043d\u0435\u0440",
             "slug": "banner_place"
@@ -234,6 +259,22 @@
             "slug": "articles"
         },
         "model": "app.feedtype",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "Feedback",
+            "slug": "feedback"
+        },
+        "model": "app.feedbacktype",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "FAQ",
+            "slug": "faq"
+        },
+        "model": "app.feedbacktype",
         "pk": 2
     }
 ]

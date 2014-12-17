@@ -54,7 +54,7 @@ class AdminMixin(object):
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
 
-        index_url = re.sub(r'(insert/|update/\d+/|delete/(\d+)|change-password/(\d+)/)', "", self.request.path)
+        index_url = re.sub(r'(insert/|update/\d+/|delete/(\d+)/|change-password/(\d+)/)', "", self.request.path)
 
         if self.parent_kwarg_name:
             reg = r'(%s/(\d+)/)$' % self.kwargs['children_url']

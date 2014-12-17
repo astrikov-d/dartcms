@@ -400,6 +400,9 @@ class FeedbackMessage(models.Model):
         verbose_name_plural = _(u"feedback messages")
         ordering = ['-date_created']
 
+    def __unicode__(self):
+        return "%s / %s" % (self.feedback_type.name, self.author)
+
     feedback_type = models.ForeignKey(FeedbackType, verbose_name=_(u"Type"), related_name='messages')
     author = models.CharField(max_length=255, verbose_name=_(u"Author"))
     email = models.EmailField(verbose_name=_(u"Contact Email"), null=True, blank=True)

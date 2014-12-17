@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-16 15:46+0700\n"
+"POT-Creation-Date: 2014-12-17 10:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,9 +21,11 @@ msgstr ""
 
 #: app/adm/adv/adv/urls.py:13 app/adm/adv/advplace/urls.py:19
 #: app/adm/adv/advplace/urls.py:28 app/adm/adv/advsection/urls.py:16
-#: app/adm/adv/advsection/urls.py:22 app/adm/feeds/urls.py:16
+#: app/adm/adv/advsection/urls.py:22 app/adm/feedback/urls.py:16
+#: app/adm/feeds/items/urls.py:14 app/adm/feeds/urls.py:16
 #: app/adm/pagemap/views.py:15 app/models.py:73 app/models.py:119
-#: app/models.py:137 app/models.py:155 app/models.py:309 app/models.py:324
+#: app/models.py:137 app/models.py:155 app/models.py:312 app/models.py:327
+#: app/models.py:393
 msgid "Name"
 msgstr "Название"
 
@@ -59,13 +61,41 @@ msgstr "Активный"
 msgid "Users"
 msgstr "Пользователи"
 
-#: app/adm/feeds/items/forms.py:26
+#: app/adm/feedback/items/forms.py:25 app/adm/feeds/items/forms.py:26
 msgid "Date of publication"
 msgstr "Дата публикации"
 
-#: app/adm/feeds/urls.py:20
+#: app/adm/feedback/items/urls.py:14 app/models.py:407
+msgid "Author"
+msgstr "Автор"
+
+#: app/adm/feedback/items/urls.py:15
+msgid "Email"
+msgstr "Email"
+
+#: app/adm/feedback/items/urls.py:16 app/models.py:370 app/models.py:413
+msgid "Date of Creation"
+msgstr "Дата добавления"
+
+#: app/adm/feedback/urls.py:17
+msgid "Messages Count"
+msgstr "Число сообщений"
+
+#: app/adm/feedback/urls.py:18
+msgid "Last Message"
+msgstr "Последнее сообщение"
+
+#: app/adm/feedback/urls.py:22 app/adm/feeds/urls.py:20
 msgid "Records"
 msgstr "Записи"
+
+#: app/adm/feeds/items/urls.py:15 app/models.py:369 app/models.py:412
+msgid "Date of Publication"
+msgstr "Дата публикации"
+
+#: app/adm/feeds/items/urls.py:16 app/models.py:368 app/models.py:411
+msgid "Show on Site"
+msgstr "Показывать на сайте"
 
 #: app/adm/metrics/forms.py:13 app/adm/metrics/forms.py:15
 msgid "Date of Start"
@@ -96,8 +126,8 @@ msgstr "Группы модулей CMS"
 msgid "CMS Module Group"
 msgstr "Группа модулей CMS"
 
-#: app/models.py:33 app/models.py:59 app/models.py:185 app/models.py:310
-#: app/models.py:351
+#: app/models.py:33 app/models.py:59 app/models.py:185 app/models.py:313
+#: app/models.py:354 app/models.py:394
 msgid "Slug"
 msgstr "Идентификатор"
 
@@ -117,7 +147,7 @@ msgstr ""
 msgid "Sort"
 msgstr "Сортировка"
 
-#: app/models.py:38 app/models.py:58 app/models.py:361
+#: app/models.py:38 app/models.py:58 app/models.py:364
 msgid "Description"
 msgstr "Описание"
 
@@ -214,7 +244,7 @@ msgstr "Рекламное место"
 msgid "Section"
 msgstr "Раздел"
 
-#: app/models.py:162 app/models.py:354
+#: app/models.py:162 app/models.py:357
 msgid "Picture"
 msgstr "Изображение"
 
@@ -234,7 +264,7 @@ msgstr "страницы"
 msgid "Parent Page"
 msgstr "Родительская страница"
 
-#: app/models.py:212 app/models.py:350
+#: app/models.py:212 app/models.py:353
 msgid "Title"
 msgstr "Название"
 
@@ -254,7 +284,7 @@ msgstr "Пункт меню"
 msgid "URL for Redirect"
 msgstr "URL для редиректа"
 
-#: app/models.py:216 app/models.py:325
+#: app/models.py:216 app/models.py:328
 msgid "URL"
 msgstr "URL"
 
@@ -286,69 +316,85 @@ msgstr "Показывать в меню"
 msgid "Only for Authorized Users"
 msgstr "Только для авторизованных пользователей"
 
-#: app/models.py:303
+#: app/models.py:306
 msgid "feed type"
 msgstr "Тип ленты"
 
-#: app/models.py:304
+#: app/models.py:307
 msgid "feed types"
 msgstr "Типы лент"
 
-#: app/models.py:315
+#: app/models.py:318
 msgid "feed category"
 msgstr "Категория ленты"
 
-#: app/models.py:316
+#: app/models.py:319
 msgid "feed categories"
 msgstr "Категории лент"
 
-#: app/models.py:323
+#: app/models.py:326 app/models.py:406
 msgid "Type"
 msgstr "Тип"
 
-#: app/models.py:330
+#: app/models.py:333
 msgid "feed item"
 msgstr "Запись ленты"
 
-#: app/models.py:331
+#: app/models.py:334
 msgid "feed items"
 msgstr "Записи ленты"
 
-#: app/models.py:349
+#: app/models.py:352
 msgid "Feed"
 msgstr "Лента"
 
-#: app/models.py:352
+#: app/models.py:355
 msgid "Short Text"
 msgstr "Анонс"
 
-#: app/models.py:353
+#: app/models.py:356
 msgid "Full Text"
 msgstr "Полный текст"
 
-#: app/models.py:356
+#: app/models.py:359
 msgid "Keywords"
 msgstr "Ключевые слова"
 
-#: app/models.py:357
+#: app/models.py:360
 msgid "Don't use more than 255 symbols"
 msgstr "Не используйте более 255 символов"
 
-#: app/models.py:362
+#: app/models.py:365
 msgid "Don't use more than 1024 symbols"
 msgstr "Не используйте более 1024 символов"
 
-#: app/models.py:365
-msgid "Show on Site"
-msgstr "Показывать на сайте"
+#: app/models.py:381
+msgid "feedback type"
+msgstr "Тип формы"
 
-#: app/models.py:366
-msgid "Date of Publication"
-msgstr "Дата публикации"
+#: app/models.py:382
+msgid "feedback types"
+msgstr "Типы форм"
 
-#: app/models.py:367
-msgid "Date of Creation"
-msgstr "Дата добавления"
+#: app/models.py:399
+msgid "feedback message"
+msgstr "сообщение обратной связи"
+
+#: app/models.py:400
+msgid "feedback messages"
+msgstr "сообщения обратной связи"
+
+#: app/models.py:408
+msgid "Contact Email"
+msgstr "Контактный email"
+
+#: app/models.py:409
+msgid "Message"
+msgstr "Сообщение"
+
+#: app/models.py:410
+msgid "Answer"
+msgstr "Ответ"
 
 #: lib/db/models.py:99
 msgid "Files"
@@ -415,11 +461,11 @@ msgstr "Добавить запись"
 msgid "Edit"
 msgstr "Изменить"
 
-#: tpl/adm/base/generic/grid.html:61
+#: tpl/adm/base/generic/grid.html:69
 msgid "Search"
 msgstr "Поиск"
 
-#: tpl/adm/base/generic/grid.html:107
+#: tpl/adm/base/generic/grid.html:115
 msgid "Records not found."
 msgstr "Записи не найдены."
 
@@ -482,6 +528,15 @@ msgstr "Вы вошли как"
 #: tpl/adm/cmsusers/grid.html:8
 msgid "Change/Set Password"
 msgstr "Изменить/Задать пароль"
+
+#: tpl/adm/dashboard/index.html:7
+#, python-format
+msgid "Hello, %(username)s!"
+msgstr "Здравствуйте, %(username)s!"
+
+#: tpl/adm/dashboard/index.html:10
+msgid "To start work, use the side menu."
+msgstr "Для начала работы, используйте боковое меню."
 
 #: tpl/adm/metrics/index.html:5 tpl/adm/metrics/index.html.py:59
 msgid "Metrics"
