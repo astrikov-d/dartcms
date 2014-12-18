@@ -9,6 +9,10 @@ from app.site.homepage.views import HomepageView
 
 urlpatterns = patterns('',
     url(r'^$', HomepageView.as_view(), name='homepage'),
+    url(r'^page/', include('app.site.pagemap.urls', namespace="page")),
+    url(r'^feeds/', include('app.site.feeds.urls', namespace="feeds")),
+    #url(r'^photos/', include('app.site.gallery.urls', namespace="gallery")),
+    url(r'^feedback/', include('app.site.feedback.urls', namespace="feedback")),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

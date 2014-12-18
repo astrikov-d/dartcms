@@ -1,0 +1,10 @@
+{% load static %}
+{% if banner %}
+    {% if banner.code %}
+        {{ banner.code|safe }}
+    {% else %}
+        {% if banner.picture %}
+            <div><a href="{{ banner.link }}" target="_blank"><img src="{{ banner.picture.url }}"/></a></div>
+        {% endif %}
+    {% endif %}
+{% endif %}

@@ -61,8 +61,8 @@ $(function () {
         e.preventDefault();
         if ($(this).hasClass('btn-disabled')) {
             $.pnotify({
-                title: 'Внимание',
-                text: 'Выберите строку для редактирования',
+                title: gettext('Warning'),
+                text: gettext('Choose row for update'),
                 type: 'info'
             });
             return false;
@@ -74,8 +74,8 @@ $(function () {
         e.preventDefault();
         if ($(this).hasClass('btn-disabled')) {
             $.pnotify({
-                title: 'Внимание',
-                text: 'Выберите строку для удаления',
+                title: gettext('Warning'),
+                text: gettext('Choose row for deletion'),
                 type: 'info'
             });
             return false;
@@ -87,8 +87,8 @@ $(function () {
         e.preventDefault();
         if ($(this).hasClass('btn-disabled')) {
             $.pnotify({
-                title: 'Внимание',
-                text: 'Выберите запись',
+                title: gettext('Warning'),
+                text: gettext('Choose row'),
                 type: 'info'
             });
             return false;

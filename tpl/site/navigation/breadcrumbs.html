@@ -1,0 +1,6 @@
+<ol class="breadcrumb">
+    {% for page in pages reversed %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    {% endfor %}
+    <li class="active">{{ current_page.title }}</li>
+</ol>

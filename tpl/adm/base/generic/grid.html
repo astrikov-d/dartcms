@@ -35,8 +35,7 @@
             {% endif %}
 
             {% for action in object_actions %}
-                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/
-                    {% else %}{{ request.path }}children/{% endif %}"
+                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/{% else %}{{ request.path }}children/{% endif %}"
                    class="btn btn-{% if action.3 %}{{ action.3 }}{% else %}info{% endif %} btn-children btn-disabled">
                     {% if action.2 %}<i class="fa {{ action.2 }}"></i>{% endif %} {{ action.0 }}
                 </a>&nbsp;

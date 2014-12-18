@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-17 10:26+0700\n"
+"POT-Creation-Date: 2014-12-18 16:22+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,8 +24,8 @@ msgstr ""
 #: app/adm/adv/advsection/urls.py:22 app/adm/feedback/urls.py:16
 #: app/adm/feeds/items/urls.py:14 app/adm/feeds/urls.py:16
 #: app/adm/pagemap/views.py:15 app/models.py:73 app/models.py:119
-#: app/models.py:137 app/models.py:155 app/models.py:312 app/models.py:327
-#: app/models.py:393
+#: app/models.py:137 app/models.py:155 app/models.py:314 app/models.py:329
+#: app/models.py:395
 msgid "Name"
 msgstr "Название"
 
@@ -61,11 +61,11 @@ msgstr "Активный"
 msgid "Users"
 msgstr "Пользователи"
 
-#: app/adm/feedback/items/forms.py:25 app/adm/feeds/items/forms.py:26
+#: app/adm/feedback/items/forms.py:25 app/adm/feeds/items/forms.py:29
 msgid "Date of publication"
 msgstr "Дата публикации"
 
-#: app/adm/feedback/items/urls.py:14 app/models.py:407
+#: app/adm/feedback/items/urls.py:14 app/models.py:409
 msgid "Author"
 msgstr "Автор"
 
@@ -73,7 +73,7 @@ msgstr "Автор"
 msgid "Email"
 msgstr "Email"
 
-#: app/adm/feedback/items/urls.py:16 app/models.py:370 app/models.py:413
+#: app/adm/feedback/items/urls.py:16 app/models.py:372 app/models.py:415
 msgid "Date of Creation"
 msgstr "Дата добавления"
 
@@ -89,11 +89,11 @@ msgstr "Последнее сообщение"
 msgid "Records"
 msgstr "Записи"
 
-#: app/adm/feeds/items/urls.py:15 app/models.py:369 app/models.py:412
+#: app/adm/feeds/items/urls.py:15 app/models.py:371 app/models.py:414
 msgid "Date of Publication"
 msgstr "Дата публикации"
 
-#: app/adm/feeds/items/urls.py:16 app/models.py:368 app/models.py:411
+#: app/adm/feeds/items/urls.py:16 app/models.py:370 app/models.py:413
 msgid "Show on Site"
 msgstr "Показывать на сайте"
 
@@ -126,8 +126,8 @@ msgstr "Группы модулей CMS"
 msgid "CMS Module Group"
 msgstr "Группа модулей CMS"
 
-#: app/models.py:33 app/models.py:59 app/models.py:185 app/models.py:313
-#: app/models.py:354 app/models.py:394
+#: app/models.py:33 app/models.py:59 app/models.py:185 app/models.py:315
+#: app/models.py:356 app/models.py:396
 msgid "Slug"
 msgstr "Идентификатор"
 
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Sort"
 msgstr "Сортировка"
 
-#: app/models.py:38 app/models.py:58 app/models.py:364
+#: app/models.py:38 app/models.py:58 app/models.py:366
 msgid "Description"
 msgstr "Описание"
 
@@ -244,7 +244,7 @@ msgstr "Рекламное место"
 msgid "Section"
 msgstr "Раздел"
 
-#: app/models.py:162 app/models.py:357
+#: app/models.py:162 app/models.py:359
 msgid "Picture"
 msgstr "Изображение"
 
@@ -264,7 +264,7 @@ msgstr "страницы"
 msgid "Parent Page"
 msgstr "Родительская страница"
 
-#: app/models.py:212 app/models.py:353
+#: app/models.py:212 app/models.py:355
 msgid "Title"
 msgstr "Название"
 
@@ -284,7 +284,7 @@ msgstr "Пункт меню"
 msgid "URL for Redirect"
 msgstr "URL для редиректа"
 
-#: app/models.py:216 app/models.py:328
+#: app/models.py:216 app/models.py:330
 msgid "URL"
 msgstr "URL"
 
@@ -316,83 +316,83 @@ msgstr "Показывать в меню"
 msgid "Only for Authorized Users"
 msgstr "Только для авторизованных пользователей"
 
-#: app/models.py:306
+#: app/models.py:308
 msgid "feed type"
 msgstr "Тип ленты"
 
-#: app/models.py:307
+#: app/models.py:309
 msgid "feed types"
 msgstr "Типы лент"
 
-#: app/models.py:318
+#: app/models.py:320
 msgid "feed category"
 msgstr "Категория ленты"
 
-#: app/models.py:319
+#: app/models.py:321
 msgid "feed categories"
 msgstr "Категории лент"
 
-#: app/models.py:326 app/models.py:406
+#: app/models.py:328 app/models.py:408
 msgid "Type"
 msgstr "Тип"
 
-#: app/models.py:333
+#: app/models.py:335
 msgid "feed item"
 msgstr "Запись ленты"
 
-#: app/models.py:334
+#: app/models.py:336
 msgid "feed items"
 msgstr "Записи ленты"
 
-#: app/models.py:352
+#: app/models.py:354
 msgid "Feed"
 msgstr "Лента"
 
-#: app/models.py:355
+#: app/models.py:357
 msgid "Short Text"
 msgstr "Анонс"
 
-#: app/models.py:356
+#: app/models.py:358
 msgid "Full Text"
 msgstr "Полный текст"
 
-#: app/models.py:359
+#: app/models.py:361
 msgid "Keywords"
 msgstr "Ключевые слова"
 
-#: app/models.py:360
+#: app/models.py:362
 msgid "Don't use more than 255 symbols"
 msgstr "Не используйте более 255 символов"
 
-#: app/models.py:365
+#: app/models.py:367
 msgid "Don't use more than 1024 symbols"
 msgstr "Не используйте более 1024 символов"
 
-#: app/models.py:381
+#: app/models.py:383
 msgid "feedback type"
 msgstr "Тип формы"
 
-#: app/models.py:382
+#: app/models.py:384
 msgid "feedback types"
 msgstr "Типы форм"
 
-#: app/models.py:399
+#: app/models.py:401
 msgid "feedback message"
 msgstr "сообщение обратной связи"
 
-#: app/models.py:400
+#: app/models.py:402
 msgid "feedback messages"
 msgstr "сообщения обратной связи"
 
-#: app/models.py:408
+#: app/models.py:410
 msgid "Contact Email"
 msgstr "Контактный email"
 
-#: app/models.py:409
+#: app/models.py:411
 msgid "Message"
 msgstr "Сообщение"
 
-#: app/models.py:410
+#: app/models.py:412
 msgid "Answer"
 msgstr "Ответ"
 
@@ -461,11 +461,11 @@ msgstr "Добавить запись"
 msgid "Edit"
 msgstr "Изменить"
 
-#: tpl/adm/base/generic/grid.html:69
+#: tpl/adm/base/generic/grid.html:68
 msgid "Search"
 msgstr "Поиск"
 
-#: tpl/adm/base/generic/grid.html:115
+#: tpl/adm/base/generic/grid.html:114
 msgid "Records not found."
 msgstr "Записи не найдены."
 
@@ -601,3 +601,25 @@ msgstr "Настройки сохранены"
 #: tpl/adm/sitesettings/index.html:19
 msgid "Error during saving"
 msgstr "Ошибка сохранения настроек"
+
+#: tpl/site/base/index.html:12
+msgid "Toggle navigation"
+msgstr "Показать навигацию"
+
+#: tpl/site/feeds/list.html:46
+msgid "There are no news yet."
+msgstr "Новостей пока нет"
+
+#: tpl/site/homepage/index.html:10
+msgid ""
+"\n"
+"                    This is the DartCMS demo site. You may change content of "
+"this page in the\n"
+"                    <code>/tpl/site/homepage/index.html</code>\n"
+"                "
+msgstr ""
+"\n"
+"                    Добро пожаловать на демонстрационный сайт DartCMS. Вы можете изменить содержимое этой страницы "
+"в шаблоне\n"
+"                    <code>/tpl/site/homepage/index.html</code>\n"
+"                "

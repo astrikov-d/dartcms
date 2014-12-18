@@ -19,8 +19,8 @@ $(function () {
                 }
             }).done(function (response) {
                     $.pnotify({
-                        title: 'Внимание',
-                        text: 'Узел успешно перемещен.',
+                        title: gettext('Warning'),
+                        text: gettext('Node successfully moved'),
                         type: 'info'
                     });
                 });

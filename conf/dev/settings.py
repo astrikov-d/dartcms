@@ -112,6 +112,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'lib.middleware.page.PageMiddleware'
 )
 
 INSTALLED_APPS = (
@@ -131,6 +132,8 @@ INSTALLED_APPS = (
     'django_gravatar',
     # https://github.com/mbi/django-rosetta
     'rosetta',
+    # https://github.com/etianen/django-watson/wiki
+    'watson',
 
     # Lib
     'lib',

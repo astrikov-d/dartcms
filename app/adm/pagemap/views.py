@@ -27,8 +27,13 @@ class PageModuleLoadParamsView(AjaxRequestView):
             from app.models import Feed
             return Feed.objects.all().extra(select={'label': 'name', 'value': 'id'})
 
+        def get_feedback_types():
+            from app.models import FeedbackType
+            return FeedbackType.objects.all().extra(select={'label': 'name', 'value': 'id'})
+
         switch = {
             'feeds': get_news_feeds(),
+            'feedback': get_feedback_types()
         }
         data = []
 

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Dmitry Astrikov'
 
+import datetime
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -22,6 +24,7 @@ class Form(forms.ModelForm):
                 'class': 'datetime'
             }
         ),
-        input_formats=["%d.%m.%Y %H:%M:%S"],
+        input_formats=["%d.%m.%Y %H:%M:%S", "%Y-%m-%d %H:%M:%S"],
+        initial=datetime.datetime.now,
         label=_(u'Date of publication')
     )

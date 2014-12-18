@@ -223,8 +223,8 @@ class Page(models.Model):
     after_content = models.TextField(default='', blank=True, verbose_name=_(u'After Content'))
     date_created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
     date_changed = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
-    keywords = models.TextField(default='', blank=True, verbose_name=_(u'Keywords (meta keywords)'))
-    description = models.TextField(default='', blank=True, verbose_name=_(u'Description (meta description)'))
+    seo_keywords = models.TextField(default='', blank=True, verbose_name=_(u'Keywords (meta keywords)'))
+    seo_description = models.TextField(default='', blank=True, verbose_name=_(u'Description (meta description)'))
     adv_section = models.ForeignKey(AdvSection, verbose_name=_(u'Ads'))
     is_enabled = models.BooleanField(default=True, verbose_name=_(u'Is Enabled'))
     is_in_menu = models.BooleanField(default=True, verbose_name=_(u'Show in Menu'))
@@ -256,6 +256,8 @@ class Page(models.Model):
             return u"/page/%s/" % self.slug
         if self.module.slug == 'feeds':
             return u"/feeds/%s/" % self.slug
+        if self.module.slug == 'feedback':
+            return u"/feedback/%s/" % self.slug
 
         return u"/%s/" % self.module.slug
 
