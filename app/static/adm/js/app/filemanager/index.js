@@ -10,6 +10,7 @@ $(function () {
     function reloadFoldersList() {
         var current_folder = $('.folder.active').attr('data-folder-id');
         $.ajax({
+            dataType: 'json',
             url: "/filemanager/get-folders/"
         }).done(function (data) {
                 $('#id-folders-list').html('');
@@ -57,6 +58,7 @@ $(function () {
     function reloadFilesList(folder_id) {
         $.ajax({
             url: "/filemanager/get-files/",
+            dataType: 'json',
             data: {
                 folder_id: folder_id
             }
@@ -101,6 +103,7 @@ $(function () {
                 if(result) {
                     $.ajax({
                         type: "POST",
+                        dataType: 'json',
                         url: "/filemanager/remove-file/",
                         data: {
                             file_id: file_id
@@ -127,6 +130,7 @@ $(function () {
             if (result != '') {
                 $.ajax({
                     type: "POST",
+                    dataType: 'json',
                     url: "/filemanager/create-folder/",
                     data: {
                         name: result
@@ -193,6 +197,7 @@ $(function () {
                 if (result) {
                     $.ajax({
                         type: "POST",
+                        dataType: 'json',
                         url: "/filemanager/rename-folder/",
                         data: {
                             folder_id: cm_folder_id,
@@ -214,6 +219,7 @@ $(function () {
                 if (result) {
                     $.ajax({
                         type: "POST",
+                        dataType: 'json',
                         url: "/filemanager/remove-folder/",
                         data: {
                             folder_id: cm_folder_id
