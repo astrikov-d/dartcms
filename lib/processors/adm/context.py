@@ -12,10 +12,12 @@ def template_variables(request):
     from django.conf import settings
 
     if not request.is_ajax() and request.user.is_authenticated():
-
         from app.models import CMSModuleGroup, CMSModule
 
-        cms_module_groups = CMSModuleGroup.objects.select_related().all()
+        cms_modules = request.user.cmsmodule_set.all()
+
+        cms_module_groups = [m.group for m in cms_modules]
+        cms_module_groups_set = set(cms_module_groups)
         active_module_slug = request.path.strip("/").split("/")[0]
         if active_module_slug != "":
             try:
@@ -26,7 +28,7 @@ def template_variables(request):
             active_module = None
 
         return {
-            'cms_module_groups': cms_module_groups,
+            'cms_module_groups': cms_module_groups_set,
             'active_module': active_module
         }
     else:

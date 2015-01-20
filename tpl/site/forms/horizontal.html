@@ -27,7 +27,7 @@
                     {{ field.label }} {% if field.field.required %}<span class="required">*</span>{% endif %}
                 </label>
                 <div class="col-xs-9">
-                    {% if not field|is_file and not field|is_multiple_file %}
+                    {% if not field|is_file %}
                         {% if not field|is_multiple_select %}
                             {{ field|add_class:"form-control" }}
                         {% else %}

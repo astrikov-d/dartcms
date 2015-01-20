@@ -3,8 +3,6 @@ __author__ = 'Dmitry Astrikov'
 from django import template
 from django.forms import CheckboxInput, HiddenInput, ClearableFileInput, RadioSelect, SelectMultiple
 
-from lib.forms import ClearableMultiFileInput
-
 register = template.Library()
 
 
@@ -31,11 +29,6 @@ def is_radio(field):
 @register.filter(name='is_multiple_select')
 def is_multiple_select(field):
     return field.field.widget.__class__.__name__ == SelectMultiple().__class__.__name__
-
-
-@register.filter(name='is_multiple_file')
-def is_multiple_file(field):
-    return field.field.widget.__class__.__name__ == ClearableMultiFileInput().__class__.__name__
 
 
 @register.filter(name='test_widget_class')

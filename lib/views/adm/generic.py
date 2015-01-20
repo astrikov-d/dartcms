@@ -7,12 +7,31 @@ import datetime
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import resolve, reverse_lazy
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponseForbidden
 
 from lib.views.generic import AjaxRequestView
 
 
-class AdminMixin(object):
+class ModulePermissionsMixin(object):
+    """
+    Mixin for checking user access permissions for specified CMS module.
+    """
+
+    # Check that current user have access to requested module.
+    def check_module_perms(self):
+        active_module_slug = self.request.path.strip("/").split("/")[0]
+        user_modules = [m.slug for m in self.request.user.cmsmodule_set.all()]
+        if active_module_slug not in user_modules:
+            raise Http404
+        return True
+
+    def dispatch(self, request, *args, **kwargs):
+        self.check_module_perms()
+        response = super(ModulePermissionsMixin, self).dispatch(request, *args, **kwargs)
+        return response
+
+
+class AdminMixin(ModulePermissionsMixin, object):
     """
     Admin mixin. It's common for all admin view. Gets current url sheme, app name etc.
     """

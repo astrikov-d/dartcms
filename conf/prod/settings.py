@@ -13,15 +13,15 @@ ADMIN_APP_SUBDOMAIN = "admin"
 
 TEMPLATE_DEBUG = DEBUG
 
-MEDIA_ROOT = '%s/www/data/' % PROJECT_ROOT
-STATIC_ROOT = '%s/www/static/' % PROJECT_ROOT
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'www/data')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'www/static')
 
 LOCALE_PATHS = (
-    '%s/locale/' % PROJECT_ROOT
+    os.path.join(PROJECT_ROOT, 'app/locale'),
 )
 
 TEMPLATE_DIRS = (
-    "%s/tpl/" % PROJECT_ROOT,
+    os.path.join(PROJECT_ROOT, "tpl"),
 )
 
 ADMINS = (

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
-from lib.views.adm.generic import AdminMixin
+from lib.views.adm.generic import AdminMixin, UpdateObjectView
 
 
 class ChangePasswordView(AdminMixin, FormView):
@@ -25,3 +25,13 @@ class ChangePasswordView(AdminMixin, FormView):
     def form_valid(self, form):
         form.save()
         return redirect("cmsusers:index")
+
+
+class CMSUserUpdateView(UpdateObjectView):
+    success_url = "cmsusers:index"
+
+    def get_initial(self):
+        obj = self.get_object()
+        return {
+            'modules': obj.cmsmodule_set.all()
+        }

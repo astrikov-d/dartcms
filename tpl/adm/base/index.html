@@ -136,7 +136,7 @@
                                     </a>
                                     <ul class="dropdown">
                                         {% for module in group.cmsmodules.all %}
-                                            {% if module.is_enabled %}
+                                            {% if module.is_enabled and module in request.user.cmsmodule_set.all %}
                                                 {% with module_url="/"|add:module.slug|add:"/" %}
                                                     <li {% ifstartswith request.path module_url %}class="active"{% endifstartswith %}>
                                                         <a href="{{ module_url }}">

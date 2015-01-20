@@ -25,7 +25,7 @@
             {% else %}
                 <label for="{{ field.id_for_label }}" class="control-label col-xs-3">{{ field.label }}</label>
                 <div class="col-xs-9">
-                    {% if not field|is_file and not field|is_multiple_file %}
+                    {% if not field|is_file %}
                         {% if not field|is_multiple_select %}
                             {{ field|add_class:"form-control" }}
                         {% else %}

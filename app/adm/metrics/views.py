@@ -5,10 +5,11 @@ from django.views.generic import FormView
 from django.conf import settings
 
 from app.adm.api.clients.metrika import Client
+from lib.views.adm.generic import ModulePermissionsMixin
 from forms import MStatsForm
 
 
-class ChangeSettings(FormView):
+class ChangeSettings(ModulePermissionsMixin, FormView):
     form_class = MStatsForm
     template_name = "adm/metrics/index.html"
 

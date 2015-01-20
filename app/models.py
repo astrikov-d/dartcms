@@ -7,6 +7,7 @@ from pytils.translit import slugify
 import watson
 
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
@@ -57,6 +58,7 @@ class CMSModule(models.Model):
     sort = models.IntegerField(default=1, verbose_name=_(u"Sort"))
     description = models.TextField(default='', verbose_name=_(u"Description"), blank=True)
     slug = models.SlugField(unique=True, verbose_name=_(u"Slug"))
+    user = models.ManyToManyField(User, verbose_name=_(u"User"), null=True, blank=True)
     is_enabled = models.BooleanField(default=True, verbose_name=_(u"Is Enabled"))
 
 

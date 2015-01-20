@@ -25,7 +25,14 @@
         border-width: 0 0 0 4px;
         border-color: transparent;
         &:hover {
-          background: @nav-side-menu-link-hover-bg;
+          background-color: @nav-side-menu-link-hover-bg;
+          &:focus {
+            background-color: @nav-side-menu-link-hover-bg;
+          }
+        }
+
+        &:focus {
+          background-color: transparent;
         }
 
         i {
