@@ -15,10 +15,9 @@ def template_variables(request):
 
     context = {}
 
-    try:
-        sitesettings = SiteSettings.objects.first()
-    except SiteSettings.DoesNotExist:
-        sitesettings = None
+    sitesettings = {}
+    for s in SiteSettings.objects.all():
+        sitesettings[s.name] = s.value
 
     context.update({
         'site': Site.objects.get_current(),

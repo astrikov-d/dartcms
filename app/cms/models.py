@@ -9,6 +9,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import get_language
 from django.conf import settings
+from django.template.defaultfilters import striptags, truncatewords
 
 
 class CMSModuleGroup(models.Model):
@@ -84,15 +85,50 @@ def files_delete(sender, instance, **kwargs):
 
 
 class SiteSettings(models.Model):
-    """
-    Site Settings
-    """
-    site_title = models.CharField(
-        max_length=255,
-        default=u"",
-        verbose_name=_(u"Site Name"),
+    TEXT = u'text'
+    TEXTAREA = u'textarea'
+    RICH = u'rich'
+    DATE = u'date'
+    FILE = u'file'
+    SELECT = u'select'
+
+    TYPE_CHOICES = (
+        (TEXT, _(u'String')),
+        (TEXTAREA, _(u'Text')),
+        (RICH, _(u'Rich Editor')),
+        (SELECT, _(u'Select')),
+        (DATE, _(u'Date')),
+        (FILE, _(u'File')),
     )
-    site_description = models.TextField(
-        verbose_name=_(u"Site Description")
-    )
-    footer_content = models.TextField(default=u"", verbose_name=_(u"Footer Content"))
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = _(u'Site settings')
+        verbose_name = _(u'Site setting')
+
+    def __unicode__(self):
+        return self.name
+
+    @property
+    def value(self):
+        if self.type == self.DATE:
+            return self.date_value
+        if self.type == self.FILE:
+            return self.file_value
+        return self.text_value
+
+    @property
+    def type_display(self):
+        return self.get_type_display()
+
+    @property
+    def value_for_grid(self):
+        return truncatewords(striptags(self.value), 10)
+
+    name = models.CharField(max_length=30, unique=True)
+    descr = models.TextField(default='')
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES, default=TEXT, blank=True)
+    text_value = models.TextField(default='', blank=True)
+    date_value = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
+    file_value = models.FileField(upload_to='vars', blank=True, null=True)
+    options = models.TextField(default='', blank=True)
