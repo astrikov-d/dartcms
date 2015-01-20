@@ -28,6 +28,8 @@ At the moment, only few modules are included:
 - Site Settings
 - News and Articles
 - Advertising (ads, ad places and ad sections)
+- Feedback and FAQ
+- E-shop (under construction)
 
 
 Installation
