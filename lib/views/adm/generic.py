@@ -70,6 +70,9 @@ class AdminMixin(ModulePermissionsMixin, object):
     # Form class for insert and update views.
     form_class = None
 
+    # Inline elements of the forms
+    inlines = []
+
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
 
@@ -150,7 +153,8 @@ class GridView(AdminMixin, ListView):
             search_values = []
             for search_field in self.search_by:
                 if len(search_field) > 2 and search_field[2] in ['datetime', 'date', 'time']:
-                    date_list = [self.request.GET.get("%s_from" % search_field[0], ''), self.request.GET.get("%s_to" % search_field[0], '')]
+                    date_list = [self.request.GET.get("%s_from" % search_field[0], ''),
+                                 self.request.GET.get("%s_to" % search_field[0], '')]
                     search_values.append(date_list)
                 else:
                     search_values.append(self.request.GET.get(search_field[0], ''))
@@ -218,7 +222,45 @@ class InsertObjectView(AdminMixin, CreateView):
         return initial
 
 
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView
+
+
+class InsertObjectWithInlinesView(AdminMixin, CreateWithInlinesView):
+    template_name = "adm/base/generic/insert.html"
+
+    def forms_valid(self, form, inlines):
+        if self.parent_kwarg_name:
+            obj = form.save(commit=False)
+
+            if self.parent_model_fk is not None:
+                fk = self.parent_model_fk
+            else:
+                fk = "%s_id" % self.parent_model.__name__.lower()
+
+            setattr(obj, fk, self.kwargs[self.parent_kwarg_name])
+            obj.save()
+
+            for formset in inlines:
+                formset.save()
+
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(InsertObjectWithInlinesView, self).form_valid(form)
+
+    def get_initial(self):
+        initial = super(InsertObjectWithInlinesView, self).get_initial()
+        if self.parent_model_fk and self.parent_kwarg_name in self.kwargs:
+            initial.update({
+                self.parent_model_fk: self.kwargs[self.parent_kwarg_name]
+            })
+        return initial
+
+
 class UpdateObjectView(AdminMixin, UpdateView):
+    template_name = "adm/base/generic/update.html"
+
+
+class UpdateObjectWithInlinesView(AdminMixin, UpdateWithInlinesView):
     template_name = "adm/base/generic/update.html"
 
 

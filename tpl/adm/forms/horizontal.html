@@ -45,3 +45,9 @@
         {{ field }}
     {% endif %}
 {% endfor %}
+{{ inlines.management_form }}
+<table>
+    {% for form in inlines %}
+        {{ form }}
+    {% endfor %}
+</table>

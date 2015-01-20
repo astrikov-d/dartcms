@@ -11,3 +11,4 @@ psycopg2
 requests
 pytils
 django-watson
+django-extra-views
