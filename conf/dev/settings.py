@@ -17,7 +17,7 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'www/data')
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'www/static')
 
 LOCALE_PATHS = (
-    os.path.join(PROJECT_ROOT, 'app/locale'),
+    os.path.join(PROJECT_ROOT, 'locale'),
 )
 
 TEMPLATE_DIRS = (
@@ -186,13 +186,13 @@ APPEND_SLASH = True
 
 SESSION_SAVE_EVERY_REQUEST = True
 
-ROOT_URLCONF = 'app.site.urls'
+ROOT_URLCONF = 'app.site_urls'
 
 SUBDOMAIN_URLCONFS = {
-    None: 'app.site.urls',
-    'www': 'app.site.urls',
-    'dev': 'app.site.urls',
-    'admin': 'app.adm.urls',
+    None: 'app.site_urls',
+    'www': 'app.site_urls',
+    'dev': 'app.site_urls',
+    'admin': 'app.adm_urls',
 }
 
 AUTHENTICATION_BACKENDS = (

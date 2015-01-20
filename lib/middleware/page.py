@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Dmitry Astrikov'
 
-from app.models import Page
+from app.pagemap.models import Page
 
 
 class PageMiddleware(object):

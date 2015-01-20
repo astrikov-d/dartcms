@@ -26,10 +26,6 @@ echo "Installing models.."
 python manage.py migrate
 echo "Sucsess.."
 
-echo "Loading fixtures"
-python manage.py loaddata app/fixtures/setup.json
-echo "Success"
-
 read -p "Initial install is done. Do you want to install nodejs packages for admin app? (y/n)" -n 1 -r
 echo 
 if [[ $REPLY =~ ^[Yy]$ ]]

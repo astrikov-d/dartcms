@@ -4,7 +4,7 @@ __author__ = 'Dmitry Astrikov'
 from django.conf import settings
 from django.contrib.sites.models import Site
 
-from app.models import SiteSettings
+from app.cms.models import SiteSettings
 
 
 def template_variables(request):

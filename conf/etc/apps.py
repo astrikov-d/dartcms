@@ -5,10 +5,13 @@ __author__ = 'astrikov'
 PROJECT_APPS = (
     # Core apps
     'app',
-    'app.adm',
+    'app.cms',
+    'app.cms.adm',
 
     # Other apps. We need them for templatetags or custom models.
-    'app.site.feeds',
-    'app.site.pagemap',
-    'app.site.adv'
+    'app.adv',
+    'app.feedback',
+    'app.feeds',
+    'app.pagemap',
+    'app.shop',
 )
