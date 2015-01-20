@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
+from django.forms import DateTimeInput
+
 __author__ = 'Dmitry Astrikov'
 
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
+from django.forms.models import modelform_factory
 
 from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
-from forms import Form
 from app.adv.models import Adv
+
+Form = modelform_factory(
+    model=Adv,
+    exclude=[],
+    widgets={
+        'date_from': DateTimeInput(attrs={'class': 'datetime'}),
+        'date_to': DateTimeInput(attrs={'class': 'datetime'}),
+    })
 
 grid_columns = (
     ('name', _(u"Name"), 'string', '20%'),
@@ -16,24 +26,16 @@ grid_columns = (
     ('is_enabled', _(u"Show on site"), 'boolean', '20%'),
 )
 
+kwargs = {
+    'model': Adv,
+    'grid_columns': grid_columns,
+    'form_class': Form
+}
+
 urlpatterns = patterns('',
-    url(r'^$', login_required(GridView.as_view(
-        model=Adv,
-        grid_columns = grid_columns,
-    )), name='index'),
-    url(r'^page/(?P<page>\d+)/$', login_required(GridView.as_view(
-        model=Adv,
-        grid_columns = grid_columns,
-    )), name='index'),
-    url(r'^insert/$', login_required(InsertObjectView.as_view(
-        model=Adv,
-        form_class=Form
-    )), name='insert'),
-    url(r'^update/(?P<pk>\d+)/$', login_required(UpdateObjectView.as_view(
-        model=Adv,
-        form_class=Form
-    )), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(
-        model=Adv
-    )), name='delete'),
+    url(r'^$', login_required(GridView.as_view(**kwargs)), name='index'),
+    url(r'^page/(?P<page>\d+)/$', login_required(GridView.as_view(**kwargs)), name='index'),
+    url(r'^insert/$', login_required(InsertObjectView.as_view(**kwargs)), name='insert'),
+    url(r'^update/(?P<pk>\d+)/$', login_required(UpdateObjectView.as_view(**kwargs)), name='update'),
+    url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(**kwargs)), name='delete'),
 )
