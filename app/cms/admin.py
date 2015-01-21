@@ -3,8 +3,7 @@ __author__ = 'Dmitry Astrikov'
 
 from django.contrib import admin
 
-from app.cms.models import CMSModuleGroup, CMSModule, SiteSettings
-from app.pagemap.models import PageModule
+from models import CMSModuleGroup, CMSModule, SiteSettings
 
 
 class CMSModuleGroupAdmin(admin.ModelAdmin):
@@ -19,13 +18,6 @@ class CMSModuleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CMSModule, CMSModuleAdmin)
-
-
-class PageModuleAdmin(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(PageModule, PageModuleAdmin)
 
 
 class SiteSettingsAdmin(admin.ModelAdmin):

@@ -1,6 +1,6 @@
 {% extends "adm/base/index.html" %}
 
-{% load attribute list i18n %}
+{% load attribute list i18n filename %}
 
 {% block breadcrumbs_current_path %}
     <li class="active">{{ page_header|capfirst }}</li>
@@ -91,6 +91,10 @@
                                             {{ object|attribute:index|date:"d.m.Y" }}
                                         {% elif column.2 == 'time' %}
                                             {{ object|attribute:index|date:"H:i:s" }}
+                                        {% elif column.2 == 'file' %}
+                                            <a href="{{ MEDIA_URL }}{{ object|attribute:index }}" target="_blank">{{ object|attribute:index|filename }}</a>
+                                        {% elif column.2 == 'image' %}
+                                            <img src="{{ MEDIA_URL }}{{ object|attribute:index }}" class="img-thumbnail"/>
                                         {% elif column.2 == 'boolean' %}
                                             {% if object|attribute:index %}
                                                 <i class="fa fa-check-circle"></i>

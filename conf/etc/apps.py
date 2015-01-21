@@ -6,7 +6,6 @@ PROJECT_APPS = (
     # Core apps
     'app',
     'app.cms',
-    'app.cms.adm',
 
     # Other apps. We need them for templatetags or custom models.
     'app.adv',
