@@ -99,6 +99,9 @@ class Product(models.Model):
         verbose_name_plural = _(u"products")
         ordering = ['-date_created']
 
+    def __unicode__(self):
+        return self.name
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.slug = slugify(self.name)

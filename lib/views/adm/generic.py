@@ -227,6 +227,7 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 class InsertObjectWithInlinesView(AdminMixin, CreateWithInlinesView):
     template_name = "adm/base/generic/insert.html"
+    extra = 0
 
     def forms_valid(self, form, inlines):
         if self.parent_kwarg_name:
@@ -262,6 +263,7 @@ class UpdateObjectView(AdminMixin, UpdateView):
 
 class UpdateObjectWithInlinesView(AdminMixin, UpdateWithInlinesView):
     template_name = "adm/base/generic/update.html"
+    extra = 0
 
 
 class DeleteObjectView(AdminMixin, DeleteView):

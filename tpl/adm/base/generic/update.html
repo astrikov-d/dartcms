@@ -4,7 +4,7 @@
 
 {% block breadcrumbs_current_path %}
     {{ block.super }}
-    <li class="active">{% trans 'Update Record' %}</li>
+    <li class="active">{% trans 'Update Record' %} {{ object }}</li>
 {% endblock %}
 
 {% block content %}
