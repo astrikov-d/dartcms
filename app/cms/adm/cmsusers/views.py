@@ -6,8 +6,9 @@ from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
+from django.http import HttpResponseRedirect
 
-from lib.views.adm.generic import AdminMixin, UpdateObjectView
+from lib.views.adm.generic import AdminMixin, UpdateObjectView, InsertObjectView
 
 
 class ChangePasswordView(AdminMixin, FormView):
@@ -35,3 +36,10 @@ class CMSUserUpdateView(UpdateObjectView):
         return {
             'modules': obj.cmsmodule_set.all()
         }
+
+
+class CMSUserInsertView(InsertObjectView):
+
+    def form_valid(self, form):
+        obj = form.save()
+        return redirect("cmsusers:change_password", pk = obj.pk)

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from lib.views.adm.generic import GridView, InsertObjectView, DeleteObjectView
-from views import ChangePasswordView, CMSUserUpdateView
+from views import ChangePasswordView, CMSUserUpdateView, CMSUserInsertView
 from forms import CMSUserForm as Form
 
 kwargs = {
@@ -29,7 +29,7 @@ grid_kwargs.update({
 urlpatterns = patterns('',
    url(r'^$', login_required(GridView.as_view(**grid_kwargs)), name='index'),
    url(r'^page/(?P<page>\d+)/$', login_required(GridView.as_view(**grid_kwargs)), name='index'),
-   url(r'^insert/$', login_required(InsertObjectView.as_view(**kwargs)), name='insert'),
+   url(r'^insert/$', login_required(CMSUserInsertView.as_view(**kwargs)), name='insert'),
    url(r'^update/(?P<pk>\d+)/$', login_required(CMSUserUpdateView.as_view(**kwargs)), name='update'),
    url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(**kwargs)), name='delete'),
    url(r'^change-password/(?P<pk>\d+)/$', login_required(ChangePasswordView.as_view()),
