@@ -5,6 +5,11 @@
         <div class="sortable-tree-row-handle">
             <i class="fa fa-arrows"></i>
         </div>
+        <div class="sortable-tree-row-children-toggle-wrapper">
+            <a href="#" class="sortable-tree-row-children-toggle {% if not object.children.all %}disabled{% endif %}">
+                <i class="fa fa-chevron-circle-right drop-icon"></i>
+            </a>
+        </div>
         <div class="sortable-tree-row-content">
             {% with grid_columns.0.0 as index %}
                 {% if grid_columns.0.2 == 'datetime' %}

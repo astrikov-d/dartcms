@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:28+0700\n"
+"POT-Creation-Date: 2015-01-21 13:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,7 @@ msgstr ""
 #: app/static/adm/js/app/ui/navigation.js:64
 #: app/static/adm/js/app/ui/navigation.js:77
 #: app/static/adm/js/app/ui/navigation.js:90
+#: app/static/adm/js/app/ui/sortable-grid.js:22
 msgid "Warning"
 msgstr "Внимание"
 
@@ -36,3 +37,7 @@ msgstr "Выберите строку для удаления"
 #: app/static/adm/js/app/ui/navigation.js:91
 msgid "Choose row"
 msgstr "Выберите строку"
+
+#: app/static/adm/js/app/ui/sortable-grid.js:23
+msgid "Node successfully moved"
+msgstr "Узел успешно перемещен"

@@ -13,6 +13,7 @@ body.dragging, body.dragging * {
 
   ul {
     list-style: none;
+    display: none;
   }
 
   .placeholder {
@@ -55,6 +56,35 @@ body.dragging, body.dragging * {
     border-radius: 2px 0 0 2px;
     border-right: 1px solid @sortable-tree-row-border-color;
     cursor: move;
+  }
+
+  .sortable-tree-row-children-toggle-wrapper {
+    float: left;
+    background: @sortable-tree-row-handle-bg;
+    border-right: 1px solid @sortable-tree-row-border-color;
+    border-left: 1px solid #F2F2F2;
+    cursor: pointer;
+    .sortable-tree-row-children-toggle {
+      display: block;
+      padding: 6px 10px;
+      color: @brand-success;
+      &:hover {
+        background: darken(@sortable-tree-row-handle-bg, 6.5%);
+      }
+
+      &.disabled {
+        color: #ccc;
+        &:hover {
+          background: transparent;
+          cursor: not-allowed;
+        }
+      }
+      &.open {
+        .drop-icon {
+          .transform(rotate(90deg));
+        }
+      }
+    }
   }
 
   &.selected {
