@@ -1,0 +1,38 @@
+<div class="col-sm-6">
+    <div class="panel panel-dashboard">
+        <div class="panel-heading">
+            <div class="pull-right">
+                <a href="{% url 'dashboard' %}" class="tt" data-title="Обновить">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+            <i class="fa fa-pie-chart"></i> Посещаемость
+        </div>
+        <div class="panel-body text-center">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="circle-progress" data-value="{{ stat.visits }}" data-color="#D53A45">
+                        <strong></strong>
+                    </div>
+                    <p class="help-block">Посещения</p>
+                </div>
+                <div class="col-sm-4">
+                    <div class="circle-progress" data-value="{{ stat.visitors }}" data-color="#217B2C">
+                        <strong></strong>
+                    </div>
+                    <p class="help-block">Уникальные посетители</p>
+                </div>
+                <div class="col-sm-4">
+                    <div class="circle-progress" data-value="{{ stat.page_views }}" data-color="#DF9B40">
+                        <strong></strong>
+                    </div>
+                    <p class="help-block">Просмотры страниц</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <a href="{% url 'metrics:index' %}" class="btn btn-block btn-link">Расширенная статистика</a>
+        </div>
+    </div>
+</div>

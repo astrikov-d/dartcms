@@ -13,4 +13,5 @@ PROJECT_APPS = (
     'app.feeds',
     'app.pagemap',
     'app.shop',
+    'app.cms.adm.metrics'
 )

@@ -1,12 +1,14 @@
 {% extends "adm/base/index.html" %}
 
-{% load i18n %}
+{% load i18n pagemap feeds metrics_summary %}
 
 {% block content %}
     <h1>
-        {% blocktrans with username=request.user %}Hello, {{ username }}!{% endblocktrans %}
+        {% trans 'Dashboard' %}
     </h1>
-    <div class="well">
-        {% trans 'To start work, use the side menu.' %}
+    <div class="row dashboard-widgets-wrapper">
+        {% page_summary %}
+        {% feeds_summary %}
+        {% traffic_summary %}
     </div>
 {% endblock %}

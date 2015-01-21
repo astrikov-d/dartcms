@@ -1,0 +1,23 @@
+<div class="col-sm-3">
+    <div class="panel panel-dashboard">
+        <div class="panel-heading">
+            <div class="pull-right">
+                <a href="{% url 'dashboard' %}" class="tt" data-title="Обновить">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+            <i class="fa fa-sitemap"></i> Структура сайта
+        </div>
+        <div class="panel-body text-center">
+            <div class="row">
+                <div class="circle-progress" data-value="{{ pages_count }}" data-color="#4D88C3">
+                    <strong></strong>
+                </div>
+                <p class="help-block">Страниц на сайте</p>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a href="{% url 'pagemap:insert' %}" class="btn btn-block btn-link">Добавить страницу</a>
+        </div>
+    </div>
+</div>

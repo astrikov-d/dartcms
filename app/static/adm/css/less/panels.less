@@ -9,3 +9,26 @@
   }
 }
 
+.panel-dashboard {
+  border-color: #ddd;
+  .panel-heading {
+    background: @panel-dashboard-heading-bg;
+    color: @panel-dashboard-heading-color;
+    a {
+      color: @panel-dashboard-heading-link-color;
+    }
+  }
+
+  .circle-progress {
+    position: relative;
+    strong {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      font-size: 36px;
+      text-align: center;
+      width: 100%;
+      margin-top: -27px;
+    }
+  }
+}
