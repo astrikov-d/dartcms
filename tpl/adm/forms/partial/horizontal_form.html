@@ -1,6 +1,8 @@
-{% load widget_tweaks %}
-{% load forms %}
+{% load widget_tweaks forms i18n %}
 
+<div class="alert alert-warning">
+    {% blocktrans %}Fields marked with <span class="text-danger">*</span> are required.{% endblocktrans %}
+</div>
 {{ form.non_field_errors }}
 {% for field in form %}
     {% if not field|is_hidden %}

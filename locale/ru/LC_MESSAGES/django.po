@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-21 13:39+0700\n"
+"POT-Creation-Date: 2015-01-21 18:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,7 +212,6 @@ msgid "String"
 msgstr ""
 
 #: app/cms/models.py:97
-#| msgid "Ad Text"
 msgid "Text"
 msgstr "Текст"
 
@@ -229,17 +228,14 @@ msgid "Date"
 msgstr "Дата"
 
 #: app/cms/models.py:101
-#| msgid "Files"
 msgid "File"
 msgstr "Файлы"
 
 #: app/cms/models.py:106
-#| msgid "Change Site Settings"
 msgid "Site settings"
 msgstr "Настройки сайта"
 
 #: app/cms/models.py:107
-#| msgid "Change Site Settings"
 msgid "Site setting"
 msgstr "Настройки сайта"
 
@@ -584,7 +580,7 @@ msgstr "Удалить"
 msgid "Search"
 msgstr "Поиск"
 
-#: tpl/adm/base/generic/grid.html:114
+#: tpl/adm/base/generic/grid.html:118
 msgid "Records not found."
 msgstr "Записи не найдены."
 
@@ -611,8 +607,8 @@ msgid "Update"
 msgstr "Изменить"
 
 #: tpl/adm/base/index.html:13 tpl/adm/base/index.html.py:166
-#: tpl/adm/base/index.html:179 tpl/adm/profile/index.html:7
-#: tpl/adm/sitesettings/index.html:7
+#: tpl/adm/base/index.html:179 tpl/adm/dashboard/index.html:7
+#: tpl/adm/profile/index.html:7 tpl/adm/sitesettings/index.html:7
 msgid "Dashboard"
 msgstr "Стартовая"
 
@@ -648,17 +644,11 @@ msgstr "Вы вошли как"
 msgid "Change/Set Password"
 msgstr "Изменить/Задать пароль"
 
-#: tpl/adm/dashboard/index.html:7
-#, python-format
-msgid "Hello, %(username)s!"
-msgstr "Здравствуйте, %(username)s!"
-
-#: tpl/adm/dashboard/index.html:10
-msgid "To start work, use the side menu."
-msgstr "Для начала работы, используйте боковое меню."
+#: tpl/adm/forms/partial/horizontal_form.html:4
+msgid "Fields marked with <span class=\"text-danger\">*</span> are required."
+msgstr "Поля, помеченные <span class=\"text-danger\">*</span>, обязательны для заполнения."
 
 #: tpl/adm/forms/partial/horizontal_inlines.html:14
-#| msgid "Add Record"
 msgid "Add More"
 msgstr "Добавить еще"
 
@@ -727,7 +717,6 @@ msgid "Toggle navigation"
 msgstr "Показать навигацию"
 
 #: tpl/site/feedback/index.html:8 tpl/site/feedback/sucess.html:8
-#| msgid "Message"
 msgid "Send Message"
 msgstr "Отправить сообщение"
 
@@ -756,6 +745,12 @@ msgstr ""
 "можете изменить содержимое этой страницы в шаблоне\n"
 "                    <code>/tpl/site/homepage/index.html</code>\n"
 "                "
+
+#~ msgid "Hello, %(username)s!"
+#~ msgstr "Здравствуйте, %(username)s!"
+
+#~ msgid "To start work, use the side menu."
+#~ msgstr "Для начала работы, используйте боковое меню."
 
 #~ msgid "Site Name"
 #~ msgstr "Название сайта"
