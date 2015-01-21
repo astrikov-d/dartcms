@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-21 18:26+0700\n"
+"POT-Creation-Date: 2015-01-21 18:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,6 +376,7 @@ msgstr "Реклама"
 
 #: app/pagemap/adm/urls.py:18 app/pagemap/adm/urls.py:24
 #: app/pagemap/adm/urls.py:28 app/pagemap/adm/views.py:14
+#: tpl/adm/pagemap/dashboard/summary.html:11
 msgid "Site Structure"
 msgstr "Структура сайта"
 
@@ -644,29 +645,56 @@ msgstr "Вы вошли как"
 msgid "Change/Set Password"
 msgstr "Изменить/Задать пароль"
 
+#: tpl/adm/feeds/dashboard/summary.html:7
+#: tpl/adm/metrics/dashboard/summary.html:7
+#: tpl/adm/pagemap/dashboard/summary.html:7
+msgid "Refresh"
+msgstr "Обновить"
+
+#: tpl/adm/feeds/dashboard/summary.html:11
+#: tpl/adm/feeds/dashboard/summary.html:18
+msgid "News and Articles"
+msgstr "Новости и статьи"
+
+#: tpl/adm/feeds/dashboard/summary.html:23
+msgid "Go to News and Articles"
+msgstr "Перейти к новостям"
+
 #: tpl/adm/forms/partial/horizontal_form.html:4
 msgid "Fields marked with <span class=\"text-danger\">*</span> are required."
-msgstr "Поля, помеченные <span class=\"text-danger\">*</span>, обязательны для заполнения."
+msgstr ""
+"Поля, помеченные <span class=\"text-danger\">*</span>, обязательны для "
+"заполнения."
 
 #: tpl/adm/forms/partial/horizontal_inlines.html:14
 msgid "Add More"
 msgstr "Добавить еще"
 
-#: tpl/adm/metrics/index.html:5 tpl/adm/metrics/index.html.py:59
-msgid "Metrics"
-msgstr "Метрика"
+#: tpl/adm/metrics/dashboard/summary.html:11
+msgid "Traffic Summary"
+msgstr "Статистика посещаемости"
 
-#: tpl/adm/metrics/index.html:19 tpl/adm/metrics/index.html.py:80
-msgid "Unique Users"
-msgstr "Уникальные пользователи"
-
-#: tpl/adm/metrics/index.html:27
+#: tpl/adm/metrics/dashboard/summary.html:19 tpl/adm/metrics/index.html:27
 msgid "Visits"
 msgstr "Посещения"
 
-#: tpl/adm/metrics/index.html:35 tpl/adm/metrics/index.html.py:81
+#: tpl/adm/metrics/dashboard/summary.html:25 tpl/adm/metrics/index.html:19
+#: tpl/adm/metrics/index.html.py:80
+msgid "Unique Users"
+msgstr "Уникальные пользователи"
+
+#: tpl/adm/metrics/dashboard/summary.html:31 tpl/adm/metrics/index.html:35
+#: tpl/adm/metrics/index.html.py:81
 msgid "Page Views"
 msgstr "Просмотры страниц"
+
+#: tpl/adm/metrics/dashboard/summary.html:37
+msgid "Extended Report"
+msgstr "Расширенный отчет"
+
+#: tpl/adm/metrics/index.html:5 tpl/adm/metrics/index.html.py:59
+msgid "Metrics"
+msgstr "Метрика"
 
 #: tpl/adm/metrics/index.html:74
 msgid "Load Data"
@@ -691,6 +719,15 @@ msgstr "Процент новых пользователей"
 #: tpl/adm/metrics/index.html:103
 msgid "Data for specified period not found"
 msgstr "Данные для указанного периода не найдены"
+
+#: tpl/adm/pagemap/dashboard/summary.html:18
+msgid "Pages on the Site"
+msgstr "Страницы на сайте"
+
+#: tpl/adm/pagemap/dashboard/summary.html:22
+#| msgid "Add More"
+msgid "Add Page"
+msgstr "Добавить страницу"
 
 #: tpl/adm/profile/index.html:8 tpl/adm/profile/index.html.py:13
 msgid "Change Profile Settings"

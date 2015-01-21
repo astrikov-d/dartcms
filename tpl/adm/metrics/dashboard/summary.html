@@ -1,12 +1,14 @@
+{% load i18n %}
+
 <div class="col-sm-6">
     <div class="panel panel-dashboard">
         <div class="panel-heading">
             <div class="pull-right">
-                <a href="{% url 'dashboard' %}" class="tt" data-title="Обновить">
+                <a href="{% url 'dashboard' %}" class="tt" data-title="{% trans 'Refresh' %}">
                     <i class="fa fa-refresh"></i>
                 </a>
             </div>
-            <i class="fa fa-pie-chart"></i> Посещаемость
+            <i class="fa fa-pie-chart"></i> {% trans 'Traffic Summary' %}
         </div>
         <div class="panel-body text-center">
             <div class="row">
@@ -14,25 +16,25 @@
                     <div class="circle-progress" data-value="{{ stat.visits }}" data-color="#D53A45">
                         <strong></strong>
                     </div>
-                    <p class="help-block">Посещения</p>
+                    <p class="help-block">{% trans 'Visits' %}</p>
                 </div>
                 <div class="col-sm-4">
                     <div class="circle-progress" data-value="{{ stat.visitors }}" data-color="#217B2C">
                         <strong></strong>
                     </div>
-                    <p class="help-block">Уникальные посетители</p>
+                    <p class="help-block">{% trans 'Unique Users' %}</p>
                 </div>
                 <div class="col-sm-4">
                     <div class="circle-progress" data-value="{{ stat.page_views }}" data-color="#DF9B40">
                         <strong></strong>
                     </div>
-                    <p class="help-block">Просмотры страниц</p>
+                    <p class="help-block">{% trans 'Page Views' %}</p>
                 </div>
             </div>
 
         </div>
         <div class="panel-footer">
-            <a href="{% url 'metrics:index' %}" class="btn btn-block btn-link">Расширенная статистика</a>
+            <a href="{% url 'metrics:index' %}" class="btn btn-block btn-link">{% trans 'Extended Report' %}</a>
         </div>
     </div>
 </div>
