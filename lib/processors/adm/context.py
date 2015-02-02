@@ -11,7 +11,7 @@ def template_variables(request):
 
     from django.conf import settings
 
-    if not request.is_ajax() and request.user.is_authenticated():
+    if not request.is_ajax() and request.user.is_authenticated() and request.subdomain == "admin":
         from app.cms.models import CMSModule
 
         cms_modules = request.user.cmsmodule_set.all()

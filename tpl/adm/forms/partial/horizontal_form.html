@@ -44,11 +44,7 @@
                             {% endif %}
                         {% endif %}
                     {% else %}
-                        {% if field.field.required %}
-                            {{ field }}
-                        {% else %}
-                            {{ field|attr:"required:required" }}
-                        {% endif %}
+                        {{ field }}
                     {% endif %}
                     {{ field.errors }}
                     {% if field.help_text and not field|is_multiple_select %}

@@ -14,15 +14,15 @@ def template_variables(request):
     """
 
     context = {}
+    if request.subdomain != "admin":
+        sitesettings = {}
+        for s in SiteSettings.objects.all():
+            sitesettings[s.name] = s.value
 
-    sitesettings = {}
-    for s in SiteSettings.objects.all():
-        sitesettings[s.name] = s.value
-
-    context.update({
-        'site': Site.objects.get_current(),
-        'app_url': settings.APP_URL,
-        'sitesettings': sitesettings
-    })
+        context.update({
+            'site': Site.objects.get_current(),
+            'app_url': settings.APP_URL,
+            'sitesettings': sitesettings
+        })
 
     return context
