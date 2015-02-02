@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 from app.pagemap.models import Page, PageModule
 
-from lib.views.adm.generic import SortableTreeGridView
+from lib.views.adm.generic import SortableTreeGridView, DeleteObjectView
 from lib.views.generic import AjaxRequestView
 
 
@@ -18,6 +18,18 @@ class PagemapView(SortableTreeGridView):
 
     def get_queryset(self):
         return Page.objects.filter(parent_id=1)
+
+
+class PageDeleteView(DeleteObjectView):
+    template_name = "adm/pagemap/delete.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageDeleteView, self).get_context_data()
+        if int(self.kwargs['pk']) == 1:
+            context.update({
+                'is_homepage': True
+            })
+        return context
 
 
 class PageModuleLoadParamsView(AjaxRequestView):
