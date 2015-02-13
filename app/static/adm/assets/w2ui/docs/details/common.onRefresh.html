@@ -1,0 +1,53 @@
+Called when object is refreshed. 
+
+<div class="definition">
+    onRefresh = function(event)
+</div>
+
+This event is common for all w2ui widgets (layout, grid, toolbar, sidebar, tabs, form). 
+<div style="height: 10px;"></div>
+You can add event listener during the object creation:
+
+<textarea class="javascript">
+$('#layout').w2layout({
+    name    : 'layout',
+    panels  : [
+        { type: 'top', size: 40 },
+        { type: 'preview', size: 200 }
+    ],
+    onRefresh: function(event) {
+        console.log('object '+ event.target + ' is refreshed');
+    }        
+});
+</textarea>
+
+or after the object has been created:
+
+<textarea class="javascript">
+w2ui.layout.on('refresh', function(event) {
+    console.log('object '+ event.target + ' is refreshed');
+});
+</textarea>
+
+The event handler is called before the default action of the event is triggered. You can cancel the default action by calling
+<span class="method">event.preventDefault()</span>. To perform an action 
+after the event is fully processed, define <span class="method">event.onComplete</span> function. 
+<div style="height: 10px;"></div>
+See <a href="utils/events">events</a> page in utilities for more details.
+
+<h4>Adding Custom Events for Generated Content</h4>
+Normally, you should not add any events directly to generated content (grid, sidebar, etc), however, it is possible to do this. You can either
+user inline html event &lt;... onclick="..."&gt; or you can add them with jQuery. You will need to add them in event.onComplete loop.
+
+<textarea class="javascript">
+w2ui.layout.on('refresh', function(event) {
+    event.onComplete = function () {
+        $(this.box).find('#..').on('click', function () {
+            // do my staff
+        });
+    }
+});
+</textarea>
+
+<h4>Layout, Sidebar, Toolbar, Tabs</h4>
+For layout, sidebar, toolbar and tabs the refresh event will be triggered for each refreshed panel (node, item, tab). It differs from other widgets, but it seems to be necessary because for layout, sidebar, toolbar and tabs the refresh method takes an argument that specifies which panel, node, item or tab to refresh.

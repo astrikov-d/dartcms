@@ -1,0 +1,63 @@
+Form HTML template.
+
+<div class="definition">
+    String, default = ''
+</div>
+
+There are four ways you can define form HTML template (in order of preference):
+<ul style="margin: 5px 40px">
+    <li><a class="argument" href="w2form.formURL">.formURL</a> - load from server</li>
+    <li><a class="argument" href="w2form.formHTML">.formHTML</a> - define in JavaScript</li>
+    <li>innerHTML of<a class="argument" href="w2form.box">.box</a></li>
+    <li>auto generated (see <a class="argument" href="w2form.generateHTML">.generateHTML</a>)</li>
+</ul>
+
+The following example shows how to define HTML template in JavaScript
+
+<textarea class="javascript">
+$('#form').w2form({
+    name: 'form',
+    style: 'border: 0px; background-color: transparent;',
+    formHTML: 
+        '<div class="w2ui-page page-0">'+
+        '    <div class="w2ui-field">'+
+        '        <label>First Name</label>'+
+        '        <div>'+
+        '            <input name="first_name" type="text" maxlength="100" size="60"/>'+
+        '        </div>'+
+        '    </div>'+
+        '    <div class="w2ui-field">'+
+        '        <label>Last Name</label>'+
+        '        <div>'+
+        '            <input name="last_name" type="text" maxlength="100" size="60"/>'+
+        '        </div>'+
+        '    </div>'+
+        '    <div class="w2ui-field">'+
+        '        <label>Email</label>'+
+        '        <div>'+
+        '            <input name="email" type="text" maxlength="100" size="60"/>'+
+        '        </div>'+
+        '    </div>'+
+        '</div>'+
+        '<div class="w2ui-buttons">'+
+        '   <button class="w2ui-btn" name="reset">Reset</button>'+
+        '    <button class="w2ui-btn w2ui-btn-green" name="save">Save</button>'+
+        '</div>',
+    fields: [
+        { name: 'first_name', type: 'text', required: true },
+        { name: 'last_name', type: 'text', required: true },
+        { name: 'email', type: 'email' },
+    ],
+    record: { 
+        first_name    : 'John',
+        last_name     : 'Doe',
+        email         : 'jdoe@email.com'
+    },
+    actions: {
+        "save": function () { this.validate(); },
+        "reset": function () { this.clear(); },
+    }
+});
+</textarea>
+
+You will still need a container #form to render the form.

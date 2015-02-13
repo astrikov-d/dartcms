@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Dmitry Astrikov'
 
-import string
+import json
 import re
 import datetime
 
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import resolve, reverse_lazy
-from django.http import HttpResponseRedirect, Http404, HttpResponseForbidden
+from django.http import HttpResponseRedirect, Http404
 
 from lib.views.generic import AjaxRequestView
 
@@ -171,6 +172,38 @@ class GridView(AdminMixin, ListView):
             'search_by': self.search_by
         })
         return context
+
+
+class DataGridView(GridView):
+    template_name = "adm/base/generic/datagrid.html"
+    paginate_by = None
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax() and request.method == "GET":
+            if request.GET.get('cmd', '') == 'get-records':
+                # W2UI request for async data loading.
+                self.object_list = self.get_queryset()
+                allow_empty = self.get_allow_empty()
+
+                if not allow_empty:
+                    if self.get_paginate_by(self.object_list is not None and hasattr(self.object_list, 'exists')):
+                        is_empty = not self.object_list.exists()
+                    else:
+                        is_empty = len(self.object_list) == 0
+                    if is_empty:
+                        response = {'total': 0, 'records': []}
+                        return self.send_response(response)
+                records = list(self.object_list.extra(select={'recid': 'id'}).values())
+                records_count = self.object_list.count()
+                response = {'total': records_count, 'records': records}
+                return self.send_response(response)
+            else:
+                return HttpResponseBadRequest()
+
+        return super(GridView, self).get(request, *args, **kwargs)
+
+    def send_response(self, response):
+        return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), content_type='text/html')
 
 
 class SortableTreeGridView(GridView):

@@ -1,6 +1,11 @@
 {% extends "adm/base/index.html" %}
 
-{% load attribute list i18n filename %}
+{% load attribute list i18n filename static %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'adm/js/app/ui/grid.js' %}"></script>
+{% endblock %}
 
 {% block breadcrumbs_current_path %}
     <li class="active">{{ page_header|capfirst }}</li>

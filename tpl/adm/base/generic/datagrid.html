@@ -1,0 +1,105 @@
+{% extends "adm/base/index.html" %}
+
+{% load attribute list i18n filename static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'adm/assets/w2ui/dist/w2ui.css' %}"/>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'adm/assets/w2ui/dist/w2ui.min.js' %}"></script>
+    <script src="{% static 'adm/js/app/ui/datagrid.js' %}"></script>
+{% endblock %}
+
+{% block breadcrumbs_current_path %}
+    <li class="active">{{ page_header|capfirst }}</li>
+{% endblock %}
+
+{% block inline_js %}
+    <script type="text/javascript">
+        $(function () {
+            w2utils.locale('{% static 'adm/assets/w2ui/src/locale/ru-ru.json' %}');
+            $('#id-grid').w2grid({
+                name: 'grid',
+                method: 'GET',
+                multiSelect: false,
+                //recid   : 'id',
+                {% if search_by %}
+                searches: [
+                    {% for field in search_by %}
+                    { field: '{{ field.0 }}', caption: '{{ field.1 }}', type: '{{ field.2 }}' }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                {% endif %}
+                columns: [
+                    {% for column in grid_columns %}
+                    {
+                        field: '{{ column.0 }}',
+                        caption: '{{ column.1 }}',
+                        render: '{% if column.2 == 'boolean' %}toggle{% else %}{{ column.2 }}{% endif %}',
+                        size: '{{ column.3 }}',
+                        sortable: true
+                    }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                onSelect: function() {
+                    $('.btn-update, .btn-delete, .btn-children').removeClass('btn-disabled');
+                },
+                onUnselect: function() {
+                    $('.btn-update, .btn-delete, .btn-children').addClass('btn-disabled');
+                }
+            });
+            w2ui['grid'].load('{{ index_url }}');
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ page_header|capfirst }}</h1>
+    <div class="grid-controls">
+        {% block grid_controls %}
+            {% if parent_url %}
+                <a href="{{ parent_url }}" class="btn btn-default">
+                    <i class="fa fa-arrow-left"></i> {% trans 'Back' %}
+                </a>&nbsp;
+            {% endif %}
+
+            {% if allow_insert %}
+                <a href="{{ index_url }}insert/" class="btn btn-success">
+                    <i class="fa fa-plus-square"></i> {% trans 'Add Record' %}
+                </a>&nbsp;
+            {% endif %}
+
+            {% if allow_update %}
+                <a href="{{ index_url }}update/" class="btn btn-warning btn-disabled btn-update">
+                    <i class="fa fa-pencil-square"></i> {% trans 'Edit' %}
+                </a>&nbsp;
+            {% endif %}
+
+            {% if allow_delete %}
+                <a href="{{ index_url }}delete/" class="btn btn-danger btn-disabled btn-delete">
+                    <i class="fa fa-trash"></i> {% trans 'Delete' %}
+                </a>&nbsp;
+            {% endif %}
+
+            {% for action in object_actions %}
+                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/{% else %}{{ index_url }}children/{% endif %}"
+                   class="btn btn-{% if action.3 %}{{ action.3 }}{% else %}info{% endif %} btn-children btn-disabled">
+                    {% if action.2 %}<i class="fa {{ action.2 }}"></i>{% endif %} {{ action.0 }}
+                </a>&nbsp;
+            {% endfor %}
+
+        {% endblock %}
+    </div>
+    <div class="well well-sm">
+        {% block object_list %}
+            {% if object_list %}
+                <div id="id-grid" style="width: 100%; height: 350px;"></div>
+            {% else %}
+                <p>{% trans 'Records not found.' %}</p>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

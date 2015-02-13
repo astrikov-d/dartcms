@@ -1,0 +1,85 @@
+Array of search objects. 
+
+<div class="definition">
+    Array, default = []
+</div>
+
+The <span class="argument">.searches</span> property can be initialized during the object creation or any time 
+during the run-time. There is no need to refresh the grid because this array will be used when user executes a search. 
+<div style="height: 10px"></div>
+
+Searches can be defined during object creation: 
+<textarea class="javascript">
+$('#grid').w2grid({
+    name : 'grid',
+    show : { toolbar : true },
+    columns : [                
+        { field: 'recid', caption: 'ID', size: '50px' },
+        { field: 'lname', caption: 'Last Name', size: '30%' },
+        { field: 'fname', caption: 'First Name', size: '30%' },
+        { field: 'email', caption: 'Email', size: '40%' },
+        { field: 'sdate', caption: 'Start Date', size: '120px' },
+        { field: 'sdate', caption: 'End Date', size: '120px' }
+    ],
+    searches : [
+        { field: 'recid', caption: 'ID (int)', type: 'int' },
+        { field: 'id', caption: 'ID (float)', type: 'float' },
+        { field: 'fname', caption: 'First Name', type: 'text' },
+        { field: 'lname', caption: 'Last Name', type: 'text' },
+        { field: 'email', caption: 'Email', type: 'list', 
+            options: { items: ['vitali@gmail.com', 'jim@gmail.com'] } },
+        { field: 'sdate', caption: 'Date', type: 'date' }
+    ]
+});
+</textarea>
+
+Or it can be changed during run-time:
+
+<textarea class="javascript">
+w2ui['grid'].searches[0] = { field: 'recid', caption: 'ID', type: 'int' };
+</textarea>
+
+Because the only way for the user to trigger the search is from the toolbar, the <a class="argument" href="w2grid.show">.show.toolbar</a> and
+<a class="argument" href="w2grid.show">.show.toolbarSearch</a> properties should be set to true. 
+<div style="height: 10px"></div>
+
+Below it the structure of the search object:
+<textarea class="javascript">
+search = {
+    type     : 'text',    // type of the search (see below)
+    field    : '',        // field name to submit to server
+    caption  : '',        // caption of the search
+    inTag    : '',        // text that will be inside &lt;input ...&gt; tag
+    outTag   : '',        // text that will be outside &lt;input ...&gt; tag
+    hidden   : false,     // indicates if search is show or hidden
+    options  : {}         // options for w2field object
+}
+</textarea>
+
+The type of the search filed can be one of the following:
+<ul>
+    <li>text</li>
+    <li>int</li>
+    <li>float</li>
+    <li>hex</li>
+    <li>money</li>
+    <li>currency</li>
+    <li>percent</li>
+    <li>alphanumeric</li>
+    <li>date</li>
+    <li>time</li>
+    <li>list</li>
+    <li>combo</li>
+    <li>enum</li>
+</ul>
+
+You can control search from JavaScript, see following methods for more information:
+<div style="height: 10px"></div>
+
+<ul>
+    <li><a href="w2grid.search" class="method">.search()</a> - submit a search</li>
+    <li><a href="w2grid.searchOpen" class="method">.searchOpen()</a> - open search dialog</li>
+    <li><a href="w2grid.searchClose" class="method">.searchClose()</a> - close search dialog</li>
+    <li><a href="w2grid.searchReset" class="method">.searchReset()</a> - reset all search fields to default values</li>
+</ul>
+

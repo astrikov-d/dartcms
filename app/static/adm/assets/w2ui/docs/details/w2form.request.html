@@ -1,0 +1,55 @@
+Reloads record data and refreshes the form.
+
+<div class="definition">
+    request([postData], [callBack])
+</div>
+
+<div class="arguments">
+    <table>
+    <tr>
+        <td>postData</td>
+        <td><b>object</b>, Map of additional parameter to submit to remote data source (<i>optional</i>)</td>
+    </tr>
+    <tr>
+        <td>callBack</td>
+        <td><b>function</b>, call back function when form is reloaded (<i>optional</i>)</td>
+    </tr>
+    </table>
+</div>
+
+Returns <i>undefined</i>.
+
+<h4>Description</h4>
+
+This method should only be called if the data source is remote (the <a class="argument" href="w2form.url">.url</a> and 
+<a class="argument" href="w2form.recid">.recid</a> properties are defined). If the data source is local - no action will be performed. 
+You can also use <a class="method" href="w2form.reload">.reload()</a> method to reload the form data.
+<div style="height: 10px"></div>
+
+There are several events associated with this method: <a class="method" href="w2form.onRequest">.onRequest</a>
+and <a class="method" href="w2form.onLoad">.onLoad</a>.
+<div style="height: 10px"></div>
+
+If you have following form:
+<textarea class="javascript">
+$('#form').w2form({
+    name     : 'form',
+    recid      : 10,
+    url      : '/server/form/path',
+    formURL  : '/server/path',
+    fields: [
+        { name: 'first_name', type: 'text', required: true },
+        { name: 'last_name', type: 'text', required: true },
+        { name: 'email', type: 'email' },
+    ],
+    actions: {
+        "save": function (target, data) { this.validate(); },
+        "reset": function (target, data) { this.clear(); },
+    }
+});
+</textarea>
+
+You can do:
+<textarea class="javascript">
+w2ui['form'].request();
+</textarea>
