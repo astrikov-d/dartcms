@@ -6,7 +6,7 @@ from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
-from lib.views.adm.generic import DataGridView, InsertObjectView, UpdateObjectView, DeleteObjectView
+from lib.views.adm.generic import DataGridView, GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
 from app.feeds.models import FeedItem as Model
 from forms import Form
 
@@ -31,9 +31,14 @@ kwargs = {
     'parent_model_fk': 'feed_id'
 }
 
+grid_kwargs = kwargs.copy()
+grid_kwargs.update({
+    'paginate_by': 1
+})
+
 urlpatterns = patterns('',
-    url(r'^$', login_required(DataGridView.as_view(**kwargs)), name='index'),
-    url(r'^page/(?P<page>\d+)/$', login_required(DataGridView.as_view(**kwargs)), name='index'),
+    url(r'^$', login_required(GridView.as_view(**grid_kwargs)), name='index'),
+    url(r'^page/(?P<page>\d+)/$', login_required(GridView.as_view(**grid_kwargs)), name='index'),
     url(r'^insert/$', login_required(InsertObjectView.as_view(**kwargs)), name='insert'),
     url(r'^update/(?P<pk>\d+)/$', login_required(UpdateObjectView.as_view(**kwargs)), name='update'),
     url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(**kwargs)), name='delete'),

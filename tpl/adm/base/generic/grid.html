@@ -28,13 +28,13 @@
             {% endif %}
 
             {% if allow_update %}
-                <a href="{{ index_url }}update/" class="btn btn-warning btn-disabled btn-update">
+                <a href="{{ index_url }}update/?back_url={{ request.path }}" class="btn btn-warning btn-disabled btn-update">
                     <i class="fa fa-pencil-square"></i> {% trans 'Edit' %}
                 </a>&nbsp;
             {% endif %}
 
             {% if allow_delete %}
-                <a href="{{ index_url }}delete/" class="btn btn-danger btn-disabled btn-delete">
+                <a href="{{ index_url }}delete/?back_url={{ request.path }}" class="btn btn-danger btn-disabled btn-delete">
                     <i class="fa fa-trash"></i> {% trans 'Delete' %}
                 </a>&nbsp;
             {% endif %}
@@ -48,32 +48,34 @@
 
         {% endblock %}
     </div>
-    {% if search_by %}
-        <div class="well well-sm">
-            <form method="GET" class="form-inline">
-                {% for field in search_by %}
-                    <div class="form-group">
-                        {% if field.2 == 'text' or not field.2 %}
-                            <input type="text" name="{{ field.0 }}" placeholder="{{ field.1 }}" class="form-control"
-                                   value="{{ search_values|lookup:forloop.counter0 }}"/>
-                        {% elif field.2 == 'datetime' %}
-                            <input type="text" name="{{ field.0 }}_from" placeholder="{{ field.1 }} от"
-                                   class="form-control datetime"
-                                   value="{{ search_values|lookup:forloop.counter0|lookup:0 }}"/>&nbsp;
-                            <input type="text" name="{{ field.0 }}_to" placeholder="{{ field.1 }} до"
-                                   class="form-control datetime"
-                                   value="{{ search_values|lookup:forloop.counter0|lookup:1 }}"/>
-                        {% elif field.2 == 'boolean' %}
-                            <label><input type="checkbox" name="{{ field.0 }}"
-                                          {% if search_values|lookup:forloop.counter0 %}checked="checked"{% endif %}/> {{ field.1 }}
-                            </label>
-                        {% endif %}
-                    </div>&nbsp;
-                {% endfor %}
-                <input type="submit" name="search" class="btn btn-primary" value="{% trans 'Search' %}"/>
-            </form>
-        </div>
-    {% endif %}
+    {% block search_by %}
+        {% if search_by %}
+            <div class="well well-sm">
+                <form method="GET" class="form-inline">
+                    {% for field in search_by %}
+                        <div class="form-group">
+                            {% if field.2 == 'text' or not field.2 %}
+                                <input type="text" name="{{ field.0 }}" placeholder="{{ field.1 }}" class="form-control"
+                                       value="{{ search_values|lookup:forloop.counter0 }}"/>
+                            {% elif field.2 == 'datetime' %}
+                                <input type="text" name="{{ field.0 }}_from" placeholder="{{ field.1 }} от"
+                                       class="form-control datetime"
+                                       value="{{ search_values|lookup:forloop.counter0|lookup:0 }}"/>&nbsp;
+                                <input type="text" name="{{ field.0 }}_to" placeholder="{{ field.1 }} до"
+                                       class="form-control datetime"
+                                       value="{{ search_values|lookup:forloop.counter0|lookup:1 }}"/>
+                            {% elif field.2 == 'boolean' %}
+                                <label><input type="checkbox" name="{{ field.0 }}"
+                                              {% if search_values|lookup:forloop.counter0 %}checked="checked"{% endif %}/> {{ field.1 }}
+                                </label>
+                            {% endif %}
+                        </div>&nbsp;
+                    {% endfor %}
+                    <input type="submit" name="search" class="btn btn-primary" value="{% trans 'Search' %}"/>
+                </form>
+            </div>
+        {% endif %}
+    {% endblock %}
     <div class="well well-sm">
         {% block object_list %}
             {% if object_list %}
@@ -97,9 +99,11 @@
                                         {% elif column.2 == 'time' %}
                                             {{ object|attribute:index|date:"H:i:s" }}
                                         {% elif column.2 == 'file' %}
-                                            <a href="{{ MEDIA_URL }}{{ object|attribute:index }}" target="_blank">{{ object|attribute:index|filename }}</a>
+                                            <a href="{{ MEDIA_URL }}{{ object|attribute:index }}"
+                                               target="_blank">{{ object|attribute:index|filename }}</a>
                                         {% elif column.2 == 'image' %}
-                                            <img src="{{ MEDIA_URL }}{{ object|attribute:index }}" class="img-thumbnail"/>
+                                            <img src="{{ MEDIA_URL }}{{ object|attribute:index }}"
+                                                 class="img-thumbnail"/>
                                         {% elif column.2 == 'boolean' %}
                                             {% if object|attribute:index %}
                                                 <i class="fa fa-check-circle"></i>

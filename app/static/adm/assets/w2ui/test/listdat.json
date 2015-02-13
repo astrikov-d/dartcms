@@ -1,7 +1,0 @@
-{
-    "status": "success",
-    "items": [ 
-        { "id": 1, "text": "item 1" }, 
-        { "id": 2, "text": "item 2" }
-    ]
-}

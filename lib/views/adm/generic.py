@@ -7,8 +7,10 @@ import datetime
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.core.paginator import InvalidPage
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, Http404
+from django.utils.translation import ugettext as _
 
 from lib.views.generic import AjaxRequestView
 
@@ -74,33 +76,46 @@ class AdminMixin(ModulePermissionsMixin, object):
     # Inline elements of the forms
     inlines = []
 
+    # Index app url
+    index_url = ""
+
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
 
-        index_url = re.sub(r'(insert/|update/\d+/|page/\d+/|delete/(\d+)/|change-password/(\d+)/)', "", self.request.path)
+        if 'back_url' in self.request.GET:
+            self.index_url = self.request.GET.get('back_url')
+        else:
+            self.index_url = re.sub(r'(insert/|update/\d+/|page/\d+/|delete/(\d+)/|change-password/(\d+)/)', "",
+                                    self.request.path)
 
         if self.parent_kwarg_name:
-            reg = r'(%s/(\d+)/)$' % self.kwargs['children_url']
+            reg = r'(%s/(\d+)/(page/\d+/)?)$' % self.kwargs['children_url']
+            print reg
             parent_url = re.sub(reg, "", self.request.path)
         else:
             parent_url = ""
+        print parent_url
 
         context.update({
             'page_header': self.page_header if self.page_header else self.model._meta.verbose_name_plural,
             'parent_kwarg_name': self.parent_kwarg_name,
-            'index_url': index_url,
+            'index_url': self.index_url,
             'parent_url': parent_url
         })
         return context
 
     def get_success_url(self):
-        index_url = re.sub(r'(insert/|update/\d+/|delete/(\d+)/)', "", self.request.path)
-        return index_url
+        if 'back_url' in self.request.GET:
+            self.index_url = self.request.GET.get('back_url')
+        else:
+            self.index_url = re.sub(r'(insert/|update/\d+/|delete/(\d+)/)', "", self.request.path)
+        return self.index_url
 
 
 class GridView(AdminMixin, ListView):
     template_name = "adm/base/generic/grid.html"
     paginate_by = 15
+    allow_empty = True
 
     def get_queryset(self):
         if self.parent_kwarg_name:
@@ -146,6 +161,28 @@ class GridView(AdminMixin, ListView):
 
         return queryset
 
+    def paginate_queryset(self, queryset, page_size):
+        """
+        Paginate the queryset, if needed.
+        """
+        paginator = self.get_paginator(
+            queryset, page_size, orphans=self.get_paginate_orphans(),
+            allow_empty_first_page=self.get_allow_empty())
+        page_kwarg = self.page_kwarg
+        page = self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1
+        try:
+            page_number = int(page)
+        except ValueError:
+            if page == 'last':
+                page_number = paginator.num_pages
+            else:
+                raise Http404(_("Page is not 'last', nor can it be converted to an int."))
+        try:
+            page = paginator.page(page_number)
+        except InvalidPage as e:
+            page = paginator.page(paginator.num_pages)
+        return (paginator, page, page.object_list, page.has_other_pages())
+
     def get_context_data(self, **kwargs):
         context = super(GridView, self).get_context_data(**kwargs)
 
@@ -180,25 +217,19 @@ class DataGridView(GridView):
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax() and request.method == "GET":
-            if request.GET.get('cmd', '') == 'get-records':
-                # W2UI request for async data loading.
-                self.object_list = self.get_queryset()
-                allow_empty = self.get_allow_empty()
+            self.object_list = self.get_queryset()
+            allow_empty = self.get_allow_empty()
 
-                if not allow_empty:
-                    if self.get_paginate_by(self.object_list is not None and hasattr(self.object_list, 'exists')):
-                        is_empty = not self.object_list.exists()
-                    else:
-                        is_empty = len(self.object_list) == 0
-                    if is_empty:
-                        response = {'total': 0, 'records': []}
-                        return self.send_response(response)
-                records = list(self.object_list.extra(select={'recid': 'id'}).values())
-                records_count = self.object_list.count()
-                response = {'total': records_count, 'records': records}
-                return self.send_response(response)
-            else:
-                return HttpResponseBadRequest()
+            if not allow_empty:
+                if self.get_paginate_by(self.object_list is not None and hasattr(self.object_list, 'exists')):
+                    is_empty = not self.object_list.exists()
+                else:
+                    is_empty = len(self.object_list) == 0
+                if is_empty:
+                    response = []
+                    return self.send_response(response)
+            response = list(self.object_list.values())
+            return self.send_response(response)
 
         return super(GridView, self).get(request, *args, **kwargs)
 

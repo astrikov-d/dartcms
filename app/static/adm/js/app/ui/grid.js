@@ -48,7 +48,12 @@ $(function () {
             });
             return false;
         }
-        document.location.href = $(this).attr('href') + getSelectedRowId() + '/';
+        var url = $(this).attr('href').split('?');
+            if(url.length > 1) {
+                document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+            } else {
+                document.location.href = url[0] + getSelectedRowId() + '/';
+            }
     });
 
     btn_delete.on('click', function (e) {
@@ -61,7 +66,12 @@ $(function () {
             });
             return false;
         }
-        document.location.href = $(this).attr('href') + getSelectedRowId() + '/';
+        var url = $(this).attr('href').split('?');
+            if(url.length > 1) {
+                document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+            } else {
+                document.location.href = url[0] + getSelectedRowId() + '/';
+            }
     });
 
     btn_children.on('click', function (e) {
@@ -74,6 +84,11 @@ $(function () {
             });
             return false;
         }
-        document.location.href = $(this).attr('href') + getSelectedRowId() + '/';
+        var url = $(this).attr('href').split('?');
+            if(url.length > 1) {
+                document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+            } else {
+                document.location.href = url[0] + getSelectedRowId() + '/';
+            }
     });
 });
