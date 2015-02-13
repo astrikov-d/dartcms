@@ -17,25 +17,25 @@
             {% endif %}
 
             {% if allow_insert %}
-                <a href="{{ request.path }}insert/" class="btn btn-success">
+                <a href="{{ index_url }}insert/" class="btn btn-success">
                     <i class="fa fa-plus-square"></i> {% trans 'Add Record' %}
                 </a>&nbsp;
             {% endif %}
 
             {% if allow_update %}
-                <a href="{{ request.path }}update/" class="btn btn-warning btn-disabled btn-update">
+                <a href="{{ index_url }}update/" class="btn btn-warning btn-disabled btn-update">
                     <i class="fa fa-pencil-square"></i> {% trans 'Edit' %}
                 </a>&nbsp;
             {% endif %}
 
             {% if allow_delete %}
-                <a href="{{ request.path }}delete/" class="btn btn-danger btn-disabled btn-delete">
+                <a href="{{ index_url }}delete/" class="btn btn-danger btn-disabled btn-delete">
                     <i class="fa fa-trash"></i> {% trans 'Delete' %}
                 </a>&nbsp;
             {% endif %}
 
             {% for action in object_actions %}
-                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/{% else %}{{ request.path }}children/{% endif %}"
+                <a href="{% if action.1 %}{{ request.path }}{{ action.1 }}/{% else %}{{ index_url }}children/{% endif %}"
                    class="btn btn-{% if action.3 %}{{ action.3 }}{% else %}info{% endif %} btn-children btn-disabled">
                     {% if action.2 %}<i class="fa {{ action.2 }}"></i>{% endif %} {{ action.0 }}
                 </a>&nbsp;
@@ -111,8 +111,7 @@
                     {% endfor %}
                 </table>
                 {% if is_paginated %}
-                    {% url index_url_scheme as pagination_url %}
-                    {% include 'adm/lists/pagination.html' %}
+                    {% include 'adm/lists/pagination.html' with pagination_url=index_url %}
                 {% endif %}
             {% else %}
                 <p>{% trans 'Records not found.' %}</p>

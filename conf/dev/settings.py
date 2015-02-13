@@ -201,3 +201,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = 'login'
+
+WATSON_BACKEND = "lib.backends.watson.search.DartCMSPostgresSearchBackend"
