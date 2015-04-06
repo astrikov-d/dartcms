@@ -52,7 +52,7 @@ class CMSModule(models.Model):
     sort = models.IntegerField(default=1, verbose_name=_(u"Sort"))
     description = models.TextField(default='', verbose_name=_(u"Description"), blank=True)
     slug = models.SlugField(unique=True, verbose_name=_(u"Slug"))
-    user = models.ManyToManyField(User, verbose_name=_(u"User"), null=True, blank=True)
+    user = models.ManyToManyField(User, verbose_name=_(u"User"))
     is_enabled = models.BooleanField(default=True, verbose_name=_(u"Is Enabled"))
 
 
@@ -67,13 +67,13 @@ class Folder(models.Model):
         return self.name
 
     name = models.CharField(max_length=255, verbose_name=_(u'Name'))
-    date_created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now())
+    date_created = models.DateTimeField(auto_now_add=True)
 
 
 class File(models.Model):
     folder = models.ForeignKey(Folder)
     path = models.FileField(upload_to="uploads/%Y/%m/%d")
-    date_created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now())
+    date_created = models.DateTimeField(auto_now_add=True)
 
 
 @receiver(pre_delete, sender=File)

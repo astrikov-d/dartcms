@@ -4,6 +4,7 @@ import datetime
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.utils import timezone
 
 
 class AdvPlace(models.Model):
@@ -51,9 +52,9 @@ class Adv(models.Model):
         verbose_name_plural = _(u"banners")
         ordering = ['name']
 
-    date_from = models.DateTimeField(default=datetime.date.today(), verbose_name=_(u'Start Date'))
+    date_from = models.DateTimeField(default=timezone.now, verbose_name=_(u'Start Date'))
     date_to = models.DateTimeField(
-        default=datetime.date.today() + datetime.timedelta(days=30),
+        default=timezone.now() + datetime.timedelta(days=30),
         verbose_name=_(u'End Date'))
     name = models.CharField(max_length=255, verbose_name=_(u'Name'))
     title = models.TextField(default='', blank=True, verbose_name=_(u'Ad Text'))
