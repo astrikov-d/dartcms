@@ -128,7 +128,7 @@ class Product(models.Model):
     views_count = models.IntegerField(verbose_name=_(u"Views Count"), default=0)
     price = models.DecimalField(verbose_name=_(u"Price"), decimal_places=2, max_digits=10, default=0)
     residue = models.IntegerField(default=0, verbose_name=_(u"Residue"))
-    labels = models.ManyToManyField(ProductLabel, verbose_name=_(u"Labels"), null=True, blank=True)
+    labels = models.ManyToManyField(ProductLabel, verbose_name=_(u"Labels"))
     is_available = models.BooleanField(default=True, verbose_name=_(u"Is Available"))
     is_visible = models.BooleanField(default=True, verbose_name=_(u"Show on Site"))
     is_special_offer = models.BooleanField(default=True, verbose_name=_(u"Is Special Offer"))
