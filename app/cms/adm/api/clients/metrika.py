@@ -31,7 +31,9 @@ class Client(object):
 
         if r is not None:
             try:
-                return r.json()
+                res = r.json()
+                res['data'] = sorted(res['data'], key=lambda k: k['date'])
+                return res
             except ValueError:
                 print r
                 return r.text
