@@ -10,7 +10,7 @@ from lib.views.adm.generic import DataGridView, InsertObjectView, UpdateObjectVi
 from django.forms.models import modelform_factory
 from app.feeds.models import Feed as Model
 
-Form = modelform_factory(Model)
+Form = modelform_factory(Model, exclude=[])
 
 grid_columns = (
     ('name', _(u"Name"), 'string', '100%'),

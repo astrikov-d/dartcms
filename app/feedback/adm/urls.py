@@ -10,7 +10,7 @@ from lib.views.adm.generic import GridView, InsertObjectView, UpdateObjectView, 
 from django.forms.models import modelform_factory
 from app.feedback.models import FeedbackType as Model
 
-Form = modelform_factory(Model)
+Form = modelform_factory(Model, exclude=[])
 
 grid_columns = (
     ('name', _(u"Name"), 'string', '40%'),
