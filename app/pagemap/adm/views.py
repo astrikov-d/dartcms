@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 from app.pagemap.models import Page, PageModule
 
-from lib.views.adm.generic import SortableTreeGridView, InsertObjectView
+from lib.views.adm.generic import SortableTreeGridView, InsertObjectView, DeleteObjectView
 from lib.views.generic import AjaxRequestView
 
 
@@ -59,6 +59,18 @@ class PageModuleLoadParamsView(AjaxRequestView):
             'result': 'success',
             'data': data
         }
+
+
+class PageDeleteView(DeleteObjectView):
+    template_name = "adm/pagemap/delete.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageDeleteView, self).get_context_data()
+        if int(self.kwargs['pk']) == 1:
+            context.update({
+                'is_homepage': True
+            })
+        return context
 
 
 class PageInsertObjectView(InsertObjectView):

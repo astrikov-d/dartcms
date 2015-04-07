@@ -5,10 +5,10 @@ from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
-from lib.views.adm.generic import SortableTreeGridMoveView, InsertObjectView, UpdateObjectView, DeleteObjectView
+from lib.views.adm.generic import SortableTreeGridMoveView, UpdateObjectView
 from forms import Form
 from app.pagemap.models import Page
-from views import PagemapView, PageModuleLoadParamsView, PageInsertObjectView
+from views import PagemapView, PageModuleLoadParamsView, PageInsertObjectView, PageDeleteView
 
 
 urlpatterns = patterns('',
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
         page_header=_(u"Site Structure"),
         form_class=Form
     )), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', login_required(DeleteObjectView.as_view(
+    url(r'^delete/(?P<pk>\d+)/$', login_required(PageDeleteView.as_view(
         page_header=_(u"Site Structure"),
         model=Page
     )), name='delete'),
