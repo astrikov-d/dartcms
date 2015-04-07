@@ -21,6 +21,7 @@ class Form(BetterModelForm):
 
         fieldsets = (
             ('main', {'fields': (
+				'parent',
                 'slug',
                 'title',
                 'header',
