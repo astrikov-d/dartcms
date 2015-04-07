@@ -12,3 +12,4 @@ requests
 pytils
 django-watson
 django-extra-views
+django-form-utils

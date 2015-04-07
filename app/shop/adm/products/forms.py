@@ -8,4 +8,5 @@ from app.shop.models import ProductPicture
 
 
 class ProductPictureInline(InlineFormSet):
+    exclude = []
     model = ProductPicture

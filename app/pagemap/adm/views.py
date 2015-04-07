@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 from app.pagemap.models import Page, PageModule
 
-from lib.views.adm.generic import SortableTreeGridView, DeleteObjectView
+from lib.views.adm.generic import SortableTreeGridView, InsertObjectView, DeleteObjectView
 from lib.views.generic import AjaxRequestView
 
 
@@ -20,18 +20,6 @@ class PagemapView(SortableTreeGridView):
         return Page.objects.filter(parent_id=1)
 
 
-class PageDeleteView(DeleteObjectView):
-    template_name = "adm/pagemap/delete.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(PageDeleteView, self).get_context_data()
-        if int(self.kwargs['pk']) == 1:
-            context.update({
-                'is_homepage': True
-            })
-        return context
-
-
 class PageModuleLoadParamsView(AjaxRequestView):
     def get_response(self, request, *args, **kwargs):
         module = PageModule.objects.get(id=request.GET.get('selected_module', 0))
@@ -42,7 +30,7 @@ class PageModuleLoadParamsView(AjaxRequestView):
 
         def get_feedback_types():
             from app.feedback.models import FeedbackType
-            return FeedbackType.objects.all().extra(select={'label': 'name', 'value': 'id'})
+            return FeedbackType.objects.filter(is_enable=True).extra(select={'label': 'name', 'value': 'id'})
 
         switch = {
             'feeds': get_news_feeds(),
@@ -72,3 +60,21 @@ class PageModuleLoadParamsView(AjaxRequestView):
             'data': data
         }
 
+
+class PageDeleteView(DeleteObjectView):
+    template_name = "adm/pagemap/delete.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageDeleteView, self).get_context_data()
+        if int(self.kwargs['pk']) == 1:
+            context.update({
+                'is_homepage': True
+            })
+        return context
+
+
+class PageInsertObjectView(InsertObjectView):
+    def get_initial(self):
+        initial = super(PageInsertObjectView, self).get_initial()
+        initial.update({'parent': self.kwargs.get('parent')})
+        return initial

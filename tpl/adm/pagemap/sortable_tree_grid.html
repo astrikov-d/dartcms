@@ -2,6 +2,43 @@
 
 {% load static recursive_tree %}
 
+{% block inline_js %}
+    <script>
+        $(function(){
+            var $btn_insert = $(".btn-insert");
+
+            var getSelectedRowId = function () {
+                var selected_row = $('.clickable-row.selected');
+                if (selected_row.length) {
+                    return parseInt(selected_row.attr('data-pk'));
+                } else {
+                    return null;
+                }
+            };
+
+            $btn_insert.click(function(e){
+                e.preventDefault();
+                var id = getSelectedRowId();
+                if (id) {
+                    var url = $(this).attr('href').split('?');
+                    if(url.length > 1) {
+                        document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+                    } else {
+                        document.location.href = url[0] + getSelectedRowId() + '/';
+                    }
+                } else {
+                    $.pnotify({
+                        title: gettext('Warning'),
+                        text: gettext('Choose parent row for insert'),
+                        type: 'info'
+                    });
+                    return false;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block object_list %}
     <ul class="drag-and-drop-root">
         <li>

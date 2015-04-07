@@ -12,7 +12,9 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
 
+from lib.utils.paging import DiggPaginator
 from lib.views.generic import AjaxRequestView
+from lib.utils.hash import Hash
 
 
 class ModulePermissionsMixin(object):
@@ -38,6 +40,8 @@ class AdminMixin(ModulePermissionsMixin, object):
     """
     Admin mixin. It's common for all admin view. Gets current url sheme, app name etc.
     """
+
+    initial_filter = {}
 
     # True if user can delete records via this app
     allow_delete = True
@@ -82,19 +86,14 @@ class AdminMixin(ModulePermissionsMixin, object):
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
 
-        if 'back_url' in self.request.GET:
-            self.index_url = self.request.GET.get('back_url')
-        else:
-            self.index_url = re.sub(r'(insert/|update/\d+/|page/\d+/|delete/(\d+)/|change-password/(\d+)/)', "",
-                                    self.request.path)
+        self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|page/\d+/|delete/(\d+)/|change-password/(\d+)/)', "",
+                                self.request.path)
 
         if self.parent_kwarg_name:
             reg = r'(%s/(\d+)/(page/\d+/)?)$' % self.kwargs['children_url']
-            print reg
             parent_url = re.sub(reg, "", self.request.path)
         else:
             parent_url = ""
-        print parent_url
 
         context.update({
             'page_header': self.page_header if self.page_header else self.model._meta.verbose_name_plural,
@@ -105,17 +104,31 @@ class AdminMixin(ModulePermissionsMixin, object):
         return context
 
     def get_success_url(self):
-        if 'back_url' in self.request.GET:
-            self.index_url = self.request.GET.get('back_url')
-        else:
-            self.index_url = re.sub(r'(insert/|update/\d+/|delete/(\d+)/)', "", self.request.path)
+        self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|delete/(\d+)/)', "", self.request.path)
         return self.index_url
 
 
 class GridView(AdminMixin, ListView):
     template_name = "adm/base/generic/grid.html"
     paginate_by = 15
+    paginator_class = DiggPaginator
     allow_empty = True
+    __search = False
+
+    def get_page(self):
+        url = self.request.path
+        url_id = 'pg_%s' % Hash.md5(url)
+        page = self.request.GET.get(self.page_kwarg)
+        if page:
+            self.request.session[url_id] = page
+        else:
+            referer = self.request.META.get('HTTP_REFERER')
+            if referer and referer.find(url) >= 0:
+                page = self.request.session.get(url_id, 1)
+            else:
+                self.request.session[url_id] = 1
+                page = 1
+        return page
 
     def get_queryset(self):
         if self.parent_kwarg_name:
@@ -125,6 +138,7 @@ class GridView(AdminMixin, ListView):
             else:
                 fk = "%s_id" % self.parent_model.__name__.lower()
             filter = "%s__exact" % fk
+
             queryset = self.model.objects.filter(**{
                 filter: kwarg
             })
@@ -145,6 +159,7 @@ class GridView(AdminMixin, ListView):
                             filter_from: datetime.datetime.strptime(date_from, "%d.%m.%Y %H:%M:%S"),
                             filter_to: datetime.datetime.strptime(date_to, "%d.%m.%Y %H:%M:%S"),
                         })
+                        self.__search = True
                 elif len(field) > 2 and field[2] == 'boolean':
                     filter = lookup
                     term = self.request.GET.get(lookup, False)
@@ -152,24 +167,30 @@ class GridView(AdminMixin, ListView):
                         queryset = queryset.filter(**{
                             filter: True if term else False
                         })
+                        self.__search = True
                 else:
                     filter = "%s__icontains" % lookup
                     term = self.request.GET.get(lookup, '')
                     queryset = queryset.filter(**{
                         filter: term
                     })
+                    if term:
+                        self.__search = True
 
+        if self.initial_filter and not self.__search:
+            queryset = queryset.filter(**self.initial_filter)
         return queryset
 
     def paginate_queryset(self, queryset, page_size):
         """
         Paginate the queryset, if needed.
         """
+
         paginator = self.get_paginator(
             queryset, page_size, orphans=self.get_paginate_orphans(),
             allow_empty_first_page=self.get_allow_empty())
-        page_kwarg = self.page_kwarg
-        page = self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1
+
+        page = self.get_page()
         try:
             page_number = int(page)
         except ValueError:

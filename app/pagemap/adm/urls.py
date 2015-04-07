@@ -5,18 +5,19 @@ from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
-from lib.views.adm.generic import SortableTreeGridMoveView, InsertObjectView, UpdateObjectView, DeleteObjectView
+from lib.views.adm.generic import SortableTreeGridMoveView, UpdateObjectView
 from forms import Form
 from app.pagemap.models import Page
-from views import PagemapView, PageModuleLoadParamsView, PageDeleteView
+from views import PagemapView, PageModuleLoadParamsView, PageInsertObjectView, PageDeleteView
+
 
 urlpatterns = patterns('',
     url(r'^$', login_required(PagemapView.as_view()), name='index'),
-    url(r'^insert/$', login_required(InsertObjectView.as_view(
+    url(r'^insert/(?P<parent>\d+)/$', login_required(PageInsertObjectView.as_view(
         model=Page,
         template_name="adm/pagemap/insert.html",
         page_header=_(u"Site Structure"),
-        form_class=Form
+        form_class=Form,
     )), name='insert'),
     url(r'^update/(?P<pk>\d+)/$', login_required(UpdateObjectView.as_view(
         model=Page,

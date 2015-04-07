@@ -1,63 +1,26 @@
 {% load widget_tweaks forms i18n %}
 
-<div class="alert alert-warning">
-    {% blocktrans %}Fields marked with <span class="text-danger">*</span> are required.{% endblocktrans %}
-</div>
 {{ form.non_field_errors }}
-{% for field in form %}
-    {% if not field|is_hidden %}
-        <div class="form-group">
-            {% if field|is_checkbox %}
-                <div class="col-sm-offset-3 col-sm-9">
-                    <div class="checkbox">
-                        <label>
-                            {{ field }} {{ field.label }}
-                        </label>
-                    </div>
-                </div>
-            {% elif field|is_radio %}
-                <label for="{{ field.id_for_label }}" class="control-label col-xs-3">{{ field.label }}</label>
-                <div class="col-sm-9">
-                    <div class="radio">
-                        <label>
-                            {{ field }}
-                        </label>
-                    </div>
-                </div>
-            {% else %}
-                <label for="{{ field.id_for_label }}" class="control-label col-xs-3">
-                    {{ field.label }} {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
-                </label>
-                <div class="col-xs-9">
-                    {% if not field|is_file %}
-                        {% if not field|is_multiple_select %}
-                            {% if field.field.required %}
-                                {{ field|add_class:"form-control"|attr:"required:required" }}
-                            {% else %}
-                                {{ field|add_class:"form-control" }}
-                            {% endif %}
-                        {% else %}
-                            {% if field.field.required %}
-                                {{ field|add_class:"form-control"|add_class:"chosen"|attr:"required:required" }}
-                            {% else %}
-                                {{ field|add_class:"form-control"|add_class:"chosen" }}
-                            {% endif %}
-                        {% endif %}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                    {{ field.errors }}
-                    {% if field.help_text and not field|is_multiple_select %}
-                        <p class="help-block">{{ field.help_text }}</p>
-                    {% endif %}
-                </div>
+
+{% if form.fieldsets %}
+    {% for fieldset in form.fieldsets %}
+        <fieldset class="{{ fieldset.classes }}">
+            {% if fieldset.legend %}
+                <legend>{{ fieldset.legend }}</legend>
             {% endif %}
-        </div>
-    {% else %}
-        {% if field.field.required %}
-            {{ field }}
-        {% else %}
-            {{ field|attr:"required:required" }}
-        {% endif %}
-    {% endif %}
-{% endfor %}
+            {% if fieldset.description %}
+                <p class="description">{{ fieldset.description }}</p>
+            {% endif %}
+            {% for field in fieldset %}
+                {% include 'adm/forms/partial/field.html' %}
+            {% endfor %}
+        </fieldset>
+    {% endfor %}
+{% else %}
+    <fieldset>
+        {% for field in form %}
+            {% include 'adm/forms/partial/field.html' %}
+        {% endfor %}
+    </fieldset>
+{% endif %}
+
