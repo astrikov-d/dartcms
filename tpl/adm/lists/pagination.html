@@ -1,16 +1,22 @@
-<ul class="pagination">
-    {% if page_obj.has_previous %}
-        <li><a href="{{ pagination_url }}page/{{ page_obj.previous_page_number }}/">&laquo;</a></li>
-    {% endif %}
+{% load add_get_parameter %}
 
-    {% for page_num in paginator.page_range %}
+<ul class="pagination">
+    <li>
+        {% if page_obj.has_previous %}
+            <a href="{% append_to_get page=page_obj.previous_page_number%}">&laquo;</a>
+        {% endif %}
+    </li>
+    {% for page_num in page_obj.page_range %}
         {% if not page_num %}
             <li><a>...</a></li>
         {% else %}
-            <li {% if page_num == page_obj.number %}class="active"{% endif %}><a href="{{ pagination_url }}page/{{ page_num }}/">{{ page_num }}</a></li>
+            <li {% if page_num == page_obj.number %}class="active"{% endif %}><a
+                    href="{% append_to_get page=page_num %}">{{ page_num }}</a></li>
         {% endif %}
     {% endfor %}
-    {% if page_obj.has_next %}
-        <li><a href="{{ pagination_url }}page/{{ page_obj.next_page_number }}/">&raquo;</a></li>
-    {% endif %}
+    <li>
+        {% if page_obj.has_next %}
+            <a href="{% append_to_get page=page_obj.next_page_number%}">&raquo;</a>
+        {% endif %}
+    </li>
 </ul>
