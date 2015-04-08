@@ -293,7 +293,9 @@ class InsertObjectView(AdminMixin, CreateView):
                 fk = "%s_id" % self.parent_model.__name__.lower()
 
             setattr(obj, fk, self.kwargs[self.parent_kwarg_name])
-            obj.save()
+            obj.save()                        
+            form.save_m2m()
+            self.object = obj
             return HttpResponseRedirect(self.get_success_url())
         else:
             return super(InsertObjectView, self).form_valid(form)
