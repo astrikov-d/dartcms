@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 from django.views.i18n import javascript_catalog
+from django.http import HttpResponse
 
 from app.cms.adm.dashboard.views import DashBoardIndex
 
@@ -32,6 +33,7 @@ urlpatterns = patterns('',
     url(r'^filemanager/', include('app.cms.adm.filemanager.urls', namespace='filemanager')),
     url(r'^profile/', include('app.cms.adm.profile.urls', namespace='profile')),
     url(r'^', include('app.adv.adm.urls', namespace='adv')),
+    url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain"))
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
