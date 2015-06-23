@@ -9,6 +9,7 @@ APP_URL = "http://example-domain.com"
 PORT = 80
 
 DEBUG = False
+PRODUCTION = True
 
 DEFAULT_FROM_EMAIL = 'no-reply@example-domain.com'
 EMAIL_HOST = 'localhost'

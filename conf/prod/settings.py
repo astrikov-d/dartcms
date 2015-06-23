@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# Django settings for charm project.
 
 import os
 
 from project_settings import *
 from conf.etc.apps import *
 from conf.etc.yandex import *
+from conf.etc.common import *
 
 SITE_ID = 1
 
@@ -96,9 +96,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'lib.processors.context.template_variables',
-    'lib.processors.adm.context.template_variables'
-)
+) + PROJECT_TEMPLATE_CONTEXT_PROCESSORS
 
 MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -109,8 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'lib.middleware.page.PageMiddleware'
-)
+) + PROJECT_MIDDLEWARE_CLASSES
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -127,8 +124,6 @@ INSTALLED_APPS = (
     'widget_tweaks',
     # https://pypi.python.org/pypi/django-gravatar2
     'django_gravatar',
-    # https://github.com/mbi/django-rosetta
-    'rosetta',
     # https://github.com/etianen/django-watson/wiki
     'watson',
 
@@ -194,8 +189,7 @@ SUBDOMAIN_URLCONFS = {
     'admin': 'app.adm_urls',
 }
 
-AUTHENTICATION_BACKENDS = (
-    'lib.backends.adm.auth.AuthBackend',
+AUTHENTICATION_BACKENDS = PROJECT_AUTHENTICATION_BACKENDS + (
     'django.contrib.auth.backends.ModelBackend',
 )
 

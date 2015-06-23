@@ -9,6 +9,7 @@ APP_URL = "http://dartcms.dev:8000"
 PORT = 8000
 
 DEBUG = True
+PRODUCTION = False
 
 DEFAULT_FROM_EMAIL = 'no-reply@dartcms.dev'
 EMAIL_HOST = 'localhost'

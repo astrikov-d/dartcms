@@ -15,7 +15,6 @@ def traffic_summary(context):
     traffic = list(reversed(traffic['data']))
     if len(traffic) > 0:
         stat = traffic[0]
-    print stat
     return {
         'request': context['request'],
         'stat': stat,

@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Dmitry Astrikov'
 
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 
 
 class AuthBackend(ModelBackend):
-    """
-    Custom Auth backend for Users. Used on the account site.
-    """
     user_model = User
 
     def authenticate(self, username=None, password=None, **kwargs):
-
         if 'subdomain' in kwargs and kwargs['subdomain'] == "admin":
             try:
                 print 1

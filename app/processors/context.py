@@ -8,11 +8,6 @@ from app.cms.models import SiteSettings
 
 
 def template_variables(request):
-
-    """
-    This view returns list of global template variables
-    """
-
     context = {}
     if request.subdomain != "admin":
         sitesettings = {}

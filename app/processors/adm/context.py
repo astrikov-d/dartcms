@@ -1,16 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Dmitry Astrikov'
 
-import os
 
 def template_variables(request):
-
-    """
-    This view returns list of global template variables
-    """
-
-    from django.conf import settings
-
     if not request.is_ajax() and request.user.is_authenticated() and request.subdomain == "admin":
         from app.cms.models import CMSModule
 

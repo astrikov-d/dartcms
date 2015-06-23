@@ -10,6 +10,7 @@ class PageMiddleware(object):
     Tries to fetch page data using the request url.
     When success, saves it into request variable.
     """
+
     def process_request(self, request):
         path = u"/%s/" % request.path.strip('/')
         try:

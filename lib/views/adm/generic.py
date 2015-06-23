@@ -168,6 +168,13 @@ class GridView(AdminMixin, ListView):
                             filter: True if term else False
                         })
                         self.__search = True
+                elif field[2] in ('choices', 'foreign_key'):
+                    filter = lookup
+                    term = self.request.GET.get(lookup, '')
+                    if term:
+                        queryset = queryset.filter(**{
+                            filter: term
+                        })
                 else:
                     filter = "%s__icontains" % lookup
                     term = self.request.GET.get(lookup, '')
