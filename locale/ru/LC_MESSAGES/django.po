@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-21 18:31+0700\n"
+"POT-Creation-Date: 2015-09-22 14:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,93 +21,127 @@ msgstr ""
 
 #: app/adv/adm/adv/urls.py:23 app/adv/adm/advplace/urls.py:15
 #: app/adv/adm/advsection/urls.py:18 app/adv/adm/advsection/urls.py:25
-#: app/adv/models.py:22 app/adv/models.py:40 app/adv/models.py:58
+#: app/adv/models.py:20 app/adv/models.py:38 app/adv/models.py:70
 #: app/cms/adm/sitesettings/urls.py:15 app/cms/models.py:69
 #: app/feedback/adm/urls.py:16 app/feedback/models.py:27
-#: app/feeds/adm/items/urls.py:14 app/feeds/adm/urls.py:16
-#: app/feeds/models.py:23 app/feeds/models.py:38 app/pagemap/adm/views.py:16
-#: app/shop/adm/products/urls.py:18 app/shop/adm/sections/urls.py:16
-#: app/shop/adm/urls.py:16 app/shop/models.py:38 app/shop/models.py:78
-#: app/shop/models.py:88 app/shop/models.py:123
+#: app/feeds/adm/items/urls.py:14 app/feeds/adm/items/urls.py:20
+#: app/feeds/adm/urls.py:16 app/feeds/models.py:23 app/feeds/models.py:38
+#: app/pagemap/adm/views.py:16 app/shop/adm/products/urls.py:18
+#: app/shop/adm/sections/urls.py:16 app/shop/adm/urls.py:16
+#: app/shop/models.py:38 app/shop/models.py:78 app/shop/models.py:88
+#: app/shop/models.py:123
 msgid "Name"
 msgstr "Название"
 
-#: app/adv/adm/adv/urls.py:24
+#: app/adv/adm/adv/urls.py:24 app/adv/models.py:76
+#| msgid "Page Views"
+msgid "Views"
+msgstr "Просмотры страниц"
+
+#: app/adv/adm/adv/urls.py:25
+msgid "Clicks"
+msgstr "Клики"
+
+#: app/adv/adm/adv/urls.py:26
+msgid "Clicks (unique)"
+msgstr "Клики (уник)"
+
+#: app/adv/adm/adv/urls.py:28
 msgid "Date of start"
 msgstr "Дата начала"
 
-#: app/adv/adm/adv/urls.py:25
+#: app/adv/adm/adv/urls.py:29
 msgid "Date of end"
 msgstr "Дата окончания"
 
-#: app/adv/adm/adv/urls.py:26
+#: app/adv/adm/adv/urls.py:30
 msgid "Show on site"
 msgstr "Показывать на сайте"
 
-#: app/adv/models.py:15
+#: app/adv/models.py:13
 msgid "ad place"
 msgstr "рекламное место"
 
-#: app/adv/models.py:16
+#: app/adv/models.py:14
 msgid "ad places"
 msgstr "рекламные места"
 
-#: app/adv/models.py:24 app/adv/models.py:41 app/adv/models.py:66
+#: app/adv/models.py:22 app/adv/models.py:39 app/adv/models.py:79
 #: app/cms/models.py:56 app/pagemap/models.py:35 app/pagemap/models.py:76
 msgid "Is Enabled"
 msgstr "Включен"
 
-#: app/adv/models.py:33
+#: app/adv/models.py:31
 msgid "ad section"
 msgstr "рекламный раздел"
 
-#: app/adv/models.py:34
+#: app/adv/models.py:32
 msgid "ad sections"
 msgstr "рекламные разделы"
 
-#: app/adv/models.py:50
+#: app/adv/models.py:48
 msgid "banner"
 msgstr "баннер"
 
-#: app/adv/models.py:51
+#: app/adv/models.py:49
 msgid "banners"
 msgstr "баннеры"
 
-#: app/adv/models.py:54
+#: app/adv/models.py:68
 msgid "Start Date"
 msgstr "Дата начала"
 
-#: app/adv/models.py:57
+#: app/adv/models.py:69
 msgid "End Date"
 msgstr "Дата окончания"
 
-#: app/adv/models.py:59
+#: app/adv/models.py:71
 msgid "Ad Text"
 msgstr "Текст"
 
-#: app/adv/models.py:60
+#: app/adv/models.py:72
 msgid "Ad Link"
 msgstr "Ссылка"
 
-#: app/adv/models.py:61
+#: app/adv/models.py:73
 msgid "Embed Code"
 msgstr "Код"
 
-#: app/adv/models.py:62
+#: app/adv/models.py:74
 msgid "Background Color"
 msgstr "Цвет фона"
 
-#: app/adv/models.py:63
+#: app/adv/models.py:75
 msgid "Ad Place"
 msgstr "Рекламное место"
 
-#: app/adv/models.py:64 app/shop/models.py:120
+#: app/adv/models.py:77 app/shop/models.py:120
 msgid "Section"
 msgstr "Раздел"
 
-#: app/adv/models.py:65 app/feeds/models.py:69 app/shop/models.py:158
+#: app/adv/models.py:78 app/feeds/models.py:69 app/shop/models.py:158
 msgid "Picture"
 msgstr "Изображение"
+
+#: app/adv/models.py:89
+msgid "click"
+msgstr "клик"
+
+#: app/adv/models.py:90
+msgid "clicks"
+msgstr "клики"
+
+#: app/adv/models.py:93
+msgid "Advertisement"
+msgstr "Баннер"
+
+#: app/adv/models.py:94
+msgid "Referrer"
+msgstr "Источник"
+
+#: app/cms/adm/cmsusers/forms.py:15 app/pagemap/models.py:22
+msgid "Modules"
+msgstr "Модули"
 
 #: app/cms/adm/cmsusers/urls.py:17
 msgid "Username"
@@ -298,14 +332,15 @@ msgid "Answer"
 msgstr "Ответ"
 
 #: app/feedback/models.py:45 app/feeds/adm/items/urls.py:16
-#: app/feeds/models.py:80 app/shop/adm/products/urls.py:22
-#: app/shop/adm/sections/urls.py:19 app/shop/adm/urls.py:19
-#: app/shop/models.py:40 app/shop/models.py:80 app/shop/models.py:133
+#: app/feeds/adm/items/urls.py:22 app/feeds/models.py:80
+#: app/shop/adm/products/urls.py:22 app/shop/adm/sections/urls.py:19
+#: app/shop/adm/urls.py:19 app/shop/models.py:40 app/shop/models.py:80
+#: app/shop/models.py:133
 msgid "Show on Site"
 msgstr "Показывать на сайте"
 
 #: app/feedback/models.py:46 app/feeds/adm/items/urls.py:15
-#: app/feeds/models.py:81
+#: app/feeds/adm/items/urls.py:21 app/feeds/models.py:81
 msgid "Date of Publication"
 msgstr "Дата публикации"
 
@@ -365,24 +400,20 @@ msgstr "Не используйте более 255 символов"
 msgid "Don't use more than 1024 symbols"
 msgstr "Не используйте более 1024 символов"
 
-#: app/pagemap/adm/forms.py:20 app/pagemap/models.py:23
+#: app/pagemap/adm/forms.py:51 app/pagemap/models.py:23
 #: app/pagemap/models.py:66
 msgid "Module"
 msgstr "Модуль"
 
-#: app/pagemap/adm/forms.py:21 app/pagemap/models.py:75
+#: app/pagemap/adm/forms.py:52 app/pagemap/models.py:75
 msgid "Ads"
 msgstr "Реклама"
 
-#: app/pagemap/adm/urls.py:18 app/pagemap/adm/urls.py:24
-#: app/pagemap/adm/urls.py:28 app/pagemap/adm/views.py:14
+#: app/pagemap/adm/urls.py:19 app/pagemap/adm/urls.py:25
+#: app/pagemap/adm/urls.py:29 app/pagemap/adm/views.py:14
 #: tpl/adm/pagemap/dashboard/summary.html:11
 msgid "Site Structure"
 msgstr "Структура сайта"
-
-#: app/pagemap/models.py:22
-msgid "Modules"
-msgstr "Модули"
 
 #: app/pagemap/models.py:45
 msgid "page"
@@ -532,6 +563,10 @@ msgstr "Товар"
 msgid "Files"
 msgstr "Файлы"
 
+#: lib/views/adm/generic.py:218
+msgid "Page is not 'last', nor can it be converted to an int."
+msgstr ""
+
 #: tpl/adm/base/generic/change_password.html:7
 #: tpl/adm/base/generic/change_password.html:11 tpl/adm/base/index.html:97
 msgid "Change Password"
@@ -544,46 +579,48 @@ msgstr "Применить изменения"
 
 #: tpl/adm/base/generic/change_password.html:20
 #: tpl/adm/base/generic/delete.html:21 tpl/adm/base/generic/insert.html:24
-#: tpl/adm/base/generic/update.html:21
+#: tpl/adm/base/generic/update.html:21 tpl/adm/pagemap/delete.html:19
+#: tpl/adm/pagemap/delete.html.py:27
 msgid "Cancel"
 msgstr "Отмена"
 
+#: tpl/adm/base/generic/datagrid.html:44 tpl/adm/base/generic/grid.html:126
+msgid "Records not found."
+msgstr "Записи не найдены."
+
 #: tpl/adm/base/generic/delete.html:7 tpl/adm/base/generic/delete.html:12
+#: tpl/adm/pagemap/delete.html:7 tpl/adm/pagemap/delete.html.py:12
 msgid "Delete Record"
 msgstr "Удалить запись"
 
-#: tpl/adm/base/generic/delete.html:18
+#: tpl/adm/base/generic/delete.html:18 tpl/adm/pagemap/delete.html:24
 msgid "Deletion is permanent. Are you sure?"
 msgstr "Удаление записи необратимо. Вы уверены, что хотите продолжить?"
 
-#: tpl/adm/base/generic/delete.html:20
+#: tpl/adm/base/generic/delete.html:20 tpl/adm/pagemap/delete.html:26
 msgid "Yes"
 msgstr "Да"
 
-#: tpl/adm/base/generic/grid.html:15
+#: tpl/adm/base/generic/grid.html:20
 msgid "Back"
 msgstr "Назад"
 
-#: tpl/adm/base/generic/grid.html:21 tpl/adm/base/generic/insert.html:7
+#: tpl/adm/base/generic/grid.html:26 tpl/adm/base/generic/insert.html:7
 #: tpl/adm/base/generic/insert.html:13
 msgid "Add Record"
 msgstr "Добавить запись"
 
-#: tpl/adm/base/generic/grid.html:27
+#: tpl/adm/base/generic/grid.html:32
 msgid "Edit"
 msgstr "Изменить"
 
-#: tpl/adm/base/generic/grid.html:33
+#: tpl/adm/base/generic/grid.html:38
 msgid "Delete"
 msgstr "Удалить"
 
-#: tpl/adm/base/generic/grid.html:68
+#: tpl/adm/base/generic/grid.html:74
 msgid "Search"
 msgstr "Поиск"
-
-#: tpl/adm/base/generic/grid.html:118
-msgid "Records not found."
-msgstr "Записи не найдены."
 
 #: tpl/adm/base/generic/insert.html:23
 msgid "Add"
@@ -660,12 +697,6 @@ msgstr "Новости и статьи"
 msgid "Go to News and Articles"
 msgstr "Перейти к новостям"
 
-#: tpl/adm/forms/partial/horizontal_form.html:4
-msgid "Fields marked with <span class=\"text-danger\">*</span> are required."
-msgstr ""
-"Поля, помеченные <span class=\"text-danger\">*</span>, обязательны для "
-"заполнения."
-
 #: tpl/adm/forms/partial/horizontal_inlines.html:14
 msgid "Add More"
 msgstr "Добавить еще"
@@ -725,7 +756,6 @@ msgid "Pages on the Site"
 msgstr "Страницы на сайте"
 
 #: tpl/adm/pagemap/dashboard/summary.html:22
-#| msgid "Add More"
 msgid "Add Page"
 msgstr "Добавить страницу"
 
@@ -782,6 +812,12 @@ msgstr ""
 "можете изменить содержимое этой страницы в шаблоне\n"
 "                    <code>/tpl/site/homepage/index.html</code>\n"
 "                "
+
+#~ msgid ""
+#~ "Fields marked with <span class=\"text-danger\">*</span> are required."
+#~ msgstr ""
+#~ "Поля, помеченные <span class=\"text-danger\">*</span>, обязательны для "
+#~ "заполнения."
 
 #~ msgid "Hello, %(username)s!"
 #~ msgstr "Здравствуйте, %(username)s!"

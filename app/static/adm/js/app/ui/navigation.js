@@ -21,4 +21,9 @@ $(function () {
      */
 
     $('.nav-side-menu-content').baron();
+
+    /**
+     * Sticky buttons
+     */
+    $(".grid-controls").sticky({topSpacing:45});
 });

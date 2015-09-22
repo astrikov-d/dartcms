@@ -29,6 +29,19 @@ $(function () {
         }
     });
 
+    clickable_row.on('dblclick', function (e) {
+        $(this).addClass('selected');
+        if (btn_update.length > 0) {
+            btn_update.removeClass('btn-disabled');
+            btn_update.click();
+        } else {
+            if (btn_children.length > 0) {
+                btn_children.removeClass('btn-disabled');
+                btn_children.click();
+            }
+        }
+    });
+
     var getSelectedRowId = function () {
         var selected_row = $('.clickable-row.selected');
         if (selected_row.length) {
@@ -49,11 +62,11 @@ $(function () {
             return false;
         }
         var url = $(this).attr('href').split('?');
-            if(url.length > 1) {
-                document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
-            } else {
-                document.location.href = url[0] + getSelectedRowId() + '/';
-            }
+        if (url.length > 1) {
+            document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+        } else {
+            document.location.href = url[0] + getSelectedRowId() + '/';
+        }
     });
 
     btn_delete.on('click', function (e) {
@@ -67,11 +80,11 @@ $(function () {
             return false;
         }
         var url = $(this).attr('href').split('?');
-            if(url.length > 1) {
-                document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
-            } else {
-                document.location.href = url[0] + getSelectedRowId() + '/';
-            }
+        if (url.length > 1) {
+            document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+        } else {
+            document.location.href = url[0] + getSelectedRowId() + '/';
+        }
     });
 
     btn_children.on('click', function (e) {
@@ -85,10 +98,10 @@ $(function () {
             return false;
         }
         var url = $(this).attr('href').split('?');
-            if(url.length > 1) {
-                document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
-            } else {
-                document.location.href = url[0] + getSelectedRowId() + '/';
-            }
+        if (url.length > 1) {
+            document.location.href = url[0] + getSelectedRowId() + '/?' + url[1];
+        } else {
+            document.location.href = url[0] + getSelectedRowId() + '/';
+        }
     });
 });

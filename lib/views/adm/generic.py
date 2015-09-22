@@ -160,6 +160,17 @@ class GridView(AdminMixin, ListView):
                             filter_to: datetime.datetime.strptime(date_to, "%d.%m.%Y %H:%M:%S"),
                         })
                         self.__search = True
+                    elif date_from:
+                        queryset = queryset.filter(**{
+                            filter_from: datetime.datetime.strptime(date_from, "%d.%m.%Y %H:%M:%S"),
+                        })
+                        self.__search = True
+                    elif date_to:
+                        queryset = queryset.filter(**{
+                            filter_to: datetime.datetime.strptime(date_to, "%d.%m.%Y %H:%M:%S"),
+                        })
+                        self.__search = True
+
                 elif len(field) > 2 and field[2] == 'boolean':
                     filter = lookup
                     term = self.request.GET.get(lookup, False)

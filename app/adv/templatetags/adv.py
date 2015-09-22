@@ -7,11 +7,12 @@ from app.adv.models import Adv, AdvPlace
 register = template.Library()
 
 @register.inclusion_tag('site/adv/banner.html', name='banner_place', takes_context=True)
-def banner_place(context, adv_place):
-    return get_banners(context, adv_place, 1)
+def banner_place(context, adv_place, limit=1):
+    return get_banners(context, adv_place, limit)
 
 
-def get_banners(context, adv_place, limit=1):
+def get_banners(context, adv_place, limit):
+
     if not hasattr(context['request'], 'page') or context['request'].page is None:
         return {}
 
@@ -28,6 +29,7 @@ def get_banners(context, adv_place, limit=1):
         banner = banners[0]
     else:
         banner = None
+
     return {
-        'banner': banner
+        'object': banner
     }

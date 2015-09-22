@@ -20,16 +20,15 @@ Features
 Modules
 -------
 
-At the moment, only few modules are included:
+At the moment, these modules are included:
 
 - Site Structure
 - CMS Users
 - Metrics (based on the Yandex.Metrika API)
 - Site Settings
 - News and Articles
-- Advertising (ads, ad places and ad sections)
+- Advertising (ads, ad places and ad sections). Includes some statistics (CTR, Clicks, Views etc).
 - Feedback and FAQ
-- E-shop (under construction)
 
 
 Installation

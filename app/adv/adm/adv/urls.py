@@ -21,9 +21,13 @@ Form = modelform_factory(
 
 grid_columns = (
     ('name', _(u"Name"), 'string', '20%'),
-    ('date_from', _(u"Date of start"), 'datetime', '20%'),
-    ('date_to', _(u"Date of end"), 'datetime', '20%'),
-    ('is_enabled', _(u"Show on site"), 'boolean', '20%'),
+    ('views', _(u"Views"), 'string', '10%'),
+    ('clicks_count', _(u"Clicks"), 'string', '10%'),
+    ('clicks_count_uniq', _(u"Clicks (unique)"), 'string', '10%'),
+    ('ctr', u"CTR, %", 'string', '10%'),
+    ('date_from', _(u"Date of start"), 'datetime', '10%'),
+    ('date_to', _(u"Date of end"), 'datetime', '10%'),
+    ('is_enabled', _(u"Show on site"), 'boolean', '10%'),
 )
 
 kwargs = {
