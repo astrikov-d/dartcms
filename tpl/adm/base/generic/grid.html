@@ -88,7 +88,7 @@
                     </tr>
                     </thead>
                     {% for object in object_list %}
-                        <tr class="clickable-row" data-pk="{{ object.pk }}">
+                        <tr class="clickable-row {% if multiple_select %}multiple{% endif %}" data-pk="{{ object.pk }}">
                             {% for column in grid_columns %}
                                 <td>
                                     {% with column.0 as index %}

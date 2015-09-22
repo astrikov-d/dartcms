@@ -38,7 +38,7 @@ class ModulePermissionsMixin(object):
 
 class AdminMixin(ModulePermissionsMixin, object):
     """
-    Admin mixin. It's common for all admin view. Gets current url sheme, app name etc.
+    Admin mixin. It's common for all admin view. Gets current url scheme, app name etc.
     """
 
     initial_filter = {}
@@ -51,6 +51,16 @@ class AdminMixin(ModulePermissionsMixin, object):
 
     # True if user can update records via this app
     allow_update = True
+
+    # True if user can select multiple rows
+    # USAGE:
+    #
+    # Add this action to your urls.py
+    #
+    # object_actions = (
+    #    (u"Button Name", u'button-url', u'fa-check', 'success', 'multiple-action'),
+    # )
+    multiple_select = False
 
     # Parent model for children element, used in insert view to create foreign key relation.
     parent_model = None
@@ -160,17 +170,6 @@ class GridView(AdminMixin, ListView):
                             filter_to: datetime.datetime.strptime(date_to, "%d.%m.%Y %H:%M:%S"),
                         })
                         self.__search = True
-                    elif date_from:
-                        queryset = queryset.filter(**{
-                            filter_from: datetime.datetime.strptime(date_from, "%d.%m.%Y %H:%M:%S"),
-                        })
-                        self.__search = True
-                    elif date_to:
-                        queryset = queryset.filter(**{
-                            filter_to: datetime.datetime.strptime(date_to, "%d.%m.%Y %H:%M:%S"),
-                        })
-                        self.__search = True
-
                 elif len(field) > 2 and field[2] == 'boolean':
                     filter = lookup
                     term = self.request.GET.get(lookup, False)
@@ -242,6 +241,7 @@ class GridView(AdminMixin, ListView):
         context.update({
             'grid_columns': self.grid_columns,
             'object_actions': self.object_actions,
+            'multiple_select': self.multiple_select,
             'allow_insert': self.allow_insert,
             'allow_delete': self.allow_delete,
             'allow_update': self.allow_update,
