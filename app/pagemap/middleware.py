@@ -13,6 +13,8 @@ class PageMiddleware(object):
 
     def process_request(self, request):
         path = u"/%s/" % request.path.strip('/')
+        if path == u"//":
+            path = u"/"
         try:
             page = Page.objects.get(url=path)
             request.page = page
