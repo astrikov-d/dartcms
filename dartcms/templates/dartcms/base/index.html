@@ -1,16 +1,21 @@
 {% extends "dartcms/base/base.html" %}
 
-{% load i18n %}
+{% load i18n static %}
 
 {% block body %}
     <div class="wrapper">
         {% block wrapper %}
             <nav class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
-                <a class="navmenu-brand" href="#">DartCMS</a>
+                <a class="navmenu-brand" href="#">
+                    <img src="{% static 'dartcms/images/logo.png' %}"/>
+                </a>
                 <ul class="nav navmenu-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li>
+                        <a href="{% url 'dartcms:dashboard:index' %}">{% trans 'Dashboard' %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'dartcms:auth:logout' %}">{% trans 'Logout' %}</a>
+                    </li>
                 </ul>
             </nav>
             <div class="content">
