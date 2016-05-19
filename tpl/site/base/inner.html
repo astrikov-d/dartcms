@@ -1,0 +1,27 @@
+{% extends "site/base/index.html" %}
+
+{% load static navigation adv %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                {% block page_header %}
+                    {{ request.page.header }}
+                {% endblock %}
+            </h1>
+        </div>
+        {% block breadcrumbs %}
+            {% get_breadcrumbs %}
+        {% endblock %}
+        <div class="row">
+            <div class="col-sm-8">
+                {% block page_content %}
+                {% endblock %}
+            </div>
+            <div class="col-sm-4">
+                {% banner_place 'banner_place' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

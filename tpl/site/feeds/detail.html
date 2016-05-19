@@ -1,0 +1,25 @@
+{% extends "site/base/inner.html" %}
+
+{% load navigation %}
+
+{% block keywords %}{{ object.seo_keywords }}{% endblock %}
+{% block description %}{{ object.seo_description }}{% endblock %}
+
+{% block page_header %}
+    {{ object.name }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        {% for page in request.page|get_breadcrumbs_for_page reversed %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+        <li class="active">{{ object.name }}</li>
+    </ol>
+{% endblock %}
+
+{% block last_news %}{% endblock %}
+
+{% block page_content %}
+    {{ object.full_text|safe }}
+{% endblock %}

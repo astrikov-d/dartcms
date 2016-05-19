@@ -1,0 +1,99 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  z-index: @dd-dragged-z-index;
+  .transform(rotate(2deg));
+}
+
+.sortable-tree {
+  list-style: none;
+
+  ul {
+    list-style: none;
+    display: none;
+  }
+
+  .placeholder {
+    position: relative;
+    height: @sortable-tree-row-height;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: block;
+    width:100%;
+
+    &:before {
+      position: absolute;
+    }
+  }
+}
+
+.sortable-tree-row {
+  height: @sortable-tree-row-height;
+  border-radius: 2px;
+  background: @sortable-tree-row-bg;
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  .box-shadow(@sortable-tree-row-shadow);
+
+  &:hover {
+    background: @sortable-tree-row-hover-bg;
+  }
+
+  .sortable-tree-row-content {
+    padding: 6px 10px;
+    float: left;
+  }
+
+  .sortable-tree-row-handle {
+    padding: 6px 10px;
+    float: left;
+    background: @sortable-tree-row-handle-bg;
+    border-radius: 2px 0 0 2px;
+    border-right: 1px solid @sortable-tree-row-border-color;
+    cursor: move;
+  }
+
+  .sortable-tree-row-children-toggle-wrapper {
+    float: left;
+    background: @sortable-tree-row-handle-bg;
+    border-right: 1px solid @sortable-tree-row-border-color;
+    border-left: 1px solid #F2F2F2;
+    cursor: pointer;
+    .sortable-tree-row-children-toggle {
+      display: block;
+      padding: 6px 10px;
+      color: @brand-success;
+      &:hover {
+        background: darken(@sortable-tree-row-handle-bg, 6.5%);
+      }
+
+      &.disabled {
+        color: #ccc;
+        &:hover {
+          background: transparent;
+          cursor: not-allowed;
+        }
+      }
+      &.open {
+        .drop-icon {
+          .transform(rotate(90deg));
+        }
+      }
+    }
+  }
+
+  &.selected {
+    background: @clickable-selected-row-bg !important;
+  }
+}
+
+.drag-and-drop-root {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

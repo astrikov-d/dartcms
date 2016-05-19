@@ -1,0 +1,15 @@
+{% extends "site/base/inner.html" %}
+
+{% load i18n %}
+
+{% block page_content %}
+    {{ request.page.before_content|safe }}
+    <div class="page-header">
+        <h3>{% trans 'Send Message' %}</h3>
+    </div>
+    <div class="alert alert-success">
+        {% trans 'Thank you! Your message was sent.' %}
+    </div>
+
+    {{ request.page.after_content|safe }}
+{% endblock %}

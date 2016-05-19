@@ -1,0 +1,18 @@
+[
+    {
+        "fields": {
+            "name": "Feedback",
+            "slug": "feedback"
+        },
+        "model": "feedback.feedbacktype",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "FAQ",
+            "slug": "faq"
+        },
+        "model": "feedback.feedbacktype",
+        "pk": 2
+    }
+]

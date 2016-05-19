@@ -1,0 +1,25 @@
+.grid-controls {
+  padding: @grid-controls-padding;
+}
+
+tr.clickable-row {
+  cursor: pointer;
+  &:hover {
+    background: @clickable-row-bg;
+  }
+  &.selected {
+    background: @clickable-selected-row-bg !important;
+  }
+}
+
+.is-sticky {
+  .grid-controls {
+    background: #fff;
+    margin: 0;
+    padding: 20px 0 17px 15px;
+    box-shadow: 0 2px 2px 0 #ccc;
+    right: 0;
+    left: @content-area-left-padding;
+    width: auto !important;
+  }
+}

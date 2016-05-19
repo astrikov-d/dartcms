@@ -1,0 +1,46 @@
+{% extends "adm/base/generic/grid.html" %}
+
+{% load attribute list i18n filename static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'adm/assets/bootstrap-table/dist/bootstrap-table.min.css' %}"/>
+{% endblock %}
+
+{% block js %}
+    {{ block.super.super }}
+    <script src="{% static 'adm/assets/bootstrap-table/dist/bootstrap-table.min.js' %}"></script>
+    <script src="{% static 'adm/assets/bootstrap-table/dist/locale/bootstrap-table-ru-RU.min.js' %}"></script>
+    <script src="{% static 'adm/js/lib/moment/moment-with-locales.min.js' %}"></script>
+    <script src="{% static 'adm/js/app/ui/datagrid.js' %}"></script>
+{% endblock %}
+
+{% block search_by %}{% endblock %}
+
+{% block object_list %}
+    {% if object_list %}
+        <table class="table datagrid"
+               data-url="{{ index_url }}"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-pagination="true"
+               data-page-size="15"
+               data-show-columns="true">
+            <thead>
+            <tr>
+                {% for column in grid_columns %}
+                    <th data-field="{{ column.0 }}"
+                        data-formatter="{{ column.2 }}Formatter"
+                        data-width="{{ column.3 }}"
+                        data-sortable="true">
+                        {{ column.1 }}
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
+        </table>
+    {% else %}
+        <p>{% trans 'Records not found.' %}</p>
+    {% endif %}
+{% endblock %}

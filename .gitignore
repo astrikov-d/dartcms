@@ -3,12 +3,10 @@
 
 # Python
 *.pyc
-
-# Virtual environment
-/venv/
+venv
 
 # Node
 node_modules
 
-# Tests
-.cache
+# Git
+*.orig

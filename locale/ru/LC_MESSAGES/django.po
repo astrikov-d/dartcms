@@ -1,0 +1,848 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-22 14:25+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: app/adv/adm/adv/urls.py:23 app/adv/adm/advplace/urls.py:15
+#: app/adv/adm/advsection/urls.py:18 app/adv/adm/advsection/urls.py:25
+#: app/adv/models.py:20 app/adv/models.py:38 app/adv/models.py:70
+#: app/cms/adm/sitesettings/urls.py:15 app/cms/models.py:69
+#: app/feedback/adm/urls.py:16 app/feedback/models.py:27
+#: app/feeds/adm/items/urls.py:14 app/feeds/adm/items/urls.py:20
+#: app/feeds/adm/urls.py:16 app/feeds/models.py:23 app/feeds/models.py:38
+#: app/pagemap/adm/views.py:16 app/shop/adm/products/urls.py:18
+#: app/shop/adm/sections/urls.py:16 app/shop/adm/urls.py:16
+#: app/shop/models.py:38 app/shop/models.py:78 app/shop/models.py:88
+#: app/shop/models.py:123
+msgid "Name"
+msgstr "Название"
+
+#: app/adv/adm/adv/urls.py:24 app/adv/models.py:76
+#| msgid "Page Views"
+msgid "Views"
+msgstr "Просмотры страниц"
+
+#: app/adv/adm/adv/urls.py:25
+msgid "Clicks"
+msgstr "Клики"
+
+#: app/adv/adm/adv/urls.py:26
+msgid "Clicks (unique)"
+msgstr "Клики (уник)"
+
+#: app/adv/adm/adv/urls.py:28
+msgid "Date of start"
+msgstr "Дата начала"
+
+#: app/adv/adm/adv/urls.py:29
+msgid "Date of end"
+msgstr "Дата окончания"
+
+#: app/adv/adm/adv/urls.py:30
+msgid "Show on site"
+msgstr "Показывать на сайте"
+
+#: app/adv/models.py:13
+msgid "ad place"
+msgstr "рекламное место"
+
+#: app/adv/models.py:14
+msgid "ad places"
+msgstr "рекламные места"
+
+#: app/adv/models.py:22 app/adv/models.py:39 app/adv/models.py:79
+#: app/cms/models.py:56 app/pagemap/models.py:35 app/pagemap/models.py:76
+msgid "Is Enabled"
+msgstr "Включен"
+
+#: app/adv/models.py:31
+msgid "ad section"
+msgstr "рекламный раздел"
+
+#: app/adv/models.py:32
+msgid "ad sections"
+msgstr "рекламные разделы"
+
+#: app/adv/models.py:48
+msgid "banner"
+msgstr "баннер"
+
+#: app/adv/models.py:49
+msgid "banners"
+msgstr "баннеры"
+
+#: app/adv/models.py:68
+msgid "Start Date"
+msgstr "Дата начала"
+
+#: app/adv/models.py:69
+msgid "End Date"
+msgstr "Дата окончания"
+
+#: app/adv/models.py:71
+msgid "Ad Text"
+msgstr "Текст"
+
+#: app/adv/models.py:72
+msgid "Ad Link"
+msgstr "Ссылка"
+
+#: app/adv/models.py:73
+msgid "Embed Code"
+msgstr "Код"
+
+#: app/adv/models.py:74
+msgid "Background Color"
+msgstr "Цвет фона"
+
+#: app/adv/models.py:75
+msgid "Ad Place"
+msgstr "Рекламное место"
+
+#: app/adv/models.py:77 app/shop/models.py:120
+msgid "Section"
+msgstr "Раздел"
+
+#: app/adv/models.py:78 app/feeds/models.py:69 app/shop/models.py:158
+msgid "Picture"
+msgstr "Изображение"
+
+#: app/adv/models.py:89
+msgid "click"
+msgstr "клик"
+
+#: app/adv/models.py:90
+msgid "clicks"
+msgstr "клики"
+
+#: app/adv/models.py:93
+msgid "Advertisement"
+msgstr "Баннер"
+
+#: app/adv/models.py:94
+msgid "Referrer"
+msgstr "Источник"
+
+#: app/cms/adm/cmsusers/forms.py:15 app/pagemap/models.py:22
+msgid "Modules"
+msgstr "Модули"
+
+#: app/cms/adm/cmsusers/urls.py:17
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: app/cms/adm/cmsusers/urls.py:18
+msgid "Last Login"
+msgstr "Последний раз заходил"
+
+#: app/cms/adm/cmsusers/urls.py:19
+msgid "Staff"
+msgstr "Статус персонала"
+
+#: app/cms/adm/cmsusers/urls.py:20
+msgid "Active"
+msgstr "Активный"
+
+#: app/cms/adm/cmsusers/views.py:16
+msgid "Users"
+msgstr "Пользователи"
+
+#: app/cms/adm/metrics/forms.py:13 app/cms/adm/metrics/forms.py:15
+msgid "Date of Start"
+msgstr "Дата начала"
+
+#: app/cms/adm/metrics/forms.py:21 app/cms/adm/metrics/forms.py:23
+msgid "Date of End"
+msgstr "Дата окончания"
+
+#: app/cms/adm/sitesettings/urls.py:16 app/feedback/models.py:40
+#: app/feeds/models.py:37
+msgid "Type"
+msgstr "Тип"
+
+#: app/cms/adm/sitesettings/urls.py:17
+msgid "Value"
+msgstr ""
+
+#: app/cms/models.py:17
+msgid "CMS Module Groups"
+msgstr "Группы модулей CMS"
+
+#: app/cms/models.py:18
+msgid "CMS Module Group"
+msgstr "Группа модулей CMS"
+
+#: app/cms/models.py:28 app/cms/models.py:54 app/feedback/models.py:28
+#: app/feeds/models.py:24 app/feeds/models.py:66 app/pagemap/models.py:32
+#: app/shop/adm/sections/urls.py:17 app/shop/adm/urls.py:17
+#: app/shop/models.py:39 app/shop/models.py:79 app/shop/models.py:89
+#: app/shop/models.py:124
+msgid "Slug"
+msgstr "Идентификатор"
+
+#: app/cms/models.py:29 app/cms/models.py:50 app/pagemap/models.py:33
+msgid "Name (RU)"
+msgstr "Название (RU)"
+
+#: app/cms/models.py:30 app/cms/models.py:51 app/pagemap/models.py:34
+msgid "Name (EN)"
+msgstr "Название (EN)"
+
+#: app/cms/models.py:31
+msgid "FontAwesome class"
+msgstr ""
+
+#: app/cms/models.py:32 app/cms/models.py:52
+msgid "Sort"
+msgstr "Сортировка"
+
+#: app/cms/models.py:33 app/cms/models.py:53 app/feeds/models.py:76
+#: app/shop/models.py:127 app/shop/models.py:141
+msgid "Description"
+msgstr "Описание"
+
+#: app/cms/models.py:38
+msgid "CMS Modules"
+msgstr "Модули CMS"
+
+#: app/cms/models.py:39
+msgid "CMS Module"
+msgstr "Модуль CMS"
+
+#: app/cms/models.py:49
+msgid "Group"
+msgstr "Группа"
+
+#: app/cms/models.py:55
+msgid "User"
+msgstr "Пользователь"
+
+#: app/cms/models.py:61
+msgid "folder"
+msgstr "папка"
+
+#: app/cms/models.py:62
+msgid "folders"
+msgstr "папки"
+
+#: app/cms/models.py:96
+msgid "String"
+msgstr ""
+
+#: app/cms/models.py:97
+msgid "Text"
+msgstr "Текст"
+
+#: app/cms/models.py:98
+msgid "Rich Editor"
+msgstr ""
+
+#: app/cms/models.py:99
+msgid "Select"
+msgstr ""
+
+#: app/cms/models.py:100 tpl/adm/metrics/index.html:79
+msgid "Date"
+msgstr "Дата"
+
+#: app/cms/models.py:101
+msgid "File"
+msgstr "Файлы"
+
+#: app/cms/models.py:106
+msgid "Site settings"
+msgstr "Настройки сайта"
+
+#: app/cms/models.py:107
+msgid "Site setting"
+msgstr "Настройки сайта"
+
+#: app/feedback/adm/items/forms.py:25 app/feeds/adm/items/forms.py:29
+msgid "Date of publication"
+msgstr "Дата публикации"
+
+#: app/feedback/adm/items/urls.py:14 app/feedback/models.py:41
+msgid "Author"
+msgstr "Автор"
+
+#: app/feedback/adm/items/urls.py:15
+msgid "Email"
+msgstr "Email"
+
+#: app/feedback/adm/items/urls.py:16 app/feedback/models.py:47
+#: app/feeds/models.py:82 app/shop/models.py:41 app/shop/models.py:81
+#: app/shop/models.py:90 app/shop/models.py:145 app/shop/models.py:159
+msgid "Date of Creation"
+msgstr "Дата добавления"
+
+#: app/feedback/adm/urls.py:17
+msgid "Messages Count"
+msgstr "Число сообщений"
+
+#: app/feedback/adm/urls.py:18
+msgid "Last Message"
+msgstr "Последнее сообщение"
+
+#: app/feedback/adm/urls.py:22 app/feeds/adm/urls.py:20
+msgid "Records"
+msgstr "Записи"
+
+#: app/feedback/models.py:15
+msgid "feedback type"
+msgstr "Тип формы"
+
+#: app/feedback/models.py:16
+msgid "feedback types"
+msgstr "Типы форм"
+
+#: app/feedback/models.py:33
+msgid "feedback message"
+msgstr "сообщение обратной связи"
+
+#: app/feedback/models.py:34
+msgid "feedback messages"
+msgstr "сообщения обратной связи"
+
+#: app/feedback/models.py:42
+msgid "Contact Email"
+msgstr "Контактный email"
+
+#: app/feedback/models.py:43
+msgid "Message"
+msgstr "Сообщение"
+
+#: app/feedback/models.py:44
+msgid "Answer"
+msgstr "Ответ"
+
+#: app/feedback/models.py:45 app/feeds/adm/items/urls.py:16
+#: app/feeds/adm/items/urls.py:22 app/feeds/models.py:80
+#: app/shop/adm/products/urls.py:22 app/shop/adm/sections/urls.py:19
+#: app/shop/adm/urls.py:19 app/shop/models.py:40 app/shop/models.py:80
+#: app/shop/models.py:133
+msgid "Show on Site"
+msgstr "Показывать на сайте"
+
+#: app/feedback/models.py:46 app/feeds/adm/items/urls.py:15
+#: app/feeds/adm/items/urls.py:21 app/feeds/models.py:81
+msgid "Date of Publication"
+msgstr "Дата публикации"
+
+#: app/feeds/models.py:17
+msgid "feed type"
+msgstr "Тип ленты"
+
+#: app/feeds/models.py:18
+msgid "feed types"
+msgstr "Типы лент"
+
+#: app/feeds/models.py:29
+msgid "feed category"
+msgstr "Категория ленты"
+
+#: app/feeds/models.py:30
+msgid "feed categories"
+msgstr "Категории лент"
+
+#: app/feeds/models.py:39 app/pagemap/models.py:63
+msgid "URL"
+msgstr "URL"
+
+#: app/feeds/models.py:44
+msgid "feed item"
+msgstr "Запись ленты"
+
+#: app/feeds/models.py:45
+msgid "feed items"
+msgstr "Записи ленты"
+
+#: app/feeds/models.py:64
+msgid "Feed"
+msgstr "Лента"
+
+#: app/feeds/models.py:65 app/pagemap/models.py:59
+msgid "Title"
+msgstr "Название"
+
+#: app/feeds/models.py:67
+msgid "Short Text"
+msgstr "Анонс"
+
+#: app/feeds/models.py:68
+msgid "Full Text"
+msgstr "Полный текст"
+
+#: app/feeds/models.py:71 app/shop/models.py:136
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#: app/feeds/models.py:72 app/shop/models.py:137
+msgid "Don't use more than 255 symbols"
+msgstr "Не используйте более 255 символов"
+
+#: app/feeds/models.py:77 app/shop/models.py:142
+msgid "Don't use more than 1024 symbols"
+msgstr "Не используйте более 1024 символов"
+
+#: app/pagemap/adm/forms.py:51 app/pagemap/models.py:23
+#: app/pagemap/models.py:66
+msgid "Module"
+msgstr "Модуль"
+
+#: app/pagemap/adm/forms.py:52 app/pagemap/models.py:75
+msgid "Ads"
+msgstr "Реклама"
+
+#: app/pagemap/adm/urls.py:19 app/pagemap/adm/urls.py:25
+#: app/pagemap/adm/urls.py:29 app/pagemap/adm/views.py:14
+#: tpl/adm/pagemap/dashboard/summary.html:11
+msgid "Site Structure"
+msgstr "Структура сайта"
+
+#: app/pagemap/models.py:45
+msgid "page"
+msgstr "страница"
+
+#: app/pagemap/models.py:46
+msgid "pages"
+msgstr "страницы"
+
+#: app/pagemap/models.py:58
+msgid "Parent Page"
+msgstr "Родительская страница"
+
+#: app/pagemap/models.py:59
+msgid "Shows inside the <title/> tag"
+msgstr "Показывается внутри тега <title/>"
+
+#: app/pagemap/models.py:60
+msgid "Page Header"
+msgstr "Заголовок страницы"
+
+#: app/pagemap/models.py:61
+msgid "Menu name"
+msgstr "Пункт меню"
+
+#: app/pagemap/models.py:62
+msgid "URL for Redirect"
+msgstr "URL для редиректа"
+
+#: app/pagemap/models.py:68
+msgid "Module parameters"
+msgstr "Парамеры модуля"
+
+#: app/pagemap/models.py:69
+msgid "Before Content"
+msgstr "Содержимое до контента"
+
+#: app/pagemap/models.py:70
+msgid "After Content"
+msgstr "Содержимое после контента"
+
+#: app/pagemap/models.py:73
+msgid "Keywords (meta keywords)"
+msgstr "Ключевые слова"
+
+#: app/pagemap/models.py:74
+msgid "Description (meta description)"
+msgstr "Описание"
+
+#: app/pagemap/models.py:77
+msgid "Show in Menu"
+msgstr "Показывать в меню"
+
+#: app/pagemap/models.py:78
+msgid "Only for Authorized Users"
+msgstr "Только для авторизованных пользователей"
+
+#: app/shop/adm/products/urls.py:19 app/shop/models.py:125
+msgid "Code"
+msgstr "Артикул"
+
+#: app/shop/adm/products/urls.py:20 app/shop/models.py:128
+msgid "Views Count"
+msgstr "Число просмотров"
+
+#: app/shop/adm/products/urls.py:21 app/shop/models.py:129
+msgid "Price"
+msgstr "Цена"
+
+#: app/shop/adm/sections/urls.py:18
+msgid "Products Count"
+msgstr "Число товаров"
+
+#: app/shop/adm/sections/urls.py:23
+msgid "Products"
+msgstr "Товары"
+
+#: app/shop/adm/urls.py:18
+msgid "Sections Count"
+msgstr "Число разделов"
+
+#: app/shop/adm/urls.py:23
+msgid "Sections"
+msgstr "Разделы"
+
+#: app/shop/models.py:15
+msgid "product category"
+msgstr "Категория товаров"
+
+#: app/shop/models.py:16
+msgid "product categories"
+msgstr "Категории товаров"
+
+#: app/shop/models.py:49
+msgid "product section"
+msgstr "Раздел"
+
+#: app/shop/models.py:50
+msgid "product sections"
+msgstr "Разделы"
+
+#: app/shop/models.py:75
+msgid "Category"
+msgstr "Категория ленты"
+
+#: app/shop/models.py:98
+msgid "product"
+msgstr "товар"
+
+#: app/shop/models.py:99
+msgid "products"
+msgstr "товары"
+
+#: app/shop/models.py:126
+msgid "Short description"
+msgstr "Краткое описание"
+
+#: app/shop/models.py:130
+msgid "Residue"
+msgstr "Остаток"
+
+#: app/shop/models.py:131
+msgid "Labels"
+msgstr "Метки"
+
+#: app/shop/models.py:132
+msgid "Is Available"
+msgstr "Доступен"
+
+#: app/shop/models.py:134
+msgid "Is Special Offer"
+msgstr "По акции"
+
+#: app/shop/models.py:153
+msgid "product picture"
+msgstr "Изображение товара"
+
+#: app/shop/models.py:154
+msgid "product pictures"
+msgstr "Изображения товара"
+
+#: app/shop/models.py:157
+msgid "Product"
+msgstr "Товар"
+
+#: lib/db/models.py:99
+msgid "Files"
+msgstr "Файлы"
+
+#: lib/views/adm/generic.py:218
+msgid "Page is not 'last', nor can it be converted to an int."
+msgstr ""
+
+#: tpl/adm/base/generic/change_password.html:7
+#: tpl/adm/base/generic/change_password.html:11 tpl/adm/base/index.html:97
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+#: tpl/adm/base/generic/change_password.html:19 tpl/adm/profile/index.html:35
+#: tpl/adm/sitesettings/index.html:28
+msgid "Accept Changes"
+msgstr "Применить изменения"
+
+#: tpl/adm/base/generic/change_password.html:20
+#: tpl/adm/base/generic/delete.html:21 tpl/adm/base/generic/insert.html:24
+#: tpl/adm/base/generic/update.html:21 tpl/adm/pagemap/delete.html:19
+#: tpl/adm/pagemap/delete.html.py:27
+msgid "Cancel"
+msgstr "Отмена"
+
+#: tpl/adm/base/generic/datagrid.html:44 tpl/adm/base/generic/grid.html:126
+msgid "Records not found."
+msgstr "Записи не найдены."
+
+#: tpl/adm/base/generic/delete.html:7 tpl/adm/base/generic/delete.html:12
+#: tpl/adm/pagemap/delete.html:7 tpl/adm/pagemap/delete.html.py:12
+msgid "Delete Record"
+msgstr "Удалить запись"
+
+#: tpl/adm/base/generic/delete.html:18 tpl/adm/pagemap/delete.html:24
+msgid "Deletion is permanent. Are you sure?"
+msgstr "Удаление записи необратимо. Вы уверены, что хотите продолжить?"
+
+#: tpl/adm/base/generic/delete.html:20 tpl/adm/pagemap/delete.html:26
+msgid "Yes"
+msgstr "Да"
+
+#: tpl/adm/base/generic/grid.html:20
+msgid "Back"
+msgstr "Назад"
+
+#: tpl/adm/base/generic/grid.html:26 tpl/adm/base/generic/insert.html:7
+#: tpl/adm/base/generic/insert.html:13
+msgid "Add Record"
+msgstr "Добавить запись"
+
+#: tpl/adm/base/generic/grid.html:32
+msgid "Edit"
+msgstr "Изменить"
+
+#: tpl/adm/base/generic/grid.html:38
+msgid "Delete"
+msgstr "Удалить"
+
+#: tpl/adm/base/generic/grid.html:74
+msgid "Search"
+msgstr "Поиск"
+
+#: tpl/adm/base/generic/insert.html:23
+msgid "Add"
+msgstr "Добавить"
+
+#: tpl/adm/base/generic/insert_ymap.html:54
+#: tpl/adm/base/generic/update_ymap.html:54
+msgid "Mark address on the map"
+msgstr "Отметить адрес на карте"
+
+#: tpl/adm/base/generic/insert_ymap.html:58
+#: tpl/adm/base/generic/update_ymap.html:58
+msgid "Click on map to add the point."
+msgstr "Щелкните по карте, чтобы добавить метку."
+
+#: tpl/adm/base/generic/update.html:7 tpl/adm/base/generic/update.html:11
+msgid "Update Record"
+msgstr "Изменить запись"
+
+#: tpl/adm/base/generic/update.html:20
+msgid "Update"
+msgstr "Изменить"
+
+#: tpl/adm/base/index.html:13 tpl/adm/base/index.html.py:166
+#: tpl/adm/base/index.html:179 tpl/adm/dashboard/index.html:7
+#: tpl/adm/profile/index.html:7 tpl/adm/sitesettings/index.html:7
+msgid "Dashboard"
+msgstr "Стартовая"
+
+#: tpl/adm/base/index.html:57
+msgid "Toggle Navigation"
+msgstr "Показать навигацию"
+
+#: tpl/adm/base/index.html:71 tpl/adm/base/index.html.py:73
+msgid "Superuser Panel"
+msgstr "Панель суперпользователя"
+
+#: tpl/adm/base/index.html:79 tpl/adm/base/index.html.py:81
+msgid "Enter Site"
+msgstr "Перейти на сайт"
+
+#: tpl/adm/base/index.html:87 tpl/adm/base/index.html.py:92
+msgid "Profile Settings"
+msgstr "Настройки профиля"
+
+#: tpl/adm/base/index.html:104 tpl/adm/base/index.html.py:106
+msgid "Logout"
+msgstr "Выйти"
+
+#: tpl/adm/base/index.html:119
+msgid "You may change your avatar with www.gravatar.com"
+msgstr "Вы можете изменить свой аватар на сайте www.gravatar.com"
+
+#: tpl/adm/base/index.html:122
+msgid "You logged as"
+msgstr "Вы вошли как"
+
+#: tpl/adm/cmsusers/grid.html:8
+msgid "Change/Set Password"
+msgstr "Изменить/Задать пароль"
+
+#: tpl/adm/feeds/dashboard/summary.html:7
+#: tpl/adm/metrics/dashboard/summary.html:7
+#: tpl/adm/pagemap/dashboard/summary.html:7
+msgid "Refresh"
+msgstr "Обновить"
+
+#: tpl/adm/feeds/dashboard/summary.html:11
+#: tpl/adm/feeds/dashboard/summary.html:18
+msgid "News and Articles"
+msgstr "Новости и статьи"
+
+#: tpl/adm/feeds/dashboard/summary.html:23
+msgid "Go to News and Articles"
+msgstr "Перейти к новостям"
+
+#: tpl/adm/forms/partial/horizontal_inlines.html:14
+msgid "Add More"
+msgstr "Добавить еще"
+
+#: tpl/adm/metrics/dashboard/summary.html:11
+msgid "Traffic Summary"
+msgstr "Статистика посещаемости"
+
+#: tpl/adm/metrics/dashboard/summary.html:19 tpl/adm/metrics/index.html:27
+msgid "Visits"
+msgstr "Посещения"
+
+#: tpl/adm/metrics/dashboard/summary.html:25 tpl/adm/metrics/index.html:19
+#: tpl/adm/metrics/index.html.py:80
+msgid "Unique Users"
+msgstr "Уникальные пользователи"
+
+#: tpl/adm/metrics/dashboard/summary.html:31 tpl/adm/metrics/index.html:35
+#: tpl/adm/metrics/index.html.py:81
+msgid "Page Views"
+msgstr "Просмотры страниц"
+
+#: tpl/adm/metrics/dashboard/summary.html:37
+msgid "Extended Report"
+msgstr "Расширенный отчет"
+
+#: tpl/adm/metrics/index.html:5 tpl/adm/metrics/index.html.py:59
+msgid "Metrics"
+msgstr "Метрика"
+
+#: tpl/adm/metrics/index.html:74
+msgid "Load Data"
+msgstr "Загрузить данные"
+
+#: tpl/adm/metrics/index.html:82
+msgid "Visitors"
+msgstr "Посетители"
+
+#: tpl/adm/metrics/index.html:83
+msgid "Average Depth"
+msgstr "Средняя глубина просмотра"
+
+#: tpl/adm/metrics/index.html:84
+msgid "New Visitors"
+msgstr "Новые посетители"
+
+#: tpl/adm/metrics/index.html:85
+msgid "Percent of New Users"
+msgstr "Процент новых пользователей"
+
+#: tpl/adm/metrics/index.html:103
+msgid "Data for specified period not found"
+msgstr "Данные для указанного периода не найдены"
+
+#: tpl/adm/pagemap/dashboard/summary.html:18
+msgid "Pages on the Site"
+msgstr "Страницы на сайте"
+
+#: tpl/adm/pagemap/dashboard/summary.html:22
+msgid "Add Page"
+msgstr "Добавить страницу"
+
+#: tpl/adm/profile/index.html:8 tpl/adm/profile/index.html.py:13
+msgid "Change Profile Settings"
+msgstr "Настройки профиля"
+
+#: tpl/adm/profile/index.html:18
+msgid "Choose Language"
+msgstr "Выберите язык"
+
+#: tpl/adm/sitesettings/index.html:8 tpl/adm/sitesettings/index.html.py:13
+msgid "Change Site Settings"
+msgstr "Настройки сайта"
+
+#: tpl/adm/sitesettings/index.html:17
+msgid "Settings are saved"
+msgstr "Настройки сохранены"
+
+#: tpl/adm/sitesettings/index.html:19
+msgid "Error during saving"
+msgstr "Ошибка сохранения настроек"
+
+#: tpl/site/base/index.html:12
+msgid "Toggle navigation"
+msgstr "Показать навигацию"
+
+#: tpl/site/feedback/index.html:8 tpl/site/feedback/sucess.html:8
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
+#: tpl/site/feedback/index.html:15
+msgid "Send"
+msgstr "Отправить"
+
+#: tpl/site/feedback/sucess.html:11
+msgid "Thank you! Your message was sent."
+msgstr "Спасибо! Ваше сообщение отправлено."
+
+#: tpl/site/feeds/list.html:46
+msgid "There are no news yet."
+msgstr "Новостей пока нет"
+
+#: tpl/site/homepage/index.html:10
+msgid ""
+"\n"
+"                    This is the DartCMS demo site. You may change content of "
+"this page in the\n"
+"                    <code>/tpl/site/homepage/index.html</code>\n"
+"                "
+msgstr ""
+"\n"
+"                    Добро пожаловать на демонстрационный сайт DartCMS. Вы "
+"можете изменить содержимое этой страницы в шаблоне\n"
+"                    <code>/tpl/site/homepage/index.html</code>\n"
+"                "
+
+#~ msgid ""
+#~ "Fields marked with <span class=\"text-danger\">*</span> are required."
+#~ msgstr ""
+#~ "Поля, помеченные <span class=\"text-danger\">*</span>, обязательны для "
+#~ "заполнения."
+
+#~ msgid "Hello, %(username)s!"
+#~ msgstr "Здравствуйте, %(username)s!"
+
+#~ msgid "To start work, use the side menu."
+#~ msgstr "Для начала работы, используйте боковое меню."
+
+#~ msgid "Site Name"
+#~ msgstr "Название сайта"
+
+#~ msgid "Site Description"
+#~ msgstr "Описание сайта"
+
+#~ msgid "Footer Content"
+#~ msgstr "Содержимое футера"
+
+#~ msgid "Currently"
+#~ msgstr "Текущий"
+
+#~ msgid "Change"
+#~ msgstr "Изменить"
+
+#~ msgid ""
+#~ "The submitted field is empty! If you want to change all your files, "
+#~ "please, select files!"
+#~ msgstr ""
+#~ "Вы не загрузили ни одного файла, если вы хотите изменить файлы, "
+#~ "пожалуйста, загрузитие файл."

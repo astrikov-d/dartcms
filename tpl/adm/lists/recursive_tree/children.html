@@ -1,0 +1,39 @@
+{% load recursive_tree attribute %}
+
+<li data-id="{{ object.pk }}">
+    <div class="sortable-tree-row clickable-row" data-pk="{{ object.pk }}">
+        <div class="sortable-tree-row-handle">
+            <i class="fa fa-arrows"></i>
+        </div>
+        <div class="sortable-tree-row-children-toggle-wrapper">
+            <a href="#" class="sortable-tree-row-children-toggle {% if not object.children.all %}disabled{% endif %}">
+                <i class="fa fa-chevron-circle-right drop-icon"></i>
+            </a>
+        </div>
+        <div class="sortable-tree-row-content">
+            {% with grid_columns.0.0 as index %}
+                {% if grid_columns.0.2 == 'datetime' %}
+                    {{ object|attribute:index|date:"d.m.Y H:i:s" }}
+                {% elif grid_columns.0.2 == 'date' %}
+                    {{ object|attribute:index|date:"d.m.Y" }}
+                {% elif grid_columns.0.2 == 'time' %}
+                    {{ object|attribute:index|date:"H:i:s" }}
+                {% elif grid_columns.0.2 == 'boolean' %}
+                    {% if object|attribute:index %}
+                        <i class="fa fa-check-circle"></i>
+                    {% else %}
+                        <i class="fa fa-times-circle"></i>
+                    {% endif %}
+                {% else %}
+                    {{ object|attribute:index|striptags }}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <ul>
+        {% for object in object.children.all %}
+            {% recursive_tree %}
+        {% endfor %}
+    </ul>
+</li>

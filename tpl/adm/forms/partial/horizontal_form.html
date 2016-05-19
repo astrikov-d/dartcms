@@ -1,0 +1,26 @@
+{% load widget_tweaks forms i18n %}
+
+{{ form.non_field_errors }}
+
+{% if form.fieldsets %}
+    {% for fieldset in form.fieldsets %}
+        <fieldset class="{{ fieldset.classes }}">
+            {% if fieldset.legend %}
+                <legend>{{ fieldset.legend }}</legend>
+            {% endif %}
+            {% if fieldset.description %}
+                <p class="description">{{ fieldset.description }}</p>
+            {% endif %}
+            {% for field in fieldset %}
+                {% include 'adm/forms/partial/field.html' %}
+            {% endfor %}
+        </fieldset>
+    {% endfor %}
+{% else %}
+    <fieldset>
+        {% for field in form %}
+            {% include 'adm/forms/partial/field.html' %}
+        {% endfor %}
+    </fieldset>
+{% endif %}
+

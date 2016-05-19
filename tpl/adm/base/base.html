@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock %} DartCMS</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block core_css %}
+        <link rel="stylesheet" href="{% static 'adm/assets/font-awesome/css/font-awesome.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'adm/assets/bootstrap/dist/css/bootstrap.css' %}"/>
+        <link rel="stylesheet" href="{% static 'adm/assets/pnotify/jquery.pnotify.default.css' %}"/>
+        <link rel="stylesheet" href="{% static 'adm/assets/pnotify/jquery.pnotify.default.icons.css' %}"/>
+        <link rel="stylesheet" href="{% static 'adm/assets/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'adm/assets/baron/baron.css' %}"/>
+        <link rel="stylesheet" href="{% static 'adm/css/style.css' %}"/>
+    {% endblock %}
+    {% block css %}{% endblock %}
+    {% block inline_css %}{% endblock %}
+</head>
+<body>
+{% spaceless %}
+    {% block body %}
+    {% endblock %}
+
+    {% block core_js %}
+        <script src="{% static 'adm/js/lib/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'adm/js/lib/jquery-cookie/jquery.cookie.js' %}"></script>
+        <script src="{% static 'adm/assets/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'adm/assets/chosen/chosen.jquery.min.js' %}"></script>
+        <script src="{% static 'adm/js/lib/bootbox/bootbox.js' %}"></script>
+        <script src="{% static 'adm/assets/pnotify/jquery.pnotify.min.js' %}"></script>
+        <script src="{% static 'adm/assets/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+        <script src="{% static 'adm/assets/tinymce/tinymce.min.js' %}"></script>
+        {% if LANGUAGE_CODE != 'en' %}
+            <script src="{% static 'adm/assets/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ru.js' %}"></script>
+            <script src="{% static 'adm/assets/tinymce/langs/ru.js' %}"></script>
+        {% endif %}
+        <script src="{% static 'adm/assets/baron/baron.min.js' %}"></script>
+        <script src="{% static 'adm/assets/sticky/jquery.sticky.js' %}"></script>
+        <script src="{% static 'adm/js/lib/jquery-circle-progress/dist/circle-progress.js' %}"></script>
+        <script src="{% static 'adm/assets/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+        {% if LANGUAGE_CODE != 'en' %}
+            <script src="{% static 'adm/assets/jquery-validation/dist/localization/messages_ru.min.js' %}"></script>
+        {% endif %}
+        <script src="{% static 'adm/js/app/system/ajax.js' %}"></script>
+        <script src="{% static 'adm/js/app/ui/navigation.js' %}"></script>
+        <script src="{% static 'adm/js/app/ui/tooltip.js' %}"></script>
+        <script src="{% static 'adm/js/app/ui/datepicker.js' %}"></script>
+        <script src="{% static 'adm/js/app/ui/bootbox.js' %}"></script>
+        <script src="{% static 'adm/js/app/ui/circle-progress.js' %}"></script>
+        <script src="{% static 'adm/js/app/forms/validation.js' %}"></script>
+        <script src="{% static 'adm/js/app/forms/inlines.js' %}"></script>
+        <script src="{% static 'adm/js/app/forms/chosen.js' %}"></script>
+        <script src="{% url 'django.views.i18n.javascript_catalog' %}" type="text/javascript"></script>
+    {% endblock %}
+
+    {% block js %}{% endblock %}
+    {% block inline_js %}{% endblock %}
+{% endspaceless %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "adm/base/generic/grid.html" %}
+
+{% load i18n %}
+
+{% block grid_controls %}
+    {{ block.super }}
+    <a href="{{ index_url }}change-password/" class="btn btn-info btn-children btn-disabled">
+        <i class="fa fa-lock"></i> {% trans 'Change/Set Password' %}
+    </a>&nbsp;
+{% endblock %}

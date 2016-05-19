@@ -1,0 +1,52 @@
+{% extends "adm/base/index.html" %}
+
+{% load static %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'adm/js/lib/jquery-form/jquery.form.js' %}"></script>
+    <script src="{% static 'adm/js/app/filemanager/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12" style="margin-top:19px">
+                <a class="btn btn-default btn-info" href="#" id="id-create-folder-btn">Create folder</a>
+                &nbsp;
+                <a class="btn btn-default btn-success" href="#" id="id-upload-file-btn">Upload file</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="list-group" id="id-folders-list">
+                    {% for folder in folders %}
+                        <a href="#" class="list-group-item folder" data-folder-id="{{ folder.pk }}">
+                            {{ folder.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div id="id-folder-context-menu" class="context-menu">
+                    <div class="dropdown">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"
+                            style="display:block; position: static;">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="context-menu-link rename-folder">Rename</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="context-menu-link remove-folder">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-9" id="id-files-list">
+                <div class="alert alert-warning">
+                    To start work, please choose folder
+                </div>
+            </div>
+        </div>
+        <div style="visibility: hidden">
+            <form method="POST" enctype="multipart/form-data" id="id-file-upload-form">
+                {{ file_upload_form }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

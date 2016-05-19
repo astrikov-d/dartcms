@@ -1,0 +1,12 @@
+{% load static %}
+{% if object.code %}
+    {{ object.code|safe }}
+{% elif object.picture %}
+    {% if object.picture %}
+        <div class="picture">
+            <a href="{% url 'ads:click' %}?id={{ object.id }}&redirect={{ object.link }}" target="_blank">
+                <img src="{{ object.picture.url }}"/>
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
