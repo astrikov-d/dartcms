@@ -1,0 +1,14 @@
+# PyCharm
+.idea
+
+# Python
+*.pyc
+
+# Virtual environment
+/venv/
+
+# Node
+node_modules
+
+# Tests
+.cache

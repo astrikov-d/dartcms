@@ -1,0 +1,21 @@
+{% extends "dartcms/base/base.html" %}
+
+{% load i18n %}
+
+{% block body %}
+    <div class="wrapper">
+        {% block wrapper %}
+            <nav class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+                <a class="navmenu-brand" href="#">DartCMS</a>
+                <ul class="nav navmenu-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                {% block page_content %}{% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
