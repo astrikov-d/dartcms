@@ -2,18 +2,20 @@
 import re
 
 from django.http import Http404
+from django.core.urlresolvers import reverse
 
 
 class ModulePermissionsMixin(object):
     def check_module_perms(self):
-        active_module_slug = self.request.path.strip("/").split("/")[0]
-        user_modules = [m.slug for m in self.request.user.cmsmodule_set.all()]
-        if active_module_slug not in user_modules:
-            raise Http404
-        return True
+        root = reverse('dartcms:dashboard:index')
+        active_module_slug = self.request.path.replace(root, '').strip('/').split('/')[0]
+        user_modules = self.request.user.module_set.all().values_list('slug', flat=True)
+        return active_module_slug in user_modules
 
     def dispatch(self, request, *args, **kwargs):
-        self.check_module_perms()
+        if not self.check_module_perms():
+            raise Http404
+
         response = super(ModulePermissionsMixin, self).dispatch(request, *args, **kwargs)
         return response
 

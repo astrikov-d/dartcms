@@ -12,4 +12,5 @@ urlpatterns = [
 
     url(r'^', include('dartcms.apps.dashboard.urls', namespace='dashboard')),
     url(r'^auth/', include('dartcms.apps.auth.urls', namespace='auth')),
+    url(r'^cms-users/', include('dartcms.apps.users.urls', namespace='users')),
 ]
