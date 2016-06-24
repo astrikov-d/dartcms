@@ -2,6 +2,7 @@
 DARTCMS_CORE_APPS = [
     'dartcms',
     'dartcms.apps.modules',
+    'dartcms.apps.pages',
 ]
 
 

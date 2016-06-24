@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.contrib import admin
 
-from models import ModuleGroup, Module
+from models import Module, ModuleGroup
 
 
 class ModuleGroupAdmin(admin.ModelAdmin):

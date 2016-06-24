@@ -1,0 +1,24 @@
+{% extends "dartcms/views/grid.html" %}
+
+{% load i18n %}
+
+{% block breadcrumbs_current_path %}
+    {{ block.super }}
+    <li class="active">{% trans 'Delete Record' %}</li>
+{% endblock %}
+
+{% block page_content %}
+    <h1>{{ page_header|capfirst }}
+        <small>{% trans 'Delete Record' %} &laquo;{{ object }}&raquo;</small>
+    </h1>
+    <div class="well well-sm">
+        <form method="POST" class="form-horizontal">
+            {% csrf_token %}
+            <div class="alert alert-danger">
+                {% trans 'Deletion is permanent. Are you sure?' %}
+            </div>
+            <button type="submit" class="btn btn-danger">{% trans 'Yes' %}</button>
+            <a href="{{ index_url }}" class="btn btn-link">{% trans 'Cancel' %}</a>
+        </form>
+    </div>
+{% endblock %}

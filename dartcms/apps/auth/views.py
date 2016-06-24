@@ -1,8 +1,8 @@
 # coding: utf-8
-from django.views.generic import FormView, RedirectView
-from django.shortcuts import redirect
 from django.contrib.auth import login, logout
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import redirect
+from django.views.generic import FormView, RedirectView
 
 from .forms import LoginForm
 

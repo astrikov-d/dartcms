@@ -1,0 +1,22 @@
+{% load dartcms_helpers i18n %}
+
+{% if inlines %}
+    {% for formsets in inlines %}
+        <div class="inlines-wrapper">
+            <div class="inlines">
+                {{ formsets.management_form }}
+                {% for form in formsets %}
+                    {% include 'adm/forms/partial/horizontal_form.html' %}
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <button type="button" class="btn btn-warning add-more-inlines-btn">{% trans 'Add More' %}</button>
+                </div>
+            </div>
+            <div class="empty-formset-form">
+                {% include 'adm/forms/partial/horizontal_form.html' with form=formsets.empty_form %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

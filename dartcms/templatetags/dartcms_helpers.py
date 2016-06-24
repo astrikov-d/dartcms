@@ -1,77 +1,54 @@
 # coding: utf-8
 import os
+import types
+
+from django import template
+from django.forms import (CheckboxInput, CheckboxSelectMultiple,
+                          ClearableFileInput, DateInput, DateTimeInput,
+                          HiddenInput, RadioSelect, SelectMultiple)
+from widget_tweaks.templatetags.widget_tweaks import (append_attr,
+                                                      silence_without_field)
+
+from .ifstartswith import do_startswith
 
 try:
     import Image, ImageOps
 except ImportError:
     from PIL import Image, ImageOps
 
-from django import template
-from django.template import Node, NodeList, Variable, VariableDoesNotExist
+
+
 
 register = template.Library()
 
 
-def do_startswith(parser, token, negate):
-    try:
-        tag_name, string, start_string = token.split_contents()
-    except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires two arguments" % token.contents.split()[0]
-    end_tag = 'end' + tag_name
-    nodelist_true = parser.parse(('else', end_tag))
-    token = parser.next_token()
-    if token.contents == 'else':
-        nodelist_false = parser.parse((end_tag,))
-        parser.delete_first_token()
-    else:
-        nodelist_false = NodeList()
-    return IfStartsWithNode(string, start_string, nodelist_true, nodelist_false, negate)
+#######################################################################################
+# Startswith template tags.                                                           #
+# Usage:                                                                              #
+# {% ifstartswith foo 'bar' %}                                                        #
+# ...                                                                                 #
+# {% endifstartswith %}                                                               #
+#######################################################################################
 
 
-class IfStartsWithNode(Node):
-    def __init__(self, string, start_string, nodelist_true, nodelist_false, negate):
-        self.start_string, self.string = Variable(start_string), Variable(string)
-        self.nodelist_true, self.nodelist_false = nodelist_true, nodelist_false
-        self.negate = negate
-        self.negate = negate
-
-    def __repr__(self):
-        return "<IfStartsWithNode>"
-
-    def render(self, context):
-        try:
-            string = self.string.resolve(context)
-        except VariableDoesNotExist:
-            string = None
-        try:
-            start_string = self.start_string.resolve(context)
-        except VariableDoesNotExist:
-            start_string = None
-
-        if (self.negate and not string.startswith(start_string)) or (
-                    not self.negate and string.startswith(start_string)):
-            return self.nodelist_true.render(context)
-        return self.nodelist_false.render(context)
-
-
+@register.tag
 def ifstartswith(parser, token):
     return do_startswith(parser, token, False)
 
 
-ifstartswith = register.tag(ifstartswith)
-
-
+@register.tag
 def ifnotstartswith(parser, token):
     return do_startswith(parser, token, True)
 
 
-ifnotstartswith = register.tag(ifnotstartswith)
+#######################################################################################
+# Thumbnail filters.                                                                  #
+#######################################################################################
 
 
+@register.filter
 def thumbnail(file, size='220x220'):
-    # defining the size
     x, y = [int(x) for x in size.split('x')]
-    # defining the filename and the miniature filename
     if isinstance(file, str):
         file = open(file, 'rw')
 
@@ -126,8 +103,8 @@ def thumbnail(file, size='220x220'):
     return miniature_url
 
 
+@register.filter
 def thumbnail_with_max_side(file, size='220'):
-    # defining the filename and the miniature filename
     filehead, filetail = os.path.split(file.path)
     basename, format = os.path.splitext(filetail)
     miniature = basename + '_' + size + format
@@ -137,7 +114,6 @@ def thumbnail_with_max_side(file, size='220'):
     miniature_url = filehead + '/' + miniature
     if os.path.exists(miniature_filename) and os.path.getmtime(filename) > os.path.getmtime(miniature_filename):
         os.unlink(miniature_filename)
-        # if the image wasn't already resized, resize it
     if not os.path.exists(miniature_filename):
         image = Image.open(filename)
         x, y = 0, 0
@@ -150,7 +126,6 @@ def thumbnail_with_max_side(file, size='220'):
             x = int(size)
         else:
             y = int(size)
-            # resize but constrain proportions?
         if x == 0.0:
             x = y * img_ratio
         elif y == 0.0:
@@ -185,8 +160,9 @@ def thumbnail_with_max_side(file, size='220'):
     return miniature_url
 
 
-register.filter(thumbnail)
-register.filter(thumbnail_with_max_side)
+#######################################################################################
+# File-related filters.                                                               #
+#######################################################################################
 
 
 @register.filter
@@ -200,6 +176,11 @@ def ext(value):
     return extension.replace('.', '')
 
 
+#######################################################################################
+# Attribute lookup filters                                                            #
+#######################################################################################
+
+
 @register.filter
 def lookup(d, key):
     return d[key]
@@ -208,3 +189,99 @@ def lookup(d, key):
 @register.filter
 def attribute(obj, attribute_name):
     return getattr(obj, attribute_name, None)
+
+
+#######################################################################################
+# Form helpers.                                                                       #
+#######################################################################################
+
+
+@register.filter
+def is_checkbox(field):
+    return field.field.widget.__class__.__name__ == CheckboxInput().__class__.__name__
+
+
+@register.filter
+def is_hidden(field):
+    return field.field.widget.__class__.__name__ == HiddenInput().__class__.__name__
+
+
+@register.filter
+def is_file(field):
+    return field.field.widget.__class__.__name__ == ClearableFileInput().__class__.__name__
+
+
+@register.filter
+def is_radio(field):
+    return field.field.widget.__class__.__name__ == RadioSelect().__class__.__name__
+
+
+@register.filter
+def is_date(field):
+    return field.field.widget.__class__.__name__ == DateInput().__class__.__name__
+
+
+@register.filter
+def is_date(field):
+    return field.field.widget.__class__.__name__ == DateTimeInput().__class__.__name__
+
+
+@register.filter
+def is_multiple_select(field):
+    return field.field.widget.__class__.__name__ == SelectMultiple().__class__.__name__
+
+
+@register.filter
+def is_checkbox_multiple_select(field):
+    return field.field.widget.__class__.__name__ == CheckboxSelectMultiple().__class__.__name__
+
+
+@register.filter
+def test_widget_class(field):
+    return field.field.widget.__class__.__name__
+
+
+#######################################################################################
+# Widget tweaks backport.                                                             #
+#######################################################################################
+
+
+def _process_field_attributes(field, attr, process):
+    params = attr.split(':', 1)
+    attribute = params[0]
+    value = params[1] if len(params) == 2 else ''
+
+    old_as_widget = field.as_widget
+
+    def as_widget(self, widget=None, attrs=None, only_initial=False):
+        attrs = attrs or {}
+        process(widget or self.field.widget, attrs, attribute, value)
+        html = old_as_widget(widget, attrs, only_initial)
+        self.as_widget = old_as_widget
+        return html
+
+    field.as_widget = types.MethodType(as_widget, field)
+    return field
+
+
+@register.filter("attr")
+@silence_without_field
+def set_attr(field, attr):
+    def process(widget, attrs, attribute, value):
+        attrs[attribute] = value
+
+    return _process_field_attributes(field, attr, process)
+
+
+@register.filter("add_error_attr")
+@silence_without_field
+def add_error_attr(field, attr):
+    if hasattr(field, 'errors') and field.errors:
+        return set_attr(field, attr)
+    return field
+
+
+@register.filter("add_class")
+@silence_without_field
+def add_class(field, css_class):
+    return append_attr(field, 'class:' + css_class)

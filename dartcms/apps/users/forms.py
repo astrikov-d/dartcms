@@ -9,7 +9,7 @@ from dartcms.apps.modules.models import Module
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        exclude = ('password', 'last_login', 'date_joined', 'groups')
+        exclude = ('password', 'last_login', 'date_joined', 'groups', 'user_permissions')
 
     modules = forms.ModelMultipleChoiceField(label=_(u"Modules"), queryset=Module.objects.all())
 

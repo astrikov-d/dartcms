@@ -1,0 +1,30 @@
+{% extends "dartcms/views/grid.html" %}
+
+{% load i18n %}
+
+{% block breadcrumbs_current_path %}
+    {{ block.super }}
+    <li class="active">{% trans 'Add Record' %}</li>
+{% endblock %}
+
+{% block page_content %}
+    <h1>
+        {{ page_header|capfirst }}
+        <small>{% trans 'Add Record' %}</small>
+    </h1>
+    <div class="well well-sm">
+        <form method="POST" class="form-horizontal" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include "dartcms/forms/horizontal.html" %}
+            {% block additional_form_fields %}{% endblock %}
+            <div class="form-group">
+                <div class="col-xs-9 col-xs-offset-3">
+                    {% block form_actions %}
+                        <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
+                        <a href="{{ index_url }}" class="btn btn-link">{% trans 'Cancel' %}</a>
+                    {% endblock %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
