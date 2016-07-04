@@ -6,17 +6,21 @@ from django.db.models.signals import post_save, pre_delete, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
 
-from dartcms.apps.adv.models import AdvSection
 from dartcms.utils.loading import get_model, is_model_registered
 
-__all__ = ['PageModule', 'pre_save_handler', 'post_save_handler', 'pre_delete_handler']
+__all__ = [
+    'PageModule',
+    'pre_save_handler',
+    'post_save_handler',
+    'pre_delete_handler'
+]
 
 
 class PageModule(models.Model):
     class Meta:
         ordering = ['id']
-        verbose_name_plural = _('Modules')
-        verbose_name = _('Module')
+        verbose_name_plural = _('modules')
+        verbose_name = _('module')
 
     def __unicode__(self):
         lang = get_language()
@@ -32,6 +36,11 @@ class PageModule(models.Model):
 
 
 class AbstractPage(models.Model):
+    """
+    Base page model. In common cases, you should not re-declare this class, since it have all necessary features.
+    It holds base information about site's pages - urls, names, functional features, parents and childrens etc.
+    """
+
     class Meta:
         abstract = True
         ordering = ['sort']
@@ -40,6 +49,9 @@ class AbstractPage(models.Model):
         unique_together = ['module', 'slug']
 
     def __unicode__(self):
+        """
+        Constructs breadcrumbs-like page name.
+        """
         parent = self.parent
         page_names = [self.title]
         while parent:
@@ -59,7 +71,7 @@ class AbstractPage(models.Model):
 
     sort = models.IntegerField(default=1)
 
-    module = models.ForeignKey(PageModule, verbose_name=_('Module'))
+    module = models.ForeignKey(PageModule, verbose_name=_('Module'), related_name='%(app_label)s_%(class)s_related')
     module_params = models.CharField(max_length=128, blank=True, null=True, default=None,
                                      verbose_name=_('Module parameters'))
 
@@ -69,33 +81,30 @@ class AbstractPage(models.Model):
     seo_keywords = models.TextField(default='', blank=True, verbose_name=_('Keywords (meta keywords)'))
     seo_description = models.TextField(default='', blank=True, verbose_name=_('Description (meta description)'))
 
-    adv_section = models.ForeignKey(AdvSection, verbose_name=_('Ads'))
+    ad_section = models.ForeignKey('ads.AdSection', verbose_name=_('Ads'),
+                                   related_name='%(app_label)s_%(class)s_related')
 
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
     is_in_menu = models.BooleanField(default=True, verbose_name=_('Show in Menu'))
 
     date_created = models.DateTimeField(auto_now_add=True)
 
-    def get_menu_url(self):
+    @property
+    def menu_url(self):
         lang = get_language()
         prefix = '' if lang == settings.LANGUAGE_CODE else '/%s' % lang
         return prefix + self.menu_url if self.menu_url else prefix + self.url
 
-    def get_page_url(self):
-
-        if self.module.slug == 'pagemap':
-            return '/page/%s/' % self.slug
-        if self.module.slug == 'feeds':
-            return '/feeds/%s/' % self.slug
-        if self.module.slug == 'feedback':
-            return '/feedback/%s/' % self.slug
-
+    @property
+    def page_url(self):
         return '/%s/' % self.module.slug
 
 
 def pre_save_handler(sender, **kwargs):
+    """
+    Sorting pages while saving.
+    """
     instance = kwargs.get('instance')
-    print 'save'
     if instance:
         instance.url = instance.get_page_url()
 
@@ -140,15 +149,14 @@ def pre_delete_handler(sender, **kwargs):
 
 if is_model_registered('pages', 'Page'):
     page_model = get_model('pages', 'Page')
-    pre_save.connect(pre_save_handler, sender=page_model)
-    post_save.connect(post_save_handler, sender=page_model)
-    pre_delete.connect(pre_delete_handler, sender=page_model)
 else:
     class Page(AbstractPage):
         pass
 
     __all__.append('Page')
 
-    pre_save.connect(pre_save_handler, sender=Page)
-    post_save.connect(post_save_handler, sender=Page)
-    pre_delete.connect(pre_delete_handler, sender=Page)
+    page_model = Page
+
+pre_save.connect(pre_save_handler, sender=page_model)
+post_save.connect(post_save_handler, sender=page_model)
+pre_delete.connect(pre_delete_handler, sender=page_model)
