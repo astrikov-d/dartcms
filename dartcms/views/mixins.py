@@ -2,8 +2,7 @@
 import re
 
 from django.core.urlresolvers import reverse
-from django.http import Http404
-from django.utils.translation import ugettext_lazy as _
+from django.http import Http404, JsonResponse
 
 
 class ModulePermissionsMixin(object):
@@ -34,6 +33,7 @@ class AdminMixin(ModulePermissionsMixin):
 
     # Index URL
     index_url = ''
+    success_url = ''
 
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
@@ -56,5 +56,27 @@ class AdminMixin(ModulePermissionsMixin):
         return context
 
     def get_success_url(self):
+        if self.success_url:
+            return self.success_url
+
         self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|delete/(\d+)/)', '', self.request.path)
         return self.index_url
+
+
+class JSONResponseMixin(object):
+    """
+    A mixin that can be used to render a JSON response.
+    """
+    http_method_names = ['get', 'post']
+
+    def render_to_json_response(self, context, **response_kwargs):
+        """
+        Returns a JSON response, transforming 'context' to make the payload.
+        """
+        return JsonResponse(self.get_data(context), **response_kwargs)
+
+    def get_data(self, context):
+        """
+        Returns an object that will be serialized as JSON by json.dumps().
+        """
+        return context

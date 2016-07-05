@@ -18,9 +18,9 @@ class UserForm(forms.ModelForm):
         data = self.cleaned_data
 
         if obj.id:
-            obj.cmsmodule_set.clear()
+            obj.module_set.clear()
 
         for module in data.get('modules', []):
-            obj.cmsmodule_set.add(module)
+            obj.module_set.add(module)
 
         return obj

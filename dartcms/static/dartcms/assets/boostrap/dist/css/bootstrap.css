@@ -4677,7 +4677,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 8px 15px;
   margin-bottom: 18px;
   list-style: none;
-  background-color: transparent;
+  background-color: #fff;
   border-radius: 4px;
 }
 .breadcrumb > li {
@@ -5794,8 +5794,8 @@ button.list-group-item-danger.active:focus {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f4f4f4;
-  border: 1px solid #e3e3e3;
+  background-color: #fff;
+  border: 1px solid #eee;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -6865,5 +6865,14 @@ label {
 }
 .pager .disabled > a {
   border-color: #ddd;
+}
+.breadcrumb {
+  border: 1px solid #eee;
+}
+.well {
+  box-shadow: none;
+}
+.page-header {
+  border: 0;
 }
 /*# sourceMappingURL=bootstrap.css.map */

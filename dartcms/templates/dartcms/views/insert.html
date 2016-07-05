@@ -1,17 +1,33 @@
 {% extends "dartcms/views/grid.html" %}
 
-{% load i18n %}
+{% load i18n static %}
 
 {% block breadcrumbs_current_path %}
     {{ block.super }}
     <li class="active">{% trans 'Add Record' %}</li>
 {% endblock %}
 
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dartcms/assets/tinymce/tinymce.min.js' %}"></script>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'dartcms/assets/tinymce/skins/lightgray/skin.min.css' %}"/>
+{% endblock %}
+
+{% block inline_js %}
+    {% include 'dartcms/views/partials/tinymce.html' %}
+{% endblock %}
+
 {% block page_content %}
-    <h1>
-        {{ page_header|capfirst }}
-        <small>{% trans 'Add Record' %}</small>
-    </h1>
+    <div class="page-header">
+        <h1>
+            {{ page_header|capfirst }}
+            <small>{% trans 'Add Record' %}</small>
+        </h1>
+    </div>
     <div class="well well-sm">
         <form method="POST" class="form-horizontal" enctype="multipart/form-data">
             {% csrf_token %}

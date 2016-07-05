@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from dartcms.utils.loading import get_model, is_model_registered
+from dartcms.utils.loading import is_model_registered
 
 __all__ = [
     'AdPlace',
@@ -52,9 +52,11 @@ class AbstractAd(models.Model):
     link = models.URLField(default='', blank=True, verbose_name=_('Ad Link'))
     code = models.TextField(default='', blank=True, verbose_name=_('Embed Code'))
     bg = models.CharField(default='', blank=True, max_length=255, verbose_name=_('Background Color'))
-    place = models.ForeignKey(AdPlace, verbose_name=_('Ad Place'))
+    place = models.ForeignKey('ads.AdPlace', verbose_name=_('Ad Place'),
+                              related_name='%(app_label)s_%(class)s_related')
     views = models.IntegerField(default=0, verbose_name=_('Views'))
-    section = models.ManyToManyField(AdSection, verbose_name=_('Section'))
+    section = models.ManyToManyField('ads.AdSection', verbose_name=_('Section'),
+                                     related_name='%(app_label)s_%(class)s_related')
     picture = models.FileField(upload_to='b/%Y/%m/%d', null=True, blank=True, verbose_name=_('Picture'))
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
     date_created = models.DateTimeField(auto_now_add=True)
@@ -64,10 +66,8 @@ class AbstractAd(models.Model):
         return self.name
 
 
-if is_model_registered('ads', 'Ad'):
-    page_model = get_model('ads', 'Ad')
-else:
-    class Page(AbstractAd):
+if not is_model_registered('ads', 'Ad'):
+    class Ad(AbstractAd):
         pass
 
-    __all__.append('Page')
+    __all__.append('Ad')

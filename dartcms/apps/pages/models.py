@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
 
 from dartcms.utils.loading import get_model, is_model_registered
+from mptt.models import MPTTModel, TreeForeignKey
 
 __all__ = [
     'PageModule',
@@ -23,19 +24,14 @@ class PageModule(models.Model):
         verbose_name = _('module')
 
     def __unicode__(self):
-        lang = get_language()
-        if lang == settings.LANGUAGE_CODE:
-            return self.name
-        else:
-            return self.name_en
+        return self.name
 
     slug = models.SlugField(unique=True, verbose_name=_('Slug'))
-    name = models.CharField(max_length=64, verbose_name=_('Name (RU)'))
-    name_en = models.CharField(max_length=64, verbose_name=_('Name (EN)'))
+    name = models.CharField(max_length=64, verbose_name=_('Name'))
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
 
 
-class AbstractPage(models.Model):
+class AbstractPage(MPTTModel):
     """
     Base page model. In common cases, you should not re-declare this class, since it have all necessary features.
     It holds base information about site's pages - urls, names, functional features, parents and childrens etc.
@@ -59,14 +55,15 @@ class AbstractPage(models.Model):
             parent = parent.parent
         return ' / '.join(reversed(page_names))
 
-    parent = models.ForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Page'))
+    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Page'), blank=True)
 
     title = models.CharField(max_length=255, verbose_name=_('Title'), help_text=_('Shows inside the title tag'))
     header = models.CharField(max_length=255, verbose_name=_('Page Header'))
 
     menu_name = models.CharField(max_length=255, default='', verbose_name=_('Menu name'))
-    menu_url = models.CharField(max_length=255, blank=True, default='', verbose_name=_('URL for Redirect'))
-    slug = models.SlugField(default='', verbose_name=_('URL'))
+    redirect_url = models.CharField(max_length=255, blank=True, default='', verbose_name=_('URL for Redirect'))
+
+    slug = models.SlugField(default='', verbose_name=_('URL'), blank=True)
     url = models.CharField(max_length=512)
 
     sort = models.IntegerField(default=1)
@@ -81,7 +78,7 @@ class AbstractPage(models.Model):
     seo_keywords = models.TextField(default='', blank=True, verbose_name=_('Keywords (meta keywords)'))
     seo_description = models.TextField(default='', blank=True, verbose_name=_('Description (meta description)'))
 
-    ad_section = models.ForeignKey('ads.AdSection', verbose_name=_('Ads'),
+    ad_section = models.ForeignKey('ads.AdSection', verbose_name=_('Ads'), null=True, blank=True,
                                    related_name='%(app_label)s_%(class)s_related')
 
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
@@ -97,7 +94,24 @@ class AbstractPage(models.Model):
 
     @property
     def page_url(self):
-        return '/%s/' % self.module.slug
+        if self.module.slug == 'homepage':
+            return '/'
+        return '/%s/%s/' % (self.module.slug, self.slug)
+
+    def serializable_object(self):
+        obj = {
+            'pk': self.pk,
+            'parent_id': self.parent_id,
+            'title': self.title,
+            'module': str(self.module),
+            'url': self.url,
+            'children': []
+        }
+        print self.title
+        print self.get_children()
+        for child in self.get_children():
+            obj['children'].append(child.serializable_object())
+        return obj
 
 
 def pre_save_handler(sender, **kwargs):
@@ -106,7 +120,7 @@ def pre_save_handler(sender, **kwargs):
     """
     instance = kwargs.get('instance')
     if instance:
-        instance.url = instance.get_page_url()
+        instance.url = instance.page_url
 
         current_level_pages = sender.objects.filter(parent=instance.parent)
 
@@ -115,7 +129,8 @@ def pre_save_handler(sender, **kwargs):
 
         if not instance.id or instance.sort == 0:
             max_sort = current_level_pages.aggregate(Max('sort'))
-            instance.sort = max_sort['sort__max'] + 1 if max_sort['sort_max'] else 1
+            s = max_sort.get('sort_max')
+            instance.sort = s + 1 if s else 1
         else:
             page_cache = sender.objects.get(pk=instance.id)
 

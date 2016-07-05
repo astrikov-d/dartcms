@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from models import AdPlace
+from dartcms.utils.loading import get_model
+
+
+AdPlace = get_model('ads', 'AdPlace')
+AdSection = get_model('ads', 'AdSection')
 
 
 class AdPlaceAdmin(admin.ModelAdmin):
@@ -9,3 +13,10 @@ class AdPlaceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(AdPlace, AdPlaceAdmin)
+
+
+class AdSectionAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(AdSection, AdSectionAdmin)

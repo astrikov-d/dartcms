@@ -1,0 +1,125 @@
+{% extends 'dartcms/views/grid.html' %}
+
+{% load i18n static %}
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dartcms/assets/easyui/ext/treegrid-dnd.js' %}"></script>
+{% endblock %}
+
+{% block inline_js %}
+    {{ block.super }}
+    <script>
+        $(function () {
+            var grid = $('#id-datagrid'),
+                    gridToolbar = [
+                        {
+                            text: '{% trans 'Add' %}',
+                            iconCls: 'icon-add',
+                            handler: function () {
+                                var selected = grid.treegrid('getSelected');
+                                if (selected)
+                                    window.location.href = '{{ index_url }}insert/?parent=' + selected.pk;
+                            }
+                        },
+                        {
+                            text: '{% trans 'Edit' %}',
+                            iconCls: 'icon-edit',
+                            handler: function () {
+                                var selected = grid.treegrid('getSelected');
+                                if (selected)
+                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
+                            }
+                        },
+                        {
+                            text: '{% trans 'Delete' %}',
+                            iconCls: 'icon-remove',
+                            handler: function () {
+                                var selected = grid.treegrid('getSelected');
+                                if (selected)
+                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
+                            }
+                        }{% if grid_actions %},
+                            {% for action in grid_actions %}
+                                {
+                                    text: '{{ action.1 }}',
+                                    iconCls: 'icon-{{ action.2 }}',
+                                    handler: function () {
+                                        var selected = grid.treegrid('getSelected');
+                                        if (selected)
+                                            window.location.href = '{{ index_url }}{{ action.0 }}/' + selected.pk + '/';
+                                    }
+                                }
+                            {% endfor %}
+                        {% endif %}
+                    ];
+
+            grid.treegrid({
+                idField: 'pk',
+                singleSelect: true,
+                fitColumn: true,
+                fit: true,
+                toolbar: gridToolbar,
+                treeField: 'title',
+                url: '{% url 'dartcms:pages:get_tree' %}',
+                onLoadSuccess: function (row) {
+                    $(this).treegrid('enableDnd', row ? row.pk : null);
+                },
+                onDrop: function (target, source, point) {
+                    var url = '';
+
+                    if (point == 'append') {
+                        url = '{% url 'dartcms:pages:append' %}' + '?target=' + target.pk + '&source=' + source.pk;
+
+                        $.ajax({
+                            dataType: 'json',
+                            method: 'POST',
+                            url: url
+                        }).done(function (response) {
+                                    if (response.result) {
+                                        grid.treegrid('reload');
+                                    } else {
+                                        $.messager.show({
+                                            title: 'Ошибка',
+                                            msg: 'Ошибка перемещения страницы.'
+                                        });
+                                    }
+                                });
+                    } else {
+                        var position = point == 'bottom' ? 'right' : 'left';
+
+                        url = '{% url 'dartcms:pages:move' %}' + '?target=' + target.pk + '&source=' + source.pk + '&position=' + position;
+
+                        $.ajax({
+                            dataType: 'json',
+                            method: 'POST',
+                            url: url
+                        }).done(function (response) {
+                                    if (response.result) {
+                                        grid.treegrid('reload');
+                                    } else {
+                                        $.messager.show({
+                                            title: 'Ошибка',
+                                            msg: 'Ошибка перемещения страницы.'
+                                        });
+                                    }
+                                });
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block grid %}
+    <table id="id-datagrid">
+        <thead>
+        <tr>
+            <th data-options="field:'pk', hidden:true" width="{{ column.3 }}">ID</th>
+            {% for column in grid_columns %}
+                <th data-options="field:'{{ column.0 }}'" width="{{ column.3 }}">{{ column.1 }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+    </table>
+{% endblock %}

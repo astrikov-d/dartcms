@@ -35,7 +35,8 @@
                             iconCls: 'icon-edit',
                             handler: function () {
                                 var selected = grid.datagrid('getSelected');
-                                window.location.href = '{{ index_url }}update/' + selected.pk;
+                                if (selected)
+                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
                             }
                         },
                         {
@@ -43,7 +44,8 @@
                             iconCls: 'icon-remove',
                             handler: function () {
                                 var selected = grid.datagrid('getSelected');
-                                window.location.href = '{{ index_url }}delete/' + selected.pk;
+                                if (selected)
+                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
                             }
                         }{% if grid_actions %},
                             {% for action in grid_actions %}
@@ -52,7 +54,8 @@
                                     iconCls: 'icon-{{ action.2 }}',
                                     handler: function () {
                                         var selected = grid.datagrid('getSelected');
-                                        window.location.href = '{{ index_url }}{{ action.0 }}/' + selected.pk;
+                                        if (selected)
+                                            window.location.href = '{{ index_url }}{{ action.0 }}/' + selected.pk + '/';
                                     }
                                 }
                             {% endfor %}
@@ -71,7 +74,9 @@
 {% endblock %}
 
 {% block page_content %}
-    <h1>{{ page_header|capfirst }}</h1>
+    <div class="page-header">
+        <h1>{{ page_header|capfirst }}</h1>
+    </div>
 
     {% block grid %}
         <div class="grid-wrapper">

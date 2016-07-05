@@ -1,33 +1,59 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.forms import AdminPasswordChangeForm
-from django.contrib.auth.models import User
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import FormView
+from django.http import Http404
 
-from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView
+from dartcms.utils.loading import get_model
 
-
-class ChangePasswordView(AdminMixin, FormView):
-    form_class = AdminPasswordChangeForm
-    page_header = _(u'Users')
-    template_name = 'dartcms/apps/users/change_password.html'
-    success_url = 'users:index'
-
-    def get_form_kwargs(self):
-        kwargs = super(ChangePasswordView, self).get_form_kwargs()
-        kwargs.update({
-            'user': User.objects.get(pk=self.kwargs['pk'])
-        })
-        return kwargs
+from dartcms.views import GridView, InsertObjectView, JSONView
+from dartcms.views.mixins import JSONResponseMixin, ModulePermissionsMixin
 
 
-class CMSUserUpdateView(UpdateObjectView):
-    success_url = 'users:index'
+class GetTreeView(GridView, JSONResponseMixin):
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
 
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, safe=False, **response_kwargs)
+
+    def get_data(self, context):
+        homepage = self.object_list.get(module__slug='homepage')
+        tree = [homepage.serializable_object()]
+        return tree
+
+
+class InsertPageView(InsertObjectView):
     def get_initial(self):
-        obj = self.get_object()
-        return {'modules': obj.module_set.all()}
+        return {
+            'parent': self.model.objects.filter(pk=self.request.GET.get('parent', 0)).first()
+        }
 
 
-class CMSUserInsertView(InsertObjectView):
-    success_url = 'users:change_password'
+class TreeActionView(ModulePermissionsMixin, JSONView):
+    def get_pages(self):
+        target_id = self.request.GET.get('target')
+        source_id = self.request.GET.get('source')
+
+        if target_id and source_id:
+            Page = get_model('pages', 'Page')
+
+            target = Page.objects.get(pk=target_id)
+            source = Page.objects.get(pk=source_id)
+
+            return target, source
+
+        raise Http404
+
+
+class AppendPageView(TreeActionView):
+    def get_data(self, context):
+        target, source = self.get_pages()
+        source.move_to(target, position='last-child')
+        return {'result': True}
+
+
+class MovePageView(TreeActionView):
+    def get_data(self, context):
+        position = self.request.GET.get('position')
+        target, source = self.get_pages()
+        source.move_to(target, position=position)
+        return {'result': True}
+

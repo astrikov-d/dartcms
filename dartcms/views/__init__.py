@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
-from .mixins import AdminMixin
+from .mixins import AdminMixin, JSONResponseMixin
 
 
 class GridView(AdminMixin, ListView):
@@ -114,3 +114,11 @@ class UpdateObjectWithInlinesView(AdminMixin, UpdateWithInlinesView):
 
 class DeleteObjectView(AdminMixin, DeleteView):
     template_name = 'dartcms/views/delete.html'
+
+
+class JSONView(JSONResponseMixin, TemplateView):
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, **response_kwargs)
