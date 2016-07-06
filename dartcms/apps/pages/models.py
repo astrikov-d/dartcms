@@ -28,6 +28,7 @@ class PageModule(models.Model):
 
     slug = models.SlugField(unique=True, verbose_name=_('Slug'))
     name = models.CharField(max_length=64, verbose_name=_('Name'))
+    related_model = models.CharField(verbose_name=_('Related Model'), null=True, default=None, max_length=32)
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
 
 
@@ -107,8 +108,6 @@ class AbstractPage(MPTTModel):
             'url': self.url,
             'children': []
         }
-        print self.title
-        print self.get_children()
         for child in self.get_children():
             obj['children'].append(child.serializable_object())
         return obj

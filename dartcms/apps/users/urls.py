@@ -18,7 +18,7 @@ config = DartCMSConfig({
             ('is_active', _('Active'), 'boolean', '10%'),
         ),
         'grid_actions': (
-            ('change-password', _('Change Password'), 'lock'),
+            ('change-password', _('Change Password'), 'edit'),
         ),
         'template_name': 'dartcms/apps/users/grid.html'
     },

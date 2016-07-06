@@ -23,6 +23,14 @@
         $(function () {
             var grid = $('#id-datagrid'),
                     gridToolbar = [
+                        {% if parent_url %}
+                            {
+                                text: '{% trans 'Back' %}',
+                                iconCls: 'icon-back',
+                                handler: function () {
+                                    window.location.href = '{{ parent_url }}';
+                                }
+                            },{% endif %}
                         {
                             text: '{% trans 'Add' %}',
                             iconCls: 'icon-add',

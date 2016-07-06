@@ -12,7 +12,7 @@ class Folder(models.Model):
 
 
 class File(models.Model):
-    folder = models.ForeignKey(Folder)
+    folder = models.ForeignKey(Folder, related_name='files')
     path = models.FileField(upload_to='uploads/%Y/%m/%d', max_length=300)
     date_created = models.DateTimeField(auto_now_add=True)
 

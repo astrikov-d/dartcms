@@ -11,7 +11,8 @@ DARTCMS_CORE_APPS = [
     'dartcms.apps.ads',
     'dartcms.apps.modules',
     'dartcms.apps.pages',
-    'dartcms.apps.filemanager'
+    'dartcms.apps.filemanager',
+    'dartcms.apps.feeds'
 ]
 
 

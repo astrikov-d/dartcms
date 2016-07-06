@@ -8,6 +8,9 @@ class DartCMSConfig(object):
     @property
     def base(self):
         return {
+            'parent_kwarg_name': self.config.get('parent_kwarg_name'),
+            'parent_model_fk': self.config.get('parent_model_fk'),
+            'parent_model': self.config.get('parent_model'),
             'model': self.config['model'],
         }
 

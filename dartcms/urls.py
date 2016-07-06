@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^auth/', include('dartcms.apps.auth.urls', namespace='auth')),
     url(r'^cms-users/', include('dartcms.apps.users.urls', namespace='users')),
     url(r'^sitemap/', include('dartcms.apps.pages.urls', namespace='pages')),
+    url(r'^feeds/', include('dartcms.apps.feeds.urls', namespace='feeds')),
+    url(r'^filemanager/', include('dartcms.apps.filemanager.urls', namespace='filemanager')),
 ]

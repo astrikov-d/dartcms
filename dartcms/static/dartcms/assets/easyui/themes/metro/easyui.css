@@ -3355,3 +3355,8 @@
 .switchbutton-readonly {
     cursor: default;
 }
+
+.panel-body-noborder {
+    border: none !important;
+    padding: 0 !important;
+}

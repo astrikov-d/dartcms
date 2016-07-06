@@ -22,9 +22,7 @@ class GetTreeView(GridView, JSONResponseMixin):
 
 class InsertPageView(InsertObjectView):
     def get_initial(self):
-        return {
-            'parent': self.model.objects.filter(pk=self.request.GET.get('parent', 0)).first()
-        }
+        return {'parent': self.model.objects.filter(pk=self.request.GET.get('parent', 0)).first()}
 
 
 class TreeActionView(ModulePermissionsMixin, JSONView):
@@ -57,3 +55,42 @@ class MovePageView(TreeActionView):
         source.move_to(target, position=position)
         return {'result': True}
 
+
+class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
+    def get_data(self, context):
+        PageModule = get_model('pages', 'PageModule')
+        Page = get_model('pages', 'Page')
+
+        module = PageModule.objects.get(pk=self.request.GET.get('selected_module', 0))
+
+        if module.related_model:
+            model_path = module.related_model.split('.')
+            app = model_path[0]
+            model = model_path[1]
+            try:
+                RelatedModel = get_model(app, model)
+                data = RelatedModel.objects.all()
+            except (LookupError, ImportError):
+                data = []
+        else:
+            data = []
+
+        page_pk = self.request.GET.get('pk', 0)
+
+        if page_pk != '':
+            page = Page.objects.get(pk=page_pk)
+        else:
+            page = None
+
+        params = []
+
+        for item in data:
+            if page is not None and page.module == module and str(page.module_params) == str(item.value):
+                params.append({'label': str(item), 'value': item.pk, 'selected': True})
+            else:
+                params.append({'label': str(item), 'value': item.pk})
+
+        return {
+            'result': True,
+            'data': params
+        }

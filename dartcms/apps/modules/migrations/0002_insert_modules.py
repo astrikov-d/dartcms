@@ -17,7 +17,7 @@ MODULE_GROUPS = [
             {
                 'sort': 1,
                 'is_enabled': True,
-                'name': u'CMS Users',
+                'name': 'CMS Users',
                 'slug': 'cms-users',
                 'description': ''
             }
@@ -33,8 +33,15 @@ MODULE_GROUPS = [
             {
                 'sort': 1,
                 'is_enabled': True,
-                'name': u'Site Structure',
+                'name': 'Site Structure',
                 'slug': 'sitemap',
+                'description': ''
+            },
+            {
+                'sort': 2,
+                'is_enabled': True,
+                'name': 'Feeds',
+                'slug': 'feeds',
                 'description': ''
             }
         ]
@@ -44,7 +51,16 @@ MODULE_GROUPS = [
         'description': '',
         'fa': 'fa-cog',
         'slug': 'service',
-        'name': 'Services'
+        'name': 'Services',
+        'modules': [
+            {
+                'sort': 1,
+                'is_enabled': True,
+                'name': 'Contacts',
+                'slug': 'contacts',
+                'description': ''
+            }
+        ]
     }
 ]
 

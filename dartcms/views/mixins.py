@@ -38,11 +38,9 @@ class AdminMixin(ModulePermissionsMixin):
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
 
-        self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|delete/(\d+)/|change-password/(\d+)/)', '',
-                                self.request.path)
-
+        self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|delete/(\d+)/)', '', self.request.path)
         if self.parent_kwarg_name:
-            reg = r'(%s/(\d+)/(page/\d+/)?)$' % self.kwargs['children_url']
+            reg = r'(%s/(\d+)/)$' % self.kwargs['children_url']
             parent_url = re.sub(reg, '', self.request.path)
         else:
             parent_url = ''
@@ -73,7 +71,8 @@ class JSONResponseMixin(object):
         """
         Returns a JSON response, transforming 'context' to make the payload.
         """
-        return JsonResponse(self.get_data(context), **response_kwargs)
+        safe = response_kwargs.pop('safe', None) or False
+        return JsonResponse(self.get_data(context), safe=safe, **response_kwargs)
 
     def get_data(self, context):
         """
