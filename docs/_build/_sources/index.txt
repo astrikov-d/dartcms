@@ -1,9 +1,7 @@
-DartCMS
-=======
+Welcome to DartCMS documentation!
+=================================
 
-DartCMS is an open-source content management system based on the popular Django Framework. It's friendly for developers
-and end-users.
-
+DartCMS is an open-source content management system based on the popular Django Framework. It's friendly for developers and end-users.
 
 Features
 --------
@@ -37,3 +35,14 @@ Installation
 You can install DartCMS with `pip`:
 
 `pip install dartcms`
+
+
+Contents
+--------
+
+.. toctree::
+   :maxdepth: 3
+
+   index
+   quickstart
+   app_forking

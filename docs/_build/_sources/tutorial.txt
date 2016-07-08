@@ -1,0 +1,42 @@
+Quickstart
+==========
+
+1. Install DartCMS with `pip`:
+
+.. code-block:: bash
+
+    pip install dartcms
+
+2. Go to your project's `settings.py` file and import DartCMS apps:
+
+.. code-block:: python
+
+    from dartcms import get_dartcms_core_apps
+
+    ...
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        ...
+    ] + get_dartcms_core_apps()
+
+3. Add DartCMS's context processor to your templates settings:
+
+.. code-block:: python
+
+    TEMPLATES = [
+        {
+            ...
+            'OPTIONS': {
+                'context_processors': [
+                    ...
+                    'dartcms.context_processors.modules_data'
+                ]
+            }
+        }
+    ]
