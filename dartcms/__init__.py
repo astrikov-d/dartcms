@@ -5,6 +5,7 @@ import importlib
 from dartcms.utils.loading import get_model, is_model_registered
 
 DARTCMS_CORE_APPS = [
+    'django_gravatar',
     'mptt',
 
     'dartcms',

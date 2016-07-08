@@ -19,8 +19,7 @@ config = DartCMSConfig({
         ),
         'grid_actions': (
             ('change-password', _('Change Password'), 'edit'),
-        ),
-        'template_name': 'dartcms/apps/users/grid.html'
+        )
     },
     'form': {
         'form_class': UserForm

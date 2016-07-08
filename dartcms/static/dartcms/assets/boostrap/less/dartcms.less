@@ -169,13 +169,41 @@ label {
 }
 
 .breadcrumb {
-  border: @breadcrumb-border;
+  background: transparent;
+  padding: 0;
 }
 
 .well {
   box-shadow: none;
+  border: 0;
 }
 
 .page-header {
   border: 0;
+}
+
+.navbar {
+  border: 0;
+}
+
+.label {
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.alert {
+  border: 0;
+}
+
+.panel {
+  border: 0;
+  box-shadow: none;
+}
+
+.form-control {
+  box-shadow: none;
+
+  &:focus, &:active {
+    box-shadow: none !important;
+  }
 }

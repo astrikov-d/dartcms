@@ -41,6 +41,9 @@ class AbstractFeedItem(models.Model):
     def search_content_type(self):
         return self.feed.type.slug
 
+    def __unicode__(self):
+        return self.name
+
     feed = models.ForeignKey(Feed, verbose_name=_('Feed'))
     name = models.CharField(max_length=1024, verbose_name=_('Title'))
     short_text = models.TextField(verbose_name=_('Short Text'))

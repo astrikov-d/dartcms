@@ -2,6 +2,7 @@
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
@@ -42,8 +43,9 @@ class GridView(AdminMixin, ListView):
         return context
 
 
-class InsertObjectView(AdminMixin, CreateView):
+class InsertObjectView(AdminMixin, SuccessMessageMixin, CreateView):
     template_name = 'dartcms/views/insert.html'
+    success_message = _('Record successfully added')
 
     def form_valid(self, form):
         if self.parent_kwarg_name:
@@ -71,9 +73,10 @@ class InsertObjectView(AdminMixin, CreateView):
         return initial
 
 
-class InsertObjectWithInlinesView(AdminMixin, CreateWithInlinesView):
+class InsertObjectWithInlinesView(AdminMixin, SuccessMessageMixin, CreateWithInlinesView):
     template_name = 'dartcms/views/insert.html'
     extra = 0
+    success_message = _('Record successfully added')
 
     def forms_valid(self, form, inlines):
         if self.parent_kwarg_name:
@@ -103,17 +106,20 @@ class InsertObjectWithInlinesView(AdminMixin, CreateWithInlinesView):
         return initial
 
 
-class UpdateObjectView(AdminMixin, UpdateView):
+class UpdateObjectView(AdminMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dartcms/views/update.html'
+    success_message = _('Record successfully updated')
 
 
-class UpdateObjectWithInlinesView(AdminMixin, UpdateWithInlinesView):
+class UpdateObjectWithInlinesView(AdminMixin, SuccessMessageMixin, UpdateWithInlinesView):
     template_name = 'dartcms/views/update.html'
     extra = 0
+    success_message = _('Record successfully updated')
 
 
-class DeleteObjectView(AdminMixin, DeleteView):
+class DeleteObjectView(AdminMixin, SuccessMessageMixin, DeleteView):
     template_name = 'dartcms/views/delete.html'
+    success_message = _('Record successfully deleted')
 
 
 class JSONView(JSONResponseMixin, TemplateView):

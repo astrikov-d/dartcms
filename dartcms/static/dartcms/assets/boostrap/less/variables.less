@@ -14,11 +14,11 @@
 @gray-light:             #808080;
 @gray-lighter:           #ddd;
 
-@brand-primary:         #D9230F;
-@brand-success:         #469408;
-@brand-info:            #029ACF;
-@brand-warning:         #9B479F;
-@brand-danger:          #D9831F;
+@brand-primary:         #348fe2;
+@brand-success:         #00acac;
+@brand-info:            #49b6d6;
+@brand-warning:         #f59c1a;
+@brand-danger:          #ff5b57;
 
 
 //== Scaffolding
@@ -496,20 +496,20 @@
 //
 //## Define colors for form feedback states and, by default, alerts.
 
-@state-success-text:             #468847;
-@state-success-bg:               #dff0d8;
+@state-success-text:             #fff;
+@state-success-bg:               @brand-success;
 @state-success-border:           darken(spin(@state-success-bg, -10), 5%);
 
-@state-info-text:                #3a87ad;
-@state-info-bg:                  #d9edf7;
+@state-info-text:                #fff;
+@state-info-bg:                  @brand-info;
 @state-info-border:              darken(spin(@state-info-bg, -10), 7%);
 
-@state-warning-text:             #c09853;
-@state-warning-bg:               #fcf8e3;
+@state-warning-text:             #fff;
+@state-warning-bg:               @brand-warning;
 @state-warning-border:           darken(spin(@state-warning-bg, -10), 3%);
 
-@state-danger-text:              #b94a48;
-@state-danger-bg:                #f2dede;
+@state-danger-text:              #fff;
+@state-danger-bg:                @brand-danger;
 @state-danger-border:            darken(spin(@state-danger-bg, -10), 3%);
 
 
@@ -794,7 +794,7 @@
 //** Breadcrumb text color
 @breadcrumb-color:              #ccc;
 //** Breadcrumb border
-@breadcrumb-border:             1px solid #eee;
+@breadcrumb-border:             0px;
 //** Text color of current page in the breadcrumb
 @breadcrumb-active-color:       @gray-light;
 //** Textual separator for between breadcrumb elements

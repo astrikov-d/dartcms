@@ -22,7 +22,7 @@ class FeedItemForm(forms.ModelForm):
                 'class': 'datetime'
             }
         ),
-        input_formats=["%d.%m.%Y %H:%M:%S", "%Y-%m-%d %H:%M:%S"],
+        localize=True,
         initial=datetime.datetime.now,
         label=_('Date of publication')
     )

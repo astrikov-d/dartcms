@@ -1,4 +1,6 @@
 # coding: utf-8
+from django.conf import settings
+
 from django.conf.urls import include, url
 from django.views.i18n import javascript_catalog
 
@@ -17,3 +19,12 @@ urlpatterns = [
     url(r'^feeds/', include('dartcms.apps.feeds.urls', namespace='feeds')),
     url(r'^filemanager/', include('dartcms.apps.filemanager.urls', namespace='filemanager')),
 ]
+
+additional_apps = getattr(settings, 'DARTCMS_ADDITIONAL_APPS_URLPATTERNS', [])
+
+if additional_apps:
+    additional_patterns = []
+    for app in additional_apps:
+        additional_patterns.append(url(r'^%s/' % app[0], include(app[1], namespace=app[2])))
+
+    urlpatterns += additional_patterns

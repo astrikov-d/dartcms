@@ -11,16 +11,44 @@
 }
 
 .navmenu-default, .navbar-default .navbar-offcanvas {
-  background: #fff;
+  background: #2d353c;
+  border: 0;
+  width: 260px;
 
   .navmenu-brand {
-    padding: 0 15px;
+    padding: 7px 15px 8px 15px;
+    margin: 0;
+    background: #fff;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+
+  .user-info {
+    background: #1a2229;
+    padding: 25px 15px;
+
+    .user-avatar {
+      float: left;
+    }
+    .user-meta {
+      padding-left: 60px;
+
+      .user-name {
+        color: #fff;
+        padding-bottom: 10px;
+      }
+    }
   }
 
   li {
 
     a {
       font-size: 13px;
+      color: #a8acb1 !important;
+      padding: 12px 15px;
+
       i {
         &.fa {
           margin-right: 10px;
@@ -31,21 +59,43 @@
         float: right;
         position: relative;
         top: 8px;
+        border-top-color: #a8acb1 !important;
+        border-bottom-color: #a8acb1 !important;
+      }
+
+      &:hover {
+        color: #fff !important;
       }
     }
 
     &.open {
       a {
-        background-color: #F7F7F7 !important;
+        background-color: #232a2f !important;
+        color: #fff !important;
+
+        .caret {
+          border-top-color: #fff !important;
+          border-bottom-color: #fff !important;
+        }
       }
     }
 
     .dropdown-menu {
-      background-color: #F7F7F7 !important;
+      background-color: #1a2229 !important;
 
       li {
-        padding: 7px 20px;
+        padding: 0 20px;
+
+        a {
+          background: #1a2229 !important;
+          font-size: 12px;
+        }
       }
     }
   }
+}
+
+.breadcrumb {
+  position: relative;
+  top: 8px;
 }

@@ -63,6 +63,8 @@
                 treeField: 'title',
                 url: '{% url 'dartcms:pages:get_tree' %}',
                 onLoadSuccess: function (row) {
+                    $('.grid-loading-indicator').remove();
+                    $('.grid-wrapper').css('visibility', 'visible');
                     $(this).treegrid('enableDnd', row ? row.pk : null);
                 },
                 onDrop: function (target, source, point) {
@@ -112,14 +114,17 @@
 {% endblock %}
 
 {% block grid %}
-    <table id="id-datagrid">
-        <thead>
-        <tr>
-            <th data-options="field:'pk', hidden:true" width="{{ column.3 }}">ID</th>
-            {% for column in grid_columns %}
-                <th data-options="field:'{{ column.0 }}'" width="{{ column.3 }}">{{ column.1 }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-    </table>
+    {% include 'dartcms/views/partials/loading-indicator.html' %}
+    <div class="grid-wrapper" style="visibility: hidden;">
+        <table id="id-datagrid">
+            <thead>
+            <tr>
+                <th data-options="field:'pk', hidden:true" width="{{ column.3 }}">ID</th>
+                {% for column in grid_columns %}
+                    <th data-options="field:'{{ column.0 }}'" width="{{ column.3 }}">{{ column.1 }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+        </table>
+    </div>
 {% endblock %}

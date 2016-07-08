@@ -75,7 +75,12 @@
                 singleSelect: true,
                 fitColumn: true,
                 fit: true,
-                toolbar: gridToolbar
+                pagination: true,
+                toolbar: gridToolbar,
+                onLoadSuccess: function (data) {
+                    $('.grid-loading-indicator').remove();
+                    $('.grid-wrapper').css('visibility', 'visible');
+                }
             });
         });
     </script>
@@ -87,7 +92,8 @@
     </div>
 
     {% block grid %}
-        <div class="grid-wrapper">
+        {% include 'dartcms/views/partials/loading-indicator.html' %}
+        <div class="grid-wrapper" style="visibility: hidden;">
             <table id="id-datagrid">
                 <thead>
                 <tr>

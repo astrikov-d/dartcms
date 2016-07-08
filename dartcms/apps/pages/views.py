@@ -85,7 +85,7 @@ class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
         params = []
 
         for item in data:
-            if page is not None and page.module == module and str(page.module_params) == str(item.value):
+            if page is not None and page.module == module and str(page.module_params) == str(item.pk):
                 params.append({'label': str(item), 'value': item.pk, 'selected': True})
             else:
                 params.append({'label': str(item), 'value': item.pk})

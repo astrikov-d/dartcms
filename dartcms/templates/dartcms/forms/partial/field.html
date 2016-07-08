@@ -5,15 +5,16 @@
         {% if field|is_checkbox_multiple_select %}
             <label for="{{ field.id_for_label }}" class="control-label col-xs-3">{{ field.label }}</label>
             <div class="col-sm-9">
-                <div class="checkbox">
+                <div class="checkbox checkbox-primary">
                     {{ field }}
                 </div>
             </div>
         {% elif field|is_checkbox %}
             <div class="col-sm-offset-3 col-sm-9">
-                <div class="checkbox">
-                    <label>
-                        {{ field }} {{ field.label }}
+                <div class="checkbox checkbox-primary">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
                     </label>
                 </div>
             </div>

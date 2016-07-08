@@ -8,8 +8,7 @@
 
 .panel-header,
 .panel-body {
-    border-width: 1px;
-    border-style: solid;
+    border-width: 0px;
 }
 
 .panel-header {
@@ -1801,8 +1800,8 @@
 }
 
 .datagrid-row-selected {
-    background: #CCE6FF;
-    color: #000;
+    background: #348fe2;
+    color: #fff;
 }
 
 .datagrid-row-editing .textbox,
@@ -3359,4 +3358,8 @@
 .panel-body-noborder {
     border: none !important;
     padding: 0 !important;
+}
+
+.pagination .l-btn {
+    padding: 0px 8px;
 }
