@@ -34,7 +34,7 @@ def drop_homepage(apps, schema):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('pages', '0001_initial'),
+        ('pages', '0002_related_models'),
     ]
 
     operations = [

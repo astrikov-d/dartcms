@@ -26,7 +26,7 @@ def drop_relationships(apps, schema):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('pages', '0004_related_models'),
+        ('pages', '0004_insert_pagemodules'),
     ]
 
     operations = [
