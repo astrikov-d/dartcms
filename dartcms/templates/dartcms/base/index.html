@@ -1,0 +1,118 @@
+{% extends "dartcms/base/base.html" %}
+
+{% load i18n static dartcms_helpers gravatar %}
+
+{% block body %}
+    <div class="wrapper">
+        {% block wrapper %}
+            <nav class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm" id="id-navmenu">
+                <a class="navmenu-brand" href="#">
+                    <img src="{% static 'dartcms/images/logo.png' %}"/>
+                </a>
+                <ul class="nav navmenu-nav">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <img src="{% gravatar_url request.user.email 50 %}" class="img img-circle"/>
+                        </div>
+                        <div class="user-meta">
+                            <div class="user-name"><i class="fa fa-user"></i> {{ request.user.username }}</div>
+                            {% if request.user.is_superuser %}
+                                <span class="label label-danger">Admin</span>
+                            {% elif request.user.is_staff %}
+                                <span class="label label-info">Staff</span>
+                            {% endif %}
+                            &nbsp;<span class="label label-success">Online</span>
+                        </div>
+                    </div>
+                    <li>
+                        {% url 'dartcms:dashboard:index' as dashboard_index_url %}
+                        <a href="{{ dashboard_index_url }}">
+                            <i class="fa fa-home"></i> {% trans 'Dashboard' %}
+                        </a>
+                    </li>
+                    {% for group in module_groups %}
+                        {% if group.modules.all %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa {{ group.fa }}"></i>
+                                    {% if LANGUAGE_CODE == 'en' %}{{ group.name_en }}{% else %}
+                                        {{ group.name }}{% endif %}
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu navmenu-nav" role="menu">
+                                    {% for module in group.modules.all %}
+                                        {% if module.is_enabled and module in request.user.module_set.all %}
+                                            {% with module_url=dashboard_index_url|add:module.slug|add:"/" %}
+                                                <li {% ifstartswith request.path module_url %}class="active"{% endifstartswith %}>
+                                                    <a href="{{ module_url }}">
+                                                        {% if LANGUAGE_CODE == 'en' %}
+                                                            {{ module.name_en }}
+                                                        {% else %}
+                                                            {{ module.name }}
+                                                        {% endif %}
+                                                    </a>
+                                                </li>
+                                            {% endwith %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li>
+                        <a href="{% url 'dartcms:auth:logout' %}">
+                            <i class="fa fa-sign-out"></i> {% trans 'Logout' %}
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <button type="button" class="navbar-toggle" data-toggle="offcanvas"
+                                data-target="#id-navmenu" aria-expanded="false" data-canvas="body">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="{% url 'admin:index' %}"><i
+                                            class="fa fa-cogs"></i>&nbsp;&nbsp;{% trans 'Django administration' %}</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'dartcms:users:change_password' pk=request.user.pk %}"><i
+                                            class="fa fa-lock"></i>&nbsp;&nbsp;{% trans 'Change password' %}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="page-content">
+                    <ol class="breadcrumb pull-right">
+                        <li>
+                            <i class="fa fa-sitemap"></i>
+                        </li>
+                        <li>
+                            <a href="{{ dashboard_index_url }}">{% trans 'Dashboard' %}</a>
+                        </li>
+                        {% block breadcrumbs_current_path %}{% endblock %}
+                    </ol>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible"
+                                 role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <i class="fa fa-info-circle"></i> {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% block page_content %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

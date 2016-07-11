@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    function mceInit() {
+        tinymce.init({
+            selector: ".rte",
+            plugins: 'advlist autolink link image lists charmap print preview code table',
+            file_browser_callback: filebrowserCallback,
+            relative_urls: false,
+            remove_script_host: false
+        });
+    }
+    function filebrowserCallback(field_name, url, type, win) {
+        tinymce.activeEditor.windowManager.open({
+            file: '{% url 'dartcms:filemanager:index' %}',
+            title: 'Filemanager',
+            width: 900,
+            height: 450,
+            resizable: 'yes'
+        }, {
+            setUrl: function (url) {
+                win.document.getElementById(field_name).value = url;
+            }
+        });
+        return false;
+    }
+    mceInit();
+</script>

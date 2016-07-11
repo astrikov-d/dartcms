@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock %} DartCMS</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block core_css %}
+        <link rel="stylesheet" href="{% static 'dartcms/assets/font-awesome/css/font-awesome.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'dartcms/assets/boostrap/dist/css/bootstrap.css' %}"/>
+
+        <link rel="stylesheet" href="{% static 'dartcms/assets/jasny-bootstrap/css/jasny-bootstrap.min.css' %}"/>
+        <link rel="stylesheet"
+              href="{% static 'dartcms/css/lib/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css' %}"/>
+        <link rel="stylesheet" href="{% static 'dartcms/css/style.css' %}"/>
+    {% endblock %}
+    {% block css %}{% endblock %}
+    {% block inline_css %}{% endblock %}
+</head>
+<body>
+{% spaceless %}
+    {% block body %}
+    {% endblock %}
+
+    {% block core_js %}
+        <!-- External packages -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js" type="text/javascript"></script>
+        <script src="{% static 'dartcms/js/lib/jquery-cookie/jquery.cookie.js' %}" type="text/javascript"></script>
+        <script src="{% static 'dartcms/assets/boostrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'dartcms/assets/jasny-bootstrap/js/jasny-bootstrap.min.js' %}"
+                type="text/javascript"></script>
+        <!-- End of external packages -->
+
+        <!-- DartCMS packages -->
+
+        <!-- End of DartCMS packages -->
+
+        <script src="{% url 'dartcms:javascript-catalog' %}" type="text/javascript"></script>
+    {% endblock %}
+
+    {% block js %}{% endblock %}
+    {% block inline_js %}{% endblock %}
+{% endspaceless %}
+</body>
+</html>

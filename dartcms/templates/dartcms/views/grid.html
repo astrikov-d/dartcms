@@ -1,0 +1,141 @@
+{% extends "dartcms/base/index.html" %}
+
+{% load i18n static dartcms_helpers %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'dartcms/assets/easyui/jquery.easyui.min.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'dartcms/assets/easyui/themes/metro/easyui.css' %}"/>
+    <link rel="stylesheet" href="{% static 'dartcms/assets/easyui/themes/icon.css' %}"/>
+{% endblock %}
+
+{% block breadcrumbs_current_path %}
+    <li class="active">{{ page_header|capfirst }}</li>
+{% endblock %}
+
+{% block inline_js %}
+    {{ block.super }}
+    <script>
+        $(function () {
+            var grid = $('#id-datagrid'),
+                    gridToolbar = [
+                        {% if parent_url %}
+                            {
+                                text: '{% trans 'Back' %}',
+                                iconCls: 'icon-back',
+                                handler: function () {
+                                    window.location.href = '{{ parent_url }}';
+                                }
+                            },{% endif %}
+                        {
+                            text: '{% trans 'Add' %}',
+                            iconCls: 'icon-add',
+                            handler: function () {
+                                window.location.href = '{{ index_url }}insert/';
+                            }
+                        },
+                        {
+                            text: '{% trans 'Edit' %}',
+                            iconCls: 'icon-edit',
+                            handler: function () {
+                                var selected = grid.datagrid('getSelected');
+                                if (selected)
+                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
+                            }
+                        },
+                        {
+                            text: '{% trans 'Delete' %}',
+                            iconCls: 'icon-remove',
+                            handler: function () {
+                                var selected = grid.datagrid('getSelected');
+                                if (selected)
+                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
+                            }
+                        }{% if grid_actions %},
+                            {% for action in grid_actions %}
+                                {
+                                    text: '{{ action.1 }}',
+                                    iconCls: 'icon-{{ action.2 }}',
+                                    handler: function () {
+                                        var selected = grid.datagrid('getSelected');
+                                        if (selected)
+                                            window.location.href = '{{ index_url }}{{ action.0 }}/' + selected.pk + '/';
+                                    }
+                                }
+                            {% endfor %}
+                        {% endif %}
+
+                    ];
+            grid.datagrid({
+                idField: 'pk',
+                singleSelect: true,
+                fitColumn: true,
+                fit: true,
+                pagination: true,
+                toolbar: gridToolbar,
+                onLoadSuccess: function (data) {
+                    $('.grid-loading-indicator').remove();
+                    $('.grid-wrapper').css('visibility', 'visible');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>{{ page_header|capfirst }}</h1>
+    </div>
+
+    {% block grid %}
+        {% include 'dartcms/views/partials/loading-indicator.html' %}
+        <div class="grid-wrapper" style="visibility: hidden;">
+            <table id="id-datagrid">
+                <thead>
+                <tr>
+                    <th data-options="field:'pk', hidden:true" width="{{ column.3 }}">ID</th>
+                    {% for column in grid_columns %}
+                        <th data-options="field:'{{ column.0 }}'" width="{{ column.3 }}">{{ column.1 }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                {% for object in object_list %}
+                    <tr>
+                        <td data-options="hidden:true">{{ object.pk }}</td>
+                        {% for column in grid_columns %}
+                            <td>
+                                {% with column.0 as index %}
+                                    {% if column.2 == 'datetime' %}
+                                        {{ object|attribute:index|date:"d.m.Y H:i:s" }}
+                                    {% elif column.2 == 'date' %}
+                                        {{ object|attribute:index|date:"d.m.Y" }}
+                                    {% elif column.2 == 'time' %}
+                                        {{ object|attribute:index|date:"H:i:s" }}
+                                    {% elif column.2 == 'file' %}
+                                        <a href="{{ MEDIA_URL }}{{ object|attribute:index }}"
+                                           target="_blank">{{ object|attribute:index|filename }}</a>
+                                    {% elif column.2 == 'image' %}
+                                        <img src="{{ MEDIA_URL }}{{ object|attribute:index }}"
+                                             class="img-thumbnail"/>
+                                    {% elif column.2 == 'boolean' %}
+                                        {% if object|attribute:index %}
+                                            <i class="fa fa-check-circle text-success"></i>
+                                        {% else %}
+                                            <i class="fa fa-times-circle text-danger"></i>
+                                        {% endif %}
+                                    {% else %}
+                                        {{ object|attribute:index|striptags }}
+                                    {% endif %}
+                                {% endwith %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endblock %}
+{% endblock %}

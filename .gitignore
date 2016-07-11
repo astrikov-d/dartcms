@@ -3,21 +3,10 @@
 
 # Python
 *.pyc
-
-# Virtual environment
-/venv/
-
-# Static files
-/www/static/
+venv
 
 # Node
 node_modules
 
-# Celery
-celerybeat_schedule
-
-# Development settings
-conf/dev/project_settings.py
-
-# Data
-www/data
+# Git
+*.orig

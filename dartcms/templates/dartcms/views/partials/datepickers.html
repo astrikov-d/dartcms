@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% get_current_language as LANG %}
+
+<script>
+    $(function () {
+        {% if LANG == 'ru-ru' %}
+            var dt_format = 'dd.mm.yyyy hh:ii:ss',
+                d_format = 'dd.mm.yyyy',
+                language = 'ru',
+                week_start = 1;
+        {% else %}
+            var dt_format = 'yyyy-mm-dd hh:ii:ss',
+                d_format = 'yyyy-mm-dd',
+                language = 'en',
+                week_start = 7;
+        {% endif %}
+
+        $(".datetime").datetimepicker({format: dt_format, language: language, weekStart: week_start, autoclose: true});
+        $(".date").datetimepicker({format: d_format, language: language, weekStart: week_start, minView: 2, autoclose: true});
+        $(".time").datetimepicker({format: 'hh:ii:ss', language: language, weekStart: week_start, startView: 1, minView: 0, autoclose: true});
+    });
+</script>
