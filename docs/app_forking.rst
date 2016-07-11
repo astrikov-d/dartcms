@@ -29,7 +29,7 @@ You can pass optional parameter `replacements` to `get_dartcms_core_apps` functi
 
     INSTALLED_APPS = [
         ...
-    ] + get_dartcms_core_apps('app.feeds')
+    ] + get_dartcms_core_apps(['app.feeds'])
 
 
 This will replace DartCMS's app named `feeds` with your app `app.feeds`.
