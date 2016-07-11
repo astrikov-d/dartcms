@@ -44,13 +44,15 @@
 <p>DartCMS is an open-source content management system based on the popular Django Framework. It&#8217;s friendly for developers and end-users.</p>
 <div class="section" id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<p>Tree-like website page structure
-Fast and easy CMS module developing
-Fully customizable admin interface color scheme (LESS sources are provided)
-Multi-language support (currently only 2 languages - Russian (main) and English)
-Built with Twitter Bootstrap 3
-TinyMCE as rich editor
-Custom filemanager to work with TinyMCE</p>
+<ul class="simple">
+<li>Tree-like website page structure</li>
+<li>Fast and easy CMS module developing</li>
+<li>Fully customizable admin interface color scheme (LESS sources are provided)</li>
+<li>Multi-language support (currently only 2 languages - Russian (main) and English)</li>
+<li>Built with Twitter Bootstrap 3</li>
+<li>TinyMCE as rich editor</li>
+<li>Custom filemanager to work with TinyMCE</li>
+</ul>
 </div>
 <div class="section" id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
@@ -80,7 +82,22 @@ Custom filemanager to work with TinyMCE</p>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contents">Contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_forking.html">Forking Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_forking.html">Forking Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app_forking.html#changing-existing-applications">Changing existing applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app_forking.html#writing-application-from-scratch">Writing application from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_loading.html">Dynamic Models Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generic_views.html">Generic Views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#views-configuration">Views Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#dartcms-views-gridview">dartcms.views.GridView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#dartcms-views-insertobjectview">dartcms.views.InsertObjectView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#dartcms-views-updateobjectview">dartcms.views.UpdateObjectView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#dartcms-views-deleteobjectview">dartcms.views.DeleteObjectView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#dartcms-views-jsonview">dartcms.views.JSONView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_views.html#working-with-inlines">Working with Inlines</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -89,6 +106,17 @@ Custom filemanager to work with TinyMCE</p>
 <li class="toctree-l1"><a class="reference internal" href="app_forking.html">Forking Applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="app_forking.html#changing-existing-applications">Changing existing applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app_forking.html#writing-application-from-scratch">Writing application from scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_loading.html">Dynamic Models Loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic_views.html">Generic Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#views-configuration">Views Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#dartcms-views-gridview">dartcms.views.GridView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#dartcms-views-insertobjectview">dartcms.views.InsertObjectView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#dartcms-views-updateobjectview">dartcms.views.UpdateObjectView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#dartcms-views-deleteobjectview">dartcms.views.DeleteObjectView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#dartcms-views-jsonview">dartcms.views.JSONView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#working-with-inlines">Working with Inlines</a></li>
 </ul>
 </li>
 </ul>
@@ -111,12 +139,16 @@ Custom filemanager to work with TinyMCE</p>
 <li class="toctree-l2"><a class="reference internal" href="#contents">Contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="app_forking.html">Forking Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_loading.html">Dynamic Models Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generic_views.html">Generic Views</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app_forking.html">Forking Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_loading.html">Dynamic Models Loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic_views.html">Generic Views</a></li>
 </ul>
 
   <div role="note" aria-label="source link">

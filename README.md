@@ -10,11 +10,9 @@ Features
 
 Tree-like website page structure
 Fast and easy CMS module developing
-Fully customizable admin interface color scheme (LESS sources are provided)
-Multi-language support (currently only 2 languages - Russian (main) and English)
 Built with Twitter Bootstrap 3
 TinyMCE as rich editor
-Custom filemanager to work with TinyMCE
+Custom file manager to work with TinyMCE
 
 
 Modules

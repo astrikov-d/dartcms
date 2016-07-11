@@ -6,13 +6,13 @@ DartCMS is an open-source content management system based on the popular Django 
 Features
 --------
 
-Tree-like website page structure
-Fast and easy CMS module developing
-Fully customizable admin interface color scheme (LESS sources are provided)
-Multi-language support (currently only 2 languages - Russian (main) and English)
-Built with Twitter Bootstrap 3
-TinyMCE as rich editor
-Custom filemanager to work with TinyMCE
+- Tree-like website page structure
+- Fast and easy CMS module developing
+- Fully customizable admin interface color scheme (LESS sources are provided)
+- Multi-language support (currently only 2 languages - Russian (main) and English)
+- Built with Twitter Bootstrap 3
+- TinyMCE as rich editor
+- Custom filemanager to work with TinyMCE
 
 
 Modules
@@ -41,8 +41,11 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 5
 
    index
    quickstart
    app_forking
+   dynamic_loading
+   generic_views
+
