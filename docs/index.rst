@@ -43,7 +43,6 @@ Contents
 .. toctree::
    :maxdepth: 5
 
-   index
    quickstart
    app_forking
    dynamic_loading
