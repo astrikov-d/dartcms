@@ -65,7 +65,7 @@ class AbstractPage(MPTTModel):
     redirect_url = models.CharField(max_length=255, blank=True, default='', verbose_name=_('URL for Redirect'))
 
     slug = models.SlugField(default='', verbose_name=_('URL'), blank=True)
-    url = models.CharField(max_length=512)
+    url = models.CharField(max_length=512, unique=True)
 
     sort = models.IntegerField(default=1)
 
@@ -87,6 +87,12 @@ class AbstractPage(MPTTModel):
 
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def delete(self):
+        if self.parent is None:
+            pass
+        else:
+            return super(AbstractPage, self).delete()
+
     @property
     def menu_url(self):
         lang = get_language()
@@ -95,7 +101,7 @@ class AbstractPage(MPTTModel):
 
     @property
     def page_url(self):
-        if self.module.slug == 'homepage':
+        if self.parent is None:
             return '/'
         return '/%s/%s/' % (self.module.slug, self.slug)
 
