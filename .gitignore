@@ -8,5 +8,10 @@ venv
 # Node
 node_modules
 
+# Packages
+*.egg-info
+build
+dist
+
 # Git
 *.orig
