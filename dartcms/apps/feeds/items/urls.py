@@ -15,11 +15,11 @@ config = DartCMSConfig({
     'parent_kwarg_name': 'feed',
     'parent_model_fk': 'feed_id',
     'grid': {
-        'grid_columns': (
-            ('name', _('Name'), 'string', '60%'),
-            ('is_visible', _('Is Visible'), 'boolean', '20%'),
-            ('date_published', _('Date of Publication'), 'datetime', '20%'),
-        )
+        'grid_columns': [
+            {'field': 'name', 'width': '60%'},
+            {'field': 'is_visible', 'width': '20%'},
+            {'field': 'date_published', 'width': '20%'},
+        ]
     },
     'form': {
         'form_class': FeedItemForm,

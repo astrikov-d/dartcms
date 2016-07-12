@@ -17,7 +17,7 @@ DARTCMS_CORE_APPS = [
 ]
 
 
-def get_dartcms_core_apps(replacements=None):
+def get_dartcms_core_apps(include_apps='*', replacements=None):
     """
     If you want to override default DartCMS app, you should pass your app labels (as iterable) to this function.
 
@@ -25,15 +25,20 @@ def get_dartcms_core_apps(replacements=None):
 
     INSTALLED_APPS = [
         ...
-    ] + get_dartcms_core_apps(['your_project.pages'])
+    ] + get_dartcms_core_apps(replacements=['your_project.pages'])
 
     This will override default DartCMS app named 'pages'.
     """
-    if not replacements:
+    if include_apps == '*' and not replacements:
         return DARTCMS_CORE_APPS
 
-    def get_app_label(label, replacements):
+    def get_app_label(label):
         pattern = label.replace('dartcms.apps.', '')
+
+        if isinstance(include_apps, (list, tuple)):
+            if pattern not in include_apps:
+                return
+
         for replacement in replacements:
             if replacement.endswith(pattern):
                 return replacement
@@ -41,7 +46,9 @@ def get_dartcms_core_apps(replacements=None):
 
     apps = []
     for app_label in DARTCMS_CORE_APPS:
-        apps.append(get_app_label(app_label, replacements))
+        app_label = get_app_label(app_label)
+        if app_label:
+            apps.append(app_label)
 
     return apps
 

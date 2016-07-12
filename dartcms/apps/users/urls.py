@@ -11,15 +11,15 @@ from views import ChangePasswordView, CMSUserInsertView, CMSUserUpdateView
 config = DartCMSConfig({
     'model': User,
     'grid': {
-        'grid_columns': (
-            ('username', _('Username'), 'string', '60%'),
-            ('last_login', _('Last Login'), 'datetime', '20%'),
-            ('is_staff', _('Staff'), 'boolean', '10%'),
-            ('is_active', _('Active'), 'boolean', '10%'),
-        ),
-        'grid_actions': (
-            ('change-password', _('Change Password'), 'edit'),
-        )
+        'grid_columns': [
+            {'field': 'username', 'width': '60%'},
+            {'field': 'last_login', 'width': '20%'},
+            {'field': 'is_staff', 'width': '10%'},
+            {'field': 'is_active', 'width': '10%'},
+        ],
+        'additional_grid_actions': [
+            {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
+        ]
     },
     'form': {
         'form_class': UserForm

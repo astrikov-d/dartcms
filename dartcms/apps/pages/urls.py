@@ -14,11 +14,11 @@ Page = get_model('pages', 'Page')
 config = DartCMSConfig({
     'model': Page,
     'grid': {
-        'grid_columns': (
-            ('title', _('Title'), 'string', '60%'),
-            ('url', _('URL'), 'datetime', '20%'),
-            ('module', _('Page Module'), 'boolean', '20%'),
-        ),
+        'grid_columns': [
+            {'field': 'title', 'width': '60%'},
+            {'field': 'url', 'width': '20%'},
+            {'field': 'module', 'width': '20%'},
+        ],
         'template_name': 'dartcms/apps/pages/grid.html'
     },
     'form': {
