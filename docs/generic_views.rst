@@ -9,35 +9,7 @@ Views Configuration
 -------------------
 
 As configuration mechanism in the DartCMS, we will use simple class named `DartCMSConfig`.
-It's placed into `dartcms.utils.config` package. Here is it's implementation:
-
-.. code-block:: python
-
-    class DartCMSConfig(object):
-        config = {}
-
-        def __init__(self, config):
-            self.config = config
-
-        @property
-        def base(self):
-            return {
-                ...
-            }
-
-        @property
-        def grid(self):
-            config = self.base
-            config.update(self.config['grid'])
-            return config
-
-        @property
-        def form(self):
-            config = self.base
-            config.update(self.config['form'])
-            return config
-
-As you can see, it's pretty simple. You can pass some `dict` to its constructor and then access grid and form confiration
+It's placed into `dartcms.utils.config` package. You can pass some `dict` to its constructor and then access grid and form confiration
 via `grid` and `form` properties of resulted object. In the next examples, you'll see how to do it.
 
 
@@ -52,40 +24,57 @@ This view is inherited from `django.views.generic.ListView` and implements funct
 
     class GridView(AdminMixin, ListView):
         ...
-        grid_columns = (
-            ('name', _('Title'), 'string', '70%'),
-            ('date_created', _('Date created'), 'datetime', '30%'),
-        )
+        grid_columns = [
+            {'field': 'name', 'width': '70%'},
+            {'field': 'date_created', 'width': '30%'},
+        ]
         grid_actions = ()
 
 `grid_columns` property determines which fields from your model will be rendered as datagrid columns. This property
-must be a tuple, which contains items with column configuration:
+must be a list of dicts, which contains items with columns configuration:
 
-- Model's field name
-- Column name
-- Data type. Possible values: 'string', 'datetime', 'time', 'date', 'boolean', 'image'
-- Width in percents
+Required parameters:
 
-`grid_actions` property determines which actions can be done with each row. Default actions are:
+- `'field'`: Model's field name
+- `'width'`: Width in percents
 
-- Insert
-- Update
-- Delete
+Optional parameters:
 
-By defining this property, you can add some additional actions to your datatable.
-
-This property must be a tuple, which contains items with action configuration:
+- `'label'`: Column name. If omitted, will be determined as field's verbose name.
+- `'type'`: Data type. Possible values: 'string', 'datetime', 'time', 'date', 'boolean', 'image'. If omitted, will be
+determined from field's type. Here is column type mapping according to Django's model field types:
 
 .. code-block:: python
 
-    'grid_actions': (
-        ('change-password', _('Change Password'), 'edit'),
-    )
+    class DartCMSConfig(object):
+        ...
+        column_type_mapping = {
+            models.DateTimeField: 'datetime',
+            models.DateField: 'date',
+            models.TimeField: 'time',
+            models.BooleanField: 'boolean',
+            models.ForeignKey: 'foreign_key'
+        }
+
+
+`additional_grid_actions` property determines which actions can be done with each row.
+
+By defining this property, you can add some additional actions to your datatable.
+
+This property must be a list, which contains items with action configuration:
+
+.. code-block:: python
+
+    'grid_actions': [
+        {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
+    ]
 
 This example contains one additional action to change password.
 
-First element if tuple is URL for redirect after user click on action button. In the example, user will be redirected to
+- `'url'`: URL for redirect after user click on action button. In the example, user will be redirected to
 URL like `/<module_slug>/change-password/<row_pk>/`. Of course, you should define this URL in your app URL scheme:
+- `'label'`: Label of button. Default value is "View Records"
+- '`icon`': JQuery EasyUI icon class for button. Default is 'next'
 
 .. code-block:: python
 
@@ -101,15 +90,15 @@ URL like `/<module_slug>/change-password/<row_pk>/`. Of course, you should defin
     config = DartCMSConfig({
         'model': User,
         'grid': {
-            'grid_columns': (
-                ('username', _('Username'), 'string', '60%'),
-                ('last_login', _('Last Login'), 'datetime', '20%'),
-                ('is_staff', _('Staff'), 'boolean', '10%'),
-                ('is_active', _('Active'), 'boolean', '10%'),
-            ),
-            'grid_actions': (
-                ('change-password', _('Change Password'), 'edit'),
-            )
+            'grid_columns': [
+                {'field': 'username', 'width': '60%'},
+                {'field': 'last_login', 'width': '20%'},
+                {'field': 'is_staff', 'width': '10%'},
+                {'field': 'is_active', 'width': '10%'},
+            ],
+            'additional_grid_actions': [
+                {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
+            ]
         },
         'form': {
             'form_class': UserForm
@@ -118,7 +107,9 @@ URL like `/<module_slug>/change-password/<row_pk>/`. Of course, you should defin
 
     urlpatterns = [
         url(r'^$', GridView.as_view(**config.grid), name='index'),
-        ...
+        url(r'^insert/$', CMSUserInsertView.as_view(**config.form), name='insert'),
+        url(r'^update/(?P<pk>\d+)/$', CMSUserUpdateView.as_view(**config.form), name='update'),
+        url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
         url(r'^change-password/(?P<pk>\d+)/$', ChangePasswordView.as_view(), name='change_password'),
     ]
 

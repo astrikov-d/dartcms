@@ -31,22 +31,25 @@
                                     window.location.href = '{{ parent_url }}';
                                 }
                             },{% endif %}
-                        {
-                            text: '{% trans 'Add' %}',
-                            iconCls: 'icon-add',
-                            handler: function () {
-                                window.location.href = '{{ index_url }}insert/';
-                            }
-                        },
-                        {
-                            text: '{% trans 'Edit' %}',
-                            iconCls: 'icon-edit',
-                            handler: function () {
-                                var selected = grid.datagrid('getSelected');
-                                if (selected)
-                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
-                            }
-                        },
+                        {% if 'insert' in grid_actions %}
+                            {
+                                text: '{% trans 'Add' %}',
+                                iconCls: 'icon-add',
+                                handler: function () {
+                                    window.location.href = '{{ index_url }}insert/';
+                                }
+                            },{% endif %}
+                        {% if 'update' in grid_actions %}
+                            {
+                                text: '{% trans 'Edit' %}',
+                                iconCls: 'icon-edit',
+                                handler: function () {
+                                    var selected = grid.datagrid('getSelected');
+                                    if (selected)
+                                        window.location.href = '{{ index_url }}update/' + selected.pk + '/';
+                                }
+                            },{% endif %}
+                        {% if 'delete' in grid_actions %}
                         {
                             text: '{% trans 'Delete' %}',
                             iconCls: 'icon-remove',
@@ -55,18 +58,18 @@
                                 if (selected)
                                     window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
                             }
-                        }{% if grid_actions %},
-                            {% for action in grid_actions %}
-                                {
-                                    text: '{{ action.1 }}',
-                                    iconCls: 'icon-{{ action.2 }}',
-                                    handler: function () {
-                                        var selected = grid.datagrid('getSelected');
-                                        if (selected)
-                                            window.location.href = '{{ index_url }}{{ action.0 }}/' + selected.pk + '/';
-                                    }
+                        }{% endif %}{% if additional_grid_actions %},
+                        {% for action in additional_grid_actions %}
+                            {
+                                text: '{{ action.label }}',
+                                iconCls: 'icon-{{ action.icon }}',
+                                handler: function () {
+                                    var selected = grid.datagrid('getSelected');
+                                    if (selected)
+                                        window.location.href = '{{ index_url }}{{ action.url }}/' + selected.pk + '/';
                                 }
-                            {% endfor %}
+                            }
+                        {% endfor %}
                         {% endif %}
 
                     ];
@@ -97,9 +100,9 @@
             <table id="id-datagrid">
                 <thead>
                 <tr>
-                    <th data-options="field:'pk', hidden:true" width="{{ column.3 }}">ID</th>
+                    <th data-options="field:'pk', hidden:true">ID</th>
                     {% for column in grid_columns %}
-                        <th data-options="field:'{{ column.0 }}'" width="{{ column.3 }}">{{ column.1 }}</th>
+                        <th data-options="field:'{{ column.field }}'" width="{{ column.width }}">{{ column.label }}</th>
                     {% endfor %}
                 </tr>
                 </thead>
@@ -108,24 +111,24 @@
                         <td data-options="hidden:true">{{ object.pk }}</td>
                         {% for column in grid_columns %}
                             <td>
-                                {% with column.0 as index %}
-                                    {% if column.2 == 'datetime' %}
+                                {% with column.field as index %}
+                                    {% if column.type == 'datetime' %}
                                         {{ object|attribute:index|date:"d.m.Y H:i:s" }}
-                                    {% elif column.2 == 'date' %}
+                                    {% elif column.type == 'date' %}
                                         {{ object|attribute:index|date:"d.m.Y" }}
-                                    {% elif column.2 == 'time' %}
+                                    {% elif column.type == 'time' %}
                                         {{ object|attribute:index|date:"H:i:s" }}
-                                    {% elif column.2 == 'file' %}
+                                    {% elif column.type == 'file' %}
                                         <a href="{{ MEDIA_URL }}{{ object|attribute:index }}"
                                            target="_blank">{{ object|attribute:index|filename }}</a>
-                                    {% elif column.2 == 'image' %}
+                                    {% elif column.type == 'image' %}
                                         <img src="{{ MEDIA_URL }}{{ object|attribute:index }}"
                                              class="img-thumbnail"/>
-                                    {% elif column.2 == 'boolean' %}
+                                    {% elif column.type == 'boolean' %}
                                         {% if object|attribute:index %}
-                                            <i class="fa fa-check-circle text-success"></i>
+                                            <i class="fa fa-check-circle"></i>
                                         {% else %}
-                                            <i class="fa fa-times-circle text-danger"></i>
+                                            <i class="fa fa-times-circle"></i>
                                         {% endif %}
                                     {% else %}
                                         {{ object|attribute:index|striptags }}

@@ -29,7 +29,7 @@ You can pass optional parameter `replacements` to `get_dartcms_core_apps` functi
 
     INSTALLED_APPS = [
         ...
-    ] + get_dartcms_core_apps(['app.feeds'])
+    ] + get_dartcms_core_apps(replacements=['app.feeds'])
 
 
 This will replace DartCMS's app named `feeds` with your app `app.feeds`.
@@ -104,10 +104,11 @@ If you need some application that do not exist in DartCMS, you can write your ow
     config = DartCMSConfig({
         'model': TinyModel,
         'grid': {
-            'grid_columns': (
-                ('foo', _('Foo'), 'string', '70%'),
-                ('bar', _('Bar'), 'datetime', '30%'),
-            ),
+            'grid_columns': [
+                # Keys 'label', 'type' are optional here.
+                {'field': 'foo', 'label': _('Foo'), 'type': 'string', 'width': '70%'},
+                {'field': 'bar', 'label': _('Bar'), 'type': 'datetime', 'width': '30%'},
+            ],
         },
         'form': {
             'form_class': modelform_factory(TinyModel, exclude=[]),

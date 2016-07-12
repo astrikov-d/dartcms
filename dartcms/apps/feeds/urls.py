@@ -12,13 +12,13 @@ Feed = get_model('feeds', 'Feed')
 config = DartCMSConfig({
     'model': Feed,
     'grid': {
-        'grid_columns': (
-            ('type', _('Type'), 'string', '30%'),
-            ('name', _('Name'), 'string', '70%'),
-        ),
-        'grid_actions': (
-            ('items', _('View Records'), 'next'),
-        ),
+        'grid_columns': [
+            {'field': 'type', 'width': '30%'},
+            {'field': 'name', 'width': '70%'},
+        ],
+        'additional_grid_actions': [
+            {'url': 'items'}
+        ]
     },
     'form': {
         'form_class': modelform_factory(Feed, exclude=[]),

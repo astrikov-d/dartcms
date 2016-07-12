@@ -7,6 +7,9 @@ from django.http import Http404, JsonResponse
 
 class ModulePermissionsMixin(object):
     def check_module_perms(self):
+        if not self.request.user.is_authenticated() or not self.request.user.is_staff:
+            return False
+
         root = reverse('dartcms:dashboard:index')
         active_module_slug = self.request.path.replace(root, '').strip('/').split('/')[0]
         user_modules = self.request.user.module_set.all().values_list('slug', flat=True)

@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block inline_js %}
-    {{ block.super }}
     <script>
         $(function () {
             var grid = $('#id-datagrid'),
@@ -39,17 +38,17 @@
                                 if (selected)
                                     window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
                             }
-                        }{% if grid_actions %},
-                            {% for action in grid_actions %}
+                        }{% if additional_grid_actions %},
+                            {% for action in additional_grid_actions %}
                                 {
-                                    text: '{{ action.1 }}',
-                                    iconCls: 'icon-{{ action.2 }}',
+                                    text: '{{ action.label }}',
+                                    iconCls: 'icon-{{ action.icon }}',
                                     handler: function () {
                                         var selected = grid.treegrid('getSelected');
                                         if (selected)
-                                            window.location.href = '{{ index_url }}{{ action.0 }}/' + selected.pk + '/';
+                                            window.location.href = '{{ index_url }}{{ action.url }}/' + selected.pk + '/';
                                     }
-                                }
+                                }{% if not forloop.last %},{% endif %}
                             {% endfor %}
                         {% endif %}
                     ];
@@ -118,9 +117,9 @@
         <table id="id-datagrid">
             <thead>
             <tr>
-                <th data-options="field:'pk', hidden:true" width="{{ column.3 }}">ID</th>
+                <th data-options="field:'pk', hidden:true">ID</th>
                 {% for column in grid_columns %}
-                    <th data-options="field:'{{ column.0 }}'" width="{{ column.3 }}">{{ column.1 }}</th>
+                    <th data-options="field:'{{ column.field }}'" width="{{ column.width }}">{{ column.label }}</th>
                 {% endfor %}
             </tr>
             </thead>

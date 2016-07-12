@@ -13,11 +13,12 @@ class GridView(AdminMixin, ListView):
     template_name = 'dartcms/views/grid.html'
     paginate_by = None
     allow_empty = True
-    grid_columns = (
-        ('name', _('Title'), 'string', '70%'),
-        ('date_created', _('Date created'), 'datetime', '30%'),
-    )
-    grid_actions = ()
+    grid_columns = [
+        {'field': 'name', 'width': '70%'},
+        {'field': 'date_created', 'width': '30%'},
+    ]
+    base_grid_actions = ['insert', 'update', 'delete']
+    additional_grid_actions = []
 
     def get_queryset(self):
         if self.parent_kwarg_name:
@@ -39,7 +40,8 @@ class GridView(AdminMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(GridView, self).get_context_data(**kwargs)
         context['grid_columns'] = self.grid_columns
-        context['grid_actions'] = self.grid_actions
+        context['grid_actions'] = self.base_grid_actions
+        context['additional_grid_actions'] = self.additional_grid_actions
         return context
 
 
