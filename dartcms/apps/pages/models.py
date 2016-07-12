@@ -88,7 +88,7 @@ class AbstractPage(MPTTModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def delete(self):
-        if self.parent is None:
+        if not self.parent:
             pass
         else:
             return super(AbstractPage, self).delete()
@@ -101,7 +101,7 @@ class AbstractPage(MPTTModel):
 
     @property
     def page_url(self):
-        if self.parent is None:
+        if not self.parent:
             return '/'
         return '/%s/%s/' % (self.module.slug, self.slug)
 
@@ -172,6 +172,7 @@ if is_model_registered('pages', 'Page'):
 else:
     class Page(AbstractPage):
         pass
+
 
     __all__.append('Page')
 
