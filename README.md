@@ -35,3 +35,9 @@ Installation
 You can install DartCMS with `pip`:
 
 `pip install dartcms`
+
+
+Documentation
+-------------
+
+Documentation can be found here - http://dartcms.readthedocs.io/
