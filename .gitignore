@@ -7,11 +7,12 @@ venv
 
 # Node
 node_modules
+npm-debug.log
 
 # Packages
 *.egg-info
 build
-dist
+/dist
 
 # Git
 *.orig
