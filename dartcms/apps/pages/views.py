@@ -52,8 +52,10 @@ class MovePageView(TreeActionView):
     def get_data(self, context):
         position = self.request.GET.get('position')
         target, source = self.get_pages()
-        source.move_to(target, position=position)
-        return {'result': True}
+        if target.parent:
+            source.move_to(target, position=position)
+            return {'result': True}
+        return {'result': False}
 
 
 class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
@@ -77,7 +79,7 @@ class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
 
         page_pk = self.request.GET.get('pk', 0)
 
-        if page_pk != '':
+        if page_pk != 0:
             page = Page.objects.get(pk=page_pk)
         else:
             page = None

@@ -69,7 +69,6 @@
                 },
                 onDrop: function (target, source, point) {
                     var url = '';
-
                     if (point == 'append') {
                         url = '{% url 'dartcms:pages:append' %}' + '?target=' + target.pk + '&source=' + source.pk;
 
@@ -78,14 +77,14 @@
                             method: 'POST',
                             url: url
                         }).done(function (response) {
-                                    if (response.result) {
-                                        grid.treegrid('reload');
-                                    } else {
-                                        $.messager.show({
-                                            title: 'Ошибка',
-                                            msg: 'Ошибка перемещения страницы.'
+                                    if (!response.result) {
+                                        new PNotify({
+                                            title: gettext('Warning'),
+                                            text: gettext('Page can not be appended to target'),
+                                            icon: 'fa fa-warning'
                                         });
                                     }
+                                    grid.treegrid('reload');
                                 });
                     } else {
                         var position = point == 'bottom' ? 'right' : 'left';
@@ -97,14 +96,14 @@
                             method: 'POST',
                             url: url
                         }).done(function (response) {
-                                    if (response.result) {
-                                        grid.treegrid('reload');
-                                    } else {
-                                        $.messager.show({
-                                            title: 'Ошибка',
-                                            msg: 'Ошибка перемещения страницы.'
+                                    if (!response.result) {
+                                        new PNotify({
+                                            title: gettext('Warning'),
+                                            text: gettext('Page can not be moved'),
+                                            icon: 'fa fa-warning'
                                         });
                                     }
+                                    grid.treegrid('reload');
                                 });
                     }
                 }
