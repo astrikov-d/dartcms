@@ -14,8 +14,6 @@ class PageForm(BetterModelForm):
         model = get_model('pages', 'Page')
         exclude = ['url', 'date_created', 'date_changed', 'sort']
         widgets = {
-            'before_content': forms.Textarea(attrs={'rows': 20, 'class': 'rte'}),
-            'after_content': forms.Textarea(attrs={'rows': 20, 'class': 'rte'}),
             'module_params': forms.Select()
         }
 
