@@ -20,10 +20,7 @@ config = DartCMSConfig({
         ]
     },
     'form': {
-        'form_class': modelform_factory(Ad, widgets={
-            'date_from': DateTimeInput(attrs={'class': 'datetime'}),
-            'date_to': DateTimeInput(attrs={'class': 'datetime'}),
-        }, exclude=[]),
+        'form_class': modelform_factory(Ad, exclude=[]),
     }
 })
 

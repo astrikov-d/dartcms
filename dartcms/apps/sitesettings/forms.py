@@ -8,9 +8,6 @@ class SiteSettingsForm(ModelForm):
     class Meta:
         model = SiteSettings
         exclude = ['slug', 'description', 'type', 'options']
-        widgets = {
-            'date_value': DateTimeInput(attrs={'class': 'datetime'}),
-        }
 
     def __init__(self, *args, **kwargs):
         super(SiteSettingsForm, self).__init__(*args, **kwargs)

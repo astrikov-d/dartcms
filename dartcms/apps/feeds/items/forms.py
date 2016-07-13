@@ -15,14 +15,3 @@ class FeedItemForm(forms.ModelForm):
             'short_text': forms.Textarea(attrs={'class': 'rte'}),
             'full_text': forms.Textarea(attrs={'class': 'rte'}),
         }
-
-    date_published = forms.DateTimeField(
-        widget=forms.DateTimeInput(
-            attrs={
-                'class': 'datetime'
-            }
-        ),
-        localize=True,
-        initial=datetime.datetime.now,
-        label=_('Date of publication')
-    )
