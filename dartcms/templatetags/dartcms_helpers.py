@@ -222,7 +222,7 @@ def is_date(field):
 
 
 @register.filter
-def is_date(field):
+def is_datetime(field):
     return field.field.widget.__class__.__name__ == DateTimeInput().__class__.__name__
 
 

@@ -6,8 +6,10 @@ from django.db.models.signals import post_save, pre_delete, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
 
-from dartcms.utils.loading import get_model, is_model_registered
 from mptt.models import MPTTModel, TreeForeignKey
+
+from dartcms.utils.loading import get_model, is_model_registered
+from dartcms.utils.fields import RteField
 
 __all__ = [
     'PageModule',
@@ -73,8 +75,8 @@ class AbstractPage(MPTTModel):
     module_params = models.CharField(max_length=128, blank=True, null=True, default=None,
                                      verbose_name=_('Module parameters'))
 
-    before_content = models.TextField(default='', blank=True, verbose_name=_('Before Content'))
-    after_content = models.TextField(default='', blank=True, verbose_name=_('After Content'))
+    before_content = RteField(default='', blank=True, verbose_name=_('Before Content'))
+    after_content = RteField(default='', blank=True, verbose_name=_('After Content'))
 
     seo_keywords = models.TextField(default='', blank=True, verbose_name=_('Keywords (meta keywords)'))
     seo_description = models.TextField(default='', blank=True, verbose_name=_('Description (meta description)'))
