@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url, include
 from django.forms import modelform_factory
-from django.utils.translation import ugettext_lazy as _
 
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
