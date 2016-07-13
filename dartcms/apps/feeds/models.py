@@ -1,7 +1,6 @@
 # coding: utf-8
 import datetime
 
-from django.http import HttpResponseForbidden
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 

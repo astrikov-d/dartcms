@@ -2,6 +2,6 @@
 from django.apps import AppConfig
 
 
-class FeedsConfig(AppConfig):
+class SitesettingsConfig(AppConfig):
     name = 'dartcms.apps.sitesettings'
     verbose_name = 'Site settings'

@@ -33,11 +33,10 @@ class SiteSettings(models.Model):
 
     @property
     def value(self):
-        if self.type == self.DATE:
-            return self.date_value
-        if self.type == self.FILE:
-            return self.file_value
-        return self.text_value
+        return {
+            self.DATE: self.date_value,
+            self.FILE: self.file_value
+        }.get(self.type, self.text_value)
 
     @property
     def type_display(self):
