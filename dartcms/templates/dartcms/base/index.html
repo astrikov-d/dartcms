@@ -91,7 +91,7 @@
                     </div>
                 </nav>
                 <div class="page-content">
-                    <ol class="breadcrumb pull-right">
+                    <ol class="breadcrumb pull-left">
                         <li>
                             <i class="fa fa-sitemap"></i>
                         </li>
@@ -100,6 +100,7 @@
                         </li>
                         {% block breadcrumbs_current_path %}{% endblock %}
                     </ol>
+                    <div class="clearfix"></div>
                     {% if messages %}
                         {% for message in messages %}
                             <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible"
