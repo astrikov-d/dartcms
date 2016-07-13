@@ -2,32 +2,25 @@
 from django.conf.urls import url
 
 from dartcms.utils.config import DartCMSConfig
-from dartcms.utils.loading import get_model
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
 
-from .forms import FeedItemForm
+from .views import InsertMessageForm
 
-FeedItem = get_model('feeds', 'FeedItem')
 
 config = DartCMSConfig({
-    'model': FeedItem,
-    'parent_kwarg_name': 'feed',
-    'parent_model_fk': 'feed_id',
+    'parent_kwarg_name': 'form_type',
+    'parent_model_fk': 'type_id',
     'grid': {
         'grid_columns': [
-            {'field': 'name', 'width': '60%'},
-            {'field': 'is_visible', 'width': '20%'},
-            {'field': 'date_published', 'width': '20%'},
+            {'field': 'author', 'width': '80%'},
+            {'field': 'date_created', 'width': '20%'},
         ]
-    },
-    'form': {
-        'form_class': FeedItemForm,
     }
 })
 
 urlpatterns = [
     url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^insert/$', InsertObjectView.as_view(**config.form), name='insert'),
+    url(r'^insert/$', InsertMessageForm.as_view(**config.base), name='insert'),
     url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
     url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
 ]
