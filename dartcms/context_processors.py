@@ -1,4 +1,7 @@
 # coding: utf-8
+from django.core.urlresolvers import reverse
+
+
 def modules_data(request):
     if not request.is_ajax() and request.user.is_authenticated() and request.user.is_staff:
         modules = request.user.module_set.all()
@@ -6,8 +9,15 @@ def modules_data(request):
         module_groups = [m.group for m in modules]
         module_groups_set = set(module_groups)
 
-        return {
-            'module_groups': module_groups_set
-        }
+        res = dict(module_groups=module_groups_set)
+
+        dartcms_path = reverse('dartcms:dashboard:index')
+        active_module_slug = request.path.replace(dartcms_path, '', 1).split('/')[0]
+        if active_module_slug:
+            res.update(
+                dict(active_module_slug=active_module_slug,
+                     active_group_slug=modules.filter(slug=active_module_slug).last().group.slug)
+            )
+        return res
     else:
         return {}
