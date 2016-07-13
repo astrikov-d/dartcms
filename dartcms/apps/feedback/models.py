@@ -46,7 +46,7 @@ class AbstractContactMessage(AbstractBaseMessage):
         abstract = True
 
     email = models.EmailField(verbose_name=_('Email'), blank=True, null=True)
-    phone = models.CharField(verbose_name=_('Phone'), blank=True, null=True)
+    phone = models.CharField(max_length=64, verbose_name=_('Phone'), blank=True, null=True)
 
 
 if not is_model_registered('feedback', 'QuestionMessage'):
