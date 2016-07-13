@@ -56,7 +56,7 @@ def delete_modules(apps, schema):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('modules', '0003_insert_modules'),
+        ('modules', '0004_insert_feedback_module'),
     ]
 
     operations = [
