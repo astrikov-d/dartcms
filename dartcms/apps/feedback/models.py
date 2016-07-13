@@ -40,6 +40,9 @@ class AbstractQuestionMessage(AbstractBaseMessage):
     class Meta:
         abstract = True
 
+    answer = models.TextField(verbose_name=_('Answer'), blank=True, null=True)
+    is_visible = models.BooleanField(verbose_name=_('Is Visible'), default=False)
+
 
 class AbstractContactMessage(AbstractBaseMessage):
     class Meta:
