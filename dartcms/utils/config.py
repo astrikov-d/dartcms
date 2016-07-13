@@ -26,7 +26,7 @@ class DartCMSConfig(object):
             'parent_kwarg_name': self.config.get('parent_kwarg_name'),
             'parent_model_fk': self.config.get('parent_model_fk'),
             'parent_model': self.config.get('parent_model'),
-            'model': self.config['model'],
+            'model': self.config.get('model'),
         }
 
     def construct_grid_columns(self):
@@ -48,7 +48,7 @@ class DartCMSConfig(object):
     def grid(self):
         config = self.base
 
-        if 'grid_columns' in self.config['grid']:
+        if config['model'] and 'grid_columns' in self.config['grid']:
             self.construct_grid_columns()
 
         if 'additional_grid_actions' in self.config['grid']:
@@ -60,5 +60,6 @@ class DartCMSConfig(object):
     @property
     def form(self):
         config = self.base
-        config.update(self.config['form'])
+        if 'form' in self.config:
+            config.update(self.config['form'])
         return config
