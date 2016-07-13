@@ -1,0 +1,6 @@
+$(function () {
+    /**
+     * Side menu nav
+     */
+
+});
