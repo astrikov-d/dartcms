@@ -9,6 +9,8 @@ from django.forms import (CheckboxInput, CheckboxSelectMultiple,
 from widget_tweaks.templatetags.widget_tweaks import (append_attr,
                                                       silence_without_field)
 
+from dartcms.utils.fields import RteField
+
 from .ifstartswith import do_startswith
 
 try:
@@ -222,7 +224,7 @@ def is_date(field):
 
 
 @register.filter
-def is_date(field):
+def is_datetime(field):
     return field.field.widget.__class__.__name__ == DateTimeInput().__class__.__name__
 
 

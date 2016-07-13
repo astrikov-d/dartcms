@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 from dartcms.utils.loading import is_model_registered
+from dartcms.utils.fields import RteField
 
 
 __all__ = [
@@ -53,8 +54,8 @@ class AbstractFeedItem(models.Model):
 
     feed = models.ForeignKey(Feed, verbose_name=_('Feed'), on_delete=models.PROTECT)
     name = models.CharField(max_length=1024, verbose_name=_('Title'))
-    short_text = models.TextField(verbose_name=_('Short Text'))
-    full_text = models.TextField(verbose_name=_('Full Text'))
+    short_text = RteField(verbose_name=_('Short Text'))
+    full_text = RteField(verbose_name=_('Full Text'))
     picture = models.ImageField(verbose_name=_('Picture'), upload_to='feeds/%Y/%m/%d', null=True, blank=True)
     seo_keywords = models.TextField(
         verbose_name=_('Keywords'),
