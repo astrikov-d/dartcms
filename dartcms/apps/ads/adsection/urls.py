@@ -1,27 +1,21 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from django.conf.urls import url
+from django.forms import modelform_factory
 
 from dartcms.utils.config import DartCMSConfig
-from dartcms.utils.loading import get_model
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
-
-from .forms import FeedItemForm
-
-FeedItem = get_model('feeds', 'FeedItem')
+from dartcms.apps.ads.models import AdSection
 
 config = DartCMSConfig({
-    'model': FeedItem,
-    'parent_kwarg_name': 'feed',
-    'parent_model_fk': 'feed_id',
+    'model': AdSection,
     'grid': {
         'grid_columns': [
-            {'field': 'name', 'width': '60%'},
-            {'field': 'is_visible', 'width': '20%'},
-            {'field': 'date_published', 'width': '20%'},
+            {'field': 'name', 'width': '80%'},
+            {'field': 'is_enabled', 'width': '20%'},
         ]
     },
     'form': {
-        'form_class': FeedItemForm,
+        'form_class': modelform_factory(AdSection, exclude=[]),
     }
 })
 

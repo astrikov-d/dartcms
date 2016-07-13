@@ -19,6 +19,9 @@ urlpatterns = [
     url(r'^feeds/', include('dartcms.apps.feeds.urls', namespace='feeds')),
     url(r'^filemanager/', include('dartcms.apps.filemanager.urls', namespace='filemanager')),
     url(r'^sitesettings/', include('dartcms.apps.sitesettings.urls', namespace='sitesettings')),
+    url(r'^ad/', include('dartcms.apps.ads.ad.urls', namespace='ad')),
+    url(r'^adplace/', include('dartcms.apps.ads.adplace.urls', namespace='adplace')),
+    url(r'^adsection/', include('dartcms.apps.ads.adsection.urls', namespace='adsection')),
 ]
 
 additional_apps = getattr(settings, 'DARTCMS_ADDITIONAL_APPS_URLPATTERNS', [])

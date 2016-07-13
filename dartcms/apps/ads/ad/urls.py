@@ -1,27 +1,29 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from django.conf.urls import url
+from django.forms import modelform_factory, DateTimeInput
 
+from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
-from dartcms.utils.loading import get_model
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
 
-from .forms import FeedItemForm
-
-FeedItem = get_model('feeds', 'FeedItem')
+Ad = get_model('ads', 'Ad')
 
 config = DartCMSConfig({
-    'model': FeedItem,
-    'parent_kwarg_name': 'feed',
-    'parent_model_fk': 'feed_id',
+    'model': Ad,
     'grid': {
         'grid_columns': [
-            {'field': 'name', 'width': '60%'},
-            {'field': 'is_visible', 'width': '20%'},
-            {'field': 'date_published', 'width': '20%'},
+            {'field': 'name', 'width': '30%'},
+            {'field': 'place', 'width': '20%'},
+            {'field': 'date_from', 'width': '20%'},
+            {'field': 'date_to', 'width': '20%'},
+            {'field': 'is_enabled', 'width': '10%'},
         ]
     },
     'form': {
-        'form_class': FeedItemForm,
+        'form_class': modelform_factory(Ad, widgets={
+            'date_from': DateTimeInput(attrs={'class': 'datetime'}),
+            'date_to': DateTimeInput(attrs={'class': 'datetime'}),
+        }, exclude=[]),
     }
 })
 
