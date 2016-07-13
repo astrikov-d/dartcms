@@ -9,8 +9,6 @@ from django.forms import (CheckboxInput, CheckboxSelectMultiple,
 from widget_tweaks.templatetags.widget_tweaks import (append_attr,
                                                       silence_without_field)
 
-from dartcms.utils.fields import RteField
-
 from .ifstartswith import do_startswith
 
 try:
