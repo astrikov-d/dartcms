@@ -2,7 +2,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-
 DYNAMIC_FIELDS_MAPPING = {
     'STRING': {'class': forms.CharField, 'defaults': {'max_length': 255}},
     'DATE': {'class': forms.DateField, 'defaults': {'widget': forms.TextInput(attrs={'class': 'date'})}},

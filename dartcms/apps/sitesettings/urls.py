@@ -5,9 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView
 
-from .models import SiteSettings
 from .forms import SiteSettingsForm as Form
-
+from .models import SiteSettings
 
 config = DartCMSConfig({
     'model': SiteSettings,

@@ -6,10 +6,9 @@ from django.db.models.signals import post_save, pre_delete, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
 
-from mptt.models import MPTTModel, TreeForeignKey
-
-from dartcms.utils.loading import get_model, is_model_registered
 from dartcms.utils.fields import RteField
+from dartcms.utils.loading import get_model, is_model_registered
+from mptt.models import MPTTModel, TreeForeignKey
 
 __all__ = [
     'PageModule',

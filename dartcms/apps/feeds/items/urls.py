@@ -3,7 +3,8 @@ from django.conf.urls import url
 
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
 
 from .forms import FeedItemForm
 
@@ -20,7 +21,7 @@ config = DartCMSConfig({
             {'field': 'date_published', 'width': '20%'},
         ],
         'search': [
-            'name', 'date_published', 'feed', 'is_visible'
+            'name', 'date_published', 'is_visible'
         ]
     },
     'form': {

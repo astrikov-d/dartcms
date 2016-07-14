@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from dartcms.utils.loading import is_model_registered
 
-
 __all__ = [
     'FormType',
     'AbstractBaseMessage',

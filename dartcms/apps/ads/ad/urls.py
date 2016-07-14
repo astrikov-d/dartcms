@@ -1,10 +1,11 @@
 # coding: utf-8
 from django.conf.urls import url
-from django.forms import modelform_factory, DateTimeInput
+from django.forms import DateTimeInput, modelform_factory
 
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
 
 Ad = get_model('ads', 'Ad')
 

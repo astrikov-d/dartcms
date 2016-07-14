@@ -8,8 +8,8 @@ from django.views.generic import TemplateView
 
 from dartcms.views import JSONView
 
-from .models import File, Folder
 from .forms import FolderForm
+from .models import File, Folder
 
 
 class FileManagerIndexView(TemplateView):

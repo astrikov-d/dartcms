@@ -5,9 +5,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView
+from dartcms.views import DeleteObjectView, GridView, UpdateObjectView
+
 from .forms import PageForm
-from .views import GetTreeView, InsertPageView, AppendPageView, MovePageView, LoadModuleParamsView
+from .views import (AppendPageView, GetTreeView, InsertPageView,
+                    LoadModuleParamsView, MovePageView)
 
 Page = get_model('pages', 'Page')
 
