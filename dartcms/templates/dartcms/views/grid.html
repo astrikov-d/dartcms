@@ -116,12 +116,11 @@
 
     {% block grid %}
         {% include 'dartcms/views/partials/loading_indicator.html' %}
+        {% if search_form %}
+            {% include 'dartcms/views/partials/grid_search.html' %}
+        {% endif %}
+
         <div class="grid-wrapper" style="visibility: hidden;">
-
-            {% if search_form %}
-                {% include 'dartcms/views/partials/grid_search.html' %}
-            {% endif %}
-
             <table id="id-datagrid">
                 <thead>
                 <tr>
