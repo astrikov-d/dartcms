@@ -1,26 +1,23 @@
 # coding: utf-8
 from django.conf.urls import url
-from django.forms import modelform_factory, DateTimeInput
+from django.forms import modelform_factory
 
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
 
-Ad = get_model('ads', 'Ad')
+ProductCatalog = get_model('shop', 'ProductCatalog')
 
 config = DartCMSConfig({
-    'model': Ad,
+    'model': ProductCatalog,
     'grid': {
         'grid_columns': [
-            {'field': 'name', 'width': '30%'},
-            {'field': 'place', 'width': '20%'},
-            {'field': 'date_from', 'width': '20%'},
-            {'field': 'date_to', 'width': '20%'},
-            {'field': 'is_enabled', 'width': '10%'},
+            {'field': 'name', 'width': '90%'},
+            {'field': 'is_visible', 'width': '10%'},
         ]
     },
     'form': {
-        'form_class': modelform_factory(Ad, exclude=[]),
+        'form_class': modelform_factory(ProductCatalog, exclude=[]),
     }
 })
 
