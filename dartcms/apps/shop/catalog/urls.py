@@ -1,10 +1,10 @@
 # coding: utf-8
 from django.conf.urls import url
-from django.forms import modelform_factory
 
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
+from dartcms.apps.shop.catalog.forms import ProductCatalogForm
 
 ProductCatalog = get_model('shop', 'ProductCatalog')
 
@@ -17,7 +17,7 @@ config = DartCMSConfig({
         ]
     },
     'form': {
-        'form_class': modelform_factory(ProductCatalog, exclude=[]),
+        'form_class': ProductCatalogForm
     }
 })
 
