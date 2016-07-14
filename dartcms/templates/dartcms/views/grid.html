@@ -9,7 +9,8 @@
             src="{% static 'dartcms/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'dartcms/js/lib/jquery-validation/jquery.validate.min.js' %}"></script>
-
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment-with-locales.min.js"></script>
     {% get_current_language as LANG %}
 
     {% if LANG == 'ru-ru' %}
@@ -92,7 +93,29 @@
                         {% endif %}
 
                     ];
+
+            var request = {
+                'GET': {}
+            };
+
+            {% get_current_language as LANG %}
+
+            {% if LANG == 'ru-ru' %}
+                var date_format = 'DD.MM.YYYY';
+            {% else %}
+                var date_format = 'YYYY-MM-DD';
+            {% endif %}
+
+            location.search.substr(1).split("&").forEach(function (item) {
+                if (item) {
+                    request.GET[item.split("=")[0]] = decodeURIComponent(item.split("=")[1]).replace('+', ' ');
+                }
+            });
+
             grid.datagrid({
+                url: '{{ request.path }}',
+                queryParams: request.GET,
+                method: 'get',
                 idField: 'pk',
                 singleSelect: true,
                 fitColumn: true,
@@ -102,7 +125,46 @@
                 onOpen: function (data) {
                     $('.grid-loading-indicator').remove();
                     $('.grid-wrapper').css('visibility', 'visible');
-                }
+                    $('.search-form-wrapper').css('visibility', 'visible');
+                },
+                columns: [
+                    [
+                        {
+                            field: 'pk',
+                            hidden: true
+                        },
+                        {% for column in grid_columns %}
+                            {
+                                field: '{{ column.field }}',
+                                width: '{{ column.width }}',
+                                title: '{{ column.label }}',
+                                formatter: function (value, row, index) {
+                                    {% if column.type == 'BOOLEAN' %}
+                                        if (value) {
+                                            return '<i class="fa fa-check-circle"></i>';
+                                        } else {
+                                            return '<i class="fa fa-remove"></i>';
+                                        }
+                                    {% elif column.type == 'DATETIME' %}
+                                        return moment(value).format(date_format + ' HH:mm:ss');
+                                    {% elif column.type == 'DATE' %}
+                                        return moment(value).format(date_format);
+                                    {% elif column.type == 'TIME' %}
+                                        return moment(value).format('HH:mm:ss');
+                                    {% elif column.type == 'FILE' %}
+                                        if (value)
+                                            return '<a href="' + value + '">' + value + '</a>';
+                                    {% elif column.type == 'IMAGE' %}
+                                        if (value)
+                                            return '<img src="' + value + '" class="img img-thumbnail"/>';
+                                    {% else %}
+                                        return value;
+                                    {% endif %}
+                                }
+                            }{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                ]
             });
         });
     </script>
@@ -121,48 +183,7 @@
         {% endif %}
 
         <div class="grid-wrapper" style="visibility: hidden;">
-            <table id="id-datagrid">
-                <thead>
-                <tr>
-                    <th data-options="field:'pk', hidden:true">ID</th>
-                    {% for column in grid_columns %}
-                        <th data-options="field:'{{ column.field }}'" width="{{ column.width }}">{{ column.label }}</th>
-                    {% endfor %}
-                </tr>
-                </thead>
-                {% for object in object_list %}
-                    <tr>
-                        <td data-options="hidden:true">{{ object.pk }}</td>
-                        {% for column in grid_columns %}
-                            <td>
-                                {% with column.field as index %}
-                                    {% if column.type == 'DATETIME' %}
-                                        {{ object|attribute:index|date }}
-                                    {% elif column.type == 'DATE' %}
-                                        {{ object|attribute:index|date }}
-                                    {% elif column.type == 'TIME' %}
-                                        {{ object|attribute:index|date:'H:i:s' }}
-                                    {% elif column.type == 'FILE' %}
-                                        <a href="{{ MEDIA_URL }}{{ object|attribute:index }}"
-                                           target="_blank">{{ object|attribute:index|filename }}</a>
-                                    {% elif column.type == 'IMAGE' %}
-                                        <img src="{{ MEDIA_URL }}{{ object|attribute:index }}"
-                                             class="img-thumbnail"/>
-                                    {% elif column.type == 'BOOLEAN' %}
-                                        {% if object|attribute:index %}
-                                            <i class="fa fa-check-circle"></i>
-                                        {% else %}
-                                            <i class="fa fa-times-circle"></i>
-                                        {% endif %}
-                                    {% else %}
-                                        {{ object|attribute:index|striptags }}
-                                    {% endif %}
-                                {% endwith %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
+            <table id="id-datagrid"></table>
         </div>
     {% endblock %}
 {% endblock %}
