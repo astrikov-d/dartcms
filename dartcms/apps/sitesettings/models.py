@@ -2,8 +2,8 @@
 from datetime import datetime
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import striptags, truncatewords
+from django.utils.translation import ugettext_lazy as _
 
 
 class SiteSettings(models.Model):

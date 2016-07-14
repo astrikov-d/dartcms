@@ -1,5 +1,4 @@
 # coding: utf-8
-from django.db import models
 from django.utils.translation import ugettext as _
 
 from .db import get_model_field_label, get_model_field_type
@@ -7,13 +6,7 @@ from .db import get_model_field_label, get_model_field_type
 
 class DartCMSConfig(object):
     config = {}
-    column_type_mapping = {
-        models.DateTimeField: 'datetime',
-        models.DateField: 'date',
-        models.TimeField: 'time',
-        models.BooleanField: 'boolean',
-        models.ForeignKey: 'foreign_key'
-    }
+
     default_action_label = _('View Records')
     default_action_icon = 'next'
 
@@ -35,7 +28,7 @@ class DartCMSConfig(object):
             if 'label' not in column:
                 column['label'] = get_model_field_label(model, column['field'])
             if 'type' not in column:
-                column['type'] = self.column_type_mapping.get(get_model_field_type(model, column['field']), 'string')
+                column['type'] = get_model_field_type(model, column['field'])
 
     def construct_additional_grid_actions(self):
         for action in self.config['grid']['additional_grid_actions']:
@@ -48,8 +41,9 @@ class DartCMSConfig(object):
     def grid(self):
         config = self.base
 
-        if config['model'] and 'grid_columns' in self.config['grid']:
-            self.construct_grid_columns()
+        if config['model']:
+            if 'grid_columns' in self.config['grid']:
+                self.construct_grid_columns()
 
         if 'additional_grid_actions' in self.config['grid']:
             self.construct_additional_grid_actions()

@@ -2,9 +2,10 @@
 from django.conf.urls import url
 from django.forms import modelform_factory
 
-from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
 from dartcms.apps.ads.models import AdSection
+from dartcms.utils.config import DartCMSConfig
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
 
 config = DartCMSConfig({
     'model': AdSection,

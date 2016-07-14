@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<div class="well well-sm">
+    <form method="GET" class="form-inline">
+        {% for field in search_form %}
+            {% include 'dartcms/forms/partial/inline_field.html' %}
+        {% endfor %}
+        <a href="{{ index_url }}" class="btn btn-default">{% trans 'Clear' %}</a>&nbsp;
+        <input type="submit" name="search" class="btn btn-primary" value="{% trans 'Search' %}"/>
+    </form>
+</div>

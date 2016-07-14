@@ -1,8 +1,10 @@
 # coding: utf-8
-from django.contrib.auth.decorators import login_required
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
-from .views import FileManagerIndexView, GetTreeView, CreateFolderView, GetFilesView, UploadFileView, RenameFolderView, DeleteFileView, DeleteFolderView
+from .views import (CreateFolderView, DeleteFileView, DeleteFolderView,
+                    FileManagerIndexView, GetFilesView, GetTreeView,
+                    RenameFolderView, UploadFileView)
 
 urlpatterns = [
     url(r'^$', login_required(FileManagerIndexView.as_view()), name='index'),

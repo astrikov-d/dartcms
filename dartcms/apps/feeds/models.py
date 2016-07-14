@@ -1,12 +1,11 @@
 # coding: utf-8
 import datetime
 
-from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
-from dartcms.utils.loading import is_model_registered
 from dartcms.utils.fields import RteField
-
+from dartcms.utils.loading import is_model_registered
 
 __all__ = [
     'FeedType',

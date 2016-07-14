@@ -2,9 +2,9 @@
 from django.conf.urls import url
 from django.forms import modelform_factory
 
+from dartcms.apps.ads.models import AdPlace
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView
-from dartcms.apps.ads.models import AdPlace
 
 config = DartCMSConfig({
     'model': AdPlace,

@@ -1,0 +1,69 @@
+{% load i18n dartcms_helpers %}
+
+{% if not field|is_hidden %}
+    <div class="form-group">
+        {% if field|is_checkbox_multiple_select %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <div class="checkbox checkbox-primary">
+                {{ field }}
+            </div>
+        {% elif field|is_checkbox %}
+            <div class="checkbox checkbox-primary">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+            </div>
+        {% elif field|is_radio %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <div class="radio">
+                <label>
+                    {{ field }}
+                </label>
+            </div>
+        {% else %}
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }} {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+            </label>
+            {% if field|is_date %}
+                {% if field.field.required %}
+                    {{ field|add_class:"form-control date"|attr:"required:required" }}
+                {% else %}
+                    {{ field|add_class:"form-control date" }}
+                {% endif %}
+            {% elif field|is_datetime %}
+                {% if field.field.required %}
+                    {{ field|add_class:"form-control datetime"|attr:"required:required" }}
+                {% else %}
+                    {{ field|add_class:"form-control datetime" }}
+                {% endif %}
+            {% elif not field|is_file %}
+                {% if not field|is_multiple_select %}
+                    {% if field.field.required %}
+                        {{ field|add_class:"form-control"|attr:"required:required" }}
+                    {% else %}
+                        {{ field|add_class:"form-control" }}
+                    {% endif %}
+                {% else %}
+                    {% if field.field.required %}
+                        {{ field|add_class:"form-control"|add_class:"chosen"|attr:"required:required" }}
+                    {% else %}
+                        {{ field|add_class:"form-control"|add_class:"chosen" }}
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {{ field }}
+            {% endif %}
+            {{ field.errors }}
+            {% if field.help_text and not field|is_multiple_select %}
+                <p class="help-block">{{ field.help_text|safe }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% else %}
+    {% if field.field.required %}
+        {{ field }}
+    {% else %}
+        {{ field|attr:"required:required" }}
+    {% endif %}
+{% endif %}

@@ -57,6 +57,8 @@ determined from field's type. Here is column type mapping according to Django's 
         }
 
 
+`base_grid_actions` property determines which base actions can be done with record. Defaults are `['insert', 'update', 'delete']`.
+
 `additional_grid_actions` property determines which actions can be done with each row.
 
 By defining this property, you can add some additional actions to your datatable.
@@ -65,7 +67,7 @@ This property must be a list, which contains items with action configuration:
 
 .. code-block:: python
 
-    'grid_actions': [
+    'additional_grid_actions': [
         {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
     ]
 
@@ -75,6 +77,15 @@ This example contains one additional action to change password.
 URL like `/<module_slug>/change-password/<row_pk>/`. Of course, you should define this URL in your app URL scheme:
 - `'label'`: Label of button. Default value is "View Records"
 - '`icon`': JQuery EasyUI icon class for button. Default is 'next'
+
+`search` property determines what fields should be included in grid search. Must be a tuple or a list:
+
+.. code-block:: python
+
+    'search': ['name', 'is_visible', 'date_published']
+
+Search form will be rendered automatically.
+
 
 .. code-block:: python
 
@@ -98,7 +109,8 @@ URL like `/<module_slug>/change-password/<row_pk>/`. Of course, you should defin
             ],
             'additional_grid_actions': [
                 {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
-            ]
+            ],
+            'search': ['username', 'is_active', 'last_login']
         },
         'form': {
             'form_class': UserForm
