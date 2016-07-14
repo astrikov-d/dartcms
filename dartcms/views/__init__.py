@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from datetime import datetime
 
 from django.http import HttpResponseRedirect
@@ -10,11 +11,12 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from dartcms.utils.db import get_model_field_type, get_model_field_label, get_model_field
 from dartcms.utils.forms import DynamicFieldsForm
+from dartcms.utils.serialization import DartCMSSerializer
 from dartcms.utils.translation import get_date_format
 from .mixins import AdminMixin, JSONResponseMixin
 
 
-class GridView(AdminMixin, ListView):
+class GridView(AdminMixin, JSONResponseMixin, ListView):
     template_name = 'dartcms/views/grid.html'
     paginate_by = None
     allow_empty = True
@@ -26,6 +28,7 @@ class GridView(AdminMixin, ListView):
     search_form = None
     base_grid_actions = ['insert', 'update', 'delete']
     additional_grid_actions = []
+    model_properties = []
 
     def get_search_form_kwargs(self):
         if 'search' in self.request.GET:
@@ -88,22 +91,29 @@ class GridView(AdminMixin, ListView):
         return queryset
 
     def get_queryset(self):
+        page = self.request.GET.get('page')
+        rows = self.request.GET.get('rows', self.paginate_by)
+
         if self.parent_kwarg_name:
             kwarg = self.kwargs[self.parent_kwarg_name]
             if self.parent_model_fk is not None:
                 fk = self.parent_model_fk
             else:
                 fk = '%s_id' % self.parent_model.__name__.lower()
-            query_filter = '%s__exact' % fk
 
             queryset = self.model.objects.filter(**{
-                query_filter: kwarg
+                '%s__exact' % fk: kwarg
             })
         else:
             queryset = super(GridView, self).get_queryset()
 
         if self.search and 'search' in self.request.GET:
             queryset = self.filter_queryset(queryset)
+
+        if page and rows:
+            offset = (int(page) - 1) * int(rows)
+            limit = int(rows)
+            queryset = queryset[offset:offset + limit]
 
         return queryset
 
@@ -113,9 +123,23 @@ class GridView(AdminMixin, ListView):
             'grid_columns': self.grid_columns,
             'grid_actions': self.base_grid_actions,
             'additional_grid_actions': self.additional_grid_actions,
-            'search_form': self.get_search_form()
+            'search_form': self.get_search_form(),
+            'date_format': get_date_format()
         })
         return context
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.is_ajax():
+            return self.render_to_json_response(context, **response_kwargs)
+        return super(GridView, self).render_to_response(context, **response_kwargs)
+
+    def get_data(self, context):
+        return {
+            'rows': json.loads(DartCMSSerializer().serialize(
+                queryset=self.get_queryset(),
+                props=self.model_properties
+            ))  # TODO: refactor.
+        }
 
 
 class InsertObjectView(AdminMixin, SuccessMessageMixin, CreateView):
