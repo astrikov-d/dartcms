@@ -110,12 +110,14 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         if self.search and 'search' in self.request.GET:
             queryset = self.filter_queryset(queryset)
 
+        total = queryset.count()
+
         if page and rows:
             offset = (int(page) - 1) * int(rows)
             limit = int(rows)
             queryset = queryset[offset:offset + limit]
 
-        return queryset
+        return queryset, total
 
     def get_context_data(self, **kwargs):
         context = super(GridView, self).get_context_data(**kwargs)
@@ -134,9 +136,11 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         return super(GridView, self).render_to_response(context, **response_kwargs)
 
     def get_data(self, context):
+        qs, total = self.get_queryset()
         return {
+            'total': total,
             'rows': json.loads(DartCMSSerializer().serialize(
-                queryset=self.get_queryset(),
+                queryset=qs,
                 props=self.model_properties
             ))  # TODO: refactor.
         }
