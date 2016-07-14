@@ -18,6 +18,9 @@ config = DartCMSConfig({
             {'field': 'name', 'width': '60%'},
             {'field': 'is_visible', 'width': '20%'},
             {'field': 'date_published', 'width': '20%'},
+        ],
+        'search': [
+            'name', 'date_published', 'feed', 'is_visible'
         ]
     },
     'form': {

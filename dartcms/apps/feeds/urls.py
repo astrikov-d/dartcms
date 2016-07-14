@@ -12,8 +12,8 @@ config = DartCMSConfig({
     'model': Feed,
     'grid': {
         'grid_columns': [
-            {'field': 'type', 'width': '30%'},
-            {'field': 'name', 'width': '70%'},
+            {'field': 'type', 'width': '10%'},
+            {'field': 'name', 'width': '90%'},
         ],
         'additional_grid_actions': [
             {'url': 'items'}

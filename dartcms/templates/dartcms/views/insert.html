@@ -10,34 +10,16 @@
 {% block js %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'dartcms/assets/tinymce/tinymce.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dartcms/js/lib/jquery-validation/jquery.validate.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dartcms/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dartcms/assets/bootstrap-multiselect/js/bootstrap-multiselect.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dartcms/js/apps/base/forms.js' %}"></script>
-
-    {% get_current_language as LANG %}
-
-    {% if LANG == 'ru-ru' %}
-        <script type="text/javascript"
-                src="{% static 'dartcms/js/lib/jquery-validation/localization/messages_ru.min.js' %}"></script>
-    {% endif %}
 {% endblock %}
 
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'dartcms/assets/tinymce/skins/lightgray/skin.min.css' %}"/>
-    <link rel="stylesheet"
-          href="{% static 'dartcms/assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"/>
-    <link rel="stylesheet"
-          href="{% static 'dartcms/assets/bootstrap-multiselect/css/bootstrap-multiselect.css' %}"/>
 {% endblock %}
 
 {% block inline_js %}
+    {{ block.super }}
     {% include 'dartcms/views/partials/tinymce.html' %}
-    {% include 'dartcms/views/partials/datepickers.html' %}
 {% endblock %}
 
 {% block page_content %}

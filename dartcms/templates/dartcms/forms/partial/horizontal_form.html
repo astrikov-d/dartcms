@@ -10,14 +10,14 @@
                 <p class="description">{{ fieldset.description }}</p>
             {% endif %}
             {% for field in fieldset %}
-                {% include 'dartcms/forms/partial/field.html' %}
+                {% include 'dartcms/forms/partial/horizontal_field.html' %}
             {% endfor %}
         </fieldset>
     {% endfor %}
 {% else %}
     <fieldset>
         {% for field in form %}
-            {% include 'dartcms/forms/partial/field.html' %}
+            {% include 'dartcms/forms/partial/horizontal_field.html' %}
         {% endfor %}
     </fieldset>
 {% endif %}
