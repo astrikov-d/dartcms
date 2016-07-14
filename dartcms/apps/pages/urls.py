@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
 from dartcms.utils.config import DartCMSConfig

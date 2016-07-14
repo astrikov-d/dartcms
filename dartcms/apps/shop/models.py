@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import F, Max
 from django.db.models.signals import post_save, pre_delete, pre_save
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as __
 
 from mptt.models import MPTTModel, TreeForeignKey
 from autoslug import AutoSlugField
@@ -99,7 +100,7 @@ class AbstractProductSection(MPTTModel, AbstractProductBase):
             'pk': self.pk,
             'parent_id': self.parent_id,
             'name': self.name,
-            'is_enabled': self.is_enabled,
+            'is_visible': __('yes') if self.is_visible else __('no'),
             'children': []
         }
         for child in self.get_children():
