@@ -51,16 +51,7 @@ MODULE_GROUPS = [
         'description': '',
         'fa': 'fa-cog',
         'slug': 'service',
-        'name': 'Services',
-        'modules': [
-            {
-                'sort': 1,
-                'is_enabled': True,
-                'name': 'Contacts',
-                'slug': 'contacts',
-                'description': ''
-            }
-        ]
+        'name': 'Services'
     }
 ]
 

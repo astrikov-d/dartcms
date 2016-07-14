@@ -1,9 +1,8 @@
 # coding: utf-8
 from django.forms import modelform_factory
 
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView
 from dartcms.utils.loading import get_model
-
+from dartcms.views import DeleteObjectView, GridView, UpdateObjectView
 
 MESSAGES_MODELS_MAPPING = {
     'contact': get_model('feedback', 'ContactMessage'),

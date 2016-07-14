@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.forms import modelform_factory
 
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
 
 Feed = get_model('feeds', 'Feed')
 
@@ -12,8 +13,8 @@ config = DartCMSConfig({
     'model': Feed,
     'grid': {
         'grid_columns': [
-            {'field': 'type', 'width': '30%'},
-            {'field': 'name', 'width': '70%'},
+            {'field': 'type', 'width': '10%'},
+            {'field': 'name', 'width': '90%'},
         ],
         'additional_grid_actions': [
             {'url': 'items'}

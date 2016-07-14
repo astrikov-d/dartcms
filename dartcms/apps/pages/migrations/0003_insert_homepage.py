@@ -6,7 +6,6 @@ from django.db import migrations
 
 from dartcms.utils.loading import get_model
 
-
 PageModule = get_model('pages', 'PageModule')
 Page = get_model('pages', 'Page')
 

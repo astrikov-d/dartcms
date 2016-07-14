@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.forms import modelform_factory
 
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
+
 from .models import FormType
 
 config = DartCMSConfig({

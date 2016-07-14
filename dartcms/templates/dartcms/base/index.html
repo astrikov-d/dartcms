@@ -32,7 +32,7 @@
                     </li>
                     {% for group in module_groups %}
                         {% if group.modules.all %}
-                            <li class="dropdown">
+                            <li class="dropdown {% if group.slug == active_group_slug %}open{% endif %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa {{ group.fa }}"></i>
                                     {% if LANGUAGE_CODE == 'en' %}{{ group.name_en }}{% else %}
@@ -43,7 +43,7 @@
                                     {% for module in group.modules.all %}
                                         {% if module.is_enabled and module in request.user.module_set.all %}
                                             {% with module_url=dashboard_index_url|add:module.slug|add:"/" %}
-                                                <li {% ifstartswith request.path module_url %}class="active"{% endifstartswith %}>
+                                                <li {% if module.slug == active_module_slug %}class="active"{% endif %}>
                                                     <a href="{{ module_url }}">
                                                         {% if LANGUAGE_CODE == 'en' %}
                                                             {{ module.name_en }}

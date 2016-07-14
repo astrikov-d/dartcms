@@ -1,2 +1,3 @@
 recursive-include dartcms/templates *
 recursive-include dartcms/static *
+prune dartcms/static/dartcms/css/node_modules*

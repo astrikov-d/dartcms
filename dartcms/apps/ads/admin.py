@@ -3,7 +3,6 @@ from django.contrib import admin
 
 from dartcms.utils.loading import get_model
 
-
 AdPlace = get_model('ads', 'AdPlace')
 AdSection = get_model('ads', 'AdSection')
 

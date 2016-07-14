@@ -3,8 +3,8 @@ from django.conf.urls import url
 
 from dartcms.utils.config import DartCMSConfig
 
-from .views import MessagesGridView, UpdateMessageFormView, DeleteMessageFormView
-
+from .views import (DeleteMessageFormView, MessagesGridView,
+                    UpdateMessageFormView)
 
 config = DartCMSConfig({
     'parent_kwarg_name': 'form_type',
