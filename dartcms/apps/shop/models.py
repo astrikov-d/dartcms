@@ -17,71 +17,82 @@ __all__ = [
 ]
 
 
-class AbstractProductCatalog(models.Model):
+class AbstractProductBase(models.Model):
     class Meta:
         abstract = True
-        ordering = ['name']
-        verbose_name_plural = _('product catalogs')
-        verbose_name = _('product catalog')
 
     def __unicode__(self):
         return self.name
 
-    slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
-    name = models.CharField(_('Name'), max_length=64)
+    name = models.CharField(_('Name'), max_length=255)
     description = RteField(_('Description'), blank=True, default='')
-    image = models.ImageField(_('Image'), upload_to='shop/catalog', null=True, blank=True)
     seo_keywords = models.TextField(_('Keywords (meta keywords)'), default='', blank=True)
     seo_description = models.TextField(_('Keywords (meta keywords)'), default='', blank=True)
     is_visible = models.BooleanField(_('Is Visible'), default=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-if is_model_registered('shop', 'ProductCatalog'):
-    catalog_model = get_model('shop', 'ProductCatalog')
-else:
+class AbstractProductCatalog(AbstractProductBase):
+    class Meta:
+        abstract = True
+        ordering = ['name']
+        verbose_name_plural = _('product catalogs')
+        verbose_name = _('product catalog')
+
+    slug = models.SlugField(_('URL'), unique=True)
+    image = models.ImageField(_('Image'), upload_to='shop/catalog', null=True, blank=True)
+
+if not is_model_registered('shop', 'ProductCatalog'):
     class ProductCatalog(AbstractProductCatalog):
         pass
 
     __all__.append('ProductCatalog')
 
-    catalog_model = ProductCatalog
+
+class AbstractProductManufacturer(AbstractProductBase):
+    class Meta:
+        abstract = True
+        ordering = ['name']
+        verbose_name_plural = _('product manufacturers')
+        verbose_name = _('product manufacturer')
+
+    slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
+    image = models.ImageField(_('Image'), upload_to='shop/producer', null=True, blank=True)
+
+if not is_model_registered('shop', 'ProductManufacturer'):
+    class ProductManufacturer(AbstractProductManufacturer):
+        pass
+
+    __all__.append('ProductManufacturer')
 
 
-class AbstractProductSection(MPTTModel):
+class AbstractProductSection(MPTTModel, AbstractProductBase):
     class Meta:
         abstract = True
         ordering = ['sort']
         verbose_name = _('product section')
         verbose_name_plural = _('product sections')
-        unique_together = ['cat', 'slug']
+        unique_together = ['catalog', 'slug']
+
+    slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
+    image = models.ImageField(_('Image'), upload_to='shop/section', null=True, blank=True)
+    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Section'), blank=True)
+    catalog = models.ForeignKey(ProductCatalog, verbose_name=_('Product catalog'), related_name='sections')
+    sort = models.IntegerField(default=1)
 
     def __unicode__(self):
         parent = self.parent
-        page_names = [self.name]
+        section_names = [self.name]
         while parent:
-            page_names.append(parent.name)
+            section_names.append(parent.name)
             parent = parent.parent
-        return ' / '.join(reversed(page_names))
+        return ' / '.join(reversed(section_names))
 
-    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Section'), blank=True)
-
-    catalog = models.ForeignKey(ProductCatalog, verbose_name=_('Product catalog'), related_name='sections')
-    slug = AutoSlugField(_('URL'), populate_from='name')
-    name = models.CharField(_('Name'), max_length=255)
-    description = RteField(_('Before Content'), default='', blank=True)
-    image = models.ImageField(_('Image'), upload_to='cat', null=True, blank=True)
-    seo_keywords = models.TextField(_('Keywords (meta keywords)'), default='', blank=True)
-    seo_description = models.TextField(_('Keywords (meta keywords)'), default='', blank=True)
-    is_enabled = models.BooleanField(_('Is Enabled'), default=True)
-    sort = models.IntegerField(default=1)
-    date_created = models.DateTimeField(auto_now_add=True)
-
-    def delete(self):
-        if not self.parent:
-            pass
-        else:
-            return super(AbstractProductSection, self).delete()
+    #def delete(self, **kwargs):
+    #    if not self.parent:
+    #        pass
+    #    else:
+    #       return super(AbstractProductSection, self).delete(**kwargs)
 
     def serializable_object(self):
         obj = {
@@ -140,13 +151,12 @@ def pre_delete_handler_section(sender, **kwargs):
 
 
 if is_model_registered('shop', 'ProductSection'):
-    section_model = get_model('shop', 'ShopSection')
+    section_model = get_model('shop', 'ProductSection')
 else:
     class ProductSection(AbstractProductSection):
         pass
 
-
-    __all__.append('ShopSection')
+    __all__.append('ProductSection')
 
     section_model = ProductSection
 
@@ -155,23 +165,61 @@ post_save.connect(post_save_handler_section, sender=section_model)
 pre_delete.connect(pre_delete_handler_section, sender=section_model)
 
 
-class AbstractProductLabel(models.Model):
-     name = models.CharField(max_length=1024, verbose_name=_(u"Name"))
-     slug = models.SlugField(max_length=1024, verbose_name=_(u"Slug"))
-     date_created = models.DateTimeField(auto_now_add=True, verbose_name=_(u"Date of Creation"))
+class AbstractProductLabel(AbstractProductBase):
+    class Meta:
+        abstract = True
+        ordering = ['name']
+        verbose_name_plural = _('product labels')
+        verbose_name = _('product label')
+
+    slug = models.SlugField(_('URL'), unique=True)
+    image = models.ImageField(_('Image'), upload_to='shop/label', null=True, blank=True)
+
+if not is_model_registered('shop', 'ProductLabel'):
+    class ProductLabel(AbstractProductLabel):
+        pass
+
+    __all__.append('ProductLabel')
 
 
-class AbstractShopProduct(models.Model):
+class AbstractProduct(AbstractProductBase):
     class Meta:
         abstract = True
         ordering = ['name']
         verbose_name_plural = _('products')
         verbose_name = _('product')
 
-    section = models.ForeignKey(ShopSection, verbose_name=_('Section'), related_name='products')
-    slug
-    code
-    short_description
-    description
-    is_available
-    is_visible
+    slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
+    section = models.ForeignKey(ProductSection, verbose_name=_('Section'), related_name='products')
+    manufacturer = models.ForeignKey(ProductManufacturer, verbose_name=_('Section'),
+                                     related_name='manufacturer_products', null=True, blank=True)
+    labels = models.ManyToManyField(ProductLabel, verbose_name=_('Labels'), related_name='label_products', blank=True)
+    code = models.CharField(_('Code'), max_length=100, blank=True, default='')
+    short_description = RteField(_('Short description'), blank=True, default='')
+    residue = models.IntegerField(_('Residue'), default=1)
+    price = models.DecimalField(verbose_name=_(u"Price"), decimal_places=2, max_digits=10, default=0)
+    image = models.ImageField(_('Image'), upload_to='shop/product/%Y/%m/%d', null=True, blank=True)
+
+if not is_model_registered('shop', 'Product'):
+    class Product(AbstractProduct):
+        pass
+
+    __all__.append('Product')
+
+
+class AbstractProductImage(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = _(u"product picture")
+        verbose_name_plural = _(u"product pictures")
+        ordering = ['-date_created']
+
+    product = models.ForeignKey(Product, verbose_name=_(u"Product"), related_name='pictures')
+    image = models.ImageField(_('Image'), upload_to="shop/product_images/%Y/%m/%d")
+    date_created = models.DateTimeField(auto_now_add=True)
+
+if not is_model_registered('shop', 'ProductImage'):
+    class ProductImage(AbstractProductImage):
+        pass
+
+    __all__.append('ProductImage')
