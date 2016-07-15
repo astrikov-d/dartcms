@@ -1,6 +1,4 @@
 $(function () {
-
-    // Validation related.
     $.validator.setDefaults({
         errorElement: "span",
         errorClass: "help-block",
@@ -17,18 +15,5 @@ $(function () {
                 error.insertAfter(element);
             }
         }
-    });
-
-    $('form').each(function (index, element) {
-        $(element).validate();
-    });
-
-    // Multiselect.
-    $('select[multiple="multiple"]').multiselect({
-        allSelectedText: gettext('All selected'),
-        nonSelectedText: gettext('None selected'),
-        nSelectedText: gettext(' options selected'),
-        selectAllText: gettext('Select all'),
-        includeSelectAllOption: true
     });
 });

@@ -14,10 +14,12 @@ def modules_data(request):
         dartcms_path = reverse('dartcms:dashboard:index')
         active_module_slug = request.path.replace(dartcms_path, '', 1).split('/')[0]
         if active_module_slug:
-            res.update(
-                dict(active_module_slug=active_module_slug,
-                     active_group_slug=modules.filter(slug=active_module_slug).last().group.slug)
-            )
+            module = modules.filter(slug=active_module_slug).last()
+            if module:
+                res.update(
+                    dict(active_module_slug=active_module_slug,
+                         active_group_slug=module.group.slug)
+                )
         return res
     else:
         return {}

@@ -1,4 +1,5 @@
 Django>=1.9.6
+django-autoslug>=1.9.3
 django-extra-views>=0.7.1
 django-form-utils>=1.0.3
 django-gravatar2>=1.4.0
