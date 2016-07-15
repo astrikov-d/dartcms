@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block inline_js %}
+    {% include 'dartcms/views/partials/tinymce.html' %}
     <script>
         $(function () {
             var grid = $('#id-datagrid'),
@@ -26,7 +27,9 @@
                             handler: function () {
                                 var selected = grid.treegrid('getSelected');
                                 if (selected)
-                                    window.location.href = '{{ index_url }}insert/?parent=' + selected.pk;
+                                    openFormModal('{{ request.path }}insert/?parent=' + selected.pk, function () {
+                                        grid.treegrid('reload');
+                                    });
                                 else {
                                     new PNotify({
                                         title: gettext('Warning'),
@@ -48,7 +51,9 @@
                                         icon: 'fa fa-warning'
                                     });
                                 else if (selected)
-                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
+                                    openFormModal('{{ index_url }}update/' + selected.pk + '/', function () {
+                                        grid.treegrid('reload');
+                                    });
                                 else {
                                     new PNotify({
                                         title: gettext('Warning'),
@@ -70,7 +75,9 @@
                                         icon: 'fa fa-warning'
                                     });
                                 else if (selected)
-                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
+                                    openFormModal('{{ index_url }}delete/' + selected.pk + '/', function () {
+                                        grid.treegrid('reload');
+                                    });
                                 else {
                                     new PNotify({
                                         title: gettext('Warning'),

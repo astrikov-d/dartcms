@@ -15,7 +15,7 @@ class GetTreeView(GridView, JSONResponseMixin):
         return self.render_to_json_response(context, safe=False, **response_kwargs)
 
     def get_data(self, context):
-        sections = self.object_list[0].filter(parent=None)
+        sections = self.object_list.filter(parent=None)
         tree = [dict(pk='0', parent_id=None, name=__('Root section'), is_visible='', children=[])]
         for section in sections:
             tree[0]['children'].append(section.serializable_object())
