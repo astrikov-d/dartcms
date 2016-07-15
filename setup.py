@@ -11,8 +11,8 @@ packages = find_packages()
 
 setup(
     name='dartcms',
-    version='0.0.19',
-    description='DartCMS',
+    version='0.0.20',
+    description='DartCMS - open-source content management system for Django',
     long_description='DartCMS is an open-source content management system based on the popular '
                      'Django Framework. It is friendly for developers and end-users.',
     author='Dmitry Astrikov',
