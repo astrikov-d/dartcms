@@ -6,4 +6,4 @@ from form_utils.forms import BetterModelForm
 class OrderForm(BetterModelForm):
     class Meta:
         model = get_model('shop', 'Order')
-        exclude = []
+        exclude = ['user']
