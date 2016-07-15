@@ -1,0 +1,6 @@
+{
+  "name": "DartCMS",
+  "tagline": "DartCMS is an opensource content management system based on the popular Django Framework",
+  "body": "DartCMS\r\n=======\r\n\r\nDartCMS is an open-source content management system based on the popular Django Framework. It's friendly for developers\r\nand end-users.\r\n\r\n\r\nFeatures\r\n--------\r\n\r\nTree-like website page structure\r\nFast and easy CMS module developing\r\nBuilt with Twitter Bootstrap 3\r\nTinyMCE as rich editor\r\nCustom file manager to work with TinyMCE\r\n\r\n\r\nModules\r\n-------\r\n\r\nAt the moment, these modules are included:\r\n\r\n- Site Structure\r\n- CMS Users\r\n- Site Settings\r\n- News and Articles\r\n- Advertising (ads, ad places and ad sections)\r\n- Feedback and FAQ\r\n- E-shop. With product categories, sections etc\r\n\r\n\r\nInstallation\r\n------------\r\n\r\nYou can install DartCMS with `pip`:\r\n\r\n`pip install dartcms`\r\n\r\n\r\nDocumentation\r\n-------------\r\n\r\nDocumentation can be found here - http://dartcms.readthedocs.io/",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
