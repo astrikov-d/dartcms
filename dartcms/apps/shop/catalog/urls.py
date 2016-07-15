@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView, InsertObjectView
-from dartcms.apps.shop.catalog.forms import ProductCatalogForm
+
+from .forms import ProductCatalogForm
 
 ProductCatalog = get_model('shop', 'ProductCatalog')
 

@@ -1,18 +1,21 @@
 # coding: utf-8
+from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 
 from dartcms.utils.loading import get_model
 from form_utils.forms import BetterModelForm
 
 
-class ProductCatalogForm(BetterModelForm):
+class ProductSectionForm(BetterModelForm):
     class Meta:
-        model = get_model('shop', 'ProductCatalog')
-        exclude = []
+        model = get_model('shop', 'ProductSection')
+        exclude = ['catalog', 'sort']
+
+        widgets = {'parent': HiddenInput()}
 
         fieldsets = (
             ('main', {'fields': (
-                'slug',
+                'parent',
                 'name',
                 'description',
             ), 'legend': _('Main')}),
@@ -24,4 +27,5 @@ class ProductCatalogForm(BetterModelForm):
                 'image',
                 'is_visible',
             ), 'legend': _('Advanced')}))
+
 

@@ -192,7 +192,7 @@ class AbstractProduct(AbstractProductBase):
 
     slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
     section = models.ForeignKey(ProductSection, verbose_name=_('Section'), related_name='products')
-    manufacturer = models.ForeignKey(ProductManufacturer, verbose_name=_('Section'),
+    manufacturer = models.ForeignKey(ProductManufacturer, verbose_name=_('Manufacturer'),
                                      related_name='manufacturer_products', null=True, blank=True)
     labels = models.ManyToManyField(ProductLabel, verbose_name=_('Labels'), related_name='label_products', blank=True)
     code = models.CharField(_('Code'), max_length=100, blank=True, default='')

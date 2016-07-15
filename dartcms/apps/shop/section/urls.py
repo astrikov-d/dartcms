@@ -1,14 +1,14 @@
 # coding: utf-8
-from django.conf.urls import url
-from django.forms import modelform_factory
+from django.conf.urls import url, include
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.translation import ugettext_lazy as _
 
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView, DeleteObjectView
 
 from .views import (AppendSectionView, GetTreeView, InsertSectionView, MoveSectionView)
-
+from .forms import ProductSectionForm
 
 ProductSection = get_model('shop', 'ProductSection')
 
@@ -21,11 +21,14 @@ config = DartCMSConfig({
             {'field': 'name', 'width': '90%'},
             {'field': 'is_visible', 'width': '10%'},
         ],
-        'template_name': 'dartcms/apps/shop/grid.html'
+        'template_name': 'dartcms/apps/shop/grid.html',
+        'additional_grid_actions': [
+            {'url': 'products', 'label': _('Products')}
+        ]
     },
     'form': {
-        'form_class': modelform_factory(ProductSection, exclude=['catalog', 'sort']),
-    }
+        'form_class': ProductSectionForm,
+    },
 })
 
 insert_kwargs = config.form.copy()
@@ -42,4 +45,5 @@ urlpatterns = [
     url(r'^move/$', csrf_exempt(MoveSectionView.as_view()), name='move'),
     url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**update_kwargs), name='update'),
     url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
+    url(r'^(?P<children_url>products)/(?P<section>\d+)/', include('dartcms.apps.shop.product.urls', namespace='products')),
 ]

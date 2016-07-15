@@ -5,9 +5,9 @@ from dartcms.utils.loading import get_model
 from form_utils.forms import BetterModelForm
 
 
-class ProductCatalogForm(BetterModelForm):
+class ProductLabelForm(BetterModelForm):
     class Meta:
-        model = get_model('shop', 'ProductCatalog')
+        model = get_model('shop', 'ProductLabel')
         exclude = []
 
         fieldsets = (
