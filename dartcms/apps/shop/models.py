@@ -1,15 +1,18 @@
 # coding: utf-8
 from django.db import models
-from django.db.models import F, Max
+from django.db.models import F, Max, Sum
 from django.db.models.signals import post_save, pre_delete, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext as __
+from django.contrib.auth.models import User
 
 from mptt.models import MPTTModel, TreeForeignKey
 from autoslug import AutoSlugField
 
+from dartcms import get_model
 from dartcms.utils.fields import RteField
 from dartcms.utils.loading import get_model, is_model_registered
+
 
 __all__ = [
     'pre_save_handler_section',
@@ -192,7 +195,7 @@ class AbstractProduct(AbstractProductBase):
     code = models.CharField(_('Code'), max_length=100, blank=True, default='')
     short_description = RteField(_('Short description'), blank=True, default='')
     residue = models.IntegerField(_('Residue'), default=1)
-    price = models.DecimalField(verbose_name=_(u"Price"), decimal_places=2, max_digits=10, default=0)
+    price = models.DecimalField(verbose_name=_('Price'), decimal_places=2, max_digits=10, default=0)
     image = models.ImageField(_('Image'), upload_to='shop/product/%Y/%m/%d', null=True, blank=True)
 
 if not is_model_registered('shop', 'Product'):
@@ -205,12 +208,12 @@ if not is_model_registered('shop', 'Product'):
 class AbstractProductImage(models.Model):
     class Meta:
         abstract = True
-        verbose_name = _(u"product picture")
-        verbose_name_plural = _(u"product pictures")
+        verbose_name = _(u'product picture')
+        verbose_name_plural = _(u'product pictures')
         ordering = ['-date_created']
 
-    product = models.ForeignKey(Product, verbose_name=_(u"Product"), related_name='pictures')
-    image = models.ImageField(_('Image'), upload_to="shop/product_images/%Y/%m/%d")
+    product = models.ForeignKey(Product, verbose_name=_('Product'), related_name='pictures')
+    image = models.ImageField(_('Image'), upload_to='shop/product_images/%Y/%m/%d')
     date_created = models.DateTimeField(auto_now_add=True)
 
 if not is_model_registered('shop', 'ProductImage'):
@@ -218,3 +221,171 @@ if not is_model_registered('shop', 'ProductImage'):
         pass
 
     __all__.append('ProductImage')
+
+
+class AbstractOrderShippingType(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = _('shipping type')
+        verbose_name_plural = _('shipping types')
+        ordering = ['sort']
+
+    def __unicode__(self):
+        return u'%s (%s)' % (self.name, self.cost)
+
+    slug = models.SlugField(_('URL'), unique=True)
+    name = models.CharField(_('Name'), max_length=100)
+    description = RteField(_('Description'), blank=True, default='')
+    cost = models.DecimalField(_('Cost'), decimal_places=2, max_digits=10, default=0)
+    is_enabled = models.BooleanField(_('Is enabled'), default=True)
+    sort = models.IntegerField(default=1)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+if not is_model_registered('shop', 'OrderShippingType'):
+    class OrderShippingType(AbstractOrderShippingType):
+        pass
+
+    __all__.append('OrderShippingType')
+
+
+class AbstractOrderPaymentType(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = _('payment type')
+        verbose_name_plural = _('payment types')
+        ordering = ['sort']
+
+    def __unicode__(self):
+        return self.name
+
+    slug = models.SlugField(_('URL'), unique=True)
+    name = models.CharField(_('Name'), max_length=100)
+    description = RteField(_('Description'), blank=True, default='')
+    is_enabled = models.BooleanField(_('Is enabled'), default=True)
+    sort = models.IntegerField(default=1)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+if not is_model_registered('shop', 'OrderPaymentType'):
+    class OrderPaymentType(AbstractOrderPaymentType):
+        pass
+
+    __all__.append('OrderPaymentType')
+
+
+class AbstractOrderStatus(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = _('order status')
+        verbose_name_plural = _('order statuses')
+        ordering = ['sort']
+
+    def __unicode__(self):
+        return self.name
+
+    slug = models.SlugField(_('URL'), unique=True)
+    name = models.CharField(_('Name'), max_length=100)
+    description = RteField(_('Description'), blank=True, default='')
+    is_enabled = models.BooleanField(_('Is enabled'), default=True)
+    sort = models.IntegerField(default=1)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+if not is_model_registered('shop', 'OrderStatus'):
+    class OrderStatus(AbstractOrderStatus):
+        pass
+
+    __all__.append('OrderStatus')
+
+
+class AbstractOrder(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = _('order')
+        verbose_name_plural = _('orders')
+        ordering = ['-date_created']
+
+    user = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True, on_delete=models.SET_NULL)
+    fullname = models.CharField(_('Fullname'), max_length=255)
+    email = models.EmailField(_('E-mail'), null=True, blank=True)
+    shipping_address = models.TextField(_('Shipping address'), null=True, blank=True)
+
+    status = models.ForeignKey(OrderStatus, verbose_name=_('Status'), null=True, blank=True, on_delete=models.SET_NULL)
+    shipping_type = models.ForeignKey(OrderShippingType, verbose_name=_('Shipping type'), null=True, blank=True,
+                                      on_delete=models.SET_NULL)
+    shipping_cost = models.DecimalField(verbose_name=_('Cost'), decimal_places=2, max_digits=10, default=0)
+    payment_type = models.ForeignKey(OrderPaymentType, verbose_name=_('Payment type'), null=True, blank=True,
+                                      on_delete=models.SET_NULL)
+
+    is_paid = models.BooleanField(_('Is paid'), default=False)
+    paid_sum = models.DecimalField(_('Paid sum'), decimal_places=2, max_digits=10, null=True, blank=True)
+    discount_percent = models.DecimalField(_('Discount'), decimal_places=2, max_digits=5, default=0)
+
+    date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return u'%s%s' % (_('Order #'), self.id)
+
+    @property
+    def order_number(self):
+        return self.id
+
+    @property
+    def sum_value(self):
+        model = get_model('shop', 'OrderDetail')
+        sum_value = model.objects.filter(order=self).aggregate(
+            sum_value=Sum('price', field='price * quantity'))['sum_value']
+        if not sum_value:
+            sum_value = 0
+        return sum_value
+
+    @property
+    def discount_value(self):
+        return self.sum_value * self.discount_percent / 100
+
+    @property
+    def quantity(self):
+        model = get_model('shop', 'OrderDetail')
+        quantity = model.objects.filter(order=self).aggregate(
+            quantity=Sum('quantity'))['quantity']
+        if not quantity:
+            quantity = 0
+        return quantity
+
+    @property
+    def total(self):
+        return self.sum_value + self.shipping_cost - self.discount_value
+
+if not is_model_registered('shop', 'Order'):
+    class Order(AbstractOrder):
+        pass
+
+    __all__.append('Order')
+
+
+class AbstractOrderDetail(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = _('order datail')
+        verbose_name_plural = _('order datails')
+        ordering = ['name']
+
+    order = models.ForeignKey(Order, verbose_name=_('Order'), related_name='details')
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL, verbose_name=_('Product'))
+    code = models.CharField(_('Code'), max_length=255, blank=True)
+    name = models.CharField(_('Name'), max_length=1024)
+    price = models.DecimalField(_('Price'), decimal_places=2, max_digits=10, default=0)
+    quantity = models.IntegerField(_('Quantity'), default=0)
+
+    def __unicode__(self):
+        return self.name
+
+    @property
+    def sum_value(self):
+        return self.price * self.quantity
+
+if not is_model_registered('shop', 'OrderDetail'):
+    class OrderDetail(AbstractOrderDetail):
+        pass
+
+    __all__.append('OrderDetail')
+

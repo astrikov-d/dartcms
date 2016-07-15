@@ -70,15 +70,15 @@
                                 }
                             },{% endif %}
                         {% if 'delete' in grid_actions %}
-                        {
-                            text: '{% trans 'Delete' %}',
-                            iconCls: 'icon-remove',
-                            handler: function () {
-                                var selected = grid.datagrid('getSelected');
-                                if (selected)
-                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
+                            {
+                                text: '{% trans 'Delete' %}',
+                                iconCls: 'icon-remove',
+                                handler: function () {
+                                    var selected = grid.datagrid('getSelected');
+                                    if (selected)
+                                        window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
                             }
-                        }{% endif %}{% if additional_grid_actions %},
+                        },{% endif %}{% if additional_grid_actions %}
                         {% for action in additional_grid_actions %}
                             {
                                 text: '{{ action.label }}',
