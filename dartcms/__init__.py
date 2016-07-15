@@ -16,6 +16,7 @@ DARTCMS_CORE_APPS = [
     'dartcms.apps.modules',
     'dartcms.apps.pages',
     'dartcms.apps.sitesettings',
+    'dartcms.apps.shop',
 ]
 
 

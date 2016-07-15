@@ -21,7 +21,10 @@ urlpatterns = [
     url(r'^ad/', include('dartcms.apps.ads.ad.urls', namespace='ad')),
     url(r'^adplace/', include('dartcms.apps.ads.adplace.urls', namespace='adplace')),
     url(r'^adsection/', include('dartcms.apps.ads.adsection.urls', namespace='adsection')),
-    url(r'^feedback/', include('dartcms.apps.feedback.urls', namespace='feedback'))
+    url(r'^feedback/', include('dartcms.apps.feedback.urls', namespace='feedback')),
+    url(r'^shop-catalog/', include('dartcms.apps.shop.catalog.urls', namespace='shop-catalog')),
+    url(r'^shop-manufactures/', include('dartcms.apps.shop.manufacturer.urls', namespace='shop-manufacturers')),
+    url(r'^shop-labels/', include('dartcms.apps.shop.label.urls', namespace='shop-labels')),
 ]
 
 additional_apps = getattr(settings, 'DARTCMS_ADDITIONAL_APPS_URLPATTERNS', [])
