@@ -136,7 +136,8 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
             'grid_actions': self.base_grid_actions,
             'additional_grid_actions': self.additional_grid_actions,
             'search_form': self.get_search_form(),
-            'date_format': get_date_format()
+            'date_format': get_date_format(),
+            'urls_kwargs': self.kwargs
         })
         return context
 

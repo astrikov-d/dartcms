@@ -1,0 +1,169 @@
+{% extends 'dartcms/views/grid.html' %}
+
+{% load i18n static %}
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dartcms/assets/easyui/ext/treegrid-dnd.js' %}"></script>
+{% endblock %}
+
+{% block inline_js %}
+    <script>
+        $(function () {
+            var grid = $('#id-datagrid'),
+                    gridToolbar = [
+                        {% if parent_url %}
+                            {
+                                text: '{% trans 'Back' %}',
+                                iconCls: 'icon-back',
+                                handler: function () {
+                                    window.location.href = '{{ parent_url }}';
+                                }
+                            },{% endif %}
+                        {
+                            text: '{% trans 'Add' %}',
+                            iconCls: 'icon-add',
+                            handler: function () {
+                                var selected = grid.treegrid('getSelected');
+                                if (selected)
+                                    window.location.href = '{{ index_url }}insert/?parent=' + selected.pk;
+                                else {
+                                    new PNotify({
+                                        title: gettext('Warning'),
+                                        text: gettext('You have not selected any record.'),
+                                        icon: 'fa fa-warning'
+                                    });
+                                }
+                            }
+                        },
+                        {
+                            text: '{% trans 'Edit' %}',
+                            iconCls: 'icon-edit',
+                            handler: function () {
+                                var selected = grid.treegrid('getSelected');
+                                if (selected && selected.pk == '0')
+                                    new PNotify({
+                                        title: gettext('Warning'),
+                                        text: gettext('You can not edit Root section.'),
+                                        icon: 'fa fa-warning'
+                                    });
+                                else if (selected)
+                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
+                                else {
+                                    new PNotify({
+                                        title: gettext('Warning'),
+                                        text: gettext('You have not selected any record.'),
+                                        icon: 'fa fa-warning'
+                                    });
+                                }
+                            }
+                        },
+                        {
+                            text: '{% trans 'Delete' %}',
+                            iconCls: 'icon-remove',
+                            handler: function () {
+                                var selected = grid.treegrid('getSelected');
+                                if (selected && selected.pk == '0')
+                                    new PNotify({
+                                        title: gettext('Warning'),
+                                        text: gettext('You can not delete Root section.'),
+                                        icon: 'fa fa-warning'
+                                    });
+                                else if (selected)
+                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
+                                else {
+                                    new PNotify({
+                                        title: gettext('Warning'),
+                                        text: gettext('You have not selected any record.'),
+                                        icon: 'fa fa-warning'
+                                    });
+                                }
+                            }
+                        }{% if additional_grid_actions %},
+                            {% for action in additional_grid_actions %}
+                                {
+                                    text: '{{ action.label }}',
+                                    iconCls: 'icon-{{ action.icon }}',
+                                    handler: function () {
+                                        var selected = grid.treegrid('getSelected');
+                                        if (selected)
+                                            window.location.href = '{{ index_url }}{{ action.url }}/' + selected.pk + '/';
+                                    }
+                                }{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    ];
+
+            grid.treegrid({
+                idField: 'pk',
+                singleSelect: true,
+                fitColumn: true,
+                fit: true,
+                toolbar: gridToolbar,
+                treeField: 'name',
+                url: '{% url 'dartcms:shop-catalog:sections:get_tree' urls_kwargs.children_url urls_kwargs.catalog %}',
+                onLoadSuccess: function (row) {
+                    $('.grid-loading-indicator').remove();
+                    $('.grid-wrapper').css('visibility', 'visible');
+                    $(this).treegrid('enableDnd', row ? row.pk : null);
+                },
+                onDrop: function (target, source, point) {
+                    var url = '';
+                    if (point == 'append') {
+                        url = '{% url 'dartcms:shop-catalog:sections:append' urls_kwargs.children_url urls_kwargs.catalog %}' + '?target=' + target.pk + '&source=' + source.pk;
+
+                        $.ajax({
+                            dataType: 'json',
+                            method: 'POST',
+                            url: url
+                        }).done(function (response) {
+                                    if (!response.result) {
+                                        new PNotify({
+                                            title: gettext('Warning'),
+                                            text: gettext('Page can not be appended to target'),
+                                            icon: 'fa fa-warning'
+                                        });
+                                    }
+                                    grid.treegrid('reload');
+                                });
+                    } else {
+                        var position = point == 'bottom' ? 'right' : 'left';
+
+                        url = '{% url 'dartcms:shop-catalog:sections:move' urls_kwargs.children_url urls_kwargs.catalog %}' + '?target=' + target.pk + '&source=' + source.pk + '&position=' + position;
+
+                        $.ajax({
+                            dataType: 'json',
+                            method: 'POST',
+                            url: url
+                        }).done(function (response) {
+                                    if (!response.result) {
+                                        new PNotify({
+                                            title: gettext('Warning'),
+                                            text: gettext('Page can not be moved'),
+                                            icon: 'fa fa-warning'
+                                        });
+                                    }
+                                    grid.treegrid('reload');
+                                });
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block grid %}
+    {% include 'dartcms/views/partials/loading_indicator.html' %}
+    <div class="grid-wrapper" style="visibility: hidden;">
+        <table id="id-datagrid">
+            <thead>
+            <tr>
+                <th data-options="field:'pk', hidden:true">ID</th>
+                {% for column in grid_columns %}
+                    <th data-options="field:'{{ column.field }}'" width="{{ column.width }}">{{ column.label }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+        </table>
+    </div>
+{% endblock %}

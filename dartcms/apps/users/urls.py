@@ -19,7 +19,7 @@ config = DartCMSConfig({
         ],
         'additional_grid_actions': [
             {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
-        ]
+        ],
     },
     'form': {
         'form_class': UserForm
