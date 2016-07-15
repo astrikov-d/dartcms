@@ -3,9 +3,7 @@ import json
 from datetime import datetime
 
 from django.http import HttpResponseRedirect
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
-from django.contrib.messages.views import SuccessMessageMixin
 
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
@@ -14,6 +12,14 @@ from dartcms.utils.forms import DynamicFieldsForm
 from dartcms.utils.serialization import DartCMSSerializer
 from dartcms.utils.translation import get_date_format
 from .mixins import AdminMixin, JSONResponseMixin
+
+
+class JSONView(JSONResponseMixin, TemplateView):
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, **response_kwargs)
 
 
 class GridView(AdminMixin, JSONResponseMixin, ListView):
@@ -110,14 +116,18 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         if self.search and 'search' in self.request.GET:
             queryset = self.filter_queryset(queryset)
 
-        total = queryset.count()
-
         if page and rows:
             offset = (int(page) - 1) * int(rows)
             limit = int(rows)
             queryset = queryset[offset:offset + limit]
 
-        return queryset, total
+        return queryset
+
+    def get_total_rows_count(self):
+        queryset = super(GridView, self).get_queryset()
+        if self.search and 'search' in self.request.GET:
+            queryset = self.filter_queryset(queryset)
+        return queryset.count()
 
     def get_context_data(self, **kwargs):
         context = super(GridView, self).get_context_data(**kwargs)
@@ -136,39 +146,34 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         return super(GridView, self).render_to_response(context, **response_kwargs)
 
     def get_data(self, context):
-        qs, total = self.get_queryset()
+
         return {
-            'total': total,
+            'total': self.get_total_rows_count(),
             'rows': json.loads(DartCMSSerializer().serialize(
-                queryset=qs,
+                queryset=self.get_queryset(),
                 props=self.model_properties
             ))  # TODO: refactor.
         }
 
 
-class InsertObjectView(AdminMixin, SuccessMessageMixin, CreateView):
+class AjaxInsertObjectMixin(AdminMixin, JSONResponseMixin):
     template_name = 'dartcms/views/insert.html'
-    success_message = _('Record successfully added')
 
-    def form_valid(self, form):
+    def save_object(self, form, **kwargs):
+        self.object = form.save(commit=False)
         if self.parent_kwarg_name:
-            obj = form.save(commit=False)
+            setattr(self.object, self.get_foreign_key_name(), self.kwargs[self.parent_kwarg_name])
+        self.object.save()
+        form.save_m2m()
 
-            if self.parent_model_fk is not None:
-                fk = self.parent_model_fk
-            else:
-                fk = '%s_id' % self.parent_model.__name__.lower()
+        inlines = kwargs.pop('inlines', [])
+        for formset in inlines:
+            formset.save()
 
-            setattr(obj, fk, self.kwargs[self.parent_kwarg_name])
-            obj.save()
-            form.save_m2m()
-            self.object = obj
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return super(InsertObjectView, self).form_valid(form)
+        return self.object
 
     def get_initial(self):
-        initial = super(InsertObjectView, self).get_initial()
+        initial = super(AjaxInsertObjectMixin, self).get_initial()
         if self.parent_model_fk and self.parent_kwarg_name in self.kwargs:
             initial.update({
                 self.parent_model_fk: self.kwargs[self.parent_kwarg_name]
@@ -176,58 +181,56 @@ class InsertObjectView(AdminMixin, SuccessMessageMixin, CreateView):
         return initial
 
 
-class InsertObjectWithInlinesView(AdminMixin, SuccessMessageMixin, CreateWithInlinesView):
-    template_name = 'dartcms/views/insert.html'
+class InsertObjectView(AjaxInsertObjectMixin, CreateView):
+    def form_valid(self, form):
+        self.save_object(form)
+        return self.render_to_json_response({'result': True, 'action': 'INSERT'})
+
+    def form_invalid(self, form):
+        return self.render_to_json_response({'result': False, 'errors': form.errors})
+
+
+class InsertObjectWithInlinesView(AjaxInsertObjectMixin, CreateWithInlinesView):
     extra = 0
-    success_message = _('Record successfully added')
 
     def forms_valid(self, form, inlines):
-        if self.parent_kwarg_name:
-            obj = form.save(commit=False)
+        self.save_object(form, inlines=inlines)
+        return self.render_to_json_response({'result': True, 'action': 'INSERT'})
 
-            if self.parent_model_fk is not None:
-                fk = self.parent_model_fk
-            else:
-                fk = '%s_id' % self.parent_model.__name__.lower()
-
-            setattr(obj, fk, self.kwargs[self.parent_kwarg_name])
-            obj.save()
-
-            for formset in inlines:
-                formset.save()
-
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return super(InsertObjectWithInlinesView, self).form_valid(form)
-
-    def get_initial(self):
-        initial = super(InsertObjectWithInlinesView, self).get_initial()
-        if self.parent_model_fk and self.parent_kwarg_name in self.kwargs:
-            initial.update({
-                self.parent_model_fk: self.kwargs[self.parent_kwarg_name]
-            })
-        return initial
+    def forms_invalid(self, form, inlines):
+        return self.render_to_json_response({'result': False, 'errors': form.errors})
 
 
-class UpdateObjectView(AdminMixin, SuccessMessageMixin, UpdateView):
+class AjaxUpdateObjectMixin(AdminMixin, JSONResponseMixin):
     template_name = 'dartcms/views/update.html'
-    success_message = _('Record successfully updated')
 
 
-class UpdateObjectWithInlinesView(AdminMixin, SuccessMessageMixin, UpdateWithInlinesView):
-    template_name = 'dartcms/views/update.html'
+class UpdateObjectView(AjaxUpdateObjectMixin, UpdateView):
+    def form_valid(self, form):
+        form.save()
+        return self.render_to_json_response({'result': True, 'action': 'UPDATE'})
+
+    def form_invalid(self, form):
+        return self.render_to_json_response({'result': False, 'errors': form.errors})
+
+
+class UpdateObjectWithInlinesView(AjaxUpdateObjectMixin, UpdateWithInlinesView):
     extra = 0
-    success_message = _('Record successfully updated')
+
+    def forms_valid(self, form, inlines):
+        form.save()
+        for formset in inlines:
+            formset.save()
+        return self.render_to_json_response({'result': True, 'action': 'UPDATE'})
+
+    def forms_invalid(self, form, inlines):
+        return self.render_to_json_response({'result': False, 'errors': form.errors})
 
 
-class DeleteObjectView(AdminMixin, SuccessMessageMixin, DeleteView):
+class DeleteObjectView(AdminMixin, JSONResponseMixin, DeleteView):
     template_name = 'dartcms/views/delete.html'
-    success_message = _('Record successfully deleted')
 
-
-class JSONView(JSONResponseMixin, TemplateView):
-    def post(self, request, *args, **kwargs):
-        return self.get(request, *args, **kwargs)
-
-    def render_to_response(self, context, **response_kwargs):
-        return self.render_to_json_response(context, **response_kwargs)
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return self.render_to_json_response({'result': True, 'action': 'DELETE'})

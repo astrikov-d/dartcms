@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block inline_js %}
+    {% include 'dartcms/views/partials/tinymce.html' %}
     <script>
         $(function () {
             var grid = $('#id-datagrid'),
@@ -17,8 +18,11 @@
                             iconCls: 'icon-add',
                             handler: function () {
                                 var selected = grid.treegrid('getSelected');
-                                if (selected)
-                                    window.location.href = '{{ index_url }}insert/?parent=' + selected.pk;
+                                if (selected) {
+                                    openFormModal('{{ request.path }}insert/?parent=' + selected.pk, function () {
+                                        grid.treegrid('reload');
+                                    });
+                                }
                             }
                         },
                         {
@@ -26,8 +30,11 @@
                             iconCls: 'icon-edit',
                             handler: function () {
                                 var selected = grid.treegrid('getSelected');
-                                if (selected)
-                                    window.location.href = '{{ index_url }}update/' + selected.pk + '/';
+                                if (selected) {
+                                    openFormModal('{{ index_url }}update/' + selected.pk + '/', function () {
+                                        grid.treegrid('reload');
+                                    });
+                                }
                             }
                         },
                         {
@@ -35,22 +42,13 @@
                             iconCls: 'icon-remove',
                             handler: function () {
                                 var selected = grid.treegrid('getSelected');
-                                if (selected)
-                                    window.location.href = '{{ index_url }}delete/' + selected.pk + '/';
+                                if (selected) {
+                                    openFormModal('{{ index_url }}delete/' + selected.pk + '/', function () {
+                                        grid.treegrid('reload');
+                                    });
+                                }
                             }
-                        }{% if additional_grid_actions %},
-                            {% for action in additional_grid_actions %}
-                                {
-                                    text: '{{ action.label }}',
-                                    iconCls: 'icon-{{ action.icon }}',
-                                    handler: function () {
-                                        var selected = grid.treegrid('getSelected');
-                                        if (selected)
-                                            window.location.href = '{{ index_url }}{{ action.url }}/' + selected.pk + '/';
-                                    }
-                                }{% if not forloop.last %},{% endif %}
-                            {% endfor %}
-                        {% endif %}
+                        }
                     ];
 
             grid.treegrid({
