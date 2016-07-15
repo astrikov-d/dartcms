@@ -89,12 +89,6 @@ class AbstractProductSection(MPTTModel, AbstractProductBase):
             parent = parent.parent
         return ' / '.join(reversed(section_names))
 
-    #def delete(self, **kwargs):
-    #    if not self.parent:
-    #        pass
-    #    else:
-    #       return super(AbstractProductSection, self).delete(**kwargs)
-
     def serializable_object(self):
         obj = {
             'pk': self.pk,
