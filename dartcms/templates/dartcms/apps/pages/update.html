@@ -7,7 +7,7 @@
     <script type="text/javascript" src="{% static 'dartcms/js/apps/pages/form.js' %}"></script>
 {% endblock %}
 
-{% block page_content %}
+{% block form_content %}
     {{ block.super }}
     <div id="id-context-variables" data-page-pk="{{ object.pk }}"
          data-loading-url="{% url 'dartcms:pages:load_module_params' %}"></div>

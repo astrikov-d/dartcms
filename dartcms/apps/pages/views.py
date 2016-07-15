@@ -14,7 +14,7 @@ class GetTreeView(GridView, JSONResponseMixin):
         return self.render_to_json_response(context, safe=False, **response_kwargs)
 
     def get_data(self, context):
-        homepage = self.object_list[0].get(module__slug='homepage')
+        homepage = self.object_list.get(module__slug='homepage')
         tree = [homepage.serializable_object()]
         return tree
 

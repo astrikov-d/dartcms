@@ -1,28 +1,7 @@
-{% extends "dartcms/views/grid.html" %}
+{% load i18n %}
 
-{% load i18n static %}
-
-{% block breadcrumbs_current_path %}
-    {{ block.super }}
-    <li class="active">{% trans 'Update Record' %} &laquo;{{ object }}&raquo;</li>
-{% endblock %}
-
-{% block js %}
-    {{ block.super }}
-    <script type="text/javascript" src="{% static 'dartcms/assets/tinymce/tinymce.min.js' %}"></script>
-{% endblock %}
-
-{% block css %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'dartcms/assets/tinymce/skins/lightgray/skin.min.css' %}"/>
-{% endblock %}
-
-{% block inline_js %}
-    {{ block.super }}
-    {% include 'dartcms/views/partials/tinymce.html' %}
-{% endblock %}
-
-{% block page_content %}
+<div class="modal">
+    {% block js %}{% endblock %}
     <div class="page-header">
         <h1>{{ page_header|capfirst }}
             <small>{% trans 'Update Record' %} &laquo;{{ object }}&raquo;</small>
@@ -30,17 +9,19 @@
     </div>
     <div class="well well-sm">
         <form method="POST" class="form-horizontal" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% include "dartcms/forms/horizontal.html" %}
-            {% block additional_form_fields %}{% endblock %}
-            <div class="form-group">
-                <div class="col-xs-9 col-xs-offset-3">
-                    {% block form_actions %}
-                        <button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>
-                        <a href="{{ index_url }}" class="btn btn-link">{% trans 'Cancel' %}</a>
-                    {% endblock %}
+            {% block form_content %}
+                {% csrf_token %}
+                {% include "dartcms/forms/horizontal.html" %}
+                {% block additional_form_fields %}{% endblock %}
+                <div class="form-group">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        {% block form_actions %}
+                            <button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>
+                            <a href="#" class="btn btn-link btn-close-modal">{% trans 'Cancel' %}</a>
+                        {% endblock %}
+                    </div>
                 </div>
-            </div>
+            {% endblock %}
         </form>
     </div>
-{% endblock %}
+</div>

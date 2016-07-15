@@ -24,24 +24,20 @@ class ModulePermissionsMixin(object):
 
 
 class AdminMixin(ModulePermissionsMixin):
-    # Parent model for children element, used in insert view to create foreign key relation.
     parent_model = None
     parent_model_fk = None
 
-    # URL argument name to get the parent object in children.
     parent_kwarg_name = ''
 
-    # Page header. If page_header == '', model's verbose name used.
     page_header = ''
 
-    # Index URL
-    index_url = ''
-    success_url = ''
+    def get_foreign_key_name(self):
+        if self.parent_model_fk or self.parent_model:
+            return self.parent_model_fk if self.parent_model_fk else '%s_id' % self.parent_model.__name__.lower()
 
     def get_context_data(self, *args, **kwargs):
         context = super(AdminMixin, self).get_context_data(*args, **kwargs)
 
-        self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|delete/(\d+)/)', '', self.request.path)
         if self.parent_kwarg_name:
             reg = r'(%s/(\d+)/)$' % self.kwargs['children_url']
             parent_url = re.sub(reg, '', self.request.path)
@@ -51,17 +47,9 @@ class AdminMixin(ModulePermissionsMixin):
         context.update({
             'page_header': self.page_header if self.page_header else self.model._meta.verbose_name_plural,
             'parent_kwarg_name': self.parent_kwarg_name,
-            'index_url': self.index_url,
             'parent_url': parent_url
         })
         return context
-
-    def get_success_url(self):
-        if self.success_url:
-            return self.success_url
-
-        self.index_url = re.sub(r'(insert/\d+/|insert/|update/\d+/|delete/(\d+)/)', '', self.request.path)
-        return self.index_url
 
 
 class JSONResponseMixin(object):
