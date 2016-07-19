@@ -111,7 +111,7 @@
                 url: '{% url 'dartcms:shop-catalog:sections:get_tree' urls_kwargs.children_url urls_kwargs.catalog %}',
                 onLoadSuccess: function (row) {
                     $('.grid-loading-indicator').remove();
-                    $('.grid-wrapper').css('visibility', 'visible');
+                    $('.grid-wrapper').animate({opacity: 1}, 500);
                     $(this).treegrid('enableDnd', row ? row.pk : null);
                 },
                 onDrop: function (target, source, point) {
@@ -161,7 +161,7 @@
 
 {% block grid %}
     {% include 'dartcms/views/partials/loading_indicator.html' %}
-    <div class="grid-wrapper" style="visibility: hidden;">
+    <div class="grid-wrapper" style="opacity: 0">
         <table id="id-datagrid">
             <thead>
             <tr>

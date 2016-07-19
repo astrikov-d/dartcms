@@ -65,7 +65,9 @@
                                 text: '{% trans 'Add' %}',
                                 iconCls: 'icon-add',
                                 handler: function () {
-                                    openFormModal('{{ request.path }}insert/');
+                                    openFormModal('{{ request.path }}insert/', function () {
+                                        grid.datagrid('reload');
+                                    });
                                 }
                             },{% endif %}
                         {% if 'update' in grid_actions %}
@@ -75,29 +77,35 @@
                                 handler: function () {
                                     var selected = grid.datagrid('getSelected');
                                     if (selected) {
-                                        openFormModal('{{ request.path }}update/' + selected.pk + '/');
+                                        openFormModal('{{ request.path }}update/' + selected.pk + '/', function () {
+                                            grid.datagrid('reload');
+                                        });
                                     }
                                 }
                             },{% endif %}
                         {% if 'delete' in grid_actions %}
-                            {
-                                text: '{% trans 'Delete' %}',
-                                iconCls: 'icon-remove',
-                                handler: function () {
-                                    var selected = grid.datagrid('getSelected');
-                                    if (selected) {
-                                        openFormModal('{{ request.path }}delete/' + selected.pk + '/');
-                                    }
+                        {
+                            text: '{% trans 'Delete' %}',
+                            iconCls: 'icon-remove',
+                            handler: function () {
+                                var selected = grid.datagrid('getSelected');
+                                if (selected) {
+                                    openFormModal('{{ request.path }}delete/' + selected.pk + '/', function () {
+                                        grid.datagrid('reload');
+                                    });
                                 }
-                            },{% endif %}{% if additional_grid_actions %}
+                            }
+                        },
+                        {% endif %}{% if additional_grid_actions %}
                         {% for action in additional_grid_actions %}
                             {
                                 text: '{{ action.label }}',
                                 iconCls: 'icon-{{ action.icon }}',
                                 handler: function () {
                                     var selected = grid.datagrid('getSelected');
-                                    if (selected)
+                                    if (selected) {
                                         window.location.href = '{{ request.path }}{{ action.url }}/' + selected.pk + '/';
+                                    }
                                 }
                             }
                         {% endfor %}
@@ -131,7 +139,7 @@
                 toolbar: gridToolbar,
                 onOpen: function (data) {
                     $('.grid-loading-indicator').remove();
-                    $('.grid-wrapper').css('visibility', 'visible');
+                    $('.grid-wrapper').animate({opacity: 1}, 500);
                     $('.search-form-wrapper').css('visibility', 'visible');
                 },
                 columns: [
@@ -188,7 +196,7 @@
             {% include 'dartcms/views/partials/grid_search.html' %}
         {% endif %}
 
-        <div class="grid-wrapper" style="visibility: hidden;">
+        <div class="grid-wrapper" style="opacity: 0;">
             <table id="id-datagrid"></table>
         </div>
     {% endblock %}

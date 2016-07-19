@@ -28,6 +28,16 @@ So, please follow next instructions to run DartCMS panel:
         ...
     ] + get_dartcms_core_apps()
 
+Also, you can pass optional parameter named `include_apps` to define which apps you want to include from `dartcms`.
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        ...
+    ] + get_dartcms_core_apps(include_apps=['shop'])
+
+In this example, you will include only `dartcms.apps.shop` application in your project.
+
 3. Add DartCMS's context processor to your templates settings:
 
 .. code-block:: python

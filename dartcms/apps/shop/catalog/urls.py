@@ -14,7 +14,8 @@ config = DartCMSConfig({
     'model': ProductCatalog,
     'grid': {
         'grid_columns': [
-            {'field': 'name', 'width': '90%'},
+            {'field': 'name', 'width': '50%'},
+            {'field': 'slug', 'width': '40%'},
             {'field': 'is_visible', 'width': '10%'},
         ],
         'additional_grid_actions': [

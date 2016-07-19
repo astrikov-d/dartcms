@@ -24,7 +24,6 @@ In your `settings.py` file you have something like that:
 
 You can pass optional parameter `replacements` to `get_dartcms_core_apps` function:
 
-
 .. code-block:: python
 
     INSTALLED_APPS = [
@@ -33,6 +32,8 @@ You can pass optional parameter `replacements` to `get_dartcms_core_apps` functi
 
 
 This will replace DartCMS's app named `feeds` with your app `app.feeds`.
+
+
 You can re-declare DartCMS `feeds` app's models in your `app.feeds.models` module like that:
 
 .. code-block:: python

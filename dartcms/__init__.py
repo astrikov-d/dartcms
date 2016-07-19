@@ -4,20 +4,25 @@ import importlib
 
 from dartcms.utils.loading import get_model, is_model_registered
 
-DARTCMS_CORE_APPS = [
+DARTCMS_REQUIRED_APPS = [
     'django_gravatar',
     'mptt',
 
     'dartcms',
-    'dartcms.apps.ads',
-    'dartcms.apps.feedback',
-    'dartcms.apps.feeds',
     'dartcms.apps.filemanager',
     'dartcms.apps.modules',
     'dartcms.apps.pages',
     'dartcms.apps.sitesettings',
+]
+
+DARTCMS_OPTIONAL_APPS = [
+    'dartcms.apps.ads',
+    'dartcms.apps.feedback',
+    'dartcms.apps.feeds',
     'dartcms.apps.shop',
 ]
+
+DARTCMS_APPS = DARTCMS_REQUIRED_APPS + DARTCMS_OPTIONAL_APPS
 
 
 def get_dartcms_core_apps(include_apps='*', replacements=None):
@@ -33,7 +38,7 @@ def get_dartcms_core_apps(include_apps='*', replacements=None):
     This will override default DartCMS app named 'pages'.
     """
     if include_apps == '*' and not replacements:
-        return DARTCMS_CORE_APPS
+        return DARTCMS_APPS
 
     def get_app_label(label):
         pattern = label.replace('dartcms.apps.', '')
@@ -47,8 +52,8 @@ def get_dartcms_core_apps(include_apps='*', replacements=None):
                 return replacement
         return label
 
-    apps = []
-    for app_label in DARTCMS_CORE_APPS:
+    apps = DARTCMS_REQUIRED_APPS
+    for app_label in DARTCMS_OPTIONAL_APPS:
         app_label = get_app_label(app_label)
         if app_label:
             apps.append(app_label)
