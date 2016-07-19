@@ -2,7 +2,11 @@ $(function () {
     /**
      * Side menu nav
      */
-    $('.dropdown-menu li a').click(function(e){
+    $('#id-navmenu').on('hide.bs.dropdown', function () {
+        return false;
+    });
+    $('li.dropdown a').on('click', function (e) {
         e.stopPropagation();
+        $(this).parent().toggleClass('open');
     });
 });

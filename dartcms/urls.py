@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^shop-catalog/', include('dartcms.apps.shop.catalog.urls', namespace='shop-catalog')),
     url(r'^shop-manufactures/', include('dartcms.apps.shop.manufacturer.urls', namespace='shop-manufacturers')),
     url(r'^shop-labels/', include('dartcms.apps.shop.label.urls', namespace='shop-labels')),
+    url(r'^shop-orders/', include('dartcms.apps.shop.order.urls', namespace='shop-orders'))
 ]
 
 additional_apps = getattr(settings, 'DARTCMS_ADDITIONAL_APPS_URLPATTERNS', [])
