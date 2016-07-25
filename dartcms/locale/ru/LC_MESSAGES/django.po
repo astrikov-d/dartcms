@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-25 16:40+0700\n"
+"POT-Creation-Date: 2016-07-25 18:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,15 +146,15 @@ msgstr "Форма для вопроса"
 
 #: .\apps\feedback\models.py:22
 msgid "Form type"
-msgstr "Типы форм"
+msgstr "Тип формы"
 
 #: .\apps\feedback\models.py:23
 msgid "Form types"
-msgstr "Типы платежей"
+msgstr "Типы форм"
 
 #: .\apps\feedback\models.py:25
 msgid "Type ID"
-msgstr "ИДентификатор типа"
+msgstr "Идентификатор типа"
 
 #: .\apps\feedback\models.py:39 .\apps\feeds\models.py:35
 #: .\apps\sitesettings\models.py:51 .\apps\sitesettings\urls.py:16
