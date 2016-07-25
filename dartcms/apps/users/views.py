@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
 from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView

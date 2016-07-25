@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-22 16:16+0700\n"
+"POT-Creation-Date: 2016-07-25 16:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,11 @@ msgstr ""
 "10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%"
 "100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: .\apps\ads\apps.py:8 .\apps\pages\forms.py:37 .\apps\pages\forms.py:50
+#: .\apps\pages\models.py:85
+msgid "Ads"
+msgstr "Реклама"
+
 #: .\apps\ads\models.py:16
 msgid "ad place"
 msgstr "Рекламное место"
@@ -28,9 +33,9 @@ msgid "ad places"
 msgstr "Рекламные места"
 
 #: .\apps\ads\models.py:23 .\apps\ads\models.py:37 .\apps\ads\models.py:50
-#: .\apps\feedback\models.py:22 .\apps\feeds\models.py:20
-#: .\apps\feeds\models.py:32 .\apps\modules\models.py:19
-#: .\apps\modules\models.py:35 .\apps\pages\models.py:31
+#: .\apps\feedback\models.py:26 .\apps\feeds\models.py:24
+#: .\apps\feeds\models.py:36 .\apps\modules\models.py:19
+#: .\apps\modules\models.py:35 .\apps\pages\models.py:33
 #: .\apps\shop\models.py:31 .\apps\shop\models.py:237
 #: .\apps\shop\models.py:262 .\apps\shop\models.py:286
 #: .\apps\shop\models.py:375
@@ -38,8 +43,8 @@ msgid "Name"
 msgstr "Имя"
 
 #: .\apps\ads\models.py:25 .\apps\ads\models.py:38 .\apps\ads\models.py:61
-#: .\apps\modules\models.py:40 .\apps\pages\models.py:33
-#: .\apps\pages\models.py:86
+#: .\apps\modules\models.py:40 .\apps\pages\models.py:35
+#: .\apps\pages\models.py:88
 msgid "Is Enabled"
 msgstr "Включено"
 
@@ -95,7 +100,7 @@ msgstr "Чисто показов"
 msgid "Section"
 msgstr "Раздел"
 
-#: .\apps\ads\models.py:60 .\apps\feeds\models.py:58
+#: .\apps\ads\models.py:60 .\apps\feeds\models.py:62
 msgid "Picture"
 msgstr "Изображение"
 
@@ -119,6 +124,18 @@ msgstr "Неверное имя пользователя или пароль"
 msgid "Access denied"
 msgstr "Доступ запрещен"
 
+#: .\apps\feedback\apps.py:8
+msgid "Feedback"
+msgstr "Обратная связь"
+
+#: .\apps\feedback\messages\urls.py:16 .\apps\feedback\models.py:40
+msgid "Author"
+msgstr "Автор"
+
+#: .\apps\feedback\messages\urls.py:17
+msgid "Date_created"
+msgstr "Дата создания"
+
 #: .\apps\feedback\models.py:15
 msgid "Contact form"
 msgstr "Форма для обратной связи"
@@ -127,90 +144,110 @@ msgstr "Форма для обратной связи"
 msgid "Questions form"
 msgstr "Форма для вопроса"
 
-#: .\apps\feedback\models.py:21
+#: .\apps\feedback\models.py:22
+msgid "Form type"
+msgstr "Типы форм"
+
+#: .\apps\feedback\models.py:23
+msgid "Form types"
+msgstr "Типы платежей"
+
+#: .\apps\feedback\models.py:25
 msgid "Type ID"
 msgstr "ИДентификатор типа"
 
-#: .\apps\feedback\models.py:32 .\apps\feeds\models.py:31
+#: .\apps\feedback\models.py:39 .\apps\feeds\models.py:35
 #: .\apps\sitesettings\models.py:51 .\apps\sitesettings\urls.py:16
 msgid "Type"
 msgstr "Тип"
 
-#: .\apps\feedback\models.py:33
-msgid "Author"
-msgstr "Автор"
-
-#: .\apps\feedback\models.py:34
+#: .\apps\feedback\models.py:41
 msgid "Message"
 msgstr "Сообщение"
 
-#: .\apps\feedback\models.py:42
+#: .\apps\feedback\models.py:49
 msgid "Answer"
 msgstr "Ответ"
 
-#: .\apps\feedback\models.py:43 .\apps\shop\models.py:35
+#: .\apps\feedback\models.py:50 .\apps\shop\models.py:35
 msgid "Is Visible"
 msgstr "Показывать"
 
-#: .\apps\feedback\models.py:50
+#: .\apps\feedback\models.py:57
 msgid "Email"
 msgstr "E-mail"
 
-#: .\apps\feedback\models.py:51
+#: .\apps\feedback\models.py:58
 msgid "Phone"
 msgstr "Телефон"
 
-#: .\apps\feeds\models.py:21 .\apps\modules\models.py:18
-#: .\apps\modules\models.py:38 .\apps\pages\models.py:30
+#: .\apps\feeds\apps.py:7
+msgid "Feeds"
+msgstr "Ленты"
+
+#: .\apps\feeds\models.py:18
+msgid "Feed type"
+msgstr "Тип формы"
+
+#: .\apps\feeds\models.py:19
+msgid "Feed types"
+msgstr "Типы форм"
+
+#: .\apps\feeds\models.py:25 .\apps\modules\models.py:18
+#: .\apps\modules\models.py:38 .\apps\pages\models.py:32
 msgid "Slug"
 msgstr "Имя для URL"
 
-#: .\apps\feeds\models.py:54
+#: .\apps\feeds\models.py:58
 msgid "Feed"
 msgstr "Лента"
 
-#: .\apps\feeds\models.py:55 .\apps\pages\models.py:62
+#: .\apps\feeds\models.py:59 .\apps\pages\models.py:64
 msgid "Title"
 msgstr "Заголовок"
 
-#: .\apps\feeds\models.py:56
+#: .\apps\feeds\models.py:60
 msgid "Short Text"
 msgstr "Краткий текст"
 
-#: .\apps\feeds\models.py:57
+#: .\apps\feeds\models.py:61
 msgid "Full Text"
 msgstr "Полный текст"
 
-#: .\apps\feeds\models.py:60
+#: .\apps\feeds\models.py:64
 msgid "Keywords"
 msgstr "Ключевые слова (Keywords)"
 
-#: .\apps\feeds\models.py:61
+#: .\apps\feeds\models.py:65
 msgid "Do not use more than 255 symbols"
 msgstr "Не более 255 символов"
 
-#: .\apps\feeds\models.py:65 .\apps\modules\models.py:22
+#: .\apps\feeds\models.py:69 .\apps\modules\models.py:22
 #: .\apps\modules\models.py:37 .\apps\shop\models.py:32
 #: .\apps\shop\models.py:238 .\apps\shop\models.py:263
 #: .\apps\shop\models.py:287 .\apps\sitesettings\models.py:50
 msgid "Description"
 msgstr "Описание"
 
-#: .\apps\feeds\models.py:66
+#: .\apps\feeds\models.py:70
 msgid "Do not use more than 1024 symbols"
 msgstr "Не более 1024 символов"
 
-#: .\apps\feeds\models.py:69
+#: .\apps\feeds\models.py:73
 msgid "Show on Site"
 msgstr "Показывать на сайте"
 
-#: .\apps\feeds\models.py:70
+#: .\apps\feeds\models.py:74
 msgid "Date of Publication"
 msgstr "Дата публикации"
 
-#: .\apps\feeds\models.py:71
+#: .\apps\feeds\models.py:75
 msgid "Date of Creation"
 msgstr "Дата создания"
+
+#: .\apps\filemanager\apps.py:8
+msgid "FileManager"
+msgstr "Файловый менеджер"
 
 #: .\apps\filemanager\models.py:10
 msgid "Folder with this name is already exists"
@@ -240,7 +277,7 @@ msgstr "Сортировка"
 msgid "Modules"
 msgstr "Модули"
 
-#: .\apps\modules\models.py:28 .\apps\pages\models.py:73
+#: .\apps\modules\models.py:28 .\apps\pages\models.py:75
 msgid "Module"
 msgstr "Модуль"
 
@@ -252,6 +289,10 @@ msgstr "Группа"
 msgid "User"
 msgstr "Пользователь"
 
+#: .\apps\pages\apps.py:7
+msgid "Pages"
+msgstr "Страницы"
+
 #: .\apps\pages\forms.py:30 .\apps\shop\catalog\forms.py:18
 #: .\apps\shop\label\forms.py:18 .\apps\shop\manufacturer\forms.py:18
 #: .\apps\shop\product\forms.py:23 .\apps\shop\section\forms.py:21
@@ -261,10 +302,6 @@ msgstr "Основное"
 #: .\apps\pages\forms.py:34
 msgid "Content"
 msgstr "Содержимое"
-
-#: .\apps\pages\forms.py:37 .\apps\pages\forms.py:50 .\apps\pages\models.py:83
-msgid "Ads"
-msgstr "Реклама"
 
 #: .\apps\pages\forms.py:41 .\apps\shop\catalog\forms.py:22
 #: .\apps\shop\label\forms.py:22 .\apps\shop\manufacturer\forms.py:22
@@ -278,76 +315,80 @@ msgstr "SEO"
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: .\apps\pages\models.py:24
+#: .\apps\pages\models.py:26
 msgid "modules"
 msgstr "модули"
 
-#: .\apps\pages\models.py:25
+#: .\apps\pages\models.py:27
 msgid "module"
 msgstr "модуль"
 
-#: .\apps\pages\models.py:32
+#: .\apps\pages\models.py:34
 msgid "Related Model"
 msgstr "Связанная модель"
 
-#: .\apps\pages\models.py:45
+#: .\apps\pages\models.py:47
 msgid "page"
 msgstr "страница"
 
-#: .\apps\pages\models.py:46
+#: .\apps\pages\models.py:48
 msgid "pages"
 msgstr "страницы"
 
-#: .\apps\pages\models.py:60
+#: .\apps\pages\models.py:62
 msgid "Parent Page"
 msgstr "Родительская страница"
 
-#: .\apps\pages\models.py:62
+#: .\apps\pages\models.py:64
 msgid "Shows inside the title tag"
 msgstr "Отображается в теге Title"
 
-#: .\apps\pages\models.py:63
+#: .\apps\pages\models.py:65
 msgid "Page Header"
 msgstr "Заголовок страницы"
 
-#: .\apps\pages\models.py:65
+#: .\apps\pages\models.py:67
 msgid "Menu name"
 msgstr "Заголовок в меню"
 
-#: .\apps\pages\models.py:66
+#: .\apps\pages\models.py:68
 msgid "URL for Redirect"
 msgstr "URL для редиректа"
 
-#: .\apps\pages\models.py:68 .\apps\shop\models.py:46 .\apps\shop\models.py:63
+#: .\apps\pages\models.py:70 .\apps\shop\models.py:46 .\apps\shop\models.py:63
 #: .\apps\shop\models.py:81 .\apps\shop\models.py:173
 #: .\apps\shop\models.py:190 .\apps\shop\models.py:236
 #: .\apps\shop\models.py:261 .\apps\shop\models.py:285
 msgid "URL"
 msgstr "URL"
 
-#: .\apps\pages\models.py:75
+#: .\apps\pages\models.py:77
 msgid "Module parameters"
 msgstr "Параметры модуля"
 
-#: .\apps\pages\models.py:77
+#: .\apps\pages\models.py:79
 msgid "Before Content"
 msgstr "Содержимое перед модулем"
 
-#: .\apps\pages\models.py:78
+#: .\apps\pages\models.py:80
 msgid "After Content"
 msgstr "Содержимое после модуля"
 
-#: .\apps\pages\models.py:80 .\apps\shop\models.py:33 .\apps\shop\models.py:34
+#: .\apps\pages\models.py:82 .\apps\shop\models.py:33 .\apps\shop\models.py:34
 msgid "Keywords (meta keywords)"
 msgstr "Ключевые слова (meta keywords)"
 
-#: .\apps\pages\models.py:81
+#: .\apps\pages\models.py:83
 msgid "Description (meta description)"
 msgstr "Описание (meta description)"
 
-#: .\apps\pages\models.py:87
+#: .\apps\pages\models.py:89
 msgid "Show in Menu"
 msgstr "Показывать в меню"
+
+#: .\apps\shop\apps.py:7
+msgid "Shop"
+msgstr "Магазин"
 
 #: .\apps\shop\catalog\urls.py:22
 msgid "Sections"
@@ -470,11 +511,11 @@ msgstr "Типы платежей"
 
 #: .\apps\shop\models.py:278
 msgid "order status"
-msgstr ""
+msgstr "Статус заказа"
 
 #: .\apps\shop\models.py:279
 msgid "order statuses"
-msgstr "Статус заказа"
+msgstr "Статусы заказа"
 
 #: .\apps\shop\models.py:302
 msgid "order"
@@ -560,6 +601,10 @@ msgstr "Состав"
 msgid "Products"
 msgstr "Товары"
 
+#: .\apps\sitesettings\apps.py:8 .\apps\sitesettings\models.py:29
+msgid "Site settings"
+msgstr "Настройки сайта"
+
 #: .\apps\sitesettings\models.py:18
 msgid "String"
 msgstr "Строка"
@@ -587,10 +632,6 @@ msgstr "Файл"
 #: .\apps\sitesettings\models.py:28
 msgid "Site setting"
 msgstr "Настройка сайта"
-
-#: .\apps\sitesettings\models.py:29
-msgid "Site settings"
-msgstr "Настройки сайта"
 
 #: .\apps\sitesettings\models.py:49
 msgid "Identifier"
@@ -675,8 +716,8 @@ msgid ""
 "Are you sure that you want to delete this folder? This action will delete "
 "all files inside it."
 msgstr ""
-"Вы уверены, что хотите удалить этот каталог? Это действие приведет к удалению "
-"всех файлов внутри него."
+"Вы уверены, что хотите удалить этот каталог? Это действие приведет к "
+"удалению всех файлов внутри него."
 
 #: .\templates\dartcms\apps\filemanager\index.html:70
 msgid "Folders"

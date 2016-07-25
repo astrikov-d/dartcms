@@ -18,6 +18,10 @@ FORM_TYPES = (
 
 
 class FormType(models.Model):
+    class Meta:
+        verbose_name = _('Form type')
+        verbose_name_plural = _('Form types')
+
     slug = models.SlugField(verbose_name=_('Type ID'), choices=FORM_TYPES)
     name = models.CharField(max_length=255, verbose_name=_('Name'))
 
@@ -28,6 +32,9 @@ class FormType(models.Model):
 class AbstractBaseMessage(models.Model):
     class Meta:
         abstract = True
+
+    def __unicode__(self):
+        return self.author
 
     type = models.ForeignKey(FormType, verbose_name=_('Type'))
     author = models.CharField(max_length=255, verbose_name=_('Author'))
@@ -55,10 +62,12 @@ if not is_model_registered('feedback', 'QuestionMessage'):
     class QuestionMessage(AbstractQuestionMessage):
         pass
 
+
     __all__.append('QuestionMessage')
 
 if not is_model_registered('feedback', 'ContactMessage'):
     class ContactMessage(AbstractContactMessage):
         pass
+
 
     __all__.append('ContactMessage')

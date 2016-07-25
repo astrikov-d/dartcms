@@ -14,6 +14,10 @@ __all__ = [
 
 
 class FeedType(models.Model):
+    class Meta:
+        verbose_name = _('Feed type')
+        verbose_name_plural = _('Feed types')
+
     def __unicode__(self):
         return self.name
 
@@ -35,7 +39,7 @@ class Feed(models.Model):
         try:
             return super(Feed, self).delete(**kwargs)
         except models.ProtectedError:
-            #todo raise exeption and show it by messages framework
+            # todo raise exeption and show it by messages framework
             pass
 
 
@@ -70,8 +74,10 @@ class AbstractFeedItem(models.Model):
     date_published = models.DateTimeField(default=datetime.datetime.now, verbose_name=_('Date of Publication'))
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date of Creation'))
 
+
 if not is_model_registered('feeds', 'FeedItem'):
     class FeedItem(AbstractFeedItem):
         pass
+
 
     __all__.append('FeedItem')

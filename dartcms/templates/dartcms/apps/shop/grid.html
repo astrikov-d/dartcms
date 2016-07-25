@@ -32,8 +32,8 @@
                                     });
                                 else {
                                     new PNotify({
-                                        title: gettext('Warning'),
-                                        text: gettext('You have not selected any record.'),
+                                        title: ugettext('Warning'),
+                                        text: ugettext('You have not selected any record.'),
                                         icon: 'fa fa-warning'
                                     });
                                 }
@@ -46,8 +46,8 @@
                                 var selected = grid.treegrid('getSelected');
                                 if (selected && selected.pk == '0')
                                     new PNotify({
-                                        title: gettext('Warning'),
-                                        text: gettext('You can not edit Root section.'),
+                                        title: ugettext('Warning'),
+                                        text: ugettext('You can not edit Root section.'),
                                         icon: 'fa fa-warning'
                                     });
                                 else if (selected)
@@ -56,8 +56,8 @@
                                     });
                                 else {
                                     new PNotify({
-                                        title: gettext('Warning'),
-                                        text: gettext('You have not selected any record.'),
+                                        title: ugettext('Warning'),
+                                        text: ugettext('You have not selected any record.'),
                                         icon: 'fa fa-warning'
                                     });
                                 }
@@ -70,8 +70,8 @@
                                 var selected = grid.treegrid('getSelected');
                                 if (selected && selected.pk == '0')
                                     new PNotify({
-                                        title: gettext('Warning'),
-                                        text: gettext('You can not delete Root section.'),
+                                        title: ugettext('Warning'),
+                                        text: ugettext('You can not delete Root section.'),
                                         icon: 'fa fa-warning'
                                     });
                                 else if (selected)
@@ -80,8 +80,8 @@
                                     });
                                 else {
                                     new PNotify({
-                                        title: gettext('Warning'),
-                                        text: gettext('You have not selected any record.'),
+                                        title: ugettext('Warning'),
+                                        text: ugettext('You have not selected any record.'),
                                         icon: 'fa fa-warning'
                                     });
                                 }
@@ -126,8 +126,8 @@
                         }).done(function (response) {
                                     if (!response.result) {
                                         new PNotify({
-                                            title: gettext('Warning'),
-                                            text: gettext('Page can not be appended to target'),
+                                            title: ugettext('Warning'),
+                                            text: ugettext('Page can not be appended to target'),
                                             icon: 'fa fa-warning'
                                         });
                                     }
@@ -145,8 +145,8 @@
                         }).done(function (response) {
                                     if (!response.result) {
                                         new PNotify({
-                                            title: gettext('Warning'),
-                                            text: gettext('Page can not be moved'),
+                                            title: ugettext('Warning'),
+                                            text: ugettext('Page can not be moved'),
                                             icon: 'fa fa-warning'
                                         });
                                     }
