@@ -35,20 +35,20 @@ $(function () {
                 toolbar: [
                     {
                         iconCls: 'icon-add',
-                        text: ugettext('Insert'),
+                        text: gettext('Insert'),
                         handler: function () {
                             var row = fm_grid.datagrid('getSelected');
                             if (row) {
                                 top.tinymce.activeEditor.windowManager.getParams().setUrl('/' + row.path);
                                 top.tinymce.activeEditor.windowManager.close();
                             } else {
-                                $.messager.alert(gettext('Warning'), ugettext('Choose File'));
+                                $.messager.alert(gettext('Warning'), gettext('Choose File'));
                             }
                         }
                     },
                     {
                         iconCls: 'icon-remove',
-                        text: ugettext('Remove'),
+                        text: gettext('Remove'),
                         handler: function () {
                             var row = fm_grid.datagrid('getSelected');
                             if (row) {
@@ -67,13 +67,13 @@ $(function () {
                                         }
                                     });
                             } else {
-                                $.messager.alert(gettext('Warning'), ugettext('Choose File'));
+                                $.messager.alert(gettext('Warning'), gettext('Choose File'));
                             }
                         }
                     },
                     {
                         iconCls: 'icon-upload',
-                        text: ugettext('Upload'),
+                        text: gettext('Upload'),
                         handler: function () {
                             var file_selector = $('#id-select-file');
                             file_selector.click();
@@ -81,13 +81,13 @@ $(function () {
                     },
                     {
                         iconCls: 'icon-download',
-                        text: ugettext('Download'),
+                        text: gettext('Download'),
                         handler: function () {
                             var row = fm_grid.datagrid('getSelected');
                             if (row) {
                                 window.open('/' + row.path);
                             } else {
-                                $.messager.alert(gettext('Warning'), ugettext('Choose File'));
+                                $.messager.alert(gettext('Warning'), gettext('Choose File'));
                             }
                         }
                     }
@@ -95,9 +95,9 @@ $(function () {
                 url: index_url + 'get-files/?folder_id=' + node.id,
                 columns: [
                     [
-                        {field: 'name', title: ugettext('File Name'), width: 250},
-                        {field: 'path', title: ugettext('Path'), width: 400},
-                        {field: 'date_created', title: ugettext('Upload Date'), width: 400}
+                        {field: 'name', title: gettext('File Name'), width: 250},
+                        {field: 'path', title: gettext('Path'), width: 400},
+                        {field: 'date_created', title: gettext('Upload Date'), width: 400}
                     ]
                 ]
             });
@@ -165,7 +165,7 @@ $(function () {
                                 }
                             });
                     } else {
-                        $.messager.alert(gettext('Warning'), ugettext('Input folder name'));
+                        $.messager.alert(gettext('Warning'), gettext('Input folder name'));
                     }
                 }
             },
@@ -212,7 +212,7 @@ $(function () {
                                 }
                             });
                     } else {
-                        $.messager.alert(gettext('Warning'), ugettext('Input folder name'));
+                        $.messager.alert(gettext('Warning'), gettext('Input folder name'));
                     }
                 }
             },

@@ -55,18 +55,18 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
                             var msg = '';
 
                             if (response.action == 'DELETE') {
-                                msg = ugettext('Record successfully deleted');
+                                msg = gettext('Record successfully deleted');
                                 $('#id-datagrid').datagrid('reload');
                             } else {
                                 if (response.action == 'INSERT') {
-                                    msg = ugettext('Record successfully inserted');
+                                    msg = gettext('Record successfully inserted');
                                 } else {
-                                    msg = ugettext('Record successfully updated');
+                                    msg = gettext('Record successfully updated');
                                 }
                             }
 
                             new PNotify({
-                                title: ugettext('Success'),
+                                title: gettext('Success'),
                                 text: msg,
                                 icon: 'fa fa-check-circle'
                             });
@@ -101,10 +101,10 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
     });
 
     $('select[multiple="multiple"]', form).multiselect({
-        allSelectedText: ugettext('All selected'),
-        nonSelectedText: ugettext('None selected'),
-        nSelectedText: ugettext(' options selected'),
-        selectAllText: ugettext('Select all'),
+        allSelectedText: gettext('All selected'),
+        nonSelectedText: gettext('None selected'),
+        nSelectedText: gettext(' options selected'),
+        selectAllText: gettext('Select all'),
         includeSelectAllOption: true
     });
 };

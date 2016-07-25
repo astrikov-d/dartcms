@@ -937,7 +937,7 @@ define("3", [
 		});
 	};
 
-	var ugettextSelectionToolbarItems = function (settings) {
+	var gettextSelectionToolbarItems = function (settings) {
 		var value = settings.selection_toolbar;
 		return value ? value : DEFAULT_TEXT_SELECTION_ITEMS;
 	};
@@ -952,7 +952,7 @@ define("3", [
 
 		items = createToolbars(editor, toolbars);
 		items = items.concat([
-			Toolbar.create(editor, 'text', ugettextSelectionToolbarItems(settings)),
+			Toolbar.create(editor, 'text', gettextSelectionToolbarItems(settings)),
 			Toolbar.create(editor, 'insert', getInsertToolbarItems(settings)),
 			Forms.createQuickLinkForm(editor, hide)
 		]);
