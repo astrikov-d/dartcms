@@ -11,7 +11,6 @@ DARTCMS_REQUIRED_APPS = [
     'dartcms',
     'dartcms.apps.filemanager',
     'dartcms.apps.modules',
-    #'dartcms.apps.pages',
     'dartcms.apps.sitesettings',
 ]
 
