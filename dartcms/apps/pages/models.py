@@ -11,6 +11,7 @@ from dartcms.utils.loading import get_model, is_model_registered
 from mptt.models import MPTTModel, TreeForeignKey
 
 __all__ = [
+    'AbstractPage',
     'PageModule',
     'pre_save_handler',
     'post_save_handler',
@@ -20,6 +21,7 @@ __all__ = [
 
 class PageModule(models.Model):
     class Meta:
+        app_label = 'pages'
         ordering = ['id']
         verbose_name_plural = _('modules')
         verbose_name = _('module')

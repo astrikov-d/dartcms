@@ -11,11 +11,11 @@ DARTCMS_REQUIRED_APPS = [
     'dartcms',
     'dartcms.apps.filemanager',
     'dartcms.apps.modules',
-    'dartcms.apps.pages',
     'dartcms.apps.sitesettings',
 ]
 
 DARTCMS_OPTIONAL_APPS = [
+    'dartcms.apps.pages',
     'dartcms.apps.ads',
     'dartcms.apps.feedback',
     'dartcms.apps.feeds',
@@ -37,6 +37,7 @@ def get_dartcms_core_apps(include_apps='*', replacements=None):
 
     This will override default DartCMS app named 'pages'.
     """
+
     if include_apps == '*' and not replacements:
         return DARTCMS_APPS
 

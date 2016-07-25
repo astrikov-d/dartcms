@@ -62,9 +62,12 @@ class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
         PageModule = get_model('pages', 'PageModule')
         Page = get_model('pages', 'Page')
 
-        module = PageModule.objects.get(pk=self.request.GET.get('selected_module', 0))
+        try:
+            module = PageModule.objects.get(pk=self.request.GET.get('selected_module'))
+        except PageModule.DoesNotExist:
+            module = None
 
-        if module.related_model:
+        if module and module.related_model:
             model_path = module.related_model.split('.')
             app = model_path[0]
             model = model_path[1]
