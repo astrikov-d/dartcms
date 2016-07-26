@@ -10,6 +10,7 @@ FORM_TYPES = (
 
 class FormType(models.Model):
     class Meta:
+        app_label = 'feedback'
         verbose_name = _('Form type')
         verbose_name_plural = _('Form types')
 
@@ -22,6 +23,7 @@ class FormType(models.Model):
 
 class AbstractBaseMessage(models.Model):
     class Meta:
+        app_label = 'feedback'
         abstract = True
 
     def __unicode__(self):
@@ -35,6 +37,7 @@ class AbstractBaseMessage(models.Model):
 
 class AbstractQuestionMessage(AbstractBaseMessage):
     class Meta:
+        app_label = 'feedback'
         abstract = True
 
     answer = models.TextField(verbose_name=_('Answer'), blank=True, null=True)
@@ -43,6 +46,7 @@ class AbstractQuestionMessage(AbstractBaseMessage):
 
 class AbstractContactMessage(AbstractBaseMessage):
     class Meta:
+        app_label = 'feedback'
         abstract = True
 
     email = models.EmailField(verbose_name=_('Email'), blank=True, null=True)

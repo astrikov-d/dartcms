@@ -14,6 +14,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class AbstractProductBase(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
 
     def __unicode__(self):
         return self.name
@@ -29,6 +30,7 @@ class AbstractProductBase(models.Model):
 class AbstractProductCatalog(AbstractProductBase):
     class Meta:
         abstract = True
+        app_label = 'shop'
         ordering = ['name']
         verbose_name_plural = _('product catalogs')
         verbose_name = _('product catalog')
@@ -40,6 +42,7 @@ class AbstractProductCatalog(AbstractProductBase):
 class AbstractProductManufacturer(AbstractProductBase):
     class Meta:
         abstract = True
+        app_label = 'shop'
         ordering = ['name']
         verbose_name_plural = _('product manufacturers')
         verbose_name = _('product manufacturer')
@@ -51,6 +54,7 @@ class AbstractProductManufacturer(AbstractProductBase):
 class AbstractProductSection(MPTTModel, AbstractProductBase):
     class Meta:
         abstract = True
+        app_label = 'shop'
         ordering = ['sort']
         verbose_name = _('product section')
         verbose_name_plural = _('product sections')
@@ -86,6 +90,7 @@ class AbstractProductSection(MPTTModel, AbstractProductBase):
 class AbstractProductLabel(AbstractProductBase):
     class Meta:
         abstract = True
+        app_label = 'shop'
         ordering = ['name']
         verbose_name_plural = _('product labels')
         verbose_name = _('product label')
@@ -97,6 +102,7 @@ class AbstractProductLabel(AbstractProductBase):
 class AbstractProduct(AbstractProductBase):
     class Meta:
         abstract = True
+        app_label = 'shop'
         ordering = ['name']
         verbose_name_plural = _('products')
         verbose_name = _('product')
@@ -117,6 +123,7 @@ class AbstractProduct(AbstractProductBase):
 class AbstractProductImage(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
         verbose_name = _(u'product picture')
         verbose_name_plural = _(u'product pictures')
         ordering = ['-date_created']
@@ -129,6 +136,7 @@ class AbstractProductImage(models.Model):
 class AbstractOrderShippingType(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
         verbose_name = _('shipping type')
         verbose_name_plural = _('shipping types')
         ordering = ['sort']
@@ -148,6 +156,7 @@ class AbstractOrderShippingType(models.Model):
 class AbstractOrderPaymentType(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
         verbose_name = _('payment type')
         verbose_name_plural = _('payment types')
         ordering = ['sort']
@@ -166,6 +175,7 @@ class AbstractOrderPaymentType(models.Model):
 class AbstractOrderStatus(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
         verbose_name = _('order status')
         verbose_name_plural = _('order statuses')
         ordering = ['sort']
@@ -184,6 +194,7 @@ class AbstractOrderStatus(models.Model):
 class AbstractOrder(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
         verbose_name = _('order')
         verbose_name_plural = _('orders')
         ordering = ['-date_created']
@@ -245,6 +256,7 @@ class AbstractOrder(models.Model):
 class AbstractOrderDetail(models.Model):
     class Meta:
         abstract = True
+        app_label = 'shop'
         verbose_name = _('order datail')
         verbose_name_plural = _('order datails')
         ordering = ['name']

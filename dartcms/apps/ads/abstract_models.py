@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class AdPlace(models.Model):
     class Meta:
+        app_label = 'ads'
         verbose_name = _('ad place')
         verbose_name_plural = _('ad places')
         ordering = ['name']
@@ -20,6 +21,7 @@ class AdPlace(models.Model):
 
 class AdSection(models.Model):
     class Meta:
+        app_label = 'ads'
         verbose_name = _('ad section')
         verbose_name_plural = _('ad sections')
         ordering = ['name']
@@ -33,6 +35,7 @@ class AdSection(models.Model):
 
 class AbstractAd(models.Model):
     class Meta:
+        app_label = 'ads'
         verbose_name = _('ad')
         verbose_name_plural = _('ads')
         ordering = ['name']

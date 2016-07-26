@@ -9,6 +9,7 @@ from dartcms.utils.fields import RteField
 
 class FeedType(models.Model):
     class Meta:
+        app_label = 'feeds'
         verbose_name = _('Feed type')
         verbose_name_plural = _('Feed types')
 
@@ -21,6 +22,7 @@ class FeedType(models.Model):
 
 class Feed(models.Model):
     class Meta:
+        app_label = 'feeds'
         ordering = ['name']
 
     def __unicode__(self):
@@ -39,6 +41,7 @@ class Feed(models.Model):
 
 class AbstractFeedItem(models.Model):
     class Meta:
+        app_label = 'feeds'
         ordering = ['-date_published']
         abstract = True
 

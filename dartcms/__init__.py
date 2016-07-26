@@ -1,7 +1,4 @@
 # coding: utf-8
-import inspect
-import importlib
-
 from dartcms.utils.loading import get_model, is_model_registered
 
 DARTCMS_REQUIRED_APPS = [
@@ -60,60 +57,3 @@ def get_dartcms_core_apps(include_apps='*', replacements=None):
             apps.append(app_label)
 
     return apps
-
-
-def discover_models(app_label, existing_models):
-    """
-    Discovering models in certain app.
-    If you want to override default DartCMS app, but you don't want to re-declare all models inside this app,
-    you can call this function inside your custom app like this:
-
-    Usage:
-
-    # app: some_app
-
-    from django.db import models
-
-    import dartcms
-
-    from dartcms.apps.some_app.models import SomeAbstractModel
-
-
-    __all__ = ['Model']
-
-    __all__.extend(dartcms.discover_models('some_app', __all__))
-
-
-    class Model(SomeAbstractModel):
-        custom_field = models.CharField(max_length=255)
-
-    """
-
-    from django.apps import apps
-    from django.db import models
-
-    caller = inspect.getmodule(inspect.stack()[1][0])
-    module = importlib.import_module('dartcms.apps.%s.models' % app_label)
-
-    m = []
-
-    meta = type('Meta', (), {'app_label': app_label})
-
-    for object_name in dir(module):
-        klass = getattr(module, object_name)
-
-        if inspect.isclass(klass) and issubclass(klass, models.Model):
-            class_name = klass.__name__
-            if class_name not in existing_models and class_name not in dir(caller):
-                setattr(
-                    caller,
-                    class_name,
-                    type(class_name, (klass, ), {
-                        '__module__': app_label,
-                        'Meta': meta
-                    })
-                )
-                apps.register_model(app_label, getattr(caller, class_name))
-                m.append(class_name)
-
-    return m
