@@ -27,5 +27,3 @@ class ProductSectionForm(BetterModelForm):
                 'image',
                 'is_visible',
             ), 'legend': _('Advanced')}))
-
-

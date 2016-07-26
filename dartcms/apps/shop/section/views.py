@@ -59,6 +59,3 @@ class MoveSectionView(TreeActionView):
             source.move_to(target, position=position)
             return {'result': True}
         return {'result': False}
-
-
-

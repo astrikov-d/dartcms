@@ -24,4 +24,3 @@ class ProductCatalogForm(BetterModelForm):
                 'image',
                 'is_visible',
             ), 'legend': _('Advanced')}))
-

@@ -1,6 +1,5 @@
 # coding: utf-8
 import six
-
 from django.core.serializers.json import Serializer
 from django.db import models
 from django.utils.encoding import force_text, is_protected_type

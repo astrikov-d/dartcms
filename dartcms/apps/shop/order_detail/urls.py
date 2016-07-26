@@ -3,7 +3,7 @@ from django.conf.urls import url
 
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, UpdateObjectView, DeleteObjectView
+from dartcms.views import DeleteObjectView, GridView, UpdateObjectView
 
 from .forms import OrderDatailForm
 

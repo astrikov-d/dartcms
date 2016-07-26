@@ -70,7 +70,7 @@ def discover_models(app_label, existing_models):
 
     Usage:
 
-    # app: custom_app
+    # app: some_app
 
     from django.db import models
 
@@ -81,13 +81,14 @@ def discover_models(app_label, existing_models):
 
     __all__ = ['Model']
 
-    __all__.extend(dartcms.discover_models('ads', __all__))
+    __all__.extend(dartcms.discover_models('some_app', __all__))
 
 
     class Model(SomeAbstractModel):
         custom_field = models.CharField(max_length=255)
 
     """
+
     from django.apps import apps
     from django.db import models
 
@@ -103,7 +104,6 @@ def discover_models(app_label, existing_models):
 
         if inspect.isclass(klass) and issubclass(klass, models.Model):
             class_name = klass.__name__
-
             if class_name not in existing_models and class_name not in dir(caller):
                 setattr(
                     caller,
