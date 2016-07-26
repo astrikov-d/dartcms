@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from dartcms.utils.config import DartCMSConfig
 
-from .views import (DeleteMessageFormView, MessagesGridView,
-                    UpdateMessageFormView, InsertMessageFormView)
+from .views import (DeleteMessageFormView, InsertMessageFormView,
+                    MessagesGridView, UpdateMessageFormView)
 
 config = DartCMSConfig({
     'parent_kwarg_name': 'form_type',

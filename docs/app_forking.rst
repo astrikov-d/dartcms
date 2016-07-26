@@ -44,11 +44,7 @@ You can re-declare DartCMS `feeds` app's models in your `app.feeds.models` modul
 
     import dartcms
 
-    from dartcms.apps.feeds.models import AbstractFeedItem
-
-
-    __all__ = ['FeedItem']
-    __all__.extend(dartcms.discover_models('feeds', __all__))
+    from dartcms.apps.feeds.abstract_models import AbstractFeedItem
 
 
     class FeedItem(AbstractFeedItem):
@@ -56,9 +52,6 @@ You can re-declare DartCMS `feeds` app's models in your `app.feeds.models` modul
 
 
 By doing this, you'll replace DartCMS `FeedItem` model with your own. And DartCMS will manage this model.
-
-By calling `dartcms.discover_models('feeds', __all__)` function, you'll append non-declared models from
-DartCMS to your application.
 
 
 Writing application from scratch

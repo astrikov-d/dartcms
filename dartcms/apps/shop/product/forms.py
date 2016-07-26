@@ -30,4 +30,3 @@ class ProductForm(BetterModelForm):
                 'image',
                 'is_visible',
             ), 'legend': _('Advanced')}))
-
