@@ -1,2 +1,2 @@
 # coding: utf-8
-default_app_config = 'dartcms.apps.pages.config.PagesConfig'
+default_app_config = 'dartcms.apps.pages.apps.PagesConfig'

@@ -2,7 +2,6 @@
 from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
 
-
-class ModulesConfig(AppConfig):
-    name = 'dartcms.apps.modules'
-    verbose_name = _('DartCMS Modules')
+class FeedsConfig(AppConfig):
+    name = 'dartcms.apps.feeds'
+    verbose_name = _('Feeds')

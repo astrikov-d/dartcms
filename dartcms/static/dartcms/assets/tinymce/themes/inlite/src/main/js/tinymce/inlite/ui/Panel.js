@@ -27,7 +27,7 @@ define('tinymce/inlite/ui/Panel', [
 		});
 	};
 
-	var getTextSelectionToolbarItems = function (settings) {
+	var gettextSelectionToolbarItems = function (settings) {
 		var value = settings.selection_toolbar;
 		return value ? value : DEFAULT_TEXT_SELECTION_ITEMS;
 	};
@@ -42,7 +42,7 @@ define('tinymce/inlite/ui/Panel', [
 
 		items = createToolbars(editor, toolbars);
 		items = items.concat([
-			Toolbar.create(editor, 'text', getTextSelectionToolbarItems(settings)),
+			Toolbar.create(editor, 'text', gettextSelectionToolbarItems(settings)),
 			Toolbar.create(editor, 'insert', getInsertToolbarItems(settings)),
 			Forms.createQuickLinkForm(editor, hide)
 		]);

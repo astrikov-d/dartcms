@@ -1,6 +1,6 @@
 # coding: utf-8
 from django.conf.urls import url, include
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig

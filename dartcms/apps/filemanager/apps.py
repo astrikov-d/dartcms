@@ -3,6 +3,6 @@ from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
 
 
-class ModulesConfig(AppConfig):
-    name = 'dartcms.apps.modules'
-    verbose_name = _('DartCMS Modules')
+class FileManagerConfig(AppConfig):
+    name = 'dartcms.apps.filemanager'
+    verbose_name = _('FileManager')
