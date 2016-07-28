@@ -28,7 +28,7 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
     allow_empty = True
     grid_columns = [
         {'field': 'name', 'width': '70%', 'label': _('Name')},
-        {'field': 'date_created', 'width': '30%', 'label': _('Date created')},
+        {'field': 'date_created', 'width': '30%', 'label': _('Date created'), 'type': 'DATETIME'},
     ]
     search = None
     search_form = None
