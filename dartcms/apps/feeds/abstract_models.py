@@ -75,6 +75,6 @@ class AbstractFeedItem(models.Model):
         blank=True
     )
     is_visible = models.BooleanField(default=True, verbose_name=_('Show on Site'))
-    is_main = models.BooleanField(default=False, verbose_name=_('Is Main'))
+    is_main = models.BooleanField(default=True, verbose_name=_('Is Main'))
     date_published = models.DateTimeField(default=datetime.datetime.now, verbose_name=_('Date of Publication'))
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date of Creation'))
