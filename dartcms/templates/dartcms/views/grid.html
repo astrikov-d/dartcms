@@ -23,6 +23,7 @@
     <script type="text/javascript"
             src="{% static 'dartcms/assets/bootstrap-multiselect/js/bootstrap-multiselect.js' %}"></script>
     <script type="text/javascript" src="{% static 'dartcms/assets/tinymce/tinymce.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dartcms/js/apps/base/http.js' %}"></script>
     <script type="text/javascript" src="{% static 'dartcms/js/apps/base/grid.js' %}"></script>
     <script type="text/javascript" src="{% static 'dartcms/js/apps/base/forms.js' %}"></script>
 {% endblock %}
@@ -48,7 +49,6 @@
     {% include 'dartcms/views/partials/datepickers.html' %}
     <script>
         $(function () {
-
 
             var grid = $('#id-datagrid'),
                     gridToolbar = [
@@ -112,9 +112,6 @@
                         {% endif %}
 
                     ],
-                    request = {
-                        'GET': {}
-                    },
                     body = $('body');
 
             {% get_current_language as LANG %}
