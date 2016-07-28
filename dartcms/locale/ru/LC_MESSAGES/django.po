@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-28 08:11+0700\n"
+"POT-Creation-Date: 2016-07-28 13:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "Рекламные места"
 
 #: .\apps\ads\abstract_models.py:17 .\apps\ads\abstract_models.py:32
 #: .\apps\ads\abstract_models.py:46 .\apps\feedback\abstract_models.py:18
-#: .\apps\feeds\abstract_models.py:19 .\apps\feeds\abstract_models.py:34
+#: .\apps\feeds\abstract_models.py:21 .\apps\feeds\abstract_models.py:36
 #: .\apps\modules\models.py:17 .\apps\modules\models.py:33
 #: .\apps\pages\abstract_models.py:22 .\apps\shop\abstract_models.py:22
 #: .\apps\shop\abstract_models.py:148 .\apps\shop\abstract_models.py:168
@@ -95,7 +95,7 @@ msgstr "Чисто показов"
 msgid "Section"
 msgstr "Раздел"
 
-#: .\apps\ads\abstract_models.py:56 .\apps\feeds\abstract_models.py:63
+#: .\apps\ads\abstract_models.py:56 .\apps\feeds\abstract_models.py:66
 msgid "Picture"
 msgstr "Изображение"
 
@@ -144,7 +144,7 @@ msgstr "Типы форм"
 msgid "Type ID"
 msgstr "Идентификатор типа"
 
-#: .\apps\feedback\abstract_models.py:32 .\apps\feeds\abstract_models.py:33
+#: .\apps\feedback\abstract_models.py:32 .\apps\feeds\abstract_models.py:35
 #: .\apps\sitesettings\models.py:51 .\apps\sitesettings\urls.py:16
 msgid "Type"
 msgstr "Тип"
@@ -181,75 +181,87 @@ msgstr "Обратная связь"
 msgid "Date_created"
 msgstr "Дата создания"
 
-#: .\apps\feeds\abstract_models.py:13
+#: .\apps\feeds\abstract_models.py:15
 msgid "Feed type"
 msgstr "Тип формы"
 
-#: .\apps\feeds\abstract_models.py:14
+#: .\apps\feeds\abstract_models.py:16
 msgid "Feed types"
 msgstr "Типы форм"
 
-#: .\apps\feeds\abstract_models.py:20 .\apps\modules\models.py:16
+#: .\apps\feeds\abstract_models.py:22 .\apps\modules\models.py:16
 #: .\apps\modules\models.py:36 .\apps\pages\abstract_models.py:21
 msgid "Slug"
 msgstr "Имя для URL"
 
-#: .\apps\feeds\abstract_models.py:27 .\apps\feeds\abstract_models.py:59
+#: .\apps\feeds\abstract_models.py:29 .\apps\feeds\abstract_models.py:62
 msgid "Feed"
 msgstr "Лента"
 
-#: .\apps\feeds\abstract_models.py:28 .\apps\feeds\apps.py:8
+#: .\apps\feeds\abstract_models.py:30 .\apps\feeds\apps.py:8
 msgid "Feeds"
 msgstr "Ленты"
 
-#: .\apps\feeds\abstract_models.py:49
+#: .\apps\feeds\abstract_models.py:51
 msgid "Feed item"
 msgstr "Запись ленты"
 
-#: .\apps\feeds\abstract_models.py:50
+#: .\apps\feeds\abstract_models.py:52
 msgid "Feed items"
 msgstr "Записи ленты"
 
-#: .\apps\feeds\abstract_models.py:60 .\apps\pages\abstract_models.py:55
+#: .\apps\feeds\abstract_models.py:61 .\apps\pages\abstract_models.py:61
+#: .\apps\shop\abstract_models.py:38 .\apps\shop\abstract_models.py:50
+#: .\apps\shop\abstract_models.py:63 .\apps\shop\abstract_models.py:98
+#: .\apps\shop\abstract_models.py:110 .\apps\shop\abstract_models.py:147
+#: .\apps\shop\abstract_models.py:167 .\apps\shop\abstract_models.py:186
+msgid "URL"
+msgstr "URL"
+
+#: .\apps\feeds\abstract_models.py:63 .\apps\pages\abstract_models.py:55
 msgid "Title"
 msgstr "Заголовок"
 
-#: .\apps\feeds\abstract_models.py:61
+#: .\apps\feeds\abstract_models.py:64
 msgid "Short Text"
 msgstr "Краткий текст"
 
-#: .\apps\feeds\abstract_models.py:62
+#: .\apps\feeds\abstract_models.py:65
 msgid "Full Text"
 msgstr "Полный текст"
 
-#: .\apps\feeds\abstract_models.py:65
+#: .\apps\feeds\abstract_models.py:68
 msgid "Keywords"
 msgstr "Ключевые слова (Keywords)"
 
-#: .\apps\feeds\abstract_models.py:66
+#: .\apps\feeds\abstract_models.py:69
 msgid "Do not use more than 255 symbols"
 msgstr "Не более 255 символов"
 
-#: .\apps\feeds\abstract_models.py:70 .\apps\modules\models.py:20
+#: .\apps\feeds\abstract_models.py:73 .\apps\modules\models.py:20
 #: .\apps\modules\models.py:35 .\apps\shop\abstract_models.py:23
 #: .\apps\shop\abstract_models.py:149 .\apps\shop\abstract_models.py:169
 #: .\apps\shop\abstract_models.py:188 .\apps\sitesettings\models.py:50
 msgid "Description"
 msgstr "Описание"
 
-#: .\apps\feeds\abstract_models.py:71
+#: .\apps\feeds\abstract_models.py:74
 msgid "Do not use more than 1024 symbols"
 msgstr "Не более 1024 символов"
 
-#: .\apps\feeds\abstract_models.py:74
+#: .\apps\feeds\abstract_models.py:77
 msgid "Show on Site"
 msgstr "Показывать на сайте"
 
-#: .\apps\feeds\abstract_models.py:75
+#: .\apps\feeds\abstract_models.py:78
+msgid "Is Main"
+msgstr "Основное"
+
+#: .\apps\feeds\abstract_models.py:79
 msgid "Date of Publication"
 msgstr "Дата публикации"
 
-#: .\apps\feeds\abstract_models.py:76
+#: .\apps\feeds\abstract_models.py:80
 msgid "Date of Creation"
 msgstr "Дата создания"
 
@@ -337,14 +349,6 @@ msgstr "Заголовок в меню"
 #: .\apps\pages\abstract_models.py:59
 msgid "URL for Redirect"
 msgstr "URL для редиректа"
-
-#: .\apps\pages\abstract_models.py:61 .\apps\shop\abstract_models.py:38
-#: .\apps\shop\abstract_models.py:50 .\apps\shop\abstract_models.py:63
-#: .\apps\shop\abstract_models.py:98 .\apps\shop\abstract_models.py:110
-#: .\apps\shop\abstract_models.py:147 .\apps\shop\abstract_models.py:167
-#: .\apps\shop\abstract_models.py:186
-msgid "URL"
-msgstr "URL"
 
 #: .\apps\pages\abstract_models.py:69
 msgid "Module parameters"
@@ -767,7 +771,7 @@ msgstr "Подтвердить изменения"
 #: .\templates\dartcms\apps\users\change_password.html:24
 #: .\templates\dartcms\views\delete.html:16
 #: .\templates\dartcms\views\insert.html:21
-#: .\templates\dartcms\views\update.html:20
+#: .\templates\dartcms\views\update.html:21
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -820,11 +824,11 @@ msgstr "Поиск"
 msgid "Loading.."
 msgstr "Загрузка.."
 
-#: .\templates\dartcms\views\update.html:7
+#: .\templates\dartcms\views\update.html:8
 msgid "Update Record"
 msgstr "Редактировать запись"
 
-#: .\templates\dartcms\views\update.html:19
+#: .\templates\dartcms\views\update.html:20
 msgid "Update"
 msgstr "Редактировать"
 
