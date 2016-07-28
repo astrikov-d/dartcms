@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 import json
 from datetime import datetime
 
-from django.http import HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.utils.translation import ugettext as _
 
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
@@ -27,8 +27,8 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
     paginate_by = None
     allow_empty = True
     grid_columns = [
-        {'field': 'name', 'width': '70%'},
-        {'field': 'date_created', 'width': '30%'},
+        {'field': 'name', 'width': '70%', 'label': _('Name')},
+        {'field': 'date_created', 'width': '30%', 'label': _('Date created')},
     ]
     search = None
     search_form = None
