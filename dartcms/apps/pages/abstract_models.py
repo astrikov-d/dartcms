@@ -92,7 +92,7 @@ class AbstractPage(MPTTModel):
     def menu_url(self):
         lang = get_language()
         prefix = '' if lang == settings.LANGUAGE_CODE else '/%s' % lang
-        return prefix + self.menu_url if self.menu_url else prefix + self.url
+        return self.redirect_url if self.redirect_url else prefix + self.url
 
     @property
     def page_url(self):

@@ -46,7 +46,8 @@ class PageForm(BetterModelForm):
             ), 'legend': _('Advanced')}))
 
     module = forms.ModelChoiceField(
-        PageModule.objects.filter(is_enabled=True).exclude(slug='homepage'), empty_label=None)
+        PageModule.objects.filter(is_enabled=True).exclude(slug='homepage'), empty_label=None,
+        initial=PageModule.objects.get(slug='page'), label=_('Module'))
     ad_section = forms.ModelChoiceField(AdSection.objects.filter(is_enabled=True), required=False, label=_('Ads'))
 
     def __init__(self, *args, **kwargs):

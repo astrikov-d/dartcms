@@ -18,7 +18,7 @@ def get_ads(context, place, limit):
     if not hasattr(context['request'], 'page') or context['request'].page is None:
         return {}
 
-    section = context['request'].page.adv_section
+    section = context['request'].page.ad_section
     place = AdPlace.objects.get(slug=place)
 
     ad_model = get_model('ads', 'Ad')
@@ -30,9 +30,4 @@ def get_ads(context, place, limit):
         date_to__gt=datetime.now()
     ).order_by('?')[0:limit]
 
-    if ads:
-        ad = ads[0]
-    else:
-        ad = None
-
-    return {'object': ad}
+    return {'object_list': ads}
