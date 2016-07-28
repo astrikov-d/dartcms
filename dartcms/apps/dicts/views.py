@@ -24,7 +24,7 @@ class DictsFormMixin(object):
 
 
 class GridDictsView(DictsFormMixin, GridView):
-    pass
+    search = ['name']
 
 
 class InsertDictsView(DictsFormMixin, InsertObjectView):
