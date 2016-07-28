@@ -24,6 +24,8 @@ class Feed(models.Model):
     class Meta:
         app_label = 'feeds'
         ordering = ['name']
+        verbose_name = _('Feed')
+        verbose_name_plural = _('Feeds')
 
     def __unicode__(self):
         return self.name
@@ -44,6 +46,8 @@ class AbstractFeedItem(models.Model):
         app_label = 'feeds'
         ordering = ['-date_published']
         abstract = True
+        verbose_name = _('Feed item')
+        verbose_name_plural = _('Feed items')
 
     @property
     def search_content_type(self):

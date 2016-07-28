@@ -8,10 +8,10 @@ DARTCMS_REQUIRED_APPS = [
     'dartcms',
     'dartcms.apps.filemanager',
     'dartcms.apps.modules',
-    'dartcms.apps.sitesettings',
 ]
 
 DARTCMS_OPTIONAL_APPS = [
+    'dartcms.apps.sitesettings',
     'dartcms.apps.pages',
     'dartcms.apps.ads',
     'dartcms.apps.feedback',
