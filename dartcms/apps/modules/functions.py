@@ -12,4 +12,7 @@ def get_current_module(path):
 
     module_slug = path.replace(dartcms_path, '', 1).split('/')[0]
     if module_slug:
-        return Module.objects.get(slug=module_slug)
+        try:
+            return Module.objects.get(slug=module_slug)
+        except Module.DoesNotExist:
+            pass

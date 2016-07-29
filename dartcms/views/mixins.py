@@ -57,11 +57,13 @@ class AdminMixin(ModulePermissionsMixin):
                     app_label, form_class_name = form_config['form_class'].split('.')
                     self.form_class = get_form_class(app_label, form_class_name)
                 form_fields = form_config.get('fields', '__all__')
+                exclude_fields = form_config.get('exclude', [])
             else:
                 form_fields = '__all__'
+                exclude_fields = []
 
             if self.form_class is None:
-                self.form_class = modelform_factory(self.model, fields=form_fields)
+                self.form_class = modelform_factory(self.model, fields=form_fields, exclude=exclude_fields)
 
         return super(AdminMixin, self).dispatch(request, *args, **kwargs)
 
