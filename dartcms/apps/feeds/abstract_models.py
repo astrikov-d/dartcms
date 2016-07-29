@@ -4,6 +4,8 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from autoslug import AutoSlugField
+
 from dartcms.utils.fields import RteField
 
 
@@ -56,6 +58,7 @@ class AbstractFeedItem(models.Model):
     def __unicode__(self):
         return self.name
 
+    slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
     feed = models.ForeignKey(Feed, verbose_name=_('Feed'), on_delete=models.PROTECT)
     name = models.CharField(max_length=1024, verbose_name=_('Title'))
     short_text = RteField(verbose_name=_('Short Text'))
@@ -72,5 +75,6 @@ class AbstractFeedItem(models.Model):
         blank=True
     )
     is_visible = models.BooleanField(default=True, verbose_name=_('Show on Site'))
+    is_main = models.BooleanField(default=True, verbose_name=_('Is Main'))
     date_published = models.DateTimeField(default=datetime.datetime.now, verbose_name=_('Date of Publication'))
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date of Creation'))
