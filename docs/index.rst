@@ -54,4 +54,5 @@ Contents
    app_forking
    dynamic_loading
    generic_views
+   modules
 

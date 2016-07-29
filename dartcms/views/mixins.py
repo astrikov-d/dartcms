@@ -2,7 +2,11 @@
 import re
 
 from django.core.urlresolvers import reverse
+from django.forms import modelform_factory
 from django.http import Http404, JsonResponse
+
+from dartcms.utils.loading import get_model, get_form_class
+from dartcms.apps.modules.functions import get_current_module
 
 
 class ModulePermissionsMixin(object):
@@ -24,12 +28,42 @@ class ModulePermissionsMixin(object):
 
 
 class AdminMixin(ModulePermissionsMixin):
+    config = None
+
+    module = None
+    model = None
+    form_class = None
+
     parent_model = None
     parent_model_fk = None
 
     parent_kwarg_name = ''
 
     page_header = ''
+
+    def dispatch(self, request, *args, **kwargs):
+        self.module = get_current_module(request.path)
+        if self.module and self.module.config:
+            self.config = self.module.config
+
+            model_label = self.config.get('model', self.model)
+            if model_label:
+                app_label, model_name = model_label.split('.')
+                self.model = get_model(app_label, model_name)
+
+            form_config = self.config.get('form')
+            if form_config:
+                if 'form_class' in form_config:
+                    app_label, form_class_name = form_config['form_class'].split('.')
+                    self.form_class = get_form_class(app_label, form_class_name)
+                form_fields = form_config.get('fields', '__all__')
+            else:
+                form_fields = '__all__'
+
+            if self.form_class is None:
+                self.form_class = modelform_factory(self.model, fields=form_fields)
+
+        return super(AdminMixin, self).dispatch(request, *args, **kwargs)
 
     def get_foreign_key_name(self):
         if self.parent_model_fk or self.parent_model:

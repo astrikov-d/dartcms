@@ -30,6 +30,7 @@ setup(
         'django-mptt>=0.8.4',
         'django-widget-tweaks>=1.4.1',
         'Pillow>=3.2.0',
+        'pytils==0.3'
     ],
     license='MIT License',
     zip_safe=False,
