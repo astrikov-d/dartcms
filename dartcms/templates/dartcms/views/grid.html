@@ -104,10 +104,15 @@
                                 handler: function () {
                                     var selected = grid.datagrid('getSelected');
                                     if (selected) {
-                                        window.location.href = '{{ request.path }}{{ action.url }}/' + selected.pk + '/';
+                                        var url = '{{ request.path }}{{ action.url }}/' + selected.pk + '/';
+                                        {% if action.target %}
+                                            window.open(url, '{{ action.target }}');
+                                        {% else %}
+                                            window.location.href = url;
+                                        {% endif %}
                                     }
                                 }
-                            }
+                            },
                         {% endfor %}
                         {% endif %}
 
