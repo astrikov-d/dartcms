@@ -1,6 +1,8 @@
 # coding: utf-8
+from decimal import Decimal
+
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, F
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
 
@@ -228,7 +230,7 @@ class AbstractOrder(models.Model):
     def sum_value(self):
         model = get_model('shop', 'OrderDetail')
         sum_value = model.objects.filter(order=self).aggregate(
-            sum_value=Sum('price', field='price * quantity'))['sum_value']
+            sum_value=Sum(F('price') * F('quantity'), output_field=models.DecimalField()))['sum_value']
         if not sum_value:
             sum_value = 0
         return sum_value
