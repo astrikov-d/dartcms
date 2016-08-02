@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
 from django.utils.translation import ugettext as __
@@ -199,7 +199,6 @@ class AbstractOrder(models.Model):
         verbose_name_plural = _('orders')
         ordering = ['-date_created']
 
-    user = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True, on_delete=models.SET_NULL)
     fullname = models.CharField(_('Fullname'), max_length=255)
     email = models.EmailField(_('E-mail'), null=True, blank=True)
     shipping_address = models.TextField(_('Shipping address'), null=True, blank=True)

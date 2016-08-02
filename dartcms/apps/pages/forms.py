@@ -25,6 +25,7 @@ class PageForm(BetterModelForm):
                 'header',
                 'menu_name',
                 'menu_url',
+                'redirect_url',
                 'module',
                 'module_params',
             ), 'legend': _('Main')}),
