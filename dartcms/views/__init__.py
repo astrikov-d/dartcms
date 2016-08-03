@@ -79,7 +79,7 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
                 term = self.request.GET.get(field, False)
                 if term:
                     queryset = queryset.filter(**{
-                        field: True if term else False
+                        field: True if term == 'on' else False
                     })
             elif field_type == 'FOREIGN_KEY':
                 term = self.request.GET.get(field, '')
