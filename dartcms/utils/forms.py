@@ -2,13 +2,20 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+BOOLEAN_CHOICES = (
+    ('', ''),
+    ('ON', _('Yes')),
+    ('OFF', _('No'))
+)
+
 DYNAMIC_FIELDS_MAPPING = {
     'STRING': {'class': forms.CharField, 'defaults': {'max_length': 255}},
     'DATE': {'class': forms.DateField, 'defaults': {'widget': forms.TextInput(attrs={'class': 'date'})}},
     'TIME': {'class': forms.TimeField, 'defaults': {'widget': forms.TextInput(attrs={'class': 'time'})}},
     'DATETIME': {'class': forms.DateTimeField, 'defaults': {'widget': forms.TextInput(attrs={'class': 'datetime'})}},
     'FOREIGN_KEY': {'class': forms.ModelChoiceField},
-    'BOOLEAN': {'class': forms.BooleanField}
+    'BOOLEAN': {'class': forms.CharField,
+                'defaults': {'widget': forms.Select(choices=BOOLEAN_CHOICES)}}
 }
 
 
