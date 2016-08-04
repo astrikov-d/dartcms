@@ -79,7 +79,7 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
                 term = self.request.GET.get(field, False)
                 if term:
                     queryset = queryset.filter(**{
-                        field: True if term == 'on' else False
+                        field: True if term == 'ON' else False
                     })
             elif field_type == 'FOREIGN_KEY':
                 term = self.request.GET.get(field, '')
@@ -165,7 +165,10 @@ class AjaxInsertObjectMixin(AdminMixin, JSONResponseMixin):
         if self.parent_kwarg_name:
             setattr(self.object, self.get_foreign_key_name(), self.kwargs[self.parent_kwarg_name])
         self.object.save()
-        form.save_m2m()
+        try:
+            form.save_m2m()
+        except AttributeError:
+            pass
 
         inlines = kwargs.pop('inlines', [])
         for formset in inlines:

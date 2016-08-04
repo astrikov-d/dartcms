@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 BOOLEAN_CHOICES = (
     ('', ''),
-    ('on', _('Yes')),
-    ('off', _('No'))
+    ('ON', _('Yes')),
+    ('OFF', _('No'))
 )
 
 DYNAMIC_FIELDS_MAPPING = {
