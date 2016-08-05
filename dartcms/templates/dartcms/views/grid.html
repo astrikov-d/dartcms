@@ -11,13 +11,6 @@
     <script type="text/javascript"
             src="{% static 'dartcms/js/lib/jquery-validation/jquery.validate.min.js' %}"></script>
 
-    {% get_current_language as LANG %}
-
-    {% if LANG == 'ru-ru' %}
-        <script type="text/javascript"
-                src="{% static 'dartcms/js/lib/jquery-validation/localization/messages_ru.min.js' %}"></script>
-    {% endif %}
-
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment-with-locales.min.js"></script>
     <script type="text/javascript"
@@ -26,6 +19,18 @@
     <script type="text/javascript" src="{% static 'dartcms/js/apps/base/http.js' %}"></script>
     <script type="text/javascript" src="{% static 'dartcms/js/apps/base/grid.js' %}"></script>
     <script type="text/javascript" src="{% static 'dartcms/js/apps/base/forms.js' %}"></script>
+
+    {% get_current_language as LANG %}
+
+    {% if LANG == 'ru-ru' %}
+        <script type="text/javascript"
+                src="{% static 'dartcms/js/lib/jquery-validation/localization/messages_ru.min.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'dartcms/assets/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ru.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'dartcms/assets/easyui/locale/easyui-lang-ru.js' %}"></script>
+    {% endif %}
+
 {% endblock %}
 
 {% block css %}

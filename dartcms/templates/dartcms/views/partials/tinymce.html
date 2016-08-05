@@ -1,6 +1,12 @@
+{% load i18n %}
+
 <script type="text/javascript">
     function mceInit() {
         tinymce.init({
+            {% get_current_language as LANG %}
+            {% if LANG == 'ru-ru' %}
+            language: 'ru',
+            {% endif %}
             selector: ".rte",
             plugins: 'advlist autolink link image lists charmap print preview code table',
             file_browser_callback: filebrowserCallback,
