@@ -107,12 +107,13 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
         nonSelectedText: gettext('None selected'),
         nSelectedText: gettext(' options selected'),
         selectAllText: gettext('Select all'),
+        filterPlaceholder: gettext('Search...'),
         includeSelectAllOption: true,
         maxHeight: 400
     };
     selects.each(function(){
         var select = $(this);
-        select_param.enableFiltering = $('option', select).length > 10;
+        select_param.enableCaseInsensitiveFiltering = $('option', select).length > 10;
         select.multiselect(select_param);
     });
 };
