@@ -101,11 +101,18 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
         });
     });
 
-    $('select[multiple="multiple"]', form).multiselect({
+    var selects = $('select[multiple="multiple"]', form);
+    var select_param = {
         allSelectedText: gettext('All selected'),
         nonSelectedText: gettext('None selected'),
         nSelectedText: gettext(' options selected'),
         selectAllText: gettext('Select all'),
-        includeSelectAllOption: true
+        includeSelectAllOption: true,
+        maxHeight: 400
+    };
+    selects.each(function(){
+        var select = $(this);
+        select_param.enableFiltering = $('option', select).length > 10;
+        select.multiselect(select_param);
     });
 };
