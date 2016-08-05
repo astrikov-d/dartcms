@@ -165,10 +165,7 @@ class AjaxInsertObjectMixin(AdminMixin, JSONResponseMixin):
         if self.parent_kwarg_name:
             setattr(self.object, self.get_foreign_key_name(), self.kwargs[self.parent_kwarg_name])
         self.object.save()
-        try:
-            form.save_m2m()
-        except AttributeError:
-            pass
+        form.save_m2m()
 
         inlines = kwargs.pop('inlines', [])
         for formset in inlines:
