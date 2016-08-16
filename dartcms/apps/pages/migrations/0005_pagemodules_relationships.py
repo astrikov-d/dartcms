@@ -4,12 +4,10 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.utils.loading import get_model
-
-PageModule = get_model('pages', 'PageModule')
-
 
 def setup_relationships(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+
     feeds_module = PageModule.objects.get(slug='feeds')
     feeds_module.related_model = 'feeds.Feed'
     feeds_module.save(update_fields=['related_model'])
@@ -20,6 +18,8 @@ def setup_relationships(apps, schema):
 
 
 def drop_relationships(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+
     PageModule.objects.all().update(related_model=None)
 
 

@@ -4,8 +4,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.apps.modules.models import Module, ModuleGroup
-
 MODULE_GROUPS = [
     {
         'sort': 1,
@@ -57,6 +55,9 @@ MODULE_GROUPS = [
 
 
 def insert_modules(apps, schema):
+    ModuleGroup = apps.get_model('modules', 'ModuleGroup')
+    Module = apps.get_model('modules', 'Module')
+
     for group in MODULE_GROUPS:
         group_modules = group.pop('modules', [])
         group = ModuleGroup.objects.create(**group)
@@ -66,6 +67,7 @@ def insert_modules(apps, schema):
 
 
 def delete_modules(apps, schema):
+    ModuleGroup = apps.get_model('modules', 'ModuleGroup')
     for group in MODULE_GROUPS:
         ModuleGroup.objects.get(slug=group['slug']).delete()
 

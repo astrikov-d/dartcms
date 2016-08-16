@@ -4,10 +4,9 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.apps.modules.models import Module
-
 
 def update_runtime_config(apps, schema):
+    Module = apps.get_model('modules', 'Module')
     models_mapping = {
         'shop-manufactures': 'shop.ProductManufacturer',
         'shop-labels': 'shop.ProductLabel',

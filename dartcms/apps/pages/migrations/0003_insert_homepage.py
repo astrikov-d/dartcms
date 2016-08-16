@@ -4,13 +4,11 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.utils.loading import get_model
-
-PageModule = get_model('pages', 'PageModule')
-Page = get_model('pages', 'Page')
-
 
 def insert_homepage(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+    Page = apps.get_model('pages', 'Page')
+
     homepage_module = PageModule.objects.create(
         slug='homepage',
         name='Homepage'
@@ -27,6 +25,9 @@ def insert_homepage(apps, schema):
 
 
 def drop_homepage(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+    Page = apps.get_model('pages', 'Page')
+
     Page.objects.filter(module__slug='homepage').delete()
     PageModule.objects.filter(slug='homepage').delete()
 
