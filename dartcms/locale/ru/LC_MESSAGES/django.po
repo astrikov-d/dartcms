@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-16 10:52+0700\n"
+"POT-Creation-Date: 2016-08-16 12:42+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,6 +175,8 @@ msgid "Phone"
 msgstr "Телефон"
 
 #: .\apps\feedback\apps.py:8
+#: .\apps\modules\migrations\0004_insert_feedback_module.py:20
+#: .\apps\pages\migrations\0007_feedback_pagemodule.py:16
 msgid "Feedback"
 msgstr "Обратная связь"
 
@@ -200,7 +202,8 @@ msgid "Feed"
 msgstr "Лента"
 
 #: .\apps\feeds\abstract_models.py:30 .\apps\feeds\apps.py:8
-#: .\apps\modules\migrations\0002_insert_modules.py:42
+#: .\apps\modules\migrations\0002_insert_modules.py:44
+#: .\apps\pages\migrations\0004_insert_pagemodules.py:10
 msgid "Feeds"
 msgstr "Ленты"
 
@@ -279,29 +282,74 @@ msgstr "Такой каталог уже существует"
 msgid "DartCMS Modules"
 msgstr "Модули DartCMS"
 
-#: .\apps\modules\migrations\0002_insert_modules.py:14
-#| msgid "Django administration"
+#: .\apps\modules\migrations\0002_insert_modules.py:16
 msgid "Administration"
 msgstr "Администрирование"
 
-#: .\apps\modules\migrations\0002_insert_modules.py:19
-#| msgid "Users"
+#: .\apps\modules\migrations\0002_insert_modules.py:21
 msgid "CMS Users"
 msgstr "Пользователи CMS"
 
-#: .\apps\modules\migrations\0002_insert_modules.py:30
+#: .\apps\modules\migrations\0002_insert_modules.py:32
 #: .\apps\pages\forms.py:35
 msgid "Content"
 msgstr "Содержимое"
 
-#: .\apps\modules\migrations\0002_insert_modules.py:35
+#: .\apps\modules\migrations\0002_insert_modules.py:37
 msgid "Site Structure"
 msgstr "Карта сайта"
 
-#: .\apps\modules\migrations\0002_insert_modules.py:53
-#| msgid "Price"
+#: .\apps\modules\migrations\0002_insert_modules.py:55
 msgid "Services"
 msgstr "Сервисы"
+
+#: .\apps\modules\migrations\0003_insert_modules.py:20
+#: .\apps\sitesettings\apps.py:8 .\apps\sitesettings\models.py:29
+msgid "Site settings"
+msgstr "Настройки сайта"
+
+#: .\apps\modules\migrations\0005_insert_modules.py:16
+msgid "Advertising"
+msgstr "Реклама"
+
+#: .\apps\modules\migrations\0005_insert_modules.py:21
+msgid "Ad banners"
+msgstr "Баннеры"
+
+#: .\apps\modules\migrations\0005_insert_modules.py:28
+#| msgid "ad places"
+msgid "Ad places"
+msgstr "Рекламные места"
+
+#: .\apps\modules\migrations\0005_insert_modules.py:35
+#| msgid "ad sections"
+msgid "Ad sections"
+msgstr "Рекламные разделы"
+
+#: .\apps\modules\migrations\0006_insert_shop_modules.py:15
+#: .\apps\pages\migrations\0004_insert_pagemodules.py:12 .\apps\shop\apps.py:8
+msgid "Shop"
+msgstr "Магазин"
+
+#: .\apps\modules\migrations\0006_insert_shop_modules.py:20
+#| msgid "Product catalog"
+msgid "Product catalogs"
+msgstr "Каталоги товаров"
+
+#: .\apps\modules\migrations\0006_insert_shop_modules.py:27
+#| msgid "product manufacturers"
+msgid "Product manufacturers"
+msgstr "Производители товаров"
+
+#: .\apps\modules\migrations\0006_insert_shop_modules.py:34
+#| msgid "product labels"
+msgid "Product labels"
+msgstr "Метки для товаров"
+
+#: .\apps\modules\migrations\0007_insert_shop_modules.py:20
+#| msgid "Order"
+msgid "Orders"
+msgstr "Заказы"
 
 #: .\apps\modules\models.py:11
 msgid "Module Groups"
@@ -423,6 +471,22 @@ msgstr "SEO"
 #: .\apps\shop\product\forms.py:32 .\apps\shop\section\forms.py:29
 msgid "Advanced"
 msgstr "Дополнительно"
+
+#: .\apps\pages\migrations\0003_insert_homepage.py:19
+#: .\apps\pages\migrations\0003_insert_homepage.py:24
+#| msgid "page"
+msgid "Homepage"
+msgstr "Главная страница"
+
+#: .\apps\pages\migrations\0004_insert_pagemodules.py:11
+#| msgid "Contact form"
+msgid "Contacts"
+msgstr "Обратная связь"
+
+#: .\apps\pages\migrations\0004_insert_pagemodules.py:13
+#| msgid "Start Date"
+msgid "Static Page"
+msgstr "Статическая страница"
 
 #: .\apps\shop\abstract_models.py:36
 msgid "product catalogs"
@@ -615,13 +679,66 @@ msgstr "Заказ"
 msgid "Quantity"
 msgstr "Количество"
 
-#: .\apps\shop\apps.py:8
-msgid "Shop"
-msgstr "Магазин"
-
 #: .\apps\shop\catalog\urls.py:23
 msgid "Sections"
 msgstr "Разделы"
+
+#: .\apps\shop\migrations\0004_insert_payment_types.py:10
+msgid "Cash"
+msgstr "Наличный расчет"
+
+#: .\apps\shop\migrations\0004_insert_payment_types.py:11
+msgid "Cashless"
+msgstr "Безналичный расчет"
+
+#: .\apps\shop\migrations\0004_insert_payment_types.py:12
+msgid "Credit card"
+msgstr "Кредитная карта"
+
+#: .\apps\shop\migrations\0005_insert_shipping_types.py:10
+#| msgid "order"
+msgid "Courier"
+msgstr "Курьер"
+
+#: .\apps\shop\migrations\0005_insert_shipping_types.py:11
+#| msgid "Main"
+msgid "Mail"
+msgstr "Почта"
+
+#: .\apps\shop\migrations\0005_insert_shipping_types.py:12
+msgid "Delivery service"
+msgstr "Служба доставки"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:10
+#| msgid "Accept Changes"
+msgid "Accepted"
+msgstr "Подтвержден"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:11
+msgid "Performed"
+msgstr "Выполнен"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:12
+msgid "Avaiting payment"
+msgstr "Ожидается платеж"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:13
+#| msgid "Delete"
+msgid "Delivered"
+msgstr "Доставлен"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:14
+msgid "Ready"
+msgstr "Готов к выдаче"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:15
+msgid "Completed"
+msgstr "Завершен"
+
+#: .\apps\shop\migrations\0006_insert_order_statuses.py:16
+#| msgid "Cancel"
+msgid "Canceled"
+msgstr "Отменен"
 
 #: .\apps\shop\order\urls.py:17
 msgid "#"
@@ -639,9 +756,14 @@ msgstr "Состав"
 msgid "Products"
 msgstr "Товары"
 
-#: .\apps\sitesettings\apps.py:8 .\apps\sitesettings\models.py:29
-msgid "Site settings"
-msgstr "Настройки сайта"
+#: .\apps\sitesettings\migrations\0002_insert_settings.py:13
+#| msgid "Menu name"
+msgid "Site name"
+msgstr "Заголовок сайта"
+
+#: .\apps\sitesettings\migrations\0002_insert_settings.py:18
+msgid "Email for feedback"
+msgstr "E-mail для обратной связи"
 
 #: .\apps\sitesettings\models.py:18
 msgid "String"

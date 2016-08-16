@@ -3,31 +3,39 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
+from django.utils import translation
+from django.utils.translation import gettext_lazy as _
 
 from dartcms import get_model
 
+
 def insert_homepage(apps, schema):
+    from django.conf import settings
+    translation.activate(settings.LANGUAGE_CODE)
+
     PageModule = get_model('pages', 'PageModule')
     Page = get_model('pages', 'Page')
 
     homepage_module = PageModule.objects.create(
         slug='homepage',
-        name='Homepage'
+        name=_('Homepage')
     )
 
     homepage = {
         'parent': None,
-        'title': 'Homepage',
+        'title': _('Homepage'),
         'slug': '',
         'url': '/',
         'module': homepage_module
     }
     Page.objects.create(**homepage)
 
+    translation.deactivate()
+
 
 def drop_homepage(apps, schema):
-    PageModule = get_model('pages', 'PageModule')
-    Page = get_model('pages', 'Page')
+    PageModule = apps.get_model('pages', 'PageModule')
+    Page = apps.get_model('pages', 'Page')
 
     Page.objects.filter(module__slug='homepage').delete()
     PageModule.objects.filter(slug='homepage').delete()

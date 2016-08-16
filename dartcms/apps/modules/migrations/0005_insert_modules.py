@@ -3,6 +3,9 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
+from django.utils.translation import gettext_lazy as _
+from django.utils import translation
+
 
 MODULE_GROUPS = [
     {
@@ -10,26 +13,26 @@ MODULE_GROUPS = [
         'description': '',
         'fa': 'fa-rocket',
         'slug': 'ads',
-        'name': 'Advertising',
+        'name': _('Advertising'),
         'modules': [
             {
                 'sort': 1,
                 'is_enabled': True,
-                'name': 'Ad banners',
+                'name': _('Ad banners'),
                 'slug': 'ad',
                 'description': ''
             },
             {
                 'sort': 2,
                 'is_enabled': True,
-                'name': 'Ad places',
+                'name': _('Ad places'),
                 'slug': 'adplace',
                 'description': ''
             },
             {
                 'sort': 3,
                 'is_enabled': True,
-                'name': 'Ad sections',
+                'name': _('Ad sections'),
                 'slug': 'adsection',
                 'description': ''
             }
@@ -39,6 +42,9 @@ MODULE_GROUPS = [
 
 
 def insert_modules(apps, schema):
+    from django.conf import settings
+    translation.activate(settings.LANGUAGE_CODE)
+
     ModuleGroup = apps.get_model('modules', 'ModuleGroup')
     Module = apps.get_model('modules', 'Module')
 
@@ -48,6 +54,8 @@ def insert_modules(apps, schema):
         for module in group_modules:
             module['group'] = group
             Module.objects.create(**module)
+
+    translation.deactivate()
 
 
 def delete_modules(apps, schema):
