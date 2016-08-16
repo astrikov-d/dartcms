@@ -4,8 +4,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.apps.sitesettings.models import SiteSettings
-
 sitesettings = [
     {
         'slug': 'site_name',
@@ -21,11 +19,13 @@ sitesettings = [
 
 
 def insert_settings(apps, schema):
+    SiteSettings = apps.get_model('sitesettings', 'SiteSettings')
     for sitesetting in sitesettings:
         SiteSettings.objects.create(**sitesetting)
 
 
 def delete_settings(apps, schema):
+    SiteSettings = apps.get_model('sitesettings', 'SiteSettings')
     for sitesetting in sitesettings:
         SiteSettings.objects.get(slug=sitesetting['slug']).delete()
 

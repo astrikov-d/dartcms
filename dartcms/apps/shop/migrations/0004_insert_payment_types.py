@@ -3,9 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms import get_model
-
-model = get_model('shop', 'OrderPaymentType')
 
 records = [
     dict(sort=1, slug='cash', name='Cash'),
@@ -15,11 +12,13 @@ records = [
 
 
 def insert(apps, schema):
+    model = apps.get_model('shop', 'OrderPaymentType')
     for record in records:
         model.objects.create(**record)
 
 
 def delete(apps, schema):
+    model = apps.get_model('shop', 'OrderPaymentType')
     for record in records:
         model.objects.get(slug=record['slug']).delete()
 

@@ -4,9 +4,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.utils.loading import get_model
-
-PageModule = get_model('pages', 'PageModule')
 
 PAGE_MODULES = [
     {'slug': 'feeds', 'name': 'Feeds'},
@@ -17,11 +14,15 @@ PAGE_MODULES = [
 
 
 def insert_pagemodules(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+
     for m in PAGE_MODULES:
         PageModule.objects.create(**m)
 
 
 def drop_pagemodules(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+
     for m in PAGE_MODULES:
         PageModule.objects.filter(slug=m['slug']).delete()
 

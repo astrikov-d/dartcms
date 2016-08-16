@@ -4,10 +4,13 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.apps.modules.models import Module, ModuleGroup
+
 
 
 def insert_modules(apps, schema):
+    ModuleGroup = apps.get_model('modules', 'ModuleGroup')
+    Module = apps.get_model('modules', 'Module')
+
     module = {
         'sort': 2,
         'is_enabled': True,
@@ -21,6 +24,8 @@ def insert_modules(apps, schema):
 
 
 def delete_modules(apps, schema):
+    Module = apps.get_model('modules', 'Module')
+
     Module.objects.get(slug='sitesettings').delete()
 
 

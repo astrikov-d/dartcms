@@ -4,16 +4,16 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from dartcms.utils.loading import get_model
-
-PageModule = get_model('pages', 'PageModule')
-
 
 def insert_module(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+
     PageModule.objects.create(slug='feedback', name='Feedback', related_model='feedback.FormType'),
 
 
 def drop_module(apps, schema):
+    PageModule = apps.get_model('pages', 'PageModule')
+
     PageModule.objects.get(slug='feedback').delete()
 
 
