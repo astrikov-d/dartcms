@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-28 13:48+0700\n"
+"POT-Creation-Date: 2016-08-16 10:52+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,15 +30,16 @@ msgstr "Рекламные места"
 #: .\apps\ads\abstract_models.py:17 .\apps\ads\abstract_models.py:32
 #: .\apps\ads\abstract_models.py:46 .\apps\feedback\abstract_models.py:18
 #: .\apps\feeds\abstract_models.py:21 .\apps\feeds\abstract_models.py:36
-#: .\apps\modules\models.py:17 .\apps\modules\models.py:33
-#: .\apps\pages\abstract_models.py:22 .\apps\shop\abstract_models.py:22
-#: .\apps\shop\abstract_models.py:148 .\apps\shop\abstract_models.py:168
-#: .\apps\shop\abstract_models.py:187 .\apps\shop\abstract_models.py:267
+#: .\apps\modules\models.py:19 .\apps\modules\models.py:35
+#: .\apps\pages\abstract_models.py:22 .\apps\shop\abstract_models.py:23
+#: .\apps\shop\abstract_models.py:149 .\apps\shop\abstract_models.py:169
+#: .\apps\shop\abstract_models.py:188 .\apps\shop\abstract_models.py:267
+#: .\views\__init__.py:30
 msgid "Name"
 msgstr "Имя"
 
 #: .\apps\ads\abstract_models.py:19 .\apps\ads\abstract_models.py:33
-#: .\apps\ads\abstract_models.py:57 .\apps\modules\models.py:38
+#: .\apps\ads\abstract_models.py:57 .\apps\modules\models.py:41
 #: .\apps\pages\abstract_models.py:25 .\apps\pages\abstract_models.py:80
 msgid "Is Enabled"
 msgstr "Включено"
@@ -91,7 +92,7 @@ msgstr "Рекламное место"
 msgid "Views"
 msgstr "Чисто показов"
 
-#: .\apps\ads\abstract_models.py:54 .\apps\shop\abstract_models.py:111
+#: .\apps\ads\abstract_models.py:54 .\apps\shop\abstract_models.py:112
 msgid "Section"
 msgstr "Раздел"
 
@@ -100,7 +101,7 @@ msgid "Picture"
 msgstr "Изображение"
 
 #: .\apps\ads\apps.py:8 .\apps\pages\abstract_models.py:77
-#: .\apps\pages\forms.py:37 .\apps\pages\forms.py:51
+#: .\apps\pages\forms.py:38 .\apps\pages\forms.py:50
 msgid "Ads"
 msgstr "Реклама"
 
@@ -161,7 +162,7 @@ msgstr "Сообщение"
 msgid "Answer"
 msgstr "Ответ"
 
-#: .\apps\feedback\abstract_models.py:44 .\apps\shop\abstract_models.py:26
+#: .\apps\feedback\abstract_models.py:44 .\apps\shop\abstract_models.py:27
 msgid "Is Visible"
 msgstr "Показывать"
 
@@ -189,8 +190,8 @@ msgstr "Тип формы"
 msgid "Feed types"
 msgstr "Типы форм"
 
-#: .\apps\feeds\abstract_models.py:22 .\apps\modules\models.py:16
-#: .\apps\modules\models.py:36 .\apps\pages\abstract_models.py:21
+#: .\apps\feeds\abstract_models.py:22 .\apps\modules\models.py:18
+#: .\apps\modules\models.py:38 .\apps\pages\abstract_models.py:21
 msgid "Slug"
 msgstr "Имя для URL"
 
@@ -199,6 +200,7 @@ msgid "Feed"
 msgstr "Лента"
 
 #: .\apps\feeds\abstract_models.py:30 .\apps\feeds\apps.py:8
+#: .\apps\modules\migrations\0002_insert_modules.py:42
 msgid "Feeds"
 msgstr "Ленты"
 
@@ -211,10 +213,10 @@ msgid "Feed items"
 msgstr "Записи ленты"
 
 #: .\apps\feeds\abstract_models.py:61 .\apps\pages\abstract_models.py:61
-#: .\apps\shop\abstract_models.py:38 .\apps\shop\abstract_models.py:50
-#: .\apps\shop\abstract_models.py:63 .\apps\shop\abstract_models.py:98
-#: .\apps\shop\abstract_models.py:110 .\apps\shop\abstract_models.py:147
-#: .\apps\shop\abstract_models.py:167 .\apps\shop\abstract_models.py:186
+#: .\apps\shop\abstract_models.py:39 .\apps\shop\abstract_models.py:51
+#: .\apps\shop\abstract_models.py:64 .\apps\shop\abstract_models.py:99
+#: .\apps\shop\abstract_models.py:111 .\apps\shop\abstract_models.py:148
+#: .\apps\shop\abstract_models.py:168 .\apps\shop\abstract_models.py:187
 msgid "URL"
 msgstr "URL"
 
@@ -238,10 +240,10 @@ msgstr "Ключевые слова (Keywords)"
 msgid "Do not use more than 255 symbols"
 msgstr "Не более 255 символов"
 
-#: .\apps\feeds\abstract_models.py:73 .\apps\modules\models.py:20
-#: .\apps\modules\models.py:35 .\apps\shop\abstract_models.py:23
-#: .\apps\shop\abstract_models.py:149 .\apps\shop\abstract_models.py:169
-#: .\apps\shop\abstract_models.py:188 .\apps\sitesettings\models.py:50
+#: .\apps\feeds\abstract_models.py:73 .\apps\modules\models.py:22
+#: .\apps\modules\models.py:37 .\apps\shop\abstract_models.py:24
+#: .\apps\shop\abstract_models.py:150 .\apps\shop\abstract_models.py:170
+#: .\apps\shop\abstract_models.py:189 .\apps\sitesettings\models.py:50
 msgid "Description"
 msgstr "Описание"
 
@@ -277,36 +279,64 @@ msgstr "Такой каталог уже существует"
 msgid "DartCMS Modules"
 msgstr "Модули DartCMS"
 
-#: .\apps\modules\models.py:9
+#: .\apps\modules\migrations\0002_insert_modules.py:14
+#| msgid "Django administration"
+msgid "Administration"
+msgstr "Администрирование"
+
+#: .\apps\modules\migrations\0002_insert_modules.py:19
+#| msgid "Users"
+msgid "CMS Users"
+msgstr "Пользователи CMS"
+
+#: .\apps\modules\migrations\0002_insert_modules.py:30
+#: .\apps\pages\forms.py:35
+msgid "Content"
+msgstr "Содержимое"
+
+#: .\apps\modules\migrations\0002_insert_modules.py:35
+msgid "Site Structure"
+msgstr "Карта сайта"
+
+#: .\apps\modules\migrations\0002_insert_modules.py:53
+#| msgid "Price"
+msgid "Services"
+msgstr "Сервисы"
+
+#: .\apps\modules\models.py:11
 msgid "Module Groups"
 msgstr "Группы модулей"
 
-#: .\apps\modules\models.py:10
+#: .\apps\modules\models.py:12
 msgid "Module Group"
 msgstr "Группа модулей"
 
-#: .\apps\modules\models.py:18
+#: .\apps\modules\models.py:20
 msgid "FontAwesome class"
 msgstr "FontAwesome класс"
 
-#: .\apps\modules\models.py:19 .\apps\modules\models.py:34
+#: .\apps\modules\models.py:21 .\apps\modules\models.py:36
 msgid "Sort"
 msgstr "Сортировка"
 
-#: .\apps\modules\models.py:25 .\apps\users\forms.py:14
+#: .\apps\modules\models.py:27 .\apps\users\forms.py:14
 msgid "Modules"
 msgstr "Модули"
 
-#: .\apps\modules\models.py:26 .\apps\pages\abstract_models.py:66
-#: .\apps\pages\forms.py:50
+#: .\apps\modules\models.py:28 .\apps\pages\abstract_models.py:66
+#: .\apps\pages\forms.py:49
 msgid "Module"
 msgstr "Модуль"
 
-#: .\apps\modules\models.py:32
+#: .\apps\modules\models.py:34
 msgid "Group"
 msgstr "Группа"
 
-#: .\apps\modules\models.py:37 .\apps\shop\abstract_models.py:202
+#: .\apps\modules\models.py:39
+msgid "Config"
+msgstr "Конфигурация"
+
+#: .\apps\modules\models.py:40
 msgid "User"
 msgstr "Пользователь"
 
@@ -362,8 +392,8 @@ msgstr "Содержимое перед модулем"
 msgid "After Content"
 msgstr "Содержимое после модуля"
 
-#: .\apps\pages\abstract_models.py:74 .\apps\shop\abstract_models.py:24
-#: .\apps\shop\abstract_models.py:25
+#: .\apps\pages\abstract_models.py:74 .\apps\shop\abstract_models.py:25
+#: .\apps\shop\abstract_models.py:26
 msgid "Keywords (meta keywords)"
 msgstr "Ключевые слова (meta keywords)"
 
@@ -379,156 +409,149 @@ msgstr "Показывать в меню"
 msgid "Pages"
 msgstr "Страницы"
 
-#: .\apps\pages\forms.py:30 .\apps\shop\catalog\forms.py:18
-#: .\apps\shop\label\forms.py:18 .\apps\shop\manufacturer\forms.py:18
+#: .\apps\pages\forms.py:31 .\apps\shop\catalog\forms.py:18
 #: .\apps\shop\product\forms.py:23 .\apps\shop\section\forms.py:21
 msgid "Main"
 msgstr "Основное"
 
-#: .\apps\pages\forms.py:34
-msgid "Content"
-msgstr "Содержимое"
-
-#: .\apps\pages\forms.py:41 .\apps\shop\catalog\forms.py:22
-#: .\apps\shop\label\forms.py:22 .\apps\shop\manufacturer\forms.py:22
+#: .\apps\pages\forms.py:42 .\apps\shop\catalog\forms.py:22
 #: .\apps\shop\product\forms.py:27 .\apps\shop\section\forms.py:25
 msgid "SEO"
 msgstr "SEO"
 
-#: .\apps\pages\forms.py:46 .\apps\shop\catalog\forms.py:26
-#: .\apps\shop\label\forms.py:26 .\apps\shop\manufacturer\forms.py:26
+#: .\apps\pages\forms.py:47 .\apps\shop\catalog\forms.py:26
 #: .\apps\shop\product\forms.py:32 .\apps\shop\section\forms.py:29
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: .\apps\shop\abstract_models.py:35
+#: .\apps\shop\abstract_models.py:36
 msgid "product catalogs"
 msgstr "Каталоги товаров"
 
-#: .\apps\shop\abstract_models.py:36
+#: .\apps\shop\abstract_models.py:37
 msgid "product catalog"
 msgstr "Каталог товаров"
 
-#: .\apps\shop\abstract_models.py:39 .\apps\shop\abstract_models.py:51
-#: .\apps\shop\abstract_models.py:64 .\apps\shop\abstract_models.py:99
-#: .\apps\shop\abstract_models.py:120 .\apps\shop\abstract_models.py:132
+#: .\apps\shop\abstract_models.py:40 .\apps\shop\abstract_models.py:52
+#: .\apps\shop\abstract_models.py:65 .\apps\shop\abstract_models.py:100
+#: .\apps\shop\abstract_models.py:121 .\apps\shop\abstract_models.py:133
 msgid "Image"
 msgstr "Изображение"
 
-#: .\apps\shop\abstract_models.py:47
+#: .\apps\shop\abstract_models.py:48
 msgid "product manufacturers"
 msgstr "Производители товаров"
 
-#: .\apps\shop\abstract_models.py:48
+#: .\apps\shop\abstract_models.py:49
 msgid "product manufacturer"
 msgstr "Производитель товаров"
 
-#: .\apps\shop\abstract_models.py:59
+#: .\apps\shop\abstract_models.py:60
 msgid "product section"
 msgstr "Секция товаров"
 
-#: .\apps\shop\abstract_models.py:60
+#: .\apps\shop\abstract_models.py:61
 msgid "product sections"
 msgstr "Секции товаров"
 
-#: .\apps\shop\abstract_models.py:65
+#: .\apps\shop\abstract_models.py:66
 msgid "Parent Section"
 msgstr "Родительская секция"
 
-#: .\apps\shop\abstract_models.py:66
+#: .\apps\shop\abstract_models.py:67
 msgid "Product catalog"
 msgstr "Каталог товаров"
 
-#: .\apps\shop\abstract_models.py:95
+#: .\apps\shop\abstract_models.py:96
 msgid "product labels"
 msgstr "Метки для товаров"
 
-#: .\apps\shop\abstract_models.py:96
+#: .\apps\shop\abstract_models.py:97
 msgid "product label"
 msgstr "Метка для товара"
 
-#: .\apps\shop\abstract_models.py:107
+#: .\apps\shop\abstract_models.py:108
 msgid "products"
 msgstr "товары"
 
-#: .\apps\shop\abstract_models.py:108
+#: .\apps\shop\abstract_models.py:109
 msgid "product"
 msgstr "товар"
 
-#: .\apps\shop\abstract_models.py:112
+#: .\apps\shop\abstract_models.py:113
 msgid "Manufacturer"
 msgstr "Производитель"
 
-#: .\apps\shop\abstract_models.py:114
+#: .\apps\shop\abstract_models.py:115
 msgid "Labels"
 msgstr "Метки"
 
-#: .\apps\shop\abstract_models.py:116 .\apps\shop\abstract_models.py:266
+#: .\apps\shop\abstract_models.py:117 .\apps\shop\abstract_models.py:266
 msgid "Code"
 msgstr "Артикул"
 
-#: .\apps\shop\abstract_models.py:117
+#: .\apps\shop\abstract_models.py:118
 msgid "Short description"
 msgstr "Краткое описание"
 
-#: .\apps\shop\abstract_models.py:118
+#: .\apps\shop\abstract_models.py:119
 msgid "Residue"
 msgstr "Остаток"
 
-#: .\apps\shop\abstract_models.py:119 .\apps\shop\abstract_models.py:268
+#: .\apps\shop\abstract_models.py:120 .\apps\shop\abstract_models.py:268
 msgid "Price"
 msgstr "Цена"
 
-#: .\apps\shop\abstract_models.py:127
+#: .\apps\shop\abstract_models.py:128
 msgid "product picture"
 msgstr "Изображение товара"
 
-#: .\apps\shop\abstract_models.py:128
+#: .\apps\shop\abstract_models.py:129
 msgid "product pictures"
 msgstr "Изображения товаров"
 
-#: .\apps\shop\abstract_models.py:131 .\apps\shop\abstract_models.py:265
+#: .\apps\shop\abstract_models.py:132 .\apps\shop\abstract_models.py:265
 msgid "Product"
 msgstr "Товар"
 
-#: .\apps\shop\abstract_models.py:140
+#: .\apps\shop\abstract_models.py:141
 msgid "shipping type"
 msgstr "Тип доставки"
 
-#: .\apps\shop\abstract_models.py:141
+#: .\apps\shop\abstract_models.py:142
 msgid "shipping types"
 msgstr "Типы доставки"
 
-#: .\apps\shop\abstract_models.py:150 .\apps\shop\abstract_models.py:211
+#: .\apps\shop\abstract_models.py:151 .\apps\shop\abstract_models.py:211
 msgid "Cost"
 msgstr "Стоимость"
 
-#: .\apps\shop\abstract_models.py:151 .\apps\shop\abstract_models.py:170
-#: .\apps\shop\abstract_models.py:189
+#: .\apps\shop\abstract_models.py:152 .\apps\shop\abstract_models.py:171
+#: .\apps\shop\abstract_models.py:190
 msgid "Is enabled"
 msgstr "Включено"
 
-#: .\apps\shop\abstract_models.py:160
+#: .\apps\shop\abstract_models.py:161
 msgid "payment type"
 msgstr "Тип платежа"
 
-#: .\apps\shop\abstract_models.py:161
+#: .\apps\shop\abstract_models.py:162
 msgid "payment types"
 msgstr "Типы платежей"
 
-#: .\apps\shop\abstract_models.py:179
+#: .\apps\shop\abstract_models.py:180
 msgid "order status"
 msgstr "Статус заказа"
 
-#: .\apps\shop\abstract_models.py:180
+#: .\apps\shop\abstract_models.py:181
 msgid "order statuses"
 msgstr "Статусы заказа"
 
-#: .\apps\shop\abstract_models.py:198
+#: .\apps\shop\abstract_models.py:199
 msgid "order"
 msgstr "Заказ"
 
-#: .\apps\shop\abstract_models.py:199
+#: .\apps\shop\abstract_models.py:200
 msgid "orders"
 msgstr "Заказы"
 
@@ -568,7 +591,7 @@ msgstr "Сумма платежа"
 msgid "Discount"
 msgstr "Скидка"
 
-#: .\apps\shop\abstract_models.py:219
+#: .\apps\shop\abstract_models.py:219 .\views\__init__.py:31
 msgid "Date created"
 msgstr "Дата создания"
 
@@ -701,7 +724,7 @@ msgstr "Переименовать"
 #: .\templates\dartcms\apps\filemanager\index.html:31
 #: .\templates\dartcms\apps\pages\grid.html:41
 #: .\templates\dartcms\apps\shop\grid.html:67
-#: .\templates\dartcms\views\grid.html:88
+#: .\templates\dartcms\views\grid.html:93
 msgid "Delete"
 msgstr "Удалить"
 
@@ -748,19 +771,19 @@ msgstr "Выберите каталог"
 
 #: .\templates\dartcms\apps\pages\grid.html:17
 #: .\templates\dartcms\apps\shop\grid.html:25
-#: .\templates\dartcms\views\grid.html:65
+#: .\templates\dartcms\views\grid.html:70
 #: .\templates\dartcms\views\insert.html:20
 msgid "Add"
 msgstr "Добавить"
 
 #: .\templates\dartcms\apps\pages\grid.html:29
 #: .\templates\dartcms\apps\shop\grid.html:43
-#: .\templates\dartcms\views\grid.html:75
+#: .\templates\dartcms\views\grid.html:80
 msgid "Edit"
 msgstr "Редактировать"
 
 #: .\templates\dartcms\apps\shop\grid.html:18
-#: .\templates\dartcms\views\grid.html:57
+#: .\templates\dartcms\views\grid.html:62
 msgid "Back"
 msgstr "Назад"
 
@@ -804,7 +827,7 @@ msgstr "Удалить запись"
 msgid "Deletion is permanent. Are you sure?"
 msgstr "Удалить навсегда. Вы уверены?"
 
-#: .\templates\dartcms\views\delete.html:15
+#: .\templates\dartcms\views\delete.html:15 .\utils\forms.py:7
 msgid "Yes"
 msgstr "Да"
 
@@ -836,10 +859,14 @@ msgstr "Редактировать"
 msgid "View Records"
 msgstr "Посмотреть записи"
 
-#: .\utils\forms.py:32
+#: .\utils\forms.py:8
+msgid "No"
+msgstr "Нет"
+
+#: .\utils\forms.py:39
 msgid "from"
 msgstr "с"
 
-#: .\utils\forms.py:32
+#: .\utils\forms.py:39
 msgid "to"
 msgstr "по"
