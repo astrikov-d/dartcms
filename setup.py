@@ -29,7 +29,7 @@ setup(
         'django-gravatar2>=1.4.0',
         'django-mptt>=0.8.4',
         'django-widget-tweaks>=1.4.1',
-		'jsonfield>=1.0.3',
+        'jsonfield>=1.0.3',
         'Pillow>=3.2.0',
         'pytils==0.3'
     ],
