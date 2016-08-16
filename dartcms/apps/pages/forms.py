@@ -58,5 +58,5 @@ class PageForm(BetterModelForm):
             del self.fields['parent']
             del self.fields['module_params']
             del self.fields['slug']
-
-        self.fields['module'].initial = PageModule.objects.get(slug='page')
+        else:
+            self.fields['module'].initial = PageModule.objects.get(slug='page')
