@@ -46,9 +46,7 @@ class PageForm(BetterModelForm):
                 'is_locked',
             ), 'legend': _('Advanced')}))
 
-    module = forms.ModelChoiceField(
-        PageModule.objects.filter(is_enabled=True).exclude(slug='homepage'), empty_label=None,
-        initial=PageModule.objects.get(slug='page'), label=_('Module'))
+    module = forms.ModelChoiceField(PageModule.objects.filter(is_enabled=True).exclude(slug='homepage'), empty_label=None, label=_('Module'))
     ad_section = forms.ModelChoiceField(AdSection.objects.filter(is_enabled=True), required=False, label=_('Ads'))
 
     def __init__(self, *args, **kwargs):
@@ -60,3 +58,5 @@ class PageForm(BetterModelForm):
             del self.fields['parent']
             del self.fields['module_params']
             del self.fields['slug']
+        else:
+            self.fields['module'].initial = PageModule.objects.get(slug='page')
