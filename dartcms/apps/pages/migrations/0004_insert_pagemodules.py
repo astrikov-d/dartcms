@@ -3,21 +3,27 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-
+from django.utils import translation
+from django.utils.translation import gettext_lazy as _
 
 PAGE_MODULES = [
-    {'slug': 'feeds', 'name': 'Feeds'},
-    {'slug': 'contacts', 'name': 'Contacts'},
-    {'slug': 'shop', 'name': 'Shop'},
-    {'slug': 'page', 'name': 'Static Page'},
+    {'slug': 'feeds', 'name': _('Feeds')},
+    {'slug': 'contacts', 'name': _('Contacts')},
+    {'slug': 'shop', 'name': _('Shop')},
+    {'slug': 'page', 'name': _('Static Page')},
 ]
 
 
 def insert_pagemodules(apps, schema):
+    from django.conf import settings
+    translation.activate(settings.LANGUAGE_CODE)
+
     PageModule = apps.get_model('pages', 'PageModule')
 
     for m in PAGE_MODULES:
         PageModule.objects.create(**m)
+
+    translation.deactivate()
 
 
 def drop_pagemodules(apps, schema):

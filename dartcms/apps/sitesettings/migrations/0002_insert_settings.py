@@ -3,25 +3,33 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
+from django.utils import translation
+from django.utils.translation import gettext_lazy as _
+
 
 sitesettings = [
     {
         'slug': 'site_name',
-        'description': 'Site name',
+        'description': _('Site name'),
         'type': 'text'
     },
     {
         'slug': 'email_for_feedback',
-        'description': 'Email for feedback',
+        'description': _('Email for feedback'),
         'type': 'text'
     },
 ]
 
 
 def insert_settings(apps, schema):
+    from django.conf import settings
+    translation.activate(settings.LANGUAGE_CODE)
+
     SiteSettings = apps.get_model('sitesettings', 'SiteSettings')
     for sitesetting in sitesettings:
         SiteSettings.objects.create(**sitesetting)
+
+    translation.deactivate()
 
 
 def delete_settings(apps, schema):

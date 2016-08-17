@@ -14,19 +14,33 @@ urlpatterns = [
     url(r'^', include('dartcms.apps.dashboard.urls', namespace='dashboard')),
     url(r'^auth/', include('dartcms.apps.auth.urls', namespace='auth')),
     url(r'^cms-users/', include('dartcms.apps.users.urls', namespace='users')),
-    url(r'^sitemap/', include('dartcms.apps.pages.urls', namespace='pages')),
-    url(r'^feeds/', include('dartcms.apps.feeds.urls', namespace='feeds')),
     url(r'^filemanager/', include('dartcms.apps.filemanager.urls', namespace='filemanager')),
-    url(r'^sitesettings/', include('dartcms.apps.sitesettings.urls', namespace='sitesettings')),
-    url(r'^ad/', include('dartcms.apps.ads.ad.urls', namespace='ad')),
-    url(r'^adplace/', include('dartcms.apps.ads.adplace.urls', namespace='adplace')),
-    url(r'^adsection/', include('dartcms.apps.ads.adsection.urls', namespace='adsection')),
-    url(r'^feedback/', include('dartcms.apps.feedback.urls', namespace='feedback')),
-    url(r'^shop-catalog/', include('dartcms.apps.shop.catalog.urls', namespace='shop-catalog')),
-    url(r'^shop-orders/', include('dartcms.apps.shop.order.urls', namespace='shop-orders')),
     url(r'^dict-(?P<module_slug>[a-z_-]{3,50})/',
         include('dartcms.apps.dicts.urls', namespace='dicts')),
 ]
+
+if 'dartcms.apps.pages' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^sitemap/', include('dartcms.apps.pages.urls', namespace='pages')), ]
+
+if 'dartcms.apps.feeds' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^feeds/', include('dartcms.apps.feeds.urls', namespace='feeds')), ]
+
+if 'dartcms.apps.sitesettings' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^sitesettings/', include('dartcms.apps.sitesettings.urls', namespace='sitesettings')), ]
+
+if 'dartcms.apps.ads' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        url(r'^ad/', include('dartcms.apps.ads.ad.urls', namespace='ad')),
+        url(r'^adplace/', include('dartcms.apps.ads.adplace.urls', namespace='adplace')),
+        url(r'^adsection/', include('dartcms.apps.ads.adsection.urls', namespace='adsection')), ]
+
+if 'dartcms.apps.feedback' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^feedback/', include('dartcms.apps.feedback.urls', namespace='feedback')), ]
+
+if 'dartcms.apps.shop' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        url(r'^shop-catalog/', include('dartcms.apps.shop.catalog.urls', namespace='shop-catalog')),
+        url(r'^shop-orders/', include('dartcms.apps.shop.order.urls', namespace='shop-orders')), ]
 
 additional_apps = getattr(settings, 'DARTCMS_ADDITIONAL_APPS_URLPATTERNS', [])
 
