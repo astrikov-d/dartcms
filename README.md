@@ -8,11 +8,11 @@ and end-users.
 Features
 --------
 
-Tree-like website page structure
-Fast and easy CMS module developing
-Built with Twitter Bootstrap 3
-TinyMCE as rich editor
-Custom file manager to work with TinyMCE
+- Tree-like website page structure
+- Fast and easy CMS module developing
+- Built with Twitter Bootstrap 3
+- TinyMCE as rich editor
+- Custom file manager to work with TinyMCE
 
 
 Modules
