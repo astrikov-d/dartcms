@@ -6,7 +6,7 @@
             <div class="inlines">
                 {{ formsets.management_form }}
                 {% for form in formsets %}
-                    {% include 'adm/forms/partial/horizontal_form.html' %}
+                    {% include 'dartcms/forms/partial/horizontal_form.html' %}
                 {% endfor %}
             </div>
             <div class="form-group">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="empty-formset-form">
-                {% include 'adm/forms/partial/horizontal_form.html' with form=formsets.empty_form %}
+                {% include 'dartcms/forms/partial/horizontal_form.html' with form=formsets.empty_form %}
             </div>
         </div>
     {% endfor %}
