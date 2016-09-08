@@ -89,7 +89,7 @@ msgstr "Скачать"
 
 #: .\static\dartcms\js\apps\filemanager\index.js:98
 msgid "File Name"
-msgstr "Имя файта"
+msgstr "Имя файла"
 
 #: .\static\dartcms\js\apps\filemanager\index.js:99
 msgid "Path"
