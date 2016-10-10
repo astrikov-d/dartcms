@@ -23,7 +23,7 @@ class AbstractProductBase(models.Model):
     name = models.CharField(_('Name'), max_length=255)
     description = RteField(_('Description'), blank=True, default='')
     seo_keywords = models.TextField(_('Keywords (meta keywords)'), default='', blank=True)
-    seo_description = models.TextField(_('Keywords (meta keywords)'), default='', blank=True)
+    seo_description = models.TextField(_('Description (meta description)'), default='', blank=True)
     is_visible = models.BooleanField(_('Is Visible'), default=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
