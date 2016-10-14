@@ -2,26 +2,28 @@
 import datetime
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
 from autoslug import AutoSlugField
 
 from dartcms.utils.fields import RteField
 
 
+@python_2_unicode_compatible
 class FeedType(models.Model):
     class Meta:
         app_label = 'feeds'
         verbose_name = _('Feed type')
         verbose_name_plural = _('Feed types')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=255, verbose_name=_('Name'))
     slug = models.SlugField(verbose_name=_('Slug'))
 
 
+@python_2_unicode_compatible
 class Feed(models.Model):
     class Meta:
         app_label = 'feeds'
@@ -29,7 +31,7 @@ class Feed(models.Model):
         verbose_name = _('Feed')
         verbose_name_plural = _('Feeds')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     type = models.ForeignKey(FeedType, verbose_name=_('Type'), related_name='feeds')
@@ -43,6 +45,7 @@ class Feed(models.Model):
             pass
 
 
+@python_2_unicode_compatible
 class AbstractFeedItem(models.Model):
     class Meta:
         app_label = 'feeds'
@@ -55,7 +58,7 @@ class AbstractFeedItem(models.Model):
     def search_content_type(self):
         return self.feed.type.slug
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     slug = AutoSlugField(_('URL'), populate_from='name', unique=True)

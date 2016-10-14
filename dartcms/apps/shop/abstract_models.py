@@ -3,6 +3,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.db.models import Sum, F
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,12 +13,13 @@ from dartcms.utils.loading import get_model
 from mptt.models import MPTTModel, TreeForeignKey
 
 
+@python_2_unicode_compatible
 class AbstractProductBase(models.Model):
     class Meta:
         abstract = True
         app_label = 'shop'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(_('Name'), max_length=255)
@@ -52,6 +54,7 @@ class AbstractProductManufacturer(AbstractProductBase):
     image = models.ImageField(_('Image'), upload_to='shop/producer', null=True, blank=True)
 
 
+@python_2_unicode_compatible
 class AbstractProductSection(MPTTModel, AbstractProductBase):
     class Meta:
         abstract = True
@@ -67,7 +70,7 @@ class AbstractProductSection(MPTTModel, AbstractProductBase):
     catalog = models.ForeignKey('shop.ProductCatalog', verbose_name=_('Product catalog'), related_name='sections')
     sort = models.IntegerField(default=1)
 
-    def __unicode__(self):
+    def __str__(self):
         parent = self.parent
         section_names = [self.name]
         while parent:
@@ -134,6 +137,7 @@ class AbstractProductImage(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
+@python_2_unicode_compatible
 class AbstractOrderShippingType(models.Model):
     class Meta:
         abstract = True
@@ -142,7 +146,7 @@ class AbstractOrderShippingType(models.Model):
         verbose_name_plural = _('shipping types')
         ordering = ['sort']
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s (%s)' % (self.name, self.cost)
 
     slug = models.SlugField(_('URL'), unique=True)
@@ -154,6 +158,7 @@ class AbstractOrderShippingType(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
+@python_2_unicode_compatible
 class AbstractOrderPaymentType(models.Model):
     class Meta:
         abstract = True
@@ -162,7 +167,7 @@ class AbstractOrderPaymentType(models.Model):
         verbose_name_plural = _('payment types')
         ordering = ['sort']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     slug = models.SlugField(_('URL'), unique=True)
@@ -173,6 +178,7 @@ class AbstractOrderPaymentType(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
+@python_2_unicode_compatible
 class AbstractOrderStatus(models.Model):
     class Meta:
         abstract = True
@@ -181,7 +187,7 @@ class AbstractOrderStatus(models.Model):
         verbose_name_plural = _('order statuses')
         ordering = ['sort']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     slug = models.SlugField(_('URL'), unique=True)
@@ -192,6 +198,7 @@ class AbstractOrderStatus(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
+@python_2_unicode_compatible
 class AbstractOrder(models.Model):
     class Meta:
         abstract = True
@@ -219,7 +226,7 @@ class AbstractOrder(models.Model):
     date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
     date_modified = models.DateTimeField(auto_now_add=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s%s' % (_('Order #'), self.id)
 
     @property
@@ -253,6 +260,7 @@ class AbstractOrder(models.Model):
         return self.sum_value + self.shipping_cost - self.discount_value
 
 
+@python_2_unicode_compatible
 class AbstractOrderDetail(models.Model):
     class Meta:
         abstract = True
@@ -268,7 +276,7 @@ class AbstractOrderDetail(models.Model):
     price = models.DecimalField(_('Price'), decimal_places=2, max_digits=10, default=0)
     quantity = models.IntegerField(_('Quantity'), default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @property

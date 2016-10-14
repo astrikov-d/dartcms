@@ -7,7 +7,7 @@ def do_startswith(parser, token, negate):
     try:
         tag_name, string, start_string = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires two arguments" % token.contents.split()[0]
+        raise template.TemplateSyntaxError("%r tag requires two arguments" % token.contents.split()[0])
     end_tag = 'end' + tag_name
     nodelist_true = parser.parse(('else', end_tag))
     token = parser.next_token()

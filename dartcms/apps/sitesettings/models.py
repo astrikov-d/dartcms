@@ -3,9 +3,11 @@ from datetime import datetime
 
 from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
+@python_2_unicode_compatible
 class SiteSettings(models.Model):
     TEXT = 'text'
     TEXTAREA = 'textarea'
@@ -28,7 +30,7 @@ class SiteSettings(models.Model):
         verbose_name = _('Site setting')
         verbose_name_plural = _('Site settings')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s - %s' % (self.slug, self.description)
 
     @property

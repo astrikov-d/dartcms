@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.conf.urls import url
 
-from views import LoginView, LogoutView
+from .views import LoginView, LogoutView
 
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name='login'),

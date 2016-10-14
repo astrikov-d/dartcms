@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
+@python_2_unicode_compatible
 class AdPlace(models.Model):
     class Meta:
         app_label = 'ads'
@@ -11,7 +13,7 @@ class AdPlace(models.Model):
         verbose_name_plural = _('ad places')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=255, verbose_name=_('Name'))
@@ -19,6 +21,7 @@ class AdPlace(models.Model):
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
 
 
+@python_2_unicode_compatible
 class AdSection(models.Model):
     class Meta:
         app_label = 'ads'
@@ -26,13 +29,14 @@ class AdSection(models.Model):
         verbose_name_plural = _('ad sections')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=255, verbose_name=_('Name'))
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
 
 
+@python_2_unicode_compatible
 class AbstractAd(models.Model):
     class Meta:
         app_label = 'ads'
@@ -58,5 +62,5 @@ class AbstractAd(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
