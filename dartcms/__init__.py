@@ -45,9 +45,10 @@ def get_dartcms_core_apps(include_apps='*', replacements=None):
             if pattern not in include_apps:
                 return
 
-        for replacement in replacements:
-            if replacement.endswith(pattern):
-                return replacement
+        if replacements:
+            for replacement in replacements:
+                if replacement.endswith(pattern):
+                    return replacement
         return label
 
     apps = DARTCMS_REQUIRED_APPS
