@@ -24,6 +24,10 @@ class ChangePasswordView(AdminMixin, FormView):
         context['index_url'] = reverse_lazy('dartcms:users:index')
         return context
 
+    def form_valid(self, form):
+        form.save()
+        return super(ChangePasswordView, self).form_valid(form)
+
 
 class SaveModulesMixin(object):
     def form_valid(self, form):
