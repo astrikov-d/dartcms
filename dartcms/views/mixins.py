@@ -65,6 +65,10 @@ class AdminMixin(ModulePermissionsMixin):
             if self.form_class is None:
                 self.form_class = modelform_factory(self.model, fields=form_fields, exclude=exclude_fields)
 
+            grid_config = self.config.get('grid')
+            if grid_config:
+                self.grid_columns = grid_config.get('grid_columns', self.grid_columns)
+                
         return super(AdminMixin, self).dispatch(request, *args, **kwargs)
 
     def get_foreign_key_name(self):
