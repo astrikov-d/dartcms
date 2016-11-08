@@ -8,10 +8,14 @@
             language: 'ru',
             {% endif %}
             selector: ".rte",
-            plugins: 'advlist autolink link image lists charmap print preview code table',
+            content_css: 'https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+            noneditable_noneditable_class: 'fa',
+            plugins: 'fontawesome noneditable advlist autolink link image lists charmap print preview code table',
+            toolbar: 'fontawesome',
             file_browser_callback: filebrowserCallback,
             relative_urls: false,
-            remove_script_host: false
+            remove_script_host: false,
+            extended_valid_elements: 'span[*]'
         });
     }
     function filebrowserCallback(field_name, url, type, win) {
