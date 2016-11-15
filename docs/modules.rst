@@ -13,6 +13,25 @@ At the moment, only basic configuration is supported:
         "form": {
             "fields": ["name", "date_created"],
             "form_class": "my_app.MyFormClass"
+        },
+        "grid": {
+            "grid_columns":[
+                {
+                    "field": "name",
+                    "label": "Name",
+                    "width": "50%"
+                },
+                {
+                    "field": "date_created",
+                    "label": "Date created",
+                    "type": "DATETIME",
+                    "width": "50%"
+                }
+            ],
+            "search":[
+                "name",
+                "date_created"
+            ]
         }
     }
 

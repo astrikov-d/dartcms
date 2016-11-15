@@ -69,7 +69,11 @@ class AdminMixin(ModulePermissionsMixin):
                 grid_config = self.config.get('grid')
                 if grid_config:
                     self.grid_columns = grid_config.get('grid_columns', self.grid_columns)
-                
+
+                    search_config = grid_config.get('search')
+                    if search_config:
+                        self.search = search_config
+
         return super(AdminMixin, self).dispatch(request, *args, **kwargs)
 
     def get_foreign_key_name(self):
