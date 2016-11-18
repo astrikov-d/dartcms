@@ -62,7 +62,7 @@ def thumbnail(file, size='220x220'):
     if os.path.exists(miniature_filename) and os.path.getmtime(filename) > os.path.getmtime(miniature_filename):
         os.unlink(miniature_filename)
         # if the image wasn't already resized, resize it
-    if not os.path.exists(miniature_filename):
+    if not os.path.exists(miniature_filename) and os.path.exists(filename):
         image = Image.open(filename)
 
         if (image.size[0] < x):
@@ -114,7 +114,7 @@ def thumbnail_with_max_side(file, size='220'):
     miniature_url = filehead + '/' + miniature
     if os.path.exists(miniature_filename) and os.path.getmtime(filename) > os.path.getmtime(miniature_filename):
         os.unlink(miniature_filename)
-    if not os.path.exists(miniature_filename):
+    if not os.path.exists(miniature_filename) and os.path.exists(filename):
         image = Image.open(filename)
         x, y = 0, 0
 

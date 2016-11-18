@@ -27,6 +27,7 @@
             resizable: 'yes'
         }, {
             setUrl: function (url) {
+                url = url.replace('//', '/');
                 win.document.getElementById(field_name).value = url;
             }
         });
