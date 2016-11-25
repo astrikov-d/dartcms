@@ -37,7 +37,7 @@
                                 {% endwith %}
                             {% endfor %}
                         {% elif type == 'list' or type == 'tuple' %}
-                            var formatted = [{% for el in value %}'{{ el }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+                            var formatted = [{% for el in value %}{% if el|get_type == 'str' %}'{{ el }}'{% else %}JSON.parse({{ el|json_dumps|safe }}){% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}];
                             options['{{ option }}'] = $.merge(options['{{ option }}'], formatted);
                         {% elif type == 'str' %}
                             options['{{ option }}'] += ',{{ value }}';
@@ -58,7 +58,7 @@
                                 {% endwith %}
                             {% endfor %}
                         {% elif type == 'list' or type == 'tuple' %}
-                            var formatted = [{% for el in value %}'{{ el }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+                            var formatted = [{% for el in value %}{% if el|get_type == 'str' %}'{{ el }}'{% else %}JSON.parse('{{ el|json_dumps|safe }}'){% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}];
                             options['{{ option }}'] = formatted;
                         {% elif type == 'str' %}
                             options['{{ option }}'] = '{{ value }}';
@@ -67,6 +67,8 @@
                 {% endwith %}
             {% endfor %}
         {% endif %}
+
+        console.log(options);
 
         tinymce.init(options);
     }

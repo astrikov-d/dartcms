@@ -1,5 +1,6 @@
 # coding: utf-8
 import os
+import json
 import types
 
 from django import template
@@ -307,3 +308,13 @@ def get_type(value):
         int: 'int'
     }
     return mapping.get(type(value))
+
+
+@register.filter('json_loads')
+def json_loads(value):
+    return json.loads(value)
+
+
+@register.filter('json_dumps')
+def json_dumps(value):
+    return json.dumps(value)
