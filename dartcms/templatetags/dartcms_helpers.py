@@ -16,9 +16,6 @@ try:
 except ImportError:
     from PIL import Image, ImageOps
 
-
-
-
 register = template.Library()
 
 
@@ -264,7 +261,7 @@ def _process_field_attributes(field, attr, process):
     return field
 
 
-@register.filter("attr")
+@register.filter('attr')
 @silence_without_field
 def set_attr(field, attr):
     def process(widget, attrs, attribute, value):
@@ -273,7 +270,7 @@ def set_attr(field, attr):
     return _process_field_attributes(field, attr, process)
 
 
-@register.filter("add_error_attr")
+@register.filter('add_error_attr')
 @silence_without_field
 def add_error_attr(field, attr):
     if hasattr(field, 'errors') and field.errors:
@@ -281,7 +278,7 @@ def add_error_attr(field, attr):
     return field
 
 
-@register.filter("add_class")
+@register.filter('add_class')
 @silence_without_field
 def add_class(field, css_class):
     return append_attr(field, 'class:' + css_class)
@@ -294,3 +291,19 @@ def add_class(field, css_class):
 def get_tinymce_settings():
     from django.conf import settings
     return getattr(settings, 'DARTCMS_TINYMCE_SETTINGS', {})
+
+
+#######################################################################################
+# Useful utils                                                                        #
+#######################################################################################
+@register.filter('get_type')
+def get_type(value):
+    mapping = {
+        str: 'str',
+        dict: 'dict',
+        list: 'list',
+        tuple: 'tuple',
+        bool: 'bool',
+        int: 'int'
+    }
+    return mapping.get(type(value))

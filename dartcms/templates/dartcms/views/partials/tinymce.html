@@ -23,6 +23,7 @@
         {% if tinymce_settings %}
             {% for option, value in tinymce_settings.items %}
                 if (options.hasOwnProperty('{{ option }}')) {
+                    {% if value %}
                     options['{{ option }}'] += ',{{ value }}';
                 } else {
                     options['{{ option }}'] = '{{ value }}';
