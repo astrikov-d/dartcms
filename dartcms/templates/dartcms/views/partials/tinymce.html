@@ -1,22 +1,36 @@
-{% load i18n %}
+{% load i18n dartcms_helpers %}
 
 <script type="text/javascript">
     function mceInit() {
-        tinymce.init({
+        var options = {
             {% get_current_language as LANG %}
             {% if LANG == 'ru-ru' %}
-            language: 'ru',
+                language: 'ru',
             {% endif %}
             selector: ".rte",
             content_css: 'https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
             noneditable_noneditable_class: 'fa',
-            plugins: 'fontawesome noneditable advlist autolink link image lists charmap print preview code table',
-            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table | fontsizeselect | fontawesome',
+            plugins: 'fontawesome noneditable advlist autolink link image lists charmap print preview code table textcolor',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table | fontsizeselect | forecolor backcolor | fontawesome',
             file_browser_callback: filebrowserCallback,
             relative_urls: false,
             remove_script_host: false,
             extended_valid_elements: 'span[*]'
-        });
+        };
+
+        {% get_tinymce_settings as tinymce_settings %}
+
+        {% if tinymce_settings %}
+            {% for option, value in tinymce_settings.items %}
+                if (options.hasOwnProperty('{{ option }}')) {
+                    options['{{ option }}'] += ',{{ value }}';
+                } else {
+                    options['{{ option }}'] = '{{ value }}';
+                }
+            {% endfor %}
+        {% endif %}
+
+        tinymce.init(options);
     }
     function filebrowserCallback(field_name, url, type, win) {
         tinymce.activeEditor.windowManager.open({

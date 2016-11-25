@@ -285,3 +285,12 @@ def add_error_attr(field, attr):
 @silence_without_field
 def add_class(field, css_class):
     return append_attr(field, 'class:' + css_class)
+
+
+#######################################################################################
+# Tinymce settings                                                                    #
+#######################################################################################
+@register.simple_tag
+def get_tinymce_settings():
+    from django.conf import settings
+    return getattr(settings, 'DARTCMS_TINYMCE_SETTINGS', {})
