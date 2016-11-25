@@ -55,4 +55,5 @@ Contents
    dynamic_loading
    generic_views
    modules
+   available_configuration
 
