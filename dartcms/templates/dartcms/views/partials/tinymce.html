@@ -44,9 +44,11 @@
                         {% endif %}
                     } else {
                         {% if type == 'dict' %}
+                            options['{{ option }}'] = {};
                             {% for value_option, value_value in value.items %}
                                 {% with value_value_type=value_value|get_type %}
                                     {% if value_value_type == 'dict' %}
+                                        options['{{ option }}']['{{ value_option }}'] = {};
                                         {% for value_value_option, value_value_value in value_value.items %}
                                             options['{{ option }}']['{{ value_option }}']['{{ value_value_option }}'] = '{{ value_value_value }}';
                                         {% endfor %}
