@@ -53,7 +53,7 @@
                                             options['{{ option }}']['{{ value_option }}']['{{ value_value_option }}'] = '{{ value_value_value }}';
                                         {% endfor %}
                                     {% elif value_value_type == 'str' %}
-                                        options['{{ option }}']['{{ value_option }}'] += '{{ value_value }}';
+                                        options['{{ option }}']['{{ value_option }}'] = '{{ value_value }}';
                                     {% endif %}
                                 {% endwith %}
                             {% endfor %}
@@ -61,7 +61,7 @@
                             var formatted = [{% for el in value %}'{{ el }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
                             options['{{ option }}'] = formatted;
                         {% elif type == 'str' %}
-                            options['{{ option }}'] += '{{ value }}';
+                            options['{{ option }}'] = '{{ value }}';
                         {% endif %}
                     }
                 {% endwith %}
