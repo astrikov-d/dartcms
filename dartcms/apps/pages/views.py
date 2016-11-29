@@ -94,6 +94,8 @@ class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
             else:
                 params.append({'label': str(item), 'value': item.pk})
 
+        params = sorted(params, key=lambda k: k['label'])
+
         return {
             'result': True,
             'data': params

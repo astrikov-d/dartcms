@@ -11,7 +11,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class PageModule(models.Model):
     class Meta:
         app_label = 'pages'
-        ordering = ['id']
+        ordering = ['name']
         verbose_name_plural = _('modules')
         verbose_name = _('module')
 
