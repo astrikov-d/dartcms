@@ -157,6 +157,20 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         }
 
 
+class InlineErrorsMixin(object):
+    @staticmethod
+    def get_inline_errors(inlines):
+        errors = {}
+
+        for inline in inlines:
+            for form in inline:
+                for field_name, field_errors in form.errors.items():
+                    field = form[field_name]
+                    errors[field.html_name] = field_errors
+
+        return errors
+
+
 class AjaxInsertObjectMixin(AdminMixin, JSONResponseMixin):
     template_name = 'dartcms/views/insert.html'
 
@@ -191,7 +205,9 @@ class InsertObjectView(AjaxInsertObjectMixin, CreateView):
         return self.render_to_json_response({'result': False, 'errors': form.errors})
 
 
-class InsertObjectWithInlinesView(AjaxInsertObjectMixin, CreateWithInlinesView):
+class InsertObjectWithInlinesView(InlineErrorsMixin,
+                                  AjaxInsertObjectMixin,
+                                  CreateWithInlinesView):
     extra = 0
 
     def forms_valid(self, form, inlines):
@@ -199,7 +215,9 @@ class InsertObjectWithInlinesView(AjaxInsertObjectMixin, CreateWithInlinesView):
         return self.render_to_json_response({'result': True, 'action': 'INSERT'})
 
     def forms_invalid(self, form, inlines):
-        return self.render_to_json_response({'result': False, 'errors': form.errors})
+        errors = form.errors.copy()
+        errors.update(self.get_inline_errors(inlines))
+        return self.render_to_json_response({'result': False, 'errors': errors})
 
 
 class AjaxUpdateObjectMixin(AdminMixin, JSONResponseMixin):
@@ -215,7 +233,9 @@ class UpdateObjectView(AjaxUpdateObjectMixin, UpdateView):
         return self.render_to_json_response({'result': False, 'errors': form.errors})
 
 
-class UpdateObjectWithInlinesView(AjaxUpdateObjectMixin, UpdateWithInlinesView):
+class UpdateObjectWithInlinesView(InlineErrorsMixin,
+                                  AjaxUpdateObjectMixin,
+                                  UpdateWithInlinesView):
     extra = 0
 
     def forms_valid(self, form, inlines):
@@ -225,7 +245,9 @@ class UpdateObjectWithInlinesView(AjaxUpdateObjectMixin, UpdateWithInlinesView):
         return self.render_to_json_response({'result': True, 'action': 'UPDATE'})
 
     def forms_invalid(self, form, inlines):
-        return self.render_to_json_response({'result': False, 'errors': form.errors})
+        errors = form.errors.copy()
+        errors.update(self.get_inline_errors(inlines))
+        return self.render_to_json_response({'result': False, 'errors': errors})
 
 
 class DeleteObjectView(AdminMixin, JSONResponseMixin, DeleteView):
