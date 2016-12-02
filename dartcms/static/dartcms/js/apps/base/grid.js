@@ -9,12 +9,6 @@ $(function () {
         $('.form-modal').remove();
         mceDestroy();
     });
-
-    location.search.substr(1).split("&").forEach(function (item) {
-        if (item) {
-            request.GET[item.split("=")[0]] = decodeURIComponent(item.split("=")[1]).replace('+', ' ');
-        }
-    });
 });
 
 
