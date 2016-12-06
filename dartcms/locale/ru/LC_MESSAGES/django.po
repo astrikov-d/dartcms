@@ -90,7 +90,7 @@ msgstr "Рекламное место"
 
 #: .\apps\ads\abstract_models.py:53
 msgid "Views"
-msgstr "Чисто показов"
+msgstr "Число показов"
 
 #: .\apps\ads\abstract_models.py:54 .\apps\shop\abstract_models.py:112
 msgid "Section"
