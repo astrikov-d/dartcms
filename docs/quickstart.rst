@@ -54,7 +54,16 @@ In this example, you will include only `dartcms.apps.shop` application in your p
         }
     ]
 
-4. Include Django admin and DartCMS urls in your `urlconf`:
+4. Add DartCMS's PageMiddleware in the end of list or tuple of your middleware classes:
+
+.. code-block:: python
+
+    MIDDLEWARE_CLASSES = (
+        ...
+        'dartcms.middleware.page.PageMiddleware'
+    )
+
+5. Include Django admin and DartCMS urls in your `urlconf`:
 
 .. code-block:: python
 
@@ -65,12 +74,12 @@ In this example, you will include only `dartcms.apps.shop` application in your p
 
 You can choose any url name for DartCMS urls import.
 
-5. Run django migrations:
+6. Run django migrations:
 
 .. code-block:: bash
 
     python manage.py migrate
 
-6. Run development server and navigate your browser to http://127.0.0.1:8000/cms/. You should see DartCMS dashboard.
+7. Run development server and navigate your browser to http://127.0.0.1:8000/cms/. You should see DartCMS dashboard.
 
 .. image:: _static/dashboard.png
