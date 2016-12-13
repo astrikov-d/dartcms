@@ -6,20 +6,20 @@ from django.http.response import Http404
 class PageMiddleware(object):
 
     def process_request(self, request):
+        PageModule = get_model('pages', 'PageModule')
+        Page = get_model('pages', 'Page')
+
         request_path = request.path.strip('/')
         path_parts = request_path.split('/')
 
-        PageModule = get_model('pages', 'PageModule')
-        module_slug = path_parts[0]
+        path = '/' if request_path == '' else '/%s/' % request.path.strip('/')
+        module_slug = 'homepage' if path == '/' else path_parts[0]
 
         try:
             request.page_module = PageModule.objects.get(slug=module_slug)
         except PageModule.DoesNotExist:
             return
 
-        Page = get_model('pages', 'Page')
-
-        path = '/' if request_path == '' else '/%s/' % request.path.strip('/')
         page = None
 
         try:
