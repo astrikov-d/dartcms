@@ -39,7 +39,7 @@ class PageMiddleware(object):
             request.page = page
             request.page_children = page.children.filter(is_enabled=True, is_in_menu=True)
 
-    def process_view(self, request, **kwargs):
+    def process_view(self, request, view_func, view_args, view_kwargs):
         namespaces = request.resolver_match.namespaces
 
         if 'dartcms' in namespaces or 'admin' in namespaces:
