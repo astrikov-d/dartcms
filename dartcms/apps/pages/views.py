@@ -63,7 +63,12 @@ class UpdatePageView(SecurityMixin, PageFormKwargsMixin, UpdateObjectView):
         return self.object
 
 
-class TreeActionView(ModulePermissionsMixin, JSONView):
+class TreeActionView(SecurityMixin, ModulePermissionsMixin, JSONView):
+    @cached_property
+    def check_object(self):
+        Page = get_model('pages', 'Page')
+        return Page.objects.get(pk=self.request.GET.get('source'))
+
     def get_pages(self):
         target_id = self.request.GET.get('target')
         source_id = self.request.GET.get('source')
@@ -81,6 +86,9 @@ class TreeActionView(ModulePermissionsMixin, JSONView):
 
 class AppendPageView(TreeActionView):
     def get_data(self, context):
+        if not self.has_perm():
+            return {'result': False}
+
         target, source = self.get_pages()
         source.move_to(target, position='last-child')
         return {'result': True}
@@ -88,6 +96,9 @@ class AppendPageView(TreeActionView):
 
 class MovePageView(TreeActionView):
     def get_data(self, context):
+        if not self.has_perm():
+            return {'result': False}
+
         position = self.request.GET.get('position')
         target, source = self.get_pages()
         if target.parent:
