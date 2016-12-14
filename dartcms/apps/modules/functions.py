@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.core.urlresolvers import NoReverseMatch, reverse
 
 from .models import Module
 

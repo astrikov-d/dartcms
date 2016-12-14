@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-from django.utils.translation import gettext_lazy as _
 from django.utils import translation
+from django.utils.translation import gettext_lazy as _
 
 
 def insert_modules(apps, schema):

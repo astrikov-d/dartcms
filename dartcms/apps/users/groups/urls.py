@@ -4,7 +4,8 @@ from django.forms.models import modelform_factory
 
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import InsertObjectView, UpdateObjectView, DeleteObjectView, GridView
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
 
 config = DartCMSConfig({
     'model': UserGroup,

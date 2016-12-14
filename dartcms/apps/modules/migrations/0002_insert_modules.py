@@ -3,9 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-from django.utils.translation import gettext_lazy as _
 from django.utils import translation
-
+from django.utils.translation import gettext_lazy as _
 
 MODULE_GROUPS = [
     {
@@ -88,4 +87,3 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(insert_modules, delete_modules)
     ]
-

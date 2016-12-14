@@ -6,7 +6,6 @@ from django.db import migrations
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
-
 sitesettings = [
     {
         'slug': 'site_name',

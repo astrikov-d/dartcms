@@ -3,7 +3,8 @@ from django.http import Http404
 from django.utils.functional import cached_property
 
 from dartcms.utils.loading import get_model
-from dartcms.views import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView, JSONView
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           JSONView, UpdateObjectView)
 from dartcms.views.mixins import JSONResponseMixin, ModulePermissionsMixin
 
 

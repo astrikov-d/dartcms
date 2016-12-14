@@ -3,10 +3,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
+from mptt.models import MPTTModel, TreeForeignKey
 
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.fields import RteField
-from mptt.models import MPTTModel, TreeForeignKey
 
 
 class PageModule(models.Model):

@@ -1,10 +1,9 @@
 # coding: utf-8
 import datetime
 
+from autoslug import AutoSlugField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
-from autoslug import AutoSlugField
 
 from dartcms.utils.fields import RteField
 

@@ -7,8 +7,9 @@ from dartcms.utils.loading import get_model
 from dartcms.views import GridView
 
 from .forms import PageForm
-from .views import (AppendPageView, GetTreeView, InsertPageView, UpdatePageView, DeletePageView,
-                    LoadModuleParamsView, MovePageView)
+from .views import (AppendPageView, DeletePageView, GetTreeView,
+                    InsertPageView, LoadModuleParamsView, MovePageView,
+                    UpdatePageView)
 
 Page = get_model('pages', 'Page')
 

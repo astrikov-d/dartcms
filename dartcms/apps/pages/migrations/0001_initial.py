@@ -4,9 +4,8 @@ from __future__ import unicode_literals
 
 import django.db.models.deletion
 import django.db.models.manager
-from django.db import migrations, models
-
 import mptt.fields
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
