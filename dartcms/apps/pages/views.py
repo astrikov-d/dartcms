@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.http import Http404
+from django.utils.functional import cached_property
 
 from dartcms.utils.loading import get_model
-from dartcms.views import GridView, InsertObjectView, JSONView
+from dartcms.views import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView, JSONView
 from dartcms.views.mixins import JSONResponseMixin, ModulePermissionsMixin
 
 
@@ -19,9 +20,46 @@ class GetTreeView(GridView, JSONResponseMixin):
         return tree
 
 
-class InsertPageView(InsertObjectView):
+class PageFormKwargsMixin(object):
+    def get_form_kwargs(self):
+        kwargs = super(PageFormKwargsMixin, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+
+class SecurityMixin(object):
+    def has_perm(self):
+        if self.request.user.is_superuser:
+            return True
+
+        security_type = self.check_object.get_security_type()
+        if security_type == 'GROUPS_ONLY':
+            return len(
+                set(self.request.user.user_groups.all()).intersection(set(self.check_object.user_groups.all()))) > 0
+        return True
+
+    def check_object(self):
+        raise NotImplemented
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SecurityMixin, self).get_context_data(**kwargs)
+        context['has_perm'] = self.has_perm()
+        return context
+
+
+class InsertPageView(SecurityMixin, PageFormKwargsMixin, InsertObjectView):
+    @cached_property
+    def check_object(self):
+        return self.model.objects.get(pk=self.request.GET['parent'])
+
     def get_initial(self):
-        return {'parent': self.model.objects.filter(pk=self.request.GET.get('parent', 0)).first()}
+        return {'parent': self.check_object}
+
+
+class UpdatePageView(SecurityMixin, PageFormKwargsMixin, UpdateObjectView):
+    @cached_property
+    def check_object(self):
+        return self.object
 
 
 class TreeActionView(ModulePermissionsMixin, JSONView):
@@ -100,3 +138,9 @@ class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
             'result': True,
             'data': params
         }
+
+
+class DeletePageView(SecurityMixin, DeleteObjectView):
+    @cached_property
+    def check_object(self):
+        return self.object

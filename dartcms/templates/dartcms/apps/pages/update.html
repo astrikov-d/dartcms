@@ -1,6 +1,6 @@
 {% extends 'dartcms/views/update.html' %}
 
-{% load static %}
+{% load static i18n %}
 
 {% block js %}
     {{ block.super }}
@@ -8,6 +8,14 @@
 {% endblock %}
 
 {% block form_content %}
+    {% if not has_perm %}
+        {% trans 'You do not have permission to edit this page.' as security_message %}
+        {% include 'dartcms/views/partials/security_alert.html' with message=security_message hide_cancel=True %}
+        <script>
+            $('form').find('input, textarea, button, select').attr('disabled', 'disabled');
+        </script>
+    {% endif %}
+
     {{ block.super }}
     <div id="id-context-variables" data-page-pk="{{ object.pk }}"
          data-loading-url="{% url 'dartcms:pages:load_module_params' %}"></div>

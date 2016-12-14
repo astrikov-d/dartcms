@@ -15,7 +15,7 @@ def insert_modules(apps, schema):
     Module = apps.get_model('modules', 'Module')
 
     module = {
-        'sort': 2,
+        'sort': 3,
         'is_enabled': True,
         'name': _('Site settings'),
         'slug': 'sitesettings',

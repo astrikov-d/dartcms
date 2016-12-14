@@ -125,7 +125,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'product sections',
             },
             managers=[
-                ('_default_manager', django.db.models.manager.Manager()),
+                ('objects', django.db.models.manager.Manager()),
             ],
         ),
         migrations.AddField(

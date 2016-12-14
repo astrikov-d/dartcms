@@ -29,29 +29,36 @@ class ChangePasswordView(AdminMixin, FormView):
         return super(ChangePasswordView, self).form_valid(form)
 
 
-class SaveModulesMixin(object):
+class SaveUserMixin(object):
     def form_valid(self, form):
         data = form.cleaned_data
         user = form.save()
         if user.id:
             user.module_set.clear()
+            user.user_groups.clear()
 
         for module in data.get('modules', []):
             user.module_set.add(module)
 
+        for group in data.get('user_groups', []):
+            user.user_groups.add(group)
+
         return self.render_to_json_response({'result': True, 'action': self.action})
 
 
-class CMSUserUpdateView(SaveModulesMixin, UpdateObjectView):
+class CMSUserUpdateView(SaveUserMixin, UpdateObjectView):
     success_url = reverse_lazy('dartcms:users:index')
     action = 'UPDATE'
 
     def get_initial(self):
         obj = self.get_object()
-        return {'modules': obj.module_set.all()}
+        return {
+            'modules': obj.module_set.all(),
+            'user_groups': obj.user_groups.all()
+        }
 
 
-class CMSUserInsertView(SaveModulesMixin, InsertObjectView):
+class CMSUserInsertView(SaveUserMixin, InsertObjectView):
     action = 'INSERT'
 
     def get_success_url(self):
