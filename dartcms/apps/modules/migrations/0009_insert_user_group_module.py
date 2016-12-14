@@ -15,12 +15,12 @@ def insert_modules(apps, schema):
     Module = apps.get_model('modules', 'Module')
 
     module = {
-        'sort': 1,
+        'sort': 2,
         'is_enabled': True,
-        'name': _('Feedback'),
-        'slug': 'feedback',
+        'name': _('CMS User groups'),
+        'slug': 'user-groups',
         'description': '',
-        'group': ModuleGroup.objects.get(slug='service')
+        'group': ModuleGroup.objects.get(slug='admin')
     }
 
     Module.objects.create(**module)
@@ -31,12 +31,12 @@ def insert_modules(apps, schema):
 def delete_modules(apps, schema):
     Module = apps.get_model('modules', 'Module')
 
-    Module.objects.get(slug='feedback').delete()
+    Module.objects.get(slug='user-groups').delete()
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('modules', '0003_insert_modules'),
+        ('modules', '0008_module_config'),
     ]
 
     operations = [

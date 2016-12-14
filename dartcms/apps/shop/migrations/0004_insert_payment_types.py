@@ -5,7 +5,6 @@ from django.db import migrations
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
-
 records = [
     dict(sort=1, slug='cash', name=_('Cash')),
     dict(sort=2, slug='cashless', name=_('Cashless')),

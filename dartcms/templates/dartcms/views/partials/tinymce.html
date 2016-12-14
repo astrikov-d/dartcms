@@ -16,7 +16,12 @@
             relative_urls: false,
             remove_script_host: false,
             media_live_embeds: true,
-            extended_valid_elements: 'span[*]'
+            extended_valid_elements: 'span[*]',
+            setup: function (ed) {
+                var el = $('#' + ed.id);
+                if (el.attr('readonly') || el.attr('disabled'))
+                    ed.settings.readonly = true;
+            }
         };
 
         {% get_tinymce_settings as tinymce_settings %}
@@ -68,8 +73,6 @@
                 {% endwith %}
             {% endfor %}
         {% endif %}
-
-        console.log(options);
 
         tinymce.init(options);
     }

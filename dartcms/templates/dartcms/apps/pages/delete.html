@@ -1,0 +1,12 @@
+{% extends 'dartcms/views/delete.html' %}
+
+{% load i18n %}
+
+{% block form %}
+    {% if has_perm %}
+        {{ block.super }}
+    {% else %}
+        {% trans 'You do not have permission to delete this page.' as security_message %}
+        {% include 'dartcms/views/partials/security_alert.html' with message=security_message %}
+    {% endif %}
+{% endblock %}

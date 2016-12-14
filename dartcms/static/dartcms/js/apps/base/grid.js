@@ -21,7 +21,6 @@ var openFormModal = function (url, onSubmitSuccess, onSubmitError) {
         formModal.css('width', $('.page-content').width());
         $('form', formModal).attr('action', url);
         initModalControls(formModal, onSubmitSuccess, onSubmitError);
-        initDatePickers();
     });
     return false;
 };

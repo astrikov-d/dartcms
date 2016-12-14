@@ -7,13 +7,15 @@
         </h1>
     </div>
     <div class="well well-sm">
-        <form method="POST" class="form-horizontal">
-            {% csrf_token %}
-            <div class="alert alert-danger">
-                <i class="fa fa-warning"></i> {% trans 'Deletion is permanent. Are you sure?' %}
-            </div>
-            <button type="submit" class="btn btn-danger">{% trans 'Yes' %}</button>
-            <a href="#" class="btn btn-link btn-close-modal">{% trans 'Cancel' %}</a>
-        </form>
+        {% block form %}
+            <form method="POST" class="form-horizontal">
+                {% csrf_token %}
+                <div class="alert alert-danger">
+                    <i class="fa fa-warning"></i> {% trans 'Deletion is permanent. Are you sure?' %}
+                </div>
+                <button type="submit" class="btn btn-danger">{% trans 'Yes' %}</button>
+                <a href="#" class="btn btn-link btn-close-modal">{% trans 'Cancel' %}</a>
+            </form>
+        {% endblock %}
     </div>
 </div>

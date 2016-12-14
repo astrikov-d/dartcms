@@ -3,9 +3,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
-
-from dartcms.utils.fields import RteField
 from mptt.models import MPTTModel, TreeForeignKey
+
+from dartcms.apps.users.models import UserGroup
+from dartcms.utils.fields import RteField
 
 
 class PageModule(models.Model):
@@ -23,6 +24,13 @@ class PageModule(models.Model):
     related_model = models.CharField(verbose_name=_('Related Model'), null=True, default=None, max_length=32,
                                      blank=True)
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
+
+
+SECURITY_TYPE_CHOICES = (
+    ('DEFAULT', _('Editable for all users')),
+    ('BY_PARENT', _('Based on the parent page')),
+    ('GROUPS_ONLY', _('Editable for specific groups')),
+)
 
 
 class AbstractPage(MPTTModel):
@@ -77,10 +85,26 @@ class AbstractPage(MPTTModel):
     ad_section = models.ForeignKey('ads.AdSection', verbose_name=_('Ads'), null=True, blank=True,
                                    related_name='%(app_label)s_%(class)s_related')
 
+    security_type = models.CharField(max_length=16, verbose_name=_('Security type'), choices=SECURITY_TYPE_CHOICES,
+                                     default='BY_PARENT')
+    user_groups = models.ManyToManyField(UserGroup, verbose_name=_('User groups'))
+
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
     is_in_menu = models.BooleanField(default=True, verbose_name=_('Show in Menu'))
 
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def get_security_type(self):
+        if self.security_type == 'BY_PARENT' and self.parent:
+            parent = self.parent
+            while parent:
+                if parent.security_type == 'BY_PARENT':
+                    parent = parent.parent
+                else:
+                    break
+            return parent.security_type
+        else:
+            return self.security_type
 
     def delete(self):
         if not self.parent:

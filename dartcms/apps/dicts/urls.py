@@ -1,8 +1,8 @@
 # coding: utf-8
 from django.conf.urls import url
 
-from dartcms.views import GridView, InsertObjectView, UpdateObjectView, DeleteObjectView
-
+from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+                           UpdateObjectView)
 
 urlpatterns = [
     url(r'^$', GridView.as_view(search=['name']), name='index'),

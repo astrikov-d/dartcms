@@ -1,6 +1,6 @@
 {% extends 'dartcms/views/insert.html' %}
 
-{% load static %}
+{% load static i18n %}
 
 {% block js %}
     {{ block.super }}
@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block form_content %}
-    {{ block.super }}
-    <div id="id-context-variables" data-loading-url="{% url 'dartcms:pages:load_module_params' %}"></div>
+    {% if has_perm %}
+        {{ block.super }}
+        <div id="id-context-variables" data-loading-url="{% url 'dartcms:pages:load_module_params' %}"></div>
+    {% else %}
+        {% trans 'You do not have permission to add page in this section.' as security_message %}
+        {% include 'dartcms/views/partials/security_alert.html' with message=security_message %}
+    {% endif %}
 {% endblock %}

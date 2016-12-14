@@ -5,8 +5,8 @@ from django.core.urlresolvers import reverse
 from django.forms import modelform_factory
 from django.http import Http404, JsonResponse
 
-from dartcms.utils.loading import get_model, get_form_class
 from dartcms.apps.modules.functions import get_current_module
+from dartcms.utils.loading import get_form_class, get_model
 
 
 class ModulePermissionsMixin(object):

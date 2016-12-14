@@ -1,0 +1,8 @@
+{% load i18n %}
+
+<div class="alert alert-danger">
+    <i class="fa fa-warning"></i> {{ message }}
+</div>
+{% if not hide_cancel %}
+    <a href="#" class="btn btn-primary btn-close-modal">{% trans 'Cancel' %}</a>
+{% endif %}

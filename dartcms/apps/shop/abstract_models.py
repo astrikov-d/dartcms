@@ -1,15 +1,15 @@
 # coding: utf-8
 from decimal import Decimal
 
+from autoslug import AutoSlugField
 from django.db import models
-from django.db.models import Sum, F
+from django.db.models import F, Sum
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
+from mptt.models import MPTTModel, TreeForeignKey
 
-from autoslug import AutoSlugField
 from dartcms.utils.fields import RteField
 from dartcms.utils.loading import get_model
-from mptt.models import MPTTModel, TreeForeignKey
 
 
 class AbstractProductBase(models.Model):
