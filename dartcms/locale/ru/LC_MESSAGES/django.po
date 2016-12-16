@@ -520,9 +520,8 @@ msgstr "Заказы"
 
 #: venv/local/lib/python2.7/site-packages/dartcms/apps/modules/migrations/0009_insert_user_group_module.py:20
 #: venv/lib/python2.7/site-packages/dartcms/apps/modules/migrations/0009_insert_user_group_module.py:20
-#| msgid "CMS Users"
 msgid "CMS User groups"
-msgstr "Пользователи CMS"
+msgstr "Группы пользователей CMS"
 
 #: venv/local/lib/python2.7/site-packages/dartcms/apps/modules/models.py:11
 #: venv/lib/python2.7/site-packages/dartcms/apps/modules/models.py:11
