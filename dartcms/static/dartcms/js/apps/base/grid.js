@@ -85,15 +85,19 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
                                 }, 0);
 
                             } else if (response.hasOwnProperty('error')) {
+                                var errorMsg = '';
+
                                 if (response.error == 'PROTECTED') {
-                                    new PNotify({
-                                        title: gettext('Error'),
-                                        text: gettext('Cannot delete the object: related objects exist'),
-                                        icon: 'fa fa-exclamation-circle',
-                                        type: 'error'
-                                    });
-                                    $.modal.close();
+                                    errorMsg = gettext('Cannot delete the object: related objects exist');
                                 }
+
+                                new PNotify({
+                                    title: gettext('Error'),
+                                    text: errorMsg,
+                                    icon: 'fa fa-exclamation-circle',
+                                    type: 'error'
+                                });
+                                $.modal.close();
                             }
 
                             if (onSubmitError) {
