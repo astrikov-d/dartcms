@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.http.response import Http404
+from django.shortcuts import redirect
 
 from dartcms import get_model
 
@@ -24,19 +25,21 @@ class PageMiddleware(object):
         page = None
 
         try:
-            page = Page.objects.get(url=path, redirect_url='')
+            page = Page.objects.get(url=path)
         except Page.DoesNotExist:
             while path_parts:
                 path_parts.pop()
                 if path_parts:
                     path = '/%s/' % '/'.join(path_parts)
                     try:
-                        page = Page.objects.get(url=path, redirect_url='')
+                        page = Page.objects.get(url=path)
                         break
                     except Page.DoesNotExist:
                         continue
 
         if page:
+            if page.redirect_url:
+                return redirect(page.redirect_url)
             request.page = page
             request.page_children = page.children.filter(is_enabled=True, is_in_menu=True)
 
