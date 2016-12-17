@@ -16,6 +16,9 @@ def insert_homepage(apps, schema):
     PageModule = get_model('pages', 'PageModule')
     Page = get_model('pages', 'Page')
 
+    if PageModule.objects.filter(slug='homepage').exists():
+        return
+
     homepage_module = PageModule.objects.create(
         slug='homepage',
         name=_('Homepage')
@@ -43,7 +46,7 @@ def drop_homepage(apps, schema):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('pages', '0002_related_models'),
+        ('pages', '0010_auto_20161214_0258'),
     ]
 
     operations = [
