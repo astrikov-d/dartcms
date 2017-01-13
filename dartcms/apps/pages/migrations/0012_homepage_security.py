@@ -14,7 +14,7 @@ def set_homepage_security(apps, schema):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('pages', '0010_auto_20161214_0258'),
+        ('pages', '0011_insert_homepage'),
     ]
 
     operations = [
