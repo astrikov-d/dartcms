@@ -83,6 +83,21 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
                                 $('.jquery-modal').animate({
                                     scrollTop: $(".errorlist:first").offset().top
                                 }, 0);
+
+                            } else if (response.hasOwnProperty('error')) {
+                                var errorMsg = '';
+
+                                if (response.error == 'PROTECTED') {
+                                    errorMsg = gettext('Cannot delete the object: related objects exist');
+                                }
+
+                                new PNotify({
+                                    title: gettext('Error'),
+                                    text: errorMsg,
+                                    icon: 'fa fa-exclamation-circle',
+                                    type: 'error'
+                                });
+                                $.modal.close();
                             }
 
                             if (onSubmitError) {

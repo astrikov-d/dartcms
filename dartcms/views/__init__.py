@@ -2,6 +2,7 @@
 import json
 from datetime import datetime
 
+from django.db.models import ProtectedError
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.utils.translation import ugettext as _
 
@@ -255,5 +256,8 @@ class DeleteObjectView(AdminMixin, JSONResponseMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.delete()
+        try:
+            self.object.delete()
+        except ProtectedError:
+            return self.render_to_json_response({'result': False, 'error': 'PROTECTED'})
         return self.render_to_json_response({'result': True, 'action': 'DELETE'})
