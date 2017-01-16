@@ -5,8 +5,6 @@ from .utils import get_user_model
 
 
 class DartCMSAuthBackend(ModelBackend):
-    default_user_model = 'auth.User'
-
     @property
     def user_model(self):
         return get_user_model()
