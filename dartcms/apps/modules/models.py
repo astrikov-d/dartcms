@@ -4,8 +4,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from jsonfield import JSONField
 
-from dartcms.apps.auth.utils import get_user_model
-
 
 class ModuleGroup(models.Model):
     class Meta:
@@ -38,5 +36,5 @@ class Module(models.Model):
     description = models.TextField(default='', verbose_name=_('Description'), blank=True)
     slug = models.SlugField(unique=True, verbose_name=_('Slug'))
     config = JSONField(null=True, blank=True, verbose_name=_('Config'))
-    user = models.ManyToManyField(get_user_model(), verbose_name=_('User'))
+    user = models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name=_('User'))
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
