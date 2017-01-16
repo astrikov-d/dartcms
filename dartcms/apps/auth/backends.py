@@ -1,10 +1,13 @@
 # coding: utf-8
 from django.contrib.auth.backends import ModelBackend
-from django.contrib.auth.models import User
+
+from .utils import get_user_model
 
 
 class DartCMSAuthBackend(ModelBackend):
-    user_model = User
+    @property
+    def user_model(self):
+        return get_user_model()
 
     def authenticate(self, username=None, password=None, **kwargs):
         try:

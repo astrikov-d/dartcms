@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.forms import AdminPasswordChangeForm
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
+from dartcms.apps.auth.utils import get_user_model
 from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView
 
 
@@ -14,9 +14,13 @@ class ChangePasswordView(AdminMixin, FormView):
     template_name = 'dartcms/apps/users/change_password.html'
     success_url = reverse_lazy('dartcms:users:index')
 
+    @property
+    def user_model(self):
+        return get_user_model()
+
     def get_form_kwargs(self):
         kwargs = super(ChangePasswordView, self).get_form_kwargs()
-        kwargs['user'] = User.objects.get(pk=self.kwargs['pk'])
+        kwargs['user'] = self.user_model.objects.get(pk=self.kwargs['pk'])
         return kwargs
 
     def get_context_data(self, *args, **kwargs):

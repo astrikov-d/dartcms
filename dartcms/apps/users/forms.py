@@ -1,8 +1,8 @@
 # coding: utf-8
 from django import forms
-from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from dartcms.apps.auth.utils import get_user_model
 from dartcms.apps.modules.models import Module
 
 from .models import UserGroup
@@ -10,7 +10,7 @@ from .models import UserGroup
 
 class UserForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = get_user_model()
         exclude = ('password', 'last_login', 'date_joined', 'user_permissions', 'groups')
 
     modules = forms.ModelMultipleChoiceField(label=_('Modules'), queryset=Module.objects.all())
