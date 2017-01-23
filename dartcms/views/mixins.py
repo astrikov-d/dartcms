@@ -74,6 +74,8 @@ class AdminMixin(ModulePermissionsMixin):
                     if search_config:
                         self.search = search_config
 
+                    self.ordering = grid_config.get('ordering')
+
         return super(AdminMixin, self).dispatch(request, *args, **kwargs)
 
     def get_foreign_key_name(self):
