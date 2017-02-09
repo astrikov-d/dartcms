@@ -132,8 +132,6 @@
                 var date_format = 'YYYY-MM-DD';
             {% endif %}
 
-
-
             grid.datagrid({
                 url: '{{ request.path }}',
                 queryParams: request.GET,
@@ -143,7 +141,7 @@
                 fitColumn: true,
                 fit: true,
                 pagination: true,
-                remoteSort: false,
+                remoteSort: true,
                 toolbar: gridToolbar,
                 onOpen: function (data) {
                     $('.grid-loading-indicator').remove();

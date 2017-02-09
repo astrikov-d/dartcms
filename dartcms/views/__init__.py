@@ -117,6 +117,12 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         if self.search and 'search' in self.request.GET:
             queryset = self.filter_queryset(queryset)
 
+        sort = self.request.GET.get('sort')
+        order = self.request.GET.get('order')
+        if sort and order:
+            sort = sort if order == 'asc' else '-%s' % sort
+            queryset = queryset.order_by(sort)
+
         if page and rows:
             offset = (int(page) - 1) * int(rows)
             limit = int(rows)
