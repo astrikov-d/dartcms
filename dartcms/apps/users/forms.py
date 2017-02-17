@@ -13,5 +13,7 @@ class UserForm(forms.ModelForm):
         model = get_user_model()
         exclude = ('password', 'last_login', 'date_joined', 'user_permissions', 'groups')
 
-    modules = forms.ModelMultipleChoiceField(label=_('Modules'), queryset=Module.objects.all())
-    user_groups = forms.ModelMultipleChoiceField(label=_('Groups'), queryset=UserGroup.objects.all())
+    modules = forms.ModelMultipleChoiceField(blank=True, required=False, label=_('Modules'),
+                                             queryset=Module.objects.all())
+    user_groups = forms.ModelMultipleChoiceField(blank=True, required=False, label=_('Groups'),
+                                                 queryset=UserGroup.objects.all())
