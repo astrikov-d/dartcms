@@ -2,16 +2,18 @@
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 from jsonfield import JSONField
 
 
+@python_2_unicode_compatible
 class ModuleGroup(models.Model):
     class Meta:
         verbose_name_plural = _('Module Groups')
         verbose_name = _('Module Group')
         ordering = ['sort']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     slug = models.SlugField(unique=True, verbose_name=_('Slug'))
@@ -21,13 +23,14 @@ class ModuleGroup(models.Model):
     description = models.TextField(default='', verbose_name=_('Description'), blank=True)
 
 
+@python_2_unicode_compatible
 class Module(models.Model):
     class Meta:
         verbose_name_plural = _('Modules')
         verbose_name = _('Module')
         ordering = ['group', 'sort']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.group.name + ' / ' + self.name
 
     group = models.ForeignKey(ModuleGroup, to_field='slug', verbose_name=_('Group'), related_name='modules')
