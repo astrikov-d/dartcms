@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from dartcms.apps.auth.utils import get_user_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import DeleteObjectView, GridView
-from forms import UserForm
-from views import ChangePasswordView, CMSUserInsertView, CMSUserUpdateView
+from .forms import UserForm
+from .views import ChangePasswordView, CMSUserInsertView, CMSUserUpdateView
 
 config = DartCMSConfig({
     'model': get_user_model(),
