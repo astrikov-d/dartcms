@@ -3,12 +3,14 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
+from django.utils.encoding import python_2_unicode_compatible
 from mptt.models import MPTTModel, TreeForeignKey
 
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.fields import RteField
 
 
+@python_2_unicode_compatible
 class PageModule(models.Model):
     class Meta:
         app_label = 'pages'
@@ -16,7 +18,7 @@ class PageModule(models.Model):
         verbose_name_plural = _('modules')
         verbose_name = _('module')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     slug = models.SlugField(unique=True, verbose_name=_('Slug'))
@@ -33,6 +35,7 @@ SECURITY_TYPE_CHOICES = (
 )
 
 
+@python_2_unicode_compatible
 class AbstractPage(MPTTModel):
     """
     Base page model. In common cases, you should not re-declare this class, since it have all necessary features.
@@ -47,7 +50,7 @@ class AbstractPage(MPTTModel):
         verbose_name_plural = _('pages')
         unique_together = ['module', 'slug']
 
-    def __unicode__(self):
+    def __str__(self):
         """
         Constructs breadcrumbs-like page name.
         """

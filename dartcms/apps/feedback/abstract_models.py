@@ -1,6 +1,8 @@
 # coding: utf-8
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
+
 
 FORM_TYPES = (
     ('contact', _('Contact form')),
@@ -8,6 +10,7 @@ FORM_TYPES = (
 )
 
 
+@python_2_unicode_compatible
 class FormType(models.Model):
     class Meta:
         app_label = 'feedback'
@@ -17,16 +20,17 @@ class FormType(models.Model):
     slug = models.SlugField(verbose_name=_('Type ID'), choices=FORM_TYPES)
     name = models.CharField(max_length=255, verbose_name=_('Name'))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class AbstractBaseMessage(models.Model):
     class Meta:
         app_label = 'feedback'
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.author
 
     type = models.ForeignKey(FormType, verbose_name=_('Type'))

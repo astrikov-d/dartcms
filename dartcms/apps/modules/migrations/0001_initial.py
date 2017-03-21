@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='module',
             name='group',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='modules', to='modules.ModuleGroup', to_field=b'slug', verbose_name='Group'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='modules', to='modules.ModuleGroup', to_field='slug', verbose_name='Group'),
         ),
         migrations.AddField(
             model_name='module',

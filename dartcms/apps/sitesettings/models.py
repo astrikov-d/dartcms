@@ -4,8 +4,10 @@ from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 
+@python_2_unicode_compatible
 class SiteSettings(models.Model):
     TEXT = 'text'
     TEXTAREA = 'textarea'
@@ -15,12 +17,12 @@ class SiteSettings(models.Model):
     SELECT = 'select'
 
     TYPE_CHOICES = (
-        (TEXT, _(u'String')),
-        (TEXTAREA, _(u'Text')),
-        (RICH, _(u'Rich Editor')),
-        (SELECT, _(u'Select')),
-        (DATE, _(u'Date')),
-        (FILE, _(u'File')),
+        (TEXT, _('String')),
+        (TEXTAREA, _('Text')),
+        (RICH, _('Rich Editor')),
+        (SELECT, _('Select')),
+        (DATE, _('Date')),
+        (FILE, _('File')),
     )
 
     class Meta:
@@ -28,8 +30,8 @@ class SiteSettings(models.Model):
         verbose_name = _('Site setting')
         verbose_name_plural = _('Site settings')
 
-    def __unicode__(self):
-        return u'%s - %s' % (self.slug, self.description)
+    def __str__(self):
+        return '%s - %s' % (self.slug, self.description)
 
     @property
     def value(self):
