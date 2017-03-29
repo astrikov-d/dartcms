@@ -75,6 +75,7 @@ class AdminMixin(ModulePermissionsMixin):
                         self.search = search_config
 
                     self.ordering = grid_config.get('ordering')
+                    self.model_properties = grid_config.get('model_properties')
 
         return super(AdminMixin, self).dispatch(request, *args, **kwargs)
 
