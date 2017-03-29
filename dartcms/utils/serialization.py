@@ -47,6 +47,8 @@ class DartCMSSerializer(Serializer):
 
     def handle_prop(self, obj, field):
         self._current[field] = getattr(obj, field)
+        if callable(self._current[field]):
+            self._current[field] = self._current[field]()
 
     def get_dump_object(self, obj):
         data = self._current
