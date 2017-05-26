@@ -18,7 +18,10 @@ config = DartCMSConfig({
             {'field': 'is_active', 'width': '10%'},
         ],
         'additional_grid_actions': [
-            {'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit'}
+            {
+                'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit',
+                'required_permissions': '__all__'
+            }
         ],
         'model_properties': ['username']
     },

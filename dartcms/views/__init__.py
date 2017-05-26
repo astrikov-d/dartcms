@@ -136,12 +136,40 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
             queryset = self.filter_queryset(queryset)
         return queryset.count()
 
+    def get_grid_actions(self):
+        perms = self.user_module_permissions
+        grid_actions = []
+
+        for action in ['insert', 'update', 'delete']:
+            if getattr(perms, 'can_%s' % action, False) and action in self.base_grid_actions:
+                grid_actions.append(action)
+
+        return grid_actions
+
+    def get_additional_grid_actions(self):
+        perms = self.user_module_permissions
+        additional_actions = []
+
+        for additional_action in self.additional_grid_actions:
+            required_perms = additional_action.get('required_permissions')
+            if required_perms:
+                if required_perms == '__all__':
+                    if all([perms.can_insert, perms.can_update, perms.can_delete]):
+                        additional_actions.append(additional_action)
+                else:
+                    for perm in required_perms:
+                        has_perm = getattr(perms, 'can_%s' % perm, False)
+                        if has_perm:
+                            additional_actions.append(additional_action)
+
+        return additional_actions
+
     def get_context_data(self, **kwargs):
         context = super(GridView, self).get_context_data(**kwargs)
         context.update({
             'grid_columns': self.grid_columns,
-            'grid_actions': self.base_grid_actions,
-            'additional_grid_actions': self.additional_grid_actions,
+            'grid_actions': self.get_grid_actions(),
+            'additional_grid_actions': self.get_additional_grid_actions(),
             'search_form': self.get_search_form(),
             'date_format': get_date_format(),
             'urls_kwargs': self.kwargs

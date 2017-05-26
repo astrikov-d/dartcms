@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
+from dartcms.apps.modules.models import Module, ModulePermission, ModuleGroup
 from dartcms.apps.auth.utils import get_user_model
 from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView
 
@@ -34,36 +35,61 @@ class ChangePasswordView(AdminMixin, FormView):
 
 
 class SaveUserMixin(object):
+    def set_module_permissions(self, user):
+        read = self.request.POST.getlist('read')
+        insert = self.request.POST.getlist('insert')
+        update = self.request.POST.getlist('update')
+        delete = self.request.POST.getlist('delete')
+
+        for module_id in read:
+            user.module_set.add(Module.objects.get(pk=module_id))
+            kwargs = {
+                'can_insert': module_id in insert,
+                'can_update': module_id in update,
+                'can_delete': module_id in delete,
+                'user_id': user.id,
+                'module_id': module_id
+            }
+            ModulePermission.objects.create(**kwargs)
+
     def form_valid(self, form):
         data = form.cleaned_data
         user = form.save()
         if user.id:
             user.module_set.clear()
+            user.user_module_permissions.all().delete()
             user.user_groups.clear()
-
-        for module in data.get('modules', []):
-            user.module_set.add(module)
 
         for group in data.get('user_groups', []):
             user.user_groups.add(group)
 
+        self.set_module_permissions(user)
+
         return self.render_to_json_response({'result': True, 'action': self.action})
 
 
-class CMSUserUpdateView(SaveUserMixin, UpdateObjectView):
+class ModulesContextMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(ModulesContextMixin, self).get_context_data(**kwargs)
+        context['module_groups'] = ModuleGroup.objects.all()
+        return context
+
+
+class CMSUserUpdateView(SaveUserMixin, ModulesContextMixin, UpdateObjectView):
     success_url = reverse_lazy('dartcms:users:index')
     action = 'UPDATE'
+    template_name = 'dartcms/apps/users/update.html'
 
     def get_initial(self):
         obj = self.get_object()
         return {
-            'modules': obj.module_set.all(),
             'user_groups': obj.user_groups.all()
         }
 
 
-class CMSUserInsertView(SaveUserMixin, InsertObjectView):
+class CMSUserInsertView(SaveUserMixin, ModulesContextMixin, InsertObjectView):
     action = 'INSERT'
+    template_name = 'dartcms/apps/users/insert.html'
 
     def get_success_url(self):
         return reverse_lazy('dartcms:users:change_password', kwargs={'pk': self.object.pk})

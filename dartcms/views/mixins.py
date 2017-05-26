@@ -4,8 +4,9 @@ import re
 from django.core.urlresolvers import reverse
 from django.forms import modelform_factory
 from django.http import Http404, JsonResponse
+from django.utils.functional import cached_property
 
-from dartcms.apps.modules.functions import get_current_module
+from dartcms.apps.modules.functions import get_current_module, get_current_module_perms
 from dartcms.utils.loading import get_form_class, get_model
 
 
@@ -18,6 +19,10 @@ class ModulePermissionsMixin(object):
         active_module_slug = self.request.path.replace(root, '', 1).strip('/').split('/')[0]
         user_modules = self.request.user.module_set.all().values_list('slug', flat=True)
         return active_module_slug in user_modules
+
+    @cached_property
+    def user_module_permissions(self):
+        return get_current_module_perms(self.request)
 
     def dispatch(self, request, *args, **kwargs):
         if not self.check_module_perms():

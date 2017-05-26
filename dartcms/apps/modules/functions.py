@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.core.urlresolvers import NoReverseMatch, reverse
 
-from .models import Module
+from .models import Module, ModulePermission
 
 
 def get_current_module(path):
@@ -16,3 +16,9 @@ def get_current_module(path):
             return Module.objects.get(slug=module_slug)
         except Module.DoesNotExist:
             pass
+
+
+def get_current_module_perms(request):
+    cms_module = get_current_module(request.path)
+    if cms_module:
+        return ModulePermission.objects.filter(user=request.user, module=cms_module).first()

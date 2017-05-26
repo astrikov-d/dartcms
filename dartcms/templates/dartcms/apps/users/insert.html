@@ -1,0 +1,29 @@
+{% extends "dartcms/views/insert.html" %}
+
+{% load i18n static %}
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dartcms/js/apps/users/form.js' %}"></script>
+{% endblock %}
+
+{% block form_content %}
+    {% csrf_token %}
+
+    {% for field in form %}
+        {% if field.name == 'modules' %}
+            {% include 'dartcms/apps/users/partial/modules_widget.html' %}
+        {% else %}
+            {% include 'dartcms/forms/partial/horizontal_field.html' %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            {% block form_actions %}
+                <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
+                <a href="#" class="btn btn-link btn-close-modal">{% trans 'Cancel' %}</a>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
