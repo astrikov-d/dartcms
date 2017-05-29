@@ -41,3 +41,22 @@ class Module(models.Model):
     config = JSONField(null=True, blank=True, verbose_name=_('Config'))
     user = models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name=_('User'))
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
+
+
+@python_2_unicode_compatible
+class ModulePermission(models.Model):
+    class Meta:
+        verbose_name_plural = _('Module permissions')
+        verbose_name = _('Module permission')
+        ordering = ['id']
+
+    def __str__(self):
+        return str(_('Module permission for %s, %s' % (self.user.username, str(self.module))))
+
+    module = models.ForeignKey(Module, verbose_name=_('Module'), related_name='module_permissions')
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, verbose_name=_('User'),
+                             related_name='user_module_permissions')
+    can_insert = models.BooleanField(default=True, verbose_name=_('Can insert data'))
+    can_update = models.BooleanField(default=True, verbose_name=_('Can update data'))
+    can_delete = models.BooleanField(default=True, verbose_name=_('Can delete data'))
+    date_changed = models.DateTimeField(auto_now=True)

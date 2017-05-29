@@ -1,0 +1,57 @@
+{% load i18n module_perms %}
+
+<div class="form-group user-permissions-widget">
+    <label for="{{ field.id_for_label }}" class="control-label col-xs-3">{{ field.label }}</label>
+    <div class="col-sm-9">
+        {% for group in module_groups %}
+            <div class="module-group">
+                <div class="module-group-name">{{ group.name }}</div>
+                {% for module in group.modules.all %}
+
+                    {% if module.is_enabled %}
+                        <div class="module-permissions">
+                            <div class="module-name">
+                                {{ module.name }}
+                                (<a href="#" class="check-permissions" data-state="off">{% trans 'toogle all' %}</a>)
+                            </div>
+
+                            <div class="checkbox checkbox-primary module-permission">
+                                <input type="checkbox" name="read" id="id-module-read-{{ module.id }}"
+                                       value="{{ module.id }}"
+                                       {% if module in object.module_set.all %}checked="checked"{% endif %}>
+                                <label for="id-module-read-{{ module.id }}">{% trans 'Read' %}</label>
+                            </div>
+
+                            <div class="checkbox checkbox-primary module-permission">
+                                {% check_module_permission module 'CREATE' as has_create_permission %}
+                                <input type="checkbox" name="insert" id="id-module-insert-{{ module.id }}"
+                                       value="{{ module.id }}"
+                                       {% if has_create_permission %}checked="checked"{% endif %}>
+
+                                <label for="id-module-insert-{{ module.id }}">{% trans 'Create' %}</label>
+                            </div>
+
+                            <div class="checkbox checkbox-primary module-permission">
+                                {% check_module_permission module 'UPDATE' as has_update_permission %}
+                                <input type="checkbox" name="update" id="id-module-update-{{ module.id }}"
+                                       value="{{ module.id }}"
+                                       {% if has_update_permission %}checked="checked"{% endif %}>
+                                <label for="id-module-update-{{ module.id }}">{% trans 'Update' %}</label>
+                            </div>
+
+                            <div class="checkbox checkbox-primary module-permission">
+                                {% check_module_permission module 'DELETE' as has_delete_permission %}
+                                <input type="checkbox" name="delete" id="id-module-delete-{{ module.id }}"
+                                       value="{{ module.id }}"
+                                       {% if has_delete_permission %}checked="checked"{% endif %}>
+                                <label for="id-module-delete-{{ module.id }}">{% trans 'Delete' %}</label>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
