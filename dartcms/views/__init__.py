@@ -148,6 +148,9 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
 
     def get_additional_grid_actions(self):
         perms = self.user_module_permissions
+        if not perms:
+            return []
+
         additional_actions = []
 
         for additional_action in self.additional_grid_actions:

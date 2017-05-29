@@ -18,7 +18,7 @@ class ModulePermissionsMixin(object):
         root = reverse('dartcms:dashboard:index')
         active_module_slug = self.request.path.replace(root, '', 1).strip('/').split('/')[0]
         user_modules = self.request.user.module_set.all().values_list('slug', flat=True)
-        return active_module_slug in user_modules
+        return active_module_slug in list(user_modules)
 
     @cached_property
     def user_module_permissions(self):
