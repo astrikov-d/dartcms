@@ -76,6 +76,7 @@ class ModulesContextMixin(object):
 
 
 class CMSUserUpdateView(SaveUserMixin, ModulesContextMixin, UpdateObjectView):
+    action = 'UPDATE'
     success_url = reverse_lazy('dartcms:users:index')
     template_name = 'dartcms/apps/users/update.html'
 
@@ -88,6 +89,7 @@ class CMSUserUpdateView(SaveUserMixin, ModulesContextMixin, UpdateObjectView):
 
 class CMSUserInsertView(SaveUserMixin, ModulesContextMixin, InsertObjectView):
     template_name = 'dartcms/apps/users/insert.html'
+    action = 'INSERT'
 
     def get_success_url(self):
         return reverse_lazy('dartcms:users:change_password', kwargs={'pk': self.object.pk})
