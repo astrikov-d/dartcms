@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-29 04:55+0300\n"
+"POT-Creation-Date: 2017-05-30 04:46+0300\n"
 "PO-Revision-Date: 2016-12-14 04:54+0000\n"
 "Last-Translator:   <astrikov.d@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -421,12 +421,10 @@ msgid "User"
 msgstr "Пользователь"
 
 #: app/dartcms/apps/modules/models.py:49
-#| msgid "Module Groups"
 msgid "Module permissions"
 msgstr "Права на использование модулей"
 
 #: app/dartcms/apps/modules/models.py:50
-#| msgid "Module parameters"
 msgid "Module permission"
 msgstr "Права на использование модуля"
 
@@ -946,7 +944,7 @@ msgstr "Переименовать"
 #: app/dartcms/templates/dartcms/apps/pages/grid.html:41
 #: app/dartcms/templates/dartcms/apps/shop/grid.html:67
 #: app/dartcms/templates/dartcms/apps/users/partial/modules_widget.html:47
-#: app/dartcms/templates/dartcms/views/grid.html:93
+#: app/dartcms/templates/dartcms/views/grid.html:115
 msgid "Delete"
 msgstr "Удалить"
 
@@ -998,14 +996,15 @@ msgstr "У вас нет прав для удаления этой страни�
 #: app/dartcms/templates/dartcms/apps/pages/grid.html:17
 #: app/dartcms/templates/dartcms/apps/shop/grid.html:25
 #: app/dartcms/templates/dartcms/apps/users/insert.html:24
-#: app/dartcms/templates/dartcms/views/grid.html:70
+#: app/dartcms/templates/dartcms/views/grid.html:72
 #: app/dartcms/templates/dartcms/views/insert.html:20
+#: app/dartcms/templates/dartcms/views/view.html:20
 msgid "Add"
 msgstr "Добавить"
 
 #: app/dartcms/templates/dartcms/apps/pages/grid.html:29
 #: app/dartcms/templates/dartcms/apps/shop/grid.html:43
-#: app/dartcms/templates/dartcms/views/grid.html:80
+#: app/dartcms/templates/dartcms/views/grid.html:84
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -1033,23 +1032,23 @@ msgstr "Подтвердить изменения"
 #: app/dartcms/templates/dartcms/views/insert.html:21
 #: app/dartcms/templates/dartcms/views/partials/security_alert.html:7
 #: app/dartcms/templates/dartcms/views/update.html:21
+#: app/dartcms/templates/dartcms/views/view.html:21
 msgid "Cancel"
 msgstr "Отмена"
 
 #: app/dartcms/templates/dartcms/apps/users/partial/modules_widget.html:15
 msgid "toogle all"
-msgstr ""
+msgstr "включить все"
 
 #: app/dartcms/templates/dartcms/apps/users/partial/modules_widget.html:22
-#| msgid "Ready"
 msgid "Read"
 msgstr "Чтение"
 
 #: app/dartcms/templates/dartcms/apps/users/partial/modules_widget.html:31
-#| msgid "Create folder"
 msgid "Create"
 msgstr "Добавление"
 
+#: app/dartcms/templates/dartcms/apps/users/partial/modules_widget.html:39
 #: app/dartcms/templates/dartcms/apps/users/update.html:24
 #: app/dartcms/templates/dartcms/views/update.html:20
 msgid "Update"
@@ -1089,7 +1088,12 @@ msgstr "Удалить навсегда. Вы уверены?"
 msgid "Yes"
 msgstr "Да"
 
+#: app/dartcms/templates/dartcms/views/grid.html:97
+msgid "View"
+msgstr "Просмотр данных"
+
 #: app/dartcms/templates/dartcms/views/insert.html:8
+#: app/dartcms/templates/dartcms/views/view.html:8
 msgid "Add Record"
 msgstr "Добавить запись"
 
@@ -1104,6 +1108,11 @@ msgstr "Поиск"
 #: app/dartcms/templates/dartcms/views/partials/loading_indicator.html:2
 msgid "Loading.."
 msgstr "Загрузка.."
+
+#: app/dartcms/templates/dartcms/views/update.html:8
+#| msgid "View Records"
+msgid "View Record"
+msgstr "Подробнее"
 
 #: app/dartcms/templates/dartcms/views/update.html:8
 msgid "Update Record"
