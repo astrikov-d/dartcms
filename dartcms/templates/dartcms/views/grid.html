@@ -13,7 +13,7 @@
             src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment-with-locales.min.js"></script>
 
     <script type="text/javascript"
-        src="{% static 'dartcms/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+            src="{% static 'dartcms/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
 
     <script type="text/javascript"
             src="{% static 'dartcms/assets/bootstrap-multiselect/js/bootstrap-multiselect.js' %}"></script>
@@ -56,39 +56,61 @@
         $(function () {
 
             var grid = $('#id-datagrid'),
-                    gridToolbar = [
-                        {% if parent_url %}
-                            {
-                                text: '{% trans 'Back' %}',
-                                iconCls: 'icon-back',
-                                handler: function () {
-                                    window.location.href = '{{ parent_url }}';
-                                }
-                            },{% endif %}
-                        {% if 'insert' in grid_actions %}
-                            {
-                                text: '{% trans 'Add' %}',
-                                iconCls: 'icon-add',
-                                handler: function () {
-                                    openFormModal('{{ request.path }}insert/', function () {
+                gridToolbar = [
+                    {% if parent_url %}
+                        {
+                            text: '{% trans 'Back' %}',
+                            iconCls: 'icon-back',
+                            handler: function () {
+                                window.location.href = '{{ parent_url }}';
+                            }
+                        },
+                    {% endif %}
+
+                    {% if 'insert' in grid_actions %}
+                        {
+                            text: '{% trans 'Add' %}',
+                            iconCls: 'icon-add',
+                            handler: function () {
+                                openFormModal('{{ request.path }}insert/', function () {
+                                    grid.datagrid('reload');
+                                });
+                            }
+                        },
+                    {% endif %}
+
+                    {% if 'update' in grid_actions %}
+                        {
+                            text: '{% trans 'Edit' %}',
+                            iconCls: 'icon-edit',
+                            handler: function () {
+                                var selected = grid.datagrid('getSelected');
+                                if (selected) {
+                                    openFormModal('{{ request.path }}update/' + selected.pk + '/', function () {
                                         grid.datagrid('reload');
                                     });
                                 }
-                            },{% endif %}
-                        {% if 'update' in grid_actions %}
-                            {
-                                text: '{% trans 'Edit' %}',
-                                iconCls: 'icon-edit',
-                                handler: function () {
-                                    var selected = grid.datagrid('getSelected');
-                                    if (selected) {
-                                        openFormModal('{{ request.path }}update/' + selected.pk + '/', function () {
-                                            grid.datagrid('reload');
-                                        });
-                                    }
+                            }
+                        },
+                    {% else %}
+                        {
+                            text: '{% trans 'View' %}',
+                            iconCls: 'icon-more',
+                            handler: function () {
+                                var selected = grid.datagrid('getSelected');
+                                if (selected) {
+                                    openFormModal('{{ request.path }}update/' + selected.pk + '/', function () {
+                                        grid.datagrid('reload');
+                                    }, undefined, function (modal) {
+                                        $('input, textarea, select', modal).addClass('disabled').attr('disabled', 'disabled');
+                                        $('a', modal)
+                                    });
                                 }
-                            },{% endif %}
-                        {% if 'delete' in grid_actions %}
+                            }
+                        },
+                    {% endif %}
+
+                    {% if 'delete' in grid_actions %}
                         {
                             text: '{% trans 'Delete' %}',
                             iconCls: 'icon-remove',
@@ -101,7 +123,9 @@
                                 }
                             }
                         },
-                        {% endif %}{% if additional_grid_actions %}
+                    {% endif %}
+
+                    {% if additional_grid_actions %}
                         {% for action in additional_grid_actions %}
                             {
                                 text: '{{ action.label }}',
@@ -119,10 +143,10 @@
                                 }
                             },
                         {% endfor %}
-                        {% endif %}
+                    {% endif %}
 
-                    ],
-                    body = $('body');
+                ],
+                body = $('body');
 
             {% get_current_language as LANG %}
 
@@ -156,7 +180,7 @@
                         },
                         {% for column in grid_columns %}
                             {
-                                sortable:true,
+                                sortable: true,
                                 field: '{{ column.field }}',
                                 width: '{{ column.width }}',
                                 title: '{{ column.label }}',

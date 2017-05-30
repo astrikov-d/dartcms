@@ -12,7 +12,7 @@
                         <div class="module-permissions">
                             <div class="module-name">
                                 {{ module.name }}
-                                (<a href="#" class="check-permissions" data-state="off">{% trans 'toogle all' %}</a>)
+                                {% if not read_only %}(<a href="#" class="check-permissions" data-state="off">{% trans 'toogle all' %}</a>){% endif %}
                             </div>
 
                             <div class="checkbox checkbox-primary module-permission">

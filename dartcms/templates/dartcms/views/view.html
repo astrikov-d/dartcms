@@ -5,7 +5,7 @@
     <div class="page-header">
         <h1>
             {{ page_header|capfirst }}
-            <small>{% if read_only %}{% trans 'View Record' %}{% else %}{% trans 'Update Record' %}{% endif %} &laquo;{{ object }}&raquo;</small>
+            <small>{% trans 'Add Record' %}</small>
         </h1>
     </div>
     <div class="well well-sm">
@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <div class="col-xs-9 col-xs-offset-3">
                         {% block form_actions %}
-                            {% if not read_only %}<button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>{% endif %}
+                            <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
                             <a href="#" class="btn btn-link btn-close-modal">{% trans 'Cancel' %}</a>
                         {% endblock %}
                     </div>

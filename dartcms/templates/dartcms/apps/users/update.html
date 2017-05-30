@@ -1,4 +1,4 @@
-{% extends "dartcms/views/insert.html" %}
+{% extends "dartcms/views/update.html" %}
 
 {% load i18n static %}
 
@@ -21,7 +21,7 @@
     <div class="form-group">
         <div class="col-xs-9 col-xs-offset-3">
             {% block form_actions %}
-                <button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>
+                {% if not read_only %}<button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>{% endif %}
                 <a href="#" class="btn btn-link btn-close-modal">{% trans 'Cancel' %}</a>
             {% endblock %}
         </div>
