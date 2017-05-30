@@ -12,7 +12,7 @@ $(function () {
 });
 
 
-var openFormModal = function (url, onSubmitSuccess, onSubmitError) {
+var openFormModal = function (url, onSubmitSuccess, onSubmitError, onOpen) {
     $.get(url, function (html) {
         $(html).appendTo('body').modal({
             modalClass: "modal form-modal"
@@ -22,6 +22,10 @@ var openFormModal = function (url, onSubmitSuccess, onSubmitError) {
         $('form', formModal).attr('action', url);
         initModalControls(formModal, onSubmitSuccess, onSubmitError);
         initDatePickers();
+
+        if (onOpen) {
+            onOpen(formModal);
+        }
     });
     return false;
 };

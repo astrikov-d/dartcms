@@ -164,6 +164,8 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
                         has_perm = getattr(perms, 'can_%s' % perm, False)
                         if has_perm:
                             additional_actions.append(additional_action)
+            else:
+                additional_actions.append(additional_action)
 
         return additional_actions
 
@@ -263,6 +265,12 @@ class AjaxUpdateObjectMixin(AdminMixin, JSONResponseMixin):
 
 
 class UpdateObjectView(AjaxUpdateObjectMixin, UpdateView):
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateObjectView, self).get_context_data(*args, **kwargs)
+        if not self.user_module_permissions.can_update:
+            context['read_only'] = True
+        return context
+
     def form_valid(self, form):
         form.save()
         return self.render_to_json_response({'result': True, 'action': 'UPDATE'})
