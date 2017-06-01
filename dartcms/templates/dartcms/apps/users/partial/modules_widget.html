@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="checkbox checkbox-primary module-permission">
-                                {% check_module_permission module 'CREATE' as has_create_permission %}
+                                {% check_module_permission module object 'CREATE' as has_create_permission %}
                                 <input type="checkbox" name="insert" id="id-module-insert-{{ module.id }}"
                                        value="{{ module.id }}"
                                        {% if has_create_permission %}checked="checked"{% endif %}>
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="checkbox checkbox-primary module-permission">
-                                {% check_module_permission module 'UPDATE' as has_update_permission %}
+                                {% check_module_permission module object 'UPDATE' as has_update_permission %}
                                 <input type="checkbox" name="update" id="id-module-update-{{ module.id }}"
                                        value="{{ module.id }}"
                                        {% if has_update_permission %}checked="checked"{% endif %}>
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="checkbox checkbox-primary module-permission">
-                                {% check_module_permission module 'DELETE' as has_delete_permission %}
+                                {% check_module_permission module object 'DELETE' as has_delete_permission %}
                                 <input type="checkbox" name="delete" id="id-module-delete-{{ module.id }}"
                                        value="{{ module.id }}"
                                        {% if has_delete_permission %}checked="checked"{% endif %}>

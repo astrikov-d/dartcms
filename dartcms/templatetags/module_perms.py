@@ -18,9 +18,9 @@ register = template.Library()
 # ...                                                                                 #
 # {% endif %}                                                               #
 #######################################################################################
-@register.simple_tag(takes_context=True)
-def check_module_permission(context, cms_module, permission_type):
-    perms = ModulePermission.objects.filter(user=context['request'].user, module=cms_module).first()
+@register.simple_tag()
+def check_module_permission(user, cms_module, permission_type):
+    perms = ModulePermission.objects.filter(user=user, module=cms_module).first()
     if perms:
         mapping = {
             'CREATE': 'can_insert',
