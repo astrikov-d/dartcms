@@ -19,7 +19,7 @@ register = template.Library()
 # {% endif %}                                                               #
 #######################################################################################
 @register.simple_tag()
-def check_module_permission(user, cms_module, permission_type):
+def check_module_permission(cms_module, user, permission_type):
     perms = ModulePermission.objects.filter(user=user, module=cms_module).first()
     if perms:
         mapping = {
