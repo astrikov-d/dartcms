@@ -1,8 +1,12 @@
 # coding: utf-8
 import six
+import sys
 from django.core.serializers.json import Serializer
 from django.db import models
 from django.utils.encoding import force_text, is_protected_type
+
+if sys.version_info.major == 3:
+    unicode = str
 
 
 class DartCMSSerializer(Serializer):
