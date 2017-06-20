@@ -205,11 +205,11 @@ msgstr "Дата создания"
 
 #: app/dartcms/apps/feeds/abstract_models.py:16
 msgid "Feed type"
-msgstr "Тип формы"
+msgstr "Тип ленты"
 
 #: app/dartcms/apps/feeds/abstract_models.py:17
 msgid "Feed types"
-msgstr "Типы форм"
+msgstr "Типы лент"
 
 #: app/dartcms/apps/feeds/abstract_models.py:23
 #: app/dartcms/apps/modules/models.py:19 app/dartcms/apps/modules/models.py:40
@@ -459,7 +459,7 @@ msgstr "Связанная модель"
 
 #: app/dartcms/apps/pages/abstract_models.py:32
 msgid "Editable for all users"
-msgstr "Редактирование доустпно всем пользователям CMS"
+msgstr "Редактирование доступно всем пользователям CMS"
 
 #: app/dartcms/apps/pages/abstract_models.py:33
 msgid "Based on the parent page"
@@ -467,7 +467,7 @@ msgstr "На основе родительской страницы"
 
 #: app/dartcms/apps/pages/abstract_models.py:34
 msgid "Editable for specific groups"
-msgstr "Редактирование доустпно определенным группам пользователей CMS"
+msgstr "Редактирование доступно определенным группам пользователей CMS"
 
 #: app/dartcms/apps/pages/abstract_models.py:49
 msgid "page"
