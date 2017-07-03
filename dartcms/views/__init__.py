@@ -131,9 +131,7 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         return queryset
 
     def get_total_rows_count(self):
-        queryset = super(GridView, self).get_queryset()
-        if self.search and 'search' in self.request.GET:
-            queryset = self.filter_queryset(queryset)
+        queryset = self.get_queryset()
         return queryset.count()
 
     def get_grid_actions(self):
@@ -187,7 +185,6 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         return super(GridView, self).render_to_response(context, **response_kwargs)
 
     def get_data(self, context):
-
         return {
             'total': self.get_total_rows_count(),
             'rows': json.loads(DartCMSSerializer().serialize(

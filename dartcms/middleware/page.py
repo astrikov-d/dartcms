@@ -6,7 +6,6 @@ from dartcms import get_model
 
 
 class PageMiddleware(object):
-
     def process_request(self, request):
         PageModule = get_model('pages', 'PageModule')
         Page = get_model('pages', 'Page')
@@ -45,9 +44,8 @@ class PageMiddleware(object):
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         namespaces = request.resolver_match.namespaces
-
         if 'dartcms' in namespaces or 'admin' in namespaces:
             return
 
         if hasattr(request, 'page_module') and not hasattr(request, 'page'):
-            raise Http404
+            raise Http404('Attribute "page" is not in request')
