@@ -97,10 +97,10 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
 
         return queryset
 
-    def get_queryset(self):
-        page = self.request.GET.get('page')
-        rows = self.request.GET.get('rows', self.paginate_by)
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get('rows', self.paginate_by)
 
+    def get_queryset(self):
         if self.parent_kwarg_name:
             kwarg = self.kwargs[self.parent_kwarg_name]
             if self.parent_model_fk is not None:
@@ -122,11 +122,6 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         if sort and order:
             sort = sort if order == 'asc' else '-%s' % sort
             queryset = queryset.order_by(sort)
-
-        if page and rows:
-            offset = (int(page) - 1) * int(rows)
-            limit = int(rows)
-            queryset = queryset[offset:offset + limit]
 
         return queryset
 
@@ -185,10 +180,14 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
         return super(GridView, self).render_to_response(context, **response_kwargs)
 
     def get_data(self, context):
+        queryset = self.get_queryset()
+        page_size = self.get_paginate_by(queryset)
+        if page_size:
+            paginator, page, queryset, is_paginated = self.paginate_queryset(queryset, page_size)
         return {
             'total': self.get_total_rows_count(),
             'rows': json.loads(DartCMSSerializer().serialize(
-                queryset=self.get_queryset(),
+                queryset=queryset,
                 props=self.model_properties
             ))  # TODO: refactor.
         }
