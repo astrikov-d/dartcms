@@ -33,10 +33,10 @@ config = DartCMSConfig({
 })
 
 insert_kwargs = config.form.copy()
-insert_kwargs['template_name'] = 'dartcms/apps/pages/insert.html'
+insert_kwargs['template_name'] = 'dartcms/views/insert.html'
 
 update_kwargs = config.form.copy()
-update_kwargs['template_name'] = 'dartcms/apps/pages/update.html'
+update_kwargs['template_name'] = 'dartcms/views/update.html'
 
 urlpatterns = [
     url(r'^$', GridView.as_view(**config.grid), name='index'),
