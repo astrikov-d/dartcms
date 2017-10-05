@@ -22,7 +22,7 @@ setup(
     include_package_data=True,
     py_modules=['dartcms'],
     install_requires=[
-        'Django==1.10.4',
+        'Django>=1.10.4',
         'django-autoslug>=1.9.3',
         'django-extra-views>=0.7.1',
         'django-form-utils>=1.0.3',
@@ -42,5 +42,6 @@ setup(
         'Natural Language :: English',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
     ]
 )
