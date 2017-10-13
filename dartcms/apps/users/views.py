@@ -26,7 +26,7 @@ class ChangePasswordView(AdminMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ChangePasswordView, self).get_context_data(**kwargs)
-        context['index_url'] = reverse_lazy('dartcms:users:index')
+        context['index_url'] = self.success_url
         return context
 
     def form_valid(self, form):
