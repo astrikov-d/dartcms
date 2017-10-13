@@ -3,6 +3,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from dartcms.apps.auth.utils import get_user_model
+from .managers import CMSUserManager
+
+User = get_user_model()
 
 
 @python_2_unicode_compatible
@@ -17,3 +21,17 @@ class UserGroup(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@python_2_unicode_compatible
+class CMSUser(User):
+    class Meta:
+        verbose_name = _('CMS User')
+        verbose_name_plural = _('CMS Users')
+        proxy = True
+
+    def save(self, *args, **kwargs):
+        self.is_staff = True
+        super(CMSUser, self).save(*args, **kwargs)
+
+    objects = CMSUserManager()

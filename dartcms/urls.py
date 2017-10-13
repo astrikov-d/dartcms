@@ -16,6 +16,7 @@ urlpatterns = [
 
     url(r'^cms-users/', include('dartcms.apps.users.urls', namespace='users')),
     url(r'^user-groups/', include('dartcms.apps.users.groups.urls', namespace='user_groups')),
+    url(r'^site-users/', include('dartcms.apps.siteusers.urls', namespace='siteusers')),
 
     url(r'^filemanager/', include('dartcms.apps.filemanager.urls', namespace='filemanager')),
     url(r'^dict-(?P<module_slug>[a-z_-]{3,50})/',
