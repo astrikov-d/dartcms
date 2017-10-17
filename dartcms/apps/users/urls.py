@@ -18,6 +18,9 @@ config = DartCMSConfig({
             {'field': 'is_staff', 'width': '10%'},
             {'field': 'is_active', 'width': '10%'},
         ],
+        'search': [
+            'username', 'email'
+        ],
         'additional_grid_actions': [
             {
                 'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit',
