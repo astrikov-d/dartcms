@@ -1,12 +1,11 @@
 # coding: utf-8
 import os
 
+from dartcms.views import JSONView
 from django.conf import settings
 from django.http import Http404
 from django.utils import formats
 from django.views.generic import TemplateView
-
-from dartcms.views import JSONView
 
 from .forms import FolderForm
 from .models import File, Folder

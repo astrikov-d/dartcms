@@ -1,10 +1,9 @@
 # coding: utf-8
+from dartcms.apps.modules.models import Module
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from dartcms.apps.modules.models import Module
-
-from .models import UserGroup, CMSUser
+from .models import CMSUser, UserGroup
 
 
 class UserForm(forms.ModelForm):

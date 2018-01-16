@@ -1,18 +1,18 @@
 # coding: utf-8
 import re
 
-from django.core.urlresolvers import reverse
+from dartcms.apps.modules.functions import (get_current_module,
+                                            get_current_module_perms)
+from dartcms.utils.loading import get_form_class, get_model
 from django.forms import modelform_factory
 from django.http import Http404, JsonResponse
+from django.urls import reverse
 from django.utils.functional import cached_property
-
-from dartcms.apps.modules.functions import get_current_module, get_current_module_perms
-from dartcms.utils.loading import get_form_class, get_model
 
 
 class ModulePermissionsMixin(object):
     def check_module_perms(self):
-        if not self.request.user.is_authenticated() or not self.request.user.is_staff:
+        if not self.request.user.is_authenticated or not self.request.user.is_staff:
             return False
 
         root = reverse('dartcms:dashboard:index')

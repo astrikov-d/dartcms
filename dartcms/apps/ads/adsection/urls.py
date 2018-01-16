@@ -1,11 +1,12 @@
 # coding: utf-8
-from django.conf.urls import url
-from django.forms import modelform_factory
-
 from dartcms.apps.ads.models import AdSection
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import url
+from django.forms import modelform_factory
+
+app_name='adsection'
 
 config = DartCMSConfig({
     'model': AdSection,

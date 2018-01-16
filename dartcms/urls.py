@@ -1,15 +1,17 @@
 # coding: utf-8
 from django.conf import settings
 from django.conf.urls import include, url
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 
 js_info_dict = {
     'packages': ('dartcms',),
 }
 
+app_name = 'dartcms'
+
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 
     url(r'^', include('dartcms.apps.dashboard.urls', namespace='dashboard')),
     url(r'^auth/', include('dartcms.apps.auth.urls', namespace='auth')),

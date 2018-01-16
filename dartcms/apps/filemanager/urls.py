@@ -6,6 +6,8 @@ from .views import (CreateFolderView, DeleteFileView, DeleteFolderView,
                     FileManagerIndexView, GetFilesView, GetTreeView,
                     RenameFolderView, UploadFileView)
 
+app_name = 'filemanager'
+
 urlpatterns = [
     url(r'^$', login_required(FileManagerIndexView.as_view()), name='index'),
     url(r'^get-tree/$', login_required(GetTreeView.as_view()), name='get_tree'),

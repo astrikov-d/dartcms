@@ -2,15 +2,14 @@
 from decimal import Decimal
 
 from autoslug import AutoSlugField
-from django.db import models
-from django.db.models import F, Sum
-from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
-from mptt.models import MPTTModel, TreeForeignKey
-
 from dartcms.utils.fields import RteField
 from dartcms.utils.loading import get_model
+from django.db import models
+from django.db.models import F, Sum
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext_lazy as _
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 @python_2_unicode_compatible
@@ -66,8 +65,10 @@ class AbstractProductSection(MPTTModel, AbstractProductBase):
 
     slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
     image = models.ImageField(_('Image'), upload_to='shop/section', null=True, blank=True)
-    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Section'), blank=True)
-    catalog = models.ForeignKey('shop.ProductCatalog', verbose_name=_('Product catalog'), related_name='sections')
+    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Section'), blank=True,
+                            on_delete=models.PROTECT)
+    catalog = models.ForeignKey('shop.ProductCatalog', verbose_name=_('Product catalog'), related_name='sections',
+                                on_delete=models.PROTECT)
     sort = models.IntegerField(default=1)
 
     def __str__(self):
@@ -112,9 +113,11 @@ class AbstractProduct(AbstractProductBase):
         verbose_name = _('product')
 
     slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
-    section = models.ForeignKey('shop.ProductSection', verbose_name=_('Section'), related_name='products')
+    section = models.ForeignKey('shop.ProductSection', verbose_name=_('Section'), related_name='products',
+                                on_delete=models.PROTECT)
     manufacturer = models.ForeignKey('shop.ProductManufacturer', verbose_name=_('Manufacturer'),
-                                     related_name='manufacturer_products', null=True, blank=True)
+                                     related_name='manufacturer_products', null=True, blank=True,
+                                     on_delete=models.PROTECT)
     labels = models.ManyToManyField('shop.ProductLabel', verbose_name=_('Labels'), related_name='label_products',
                                     blank=True)
     code = models.CharField(_('Code'), max_length=100, blank=True, default='')
@@ -132,7 +135,8 @@ class AbstractProductImage(models.Model):
         verbose_name_plural = _('product pictures')
         ordering = ['-date_created']
 
-    product = models.ForeignKey('shop.Product', verbose_name=_('Product'), related_name='pictures')
+    product = models.ForeignKey('shop.Product', verbose_name=_('Product'), related_name='pictures',
+                                on_delete=models.CASCADE)
     image = models.ImageField(_('Image'), upload_to='shop/product_images/%Y/%m/%d')
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -269,7 +273,7 @@ class AbstractOrderDetail(models.Model):
         verbose_name_plural = _('order datails')
         ordering = ['name']
 
-    order = models.ForeignKey('shop.Order', verbose_name=_('Order'), related_name='details')
+    order = models.ForeignKey('shop.Order', verbose_name=_('Order'), related_name='details', on_delete=models.CASCADE)
     product = models.ForeignKey('shop.Product', null=True, on_delete=models.SET_NULL, verbose_name=_('Product'))
     code = models.CharField(_('Code'), max_length=255, blank=True)
     name = models.CharField(_('Name'), max_length=1024)

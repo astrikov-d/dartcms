@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -53,7 +53,7 @@ class AbstractAd(models.Model):
     code = models.TextField(default='', blank=True, verbose_name=_('Embed Code'))
     bg = models.CharField(default='', blank=True, max_length=255, verbose_name=_('Background Color'))
     place = models.ForeignKey('ads.AdPlace', verbose_name=_('Ad Place'),
-                              related_name='%(app_label)s_%(class)s_related')
+                              related_name='%(app_label)s_%(class)s_related', on_delete=models.CASCADE)
     views = models.IntegerField(default=0, verbose_name=_('Views'))
     section = models.ManyToManyField('ads.AdSection', verbose_name=_('Section'),
                                      related_name='%(app_label)s_%(class)s_related')

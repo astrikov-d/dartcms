@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import include, url
-from django.forms import modelform_factory
-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import include, url
+from django.forms import modelform_factory
 
 Feed = get_model('feeds', 'Feed')
 

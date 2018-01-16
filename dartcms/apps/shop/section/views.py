@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.http import Http404
-from django.utils.translation import ugettext as __
-
 from dartcms.utils.loading import get_model
 from dartcms.views import GridView, InsertObjectView, JSONView
 from dartcms.views.mixins import JSONResponseMixin, ModulePermissionsMixin
+from django.http import Http404
+from django.utils.translation import ugettext as __
 
 
 class GetTreeView(GridView, JSONResponseMixin):

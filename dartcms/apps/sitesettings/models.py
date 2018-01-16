@@ -3,8 +3,8 @@ from datetime import datetime
 
 from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
-from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 
 @python_2_unicode_compatible

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from dartcms.utils.config import DartCMSConfig
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
-from dartcms.utils.config import DartCMSConfig
-
 from .views import (DeleteMessageFormView, InsertMessageFormView,
                     MessagesGridView, UpdateMessageFormView)
+
+app_name='feedback_messages'
 
 config = DartCMSConfig({
     'parent_kwarg_name': 'form_type',

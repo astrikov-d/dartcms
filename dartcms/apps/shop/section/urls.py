@@ -1,15 +1,16 @@
 # coding: utf-8
+from dartcms import get_model
+from dartcms.utils.config import DartCMSConfig
+from dartcms.views import DeleteObjectView, GridView, UpdateObjectView
 from django.conf.urls import include, url
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
-from dartcms import get_model
-from dartcms.utils.config import DartCMSConfig
-from dartcms.views import DeleteObjectView, GridView, UpdateObjectView
-
 from .forms import ProductSectionForm
 from .views import (AppendSectionView, GetTreeView, InsertSectionView,
                     MoveSectionView)
+
+app_name='sections'
 
 ProductSection = get_model('shop', 'ProductSection')
 

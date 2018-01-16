@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse_lazy
 from dartcms.apps.users.views import ChangePasswordView as CMSChangePasswordView
+from django.urls import reverse_lazy
 
 
 class ChangePasswordView(CMSChangePasswordView):

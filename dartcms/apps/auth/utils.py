@@ -1,7 +1,6 @@
 # coding: utf-8
-from django.conf import settings
-
 from dartcms.utils.loading import get_model
+from django.conf import settings
 
 
 def get_user_model():

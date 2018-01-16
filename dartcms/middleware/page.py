@@ -1,11 +1,17 @@
 # coding: utf-8
+from dartcms import get_model
 from django.http.response import Http404
 from django.shortcuts import redirect
 
-from dartcms import get_model
 
+class PageMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
 
-class PageMiddleware(object):
+    def __call__(self, request):
+        response = self.get_response(request)
+        return response
+
     def process_request(self, request):
         PageModule = get_model('pages', 'PageModule')
         Page = get_model('pages', 'Page')

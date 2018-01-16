@@ -1,12 +1,13 @@
 # coding: utf-8
-from django.conf.urls import url
-
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import url
 
 from .forms import ProductForm
+
+app_name='products'
 
 Product = get_model('shop', 'Product')
 

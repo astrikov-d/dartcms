@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import include, url
-from django.forms import modelform_factory
-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import include, url
+from django.forms import modelform_factory
 
 from .models import FormType
+
+app_name='feedback'
 
 config = DartCMSConfig({
     'model': FormType,

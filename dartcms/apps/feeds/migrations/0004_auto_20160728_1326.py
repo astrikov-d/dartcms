@@ -3,9 +3,8 @@
 from __future__ import unicode_literals
 
 import autoslug.fields
-from django.db import migrations, models
-
 import dartcms.utils.fields
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):

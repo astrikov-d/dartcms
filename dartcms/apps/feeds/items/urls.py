@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import url
 
 from .forms import FeedItemForm
 

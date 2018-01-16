@@ -1,7 +1,6 @@
 # coding: utf-8
-from django.views.generic import TemplateView
-
 from dartcms.apps.auth.mixins import StaffRequiredMixin
+from django.views.generic import TemplateView
 
 
 class DashboardIndexView(StaffRequiredMixin, TemplateView):

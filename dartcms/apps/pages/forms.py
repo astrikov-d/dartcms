@@ -1,10 +1,9 @@
 # coding: utf-8
+from dartcms.apps.users.models import UserGroup
+from dartcms.utils.loading import get_model
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
-
-from dartcms.apps.users.models import UserGroup
-from dartcms.utils.loading import get_model
 
 PageModule = get_model('pages', 'PageModule')
 AdSection = get_model('ads', 'AdSection')

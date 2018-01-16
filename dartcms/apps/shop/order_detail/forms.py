@@ -1,7 +1,6 @@
 # coding: utf-8
-from form_utils.forms import BetterModelForm
-
 from dartcms.utils.loading import get_model
+from form_utils.forms import BetterModelForm
 
 
 class OrderDatailForm(BetterModelForm):

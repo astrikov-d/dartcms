@@ -3,7 +3,7 @@ from dartcms.apps.modules.functions import get_current_module
 
 
 def modules_data(request):
-    if not request.is_ajax() and request.user.is_authenticated() and request.user.is_staff:
+    if not request.is_ajax() and request.user.is_authenticated and request.user.is_staff:
         modules = request.user.module_set.all()
 
         module_groups = [m.group for m in modules]
