@@ -33,7 +33,7 @@ class Feed(models.Model):
     def __str__(self):
         return self.name
 
-    type = models.ForeignKey(FeedType, verbose_name=_('Type'), related_name='feeds')
+    type = models.ForeignKey(FeedType, verbose_name=_('Type'), related_name='feeds', on_delete=models.PROTECT)
     name = models.CharField(max_length=255, verbose_name=_('Name'))
 
     def delete(self, **kwargs):

@@ -7,6 +7,8 @@ from django.conf.urls import url
 
 from .forms import FeedItemForm
 
+app_name = 'feeditems'
+
 FeedItem = get_model('feeds', 'FeedItem')
 
 config = DartCMSConfig({

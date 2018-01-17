@@ -6,6 +6,8 @@ from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
 from django.conf.urls import include, url
 from django.forms import modelform_factory
 
+app_name = 'feeds'
+
 Feed = get_model('feeds', 'Feed')
 
 config = DartCMSConfig({
