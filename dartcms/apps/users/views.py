@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth import update_session_auth_hash
+
+from dartcms.apps.auth.utils import get_user_model
+from dartcms.apps.modules.models import Module, ModuleGroup, ModulePermission
+from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView
 from django.contrib.auth.forms import AdminPasswordChangeForm
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
-
-from dartcms.apps.modules.models import Module, ModulePermission, ModuleGroup
-from dartcms.apps.auth.utils import get_user_model
-from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView
 
 
 class ChangePasswordView(AdminMixin, FormView):
@@ -31,6 +32,7 @@ class ChangePasswordView(AdminMixin, FormView):
 
     def form_valid(self, form):
         form.save()
+        update_session_auth_hash(self.request, form.user)
         return super(ChangePasswordView, self).form_valid(form)
 
 

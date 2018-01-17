@@ -1,7 +1,6 @@
 # coding: utf-8
-from django import template
-
 from dartcms.apps.modules.models import ModulePermission
+from django import template
 
 try:
     import Image, ImageOps

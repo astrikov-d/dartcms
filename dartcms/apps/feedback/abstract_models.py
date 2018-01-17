@@ -1,8 +1,7 @@
 # coding: utf-8
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
-
+from django.utils.translation import ugettext_lazy as _
 
 FORM_TYPES = (
     ('contact', _('Contact form')),
@@ -33,7 +32,7 @@ class AbstractBaseMessage(models.Model):
     def __str__(self):
         return self.author
 
-    type = models.ForeignKey(FormType, verbose_name=_('Type'))
+    type = models.ForeignKey(FormType, verbose_name=_('Type'), on_delete=models.CASCADE)
     author = models.CharField(max_length=255, verbose_name=_('Author'))
     message = models.TextField(verbose_name=_('Message'))
     date_created = models.DateTimeField(auto_now_add=True)

@@ -1,7 +1,6 @@
 # coding: utf-8
-from django.db.models.signals import post_save, pre_delete, pre_save
-
 from dartcms.utils.loading import is_model_registered
+from django.db.models.signals import post_save, pre_delete, pre_save
 
 from .abstract_models import *
 from .signals import *

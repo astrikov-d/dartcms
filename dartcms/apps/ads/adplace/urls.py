@@ -1,10 +1,11 @@
 # coding: utf-8
-from django.conf.urls import url
-from django.forms import modelform_factory
-
 from dartcms.apps.ads.models import AdPlace
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView
+from django.conf.urls import url
+from django.forms import modelform_factory
+
+app_name='adplace'
 
 config = DartCMSConfig({
     'model': AdPlace,

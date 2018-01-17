@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+from dartcms.utils.config import DartCMSConfig
+from dartcms.views import DeleteObjectView, GridView
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
-from dartcms.utils.config import DartCMSConfig
-from dartcms.views import DeleteObjectView, GridView
 from .forms import UserForm
+from .models import CMSUser
 from .views import ChangePasswordView, CMSUserInsertView, CMSUserUpdateView
 
-from .models import CMSUser
+app_name = "users"
 
 config = DartCMSConfig({
     'model': CMSUser,

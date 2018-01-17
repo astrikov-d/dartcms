@@ -1,12 +1,13 @@
 # coding: utf-8
-from django.conf.urls import include, url
-from django.utils.translation import ugettext_lazy as _
-
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import GridView, UpdateObjectView
+from django.conf.urls import include, url
+from django.utils.translation import ugettext_lazy as _
 
 from .forms import OrderForm
+
+app_name='orders'
 
 Order = get_model('shop', 'Order')
 

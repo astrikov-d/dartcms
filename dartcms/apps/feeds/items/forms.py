@@ -1,7 +1,6 @@
 # coding: utf-8
-from django import forms
-
 from dartcms.utils.loading import get_model
+from django import forms
 
 
 class FeedItemForm(forms.ModelForm):

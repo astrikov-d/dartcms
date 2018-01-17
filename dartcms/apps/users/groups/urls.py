@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
-from django.forms.models import modelform_factory
-
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import url
+from django.forms.models import modelform_factory
+
+app_name='groups'
 
 config = DartCMSConfig({
     'model': UserGroup,

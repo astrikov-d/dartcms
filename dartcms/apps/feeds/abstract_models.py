@@ -2,11 +2,10 @@
 import datetime
 
 from autoslug import AutoSlugField
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
-
 from dartcms.utils.fields import RteField
+from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -34,7 +33,7 @@ class Feed(models.Model):
     def __str__(self):
         return self.name
 
-    type = models.ForeignKey(FeedType, verbose_name=_('Type'), related_name='feeds')
+    type = models.ForeignKey(FeedType, verbose_name=_('Type'), related_name='feeds', on_delete=models.PROTECT)
     name = models.CharField(max_length=255, verbose_name=_('Name'))
 
     def delete(self, **kwargs):

@@ -3,10 +3,9 @@
 from __future__ import unicode_literals
 
 import autoslug.fields
+import dartcms.utils.fields
 import django.db.models.deletion
 from django.db import migrations, models
-
-import dartcms.utils.fields
 
 
 class Migration(migrations.Migration):

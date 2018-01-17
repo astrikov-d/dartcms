@@ -1,13 +1,14 @@
 # coding: utf-8
-from django.conf.urls import include, url
-from django.utils.translation import ugettext_lazy as _
-
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
+from django.conf.urls import include, url
+from django.utils.translation import ugettext_lazy as _
 
 from .forms import ProductCatalogForm
+
+app_name='catalog'
 
 ProductCatalog = get_model('shop', 'ProductCatalog')
 

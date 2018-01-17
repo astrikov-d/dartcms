@@ -1,13 +1,12 @@
 # coding: utf-8
-from django.conf import settings
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import get_language
-from django.utils.encoding import python_2_unicode_compatible
-from mptt.models import MPTTModel, TreeForeignKey
-
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.fields import RteField
+from django.conf import settings
+from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 @python_2_unicode_compatible
@@ -61,7 +60,8 @@ class AbstractPage(MPTTModel):
             parent = parent.parent
         return ' / '.join(reversed(page_names))
 
-    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Page'), blank=True)
+    parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Page'), blank=True,
+                            on_delete=models.CASCADE)
 
     title = models.CharField(max_length=255, verbose_name=_('Title'), help_text=_('Shows inside the title tag'))
     header = models.CharField(max_length=255, verbose_name=_('Page Header'))
@@ -75,7 +75,7 @@ class AbstractPage(MPTTModel):
     sort = models.IntegerField(default=1)
 
     module = models.ForeignKey('pages.PageModule', verbose_name=_('Module'),
-                               related_name='%(app_label)s_%(class)s_related')
+                               related_name='%(app_label)s_%(class)s_related', on_delete=models.PROTECT)
     module_params = models.CharField(max_length=128, blank=True, null=True, default=None,
                                      verbose_name=_('Module parameters'))
 
@@ -86,7 +86,7 @@ class AbstractPage(MPTTModel):
     seo_description = models.TextField(default='', blank=True, verbose_name=_('Description (meta description)'))
 
     ad_section = models.ForeignKey('ads.AdSection', verbose_name=_('Ads'), null=True, blank=True,
-                                   related_name='%(app_label)s_%(class)s_related')
+                                   related_name='%(app_label)s_%(class)s_related', on_delete=models.SET_NULL)
 
     security_type = models.CharField(max_length=16, verbose_name=_('Security type'), choices=SECURITY_TYPE_CHOICES,
                                      default='BY_PARENT')

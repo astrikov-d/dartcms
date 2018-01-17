@@ -1,7 +1,6 @@
 # coding: utf-8
-from django.forms import DateTimeInput, ModelForm, Select, TextInput
-
 from dartcms.apps.sitesettings.models import SiteSettings
+from django.forms import DateTimeInput, ModelForm, Select, TextInput
 
 
 class SiteSettingsForm(ModelForm):

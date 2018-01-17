@@ -1,7 +1,8 @@
 # coding: utf-8
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
 from dartcms.apps.auth.utils import get_user_model
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
+
 from .managers import SiteUserManager
 
 User = get_user_model()

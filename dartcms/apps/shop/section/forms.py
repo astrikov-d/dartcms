@@ -1,9 +1,8 @@
 # coding: utf-8
+from dartcms.utils.loading import get_model
 from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
-
-from dartcms.utils.loading import get_model
 
 
 class ProductSectionForm(BetterModelForm):

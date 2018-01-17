@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from django import template
-
 from dartcms.apps.ads.models import AdPlace
 from dartcms.utils.loading import get_model
+from django import template
 
 register = template.Library()
 

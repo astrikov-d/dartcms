@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.contrib import admin
-
 from dartcms.utils.loading import get_model
+from django.contrib import admin
 
 AdPlace = get_model('ads', 'AdPlace')
 AdSection = get_model('ads', 'AdSection')

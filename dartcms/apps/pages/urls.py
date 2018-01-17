@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
-from django.views.decorators.csrf import csrf_exempt
-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
 from dartcms.views import GridView
+from django.conf.urls import url
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import PageForm
 from .views import (AppendPageView, DeletePageView, GetTreeView,
                     InsertPageView, LoadModuleParamsView, MovePageView,
                     UpdatePageView)
+
+app_name = 'pages'
 
 Page = get_model('pages', 'Page')
 
