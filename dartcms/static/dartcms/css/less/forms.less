@@ -96,3 +96,21 @@
 .mce-content-body {
   background: #fff !important;
 }
+
+.inlines-wrapper {
+  &>.form-group {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+
+  .inlines {
+    margin-bottom: 20px;
+    & > fieldset {
+      border-radius: 5px;
+      padding: 20px;
+      &:nth-child(odd) {
+        background: #EEE;
+      }
+    }
+  }
+}

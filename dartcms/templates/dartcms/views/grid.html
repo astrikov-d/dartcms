@@ -24,7 +24,7 @@
 
     {% get_current_language as LANG %}
 
-    {% if LANG == 'ru-ru' %}
+    {% if LANG == 'ru' or LANG == 'ru-ru' %}
         <script type="text/javascript"
                 src="{% static 'dartcms/js/lib/jquery-validation/localization/messages_ru.min.js' %}"></script>
         <script type="text/javascript"

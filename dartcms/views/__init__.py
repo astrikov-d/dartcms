@@ -244,7 +244,6 @@ class InsertObjectView(AjaxInsertObjectMixin, CreateView):
 class InsertObjectWithInlinesView(InlineErrorsMixin,
                                   AjaxInsertObjectMixin,
                                   CreateWithInlinesView):
-    extra = 0
 
     def forms_valid(self, form, inlines):
         self.save_object(form, inlines=inlines)
@@ -278,7 +277,6 @@ class UpdateObjectView(AjaxUpdateObjectMixin, UpdateView):
 class UpdateObjectWithInlinesView(InlineErrorsMixin,
                                   AjaxUpdateObjectMixin,
                                   UpdateWithInlinesView):
-    extra = 0
 
     def forms_valid(self, form, inlines):
         form.save()

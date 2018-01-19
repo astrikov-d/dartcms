@@ -3,7 +3,7 @@ from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            UpdateObjectView)
 from django.conf.urls import url
 
-app_name='dicts'
+app_name = 'dicts'
 
 urlpatterns = [
     url(r'^$', GridView.as_view(search=['name']), name='index'),

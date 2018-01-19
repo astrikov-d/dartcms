@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth import update_session_auth_hash
-
 from dartcms.apps.auth.utils import get_user_model
 from dartcms.apps.modules.models import Module, ModuleGroup, ModulePermission
 from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
