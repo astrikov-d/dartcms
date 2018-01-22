@@ -124,7 +124,7 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
         includeSelectAllOption: true,
         maxHeight: 400
     };
-    selects.each(function(){
+    selects.each(function () {
         var select = $(this);
         select_param.enableCaseInsensitiveFiltering = $('option', select).length > 10;
         select.multiselect(select_param);
@@ -147,10 +147,10 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
         total_forms_input.val(parseInt(total_forms_count) + 1);
         new_inline.append(close);
 
-        close.click(function(){
+        close.click(function () {
             $(this).parent().remove();
             total_forms_count = total_forms_input.val();
-            total_forms_input.val(parseInt(total_forms_count)-1);
+            total_forms_input.val(parseInt(total_forms_count) - 1);
         });
     });
 };
