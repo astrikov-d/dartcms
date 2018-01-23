@@ -45,7 +45,7 @@
 {% endblock %}
 
 {% block breadcrumbs_current_path %}
-    <li class="active">{{ page_header|capfirst }}</li>
+    <li class="active">{{ page_header|capfirst }}{% if parent_str %} - {{ parent_str }} {% endif %}</li>
 {% endblock %}
 
 {% block inline_js %}
@@ -218,7 +218,7 @@
 
 {% block page_content %}
     <div class="page-header">
-        <h1>{{ page_header|capfirst }}</h1>
+        <h1>{{ page_header|capfirst }}{% if parent_str %}  <small>{{ parent_str }}</small> {% endif %}</h1>
     </div>
 
     {% block grid %}
