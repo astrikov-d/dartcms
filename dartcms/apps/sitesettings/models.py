@@ -2,6 +2,8 @@
 from datetime import datetime
 
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import striptags, truncatewords
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -15,6 +17,8 @@ class SiteSettings(models.Model):
     DATE = 'date'
     FILE = 'file'
     SELECT = 'select'
+    OBJECT = 'object'
+    BOOLEAN = 'boolean'
 
     TYPE_CHOICES = (
         (TEXT, _('String')),
@@ -23,6 +27,8 @@ class SiteSettings(models.Model):
         (SELECT, _('Select')),
         (DATE, _('Date')),
         (FILE, _('File')),
+        (OBJECT, _('Object')),
+        (BOOLEAN, _('Checkbox')),
     )
 
     class Meta:
@@ -35,9 +41,15 @@ class SiteSettings(models.Model):
 
     @property
     def value(self):
+        value = ''
+        if self.type == self.OBJECT and self.content_type and self.object_id:
+            value = self.content_type.model_class().objects.get(pk=self.object_id)
+
         return {
             self.DATE: self.date_value,
-            self.FILE: self.file_value
+            self.FILE: self.file_value,
+            self.BOOLEAN: 'Да' if self.boolean_value else 'Нет',
+            self.OBJECT: value,
         }.get(self.type, self.text_value)
 
     @property
@@ -54,4 +66,8 @@ class SiteSettings(models.Model):
     text_value = models.TextField(_('Value for text type'), default='', blank=True)
     date_value = models.DateTimeField(_('Value for date type'), blank=True, null=True, default=datetime.now)
     file_value = models.FileField(_('Value for file'), upload_to='vars', blank=True, null=True)
+    boolean_value = models.BooleanField(_('Value for boolean'), default=False)
     options = models.TextField(_('Options for select type (use ";" as separator)'), default='', blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')

@@ -150,7 +150,7 @@
 
             {% get_current_language as LANG %}
 
-            {% if LANG == 'ru-ru' %}
+            {% if LANG == 'ru' or LANG == 'ru-ru' %}
                 var date_format = 'DD.MM.YYYY';
             {% else %}
                 var date_format = 'YYYY-MM-DD';

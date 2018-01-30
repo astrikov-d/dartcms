@@ -3,7 +3,7 @@
 {% get_current_language as LANG %}
 
 <script>
-    {% if LANG == 'ru-ru' %}
+    {% if LANG == 'ru-ru' or LANG == 'ru' %}
         var dt_format = 'DD.MM.YYYY HH:mm:ss',
                 d_format = 'DD.MM.YYYY',
                 locale = 'ru';
