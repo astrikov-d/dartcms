@@ -36,6 +36,7 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
     base_grid_actions = ['insert', 'update', 'delete']
     additional_grid_actions = []
     model_properties = []
+    parent_str = ''
 
     def get_search_form_kwargs(self):
         if 'search' in self.request.GET:
@@ -51,22 +52,40 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
 
             fields = []
             for item in self.search:
-                field_type = get_model_field_type(self.model, item)
+                label = None
+
+                if isinstance(item, dict):
+                    label = item.get('label')
+                    if 'field' in item:
+                        field = item['field']
+                    else:
+                        raise KeyError('Search dict item does not have "field" key.')
+                else:
+                    field = item
+
+                field_type = get_model_field_type(self.model, field)
                 kwargs = {
-                    'label': get_model_field_label(self.model, item),
+                    'label': label if label else get_model_field_label(self.model, field),
                     'required': False
                 }
 
                 if field_type == 'FOREIGN_KEY':
-                    kwargs['queryset'] = get_model_field(self.model, item).related_model.objects.all()
+                    kwargs['queryset'] = get_model_field(self.model, field).related_model.objects.all()
 
-                fields.append({'field': item, 'type': field_type, 'kwargs': kwargs})
+                fields.append({'field': field, 'type': field_type, 'kwargs': kwargs})
 
             form_kwargs['extra'] = fields
             return SearchForm(**form_kwargs)
 
     def filter_queryset(self, queryset):
         for field in self.search:
+
+            if isinstance(field, dict):
+                if 'field' in field:
+                    field = field['field']
+                else:
+                    raise KeyError('Search dict item does not have "field" key.')
+
             field_type = get_model_field_type(self.model, field)
             if field_type in ('DATETIME', 'DATE', 'TIME'):
                 date_from = self.request.GET.get('%s_from' % field, '')
@@ -103,10 +122,13 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
     def get_queryset(self):
         if self.parent_kwarg_name:
             kwarg = self.kwargs[self.parent_kwarg_name]
+
             if self.parent_model_fk is not None:
                 fk = self.parent_model_fk
             else:
                 fk = '%s_id' % self.parent_model.__name__.lower()
+
+            self.parent_str = self.model._meta.get_field(fk).related_model.objects.get(pk=kwarg)
 
             queryset = self.model.objects.filter(**{
                 '%s__exact' % fk: kwarg
@@ -170,7 +192,8 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
             'additional_grid_actions': self.get_additional_grid_actions(),
             'search_form': self.get_search_form(),
             'date_format': get_date_format(),
-            'urls_kwargs': self.kwargs
+            'urls_kwargs': self.kwargs,
+            'parent_str': self.parent_str
         })
         return context
 
@@ -244,7 +267,6 @@ class InsertObjectView(AjaxInsertObjectMixin, CreateView):
 class InsertObjectWithInlinesView(InlineErrorsMixin,
                                   AjaxInsertObjectMixin,
                                   CreateWithInlinesView):
-    extra = 0
 
     def forms_valid(self, form, inlines):
         self.save_object(form, inlines=inlines)
@@ -278,7 +300,6 @@ class UpdateObjectView(AjaxUpdateObjectMixin, UpdateView):
 class UpdateObjectWithInlinesView(InlineErrorsMixin,
                                   AjaxUpdateObjectMixin,
                                   UpdateWithInlinesView):
-    extra = 0
 
     def forms_valid(self, form, inlines):
         form.save()

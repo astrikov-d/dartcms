@@ -96,3 +96,32 @@
 .mce-content-body {
   background: #fff !important;
 }
+
+.inlines-wrapper {
+  &>.form-group {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+
+  .inlines {
+    margin-bottom: 20px;
+    & > fieldset {
+      position: relative;
+      border-radius: 5px;
+      padding: 20px;
+      &:nth-child(odd) {
+        background: #EEE;
+      }
+      .close-formset {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 30px;
+        line-height: 30px;
+        &:hover, &:focus, &:active {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

@@ -124,7 +124,7 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
         includeSelectAllOption: true,
         maxHeight: 400
     };
-    selects.each(function(){
+    selects.each(function () {
         var select = $(this);
         select_param.enableCaseInsensitiveFiltering = $('option', select).length > 10;
         select.multiselect(select_param);
@@ -140,6 +140,17 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
             empty_form = $('.empty-formset-form', formset_wrapper);
 
         inlines.append(empty_form.html().replace(/__prefix__/g, total_forms_count));
+
+        var new_inline = $('.inlines fieldset:last-child'),
+            close = $('<a href="#" class="close-formset" title="close">&times;</a>');
+
         total_forms_input.val(parseInt(total_forms_count) + 1);
+        new_inline.append(close);
+
+        close.click(function () {
+            $(this).parent().remove();
+            total_forms_count = total_forms_input.val();
+            total_forms_input.val(parseInt(total_forms_count) - 1);
+        });
     });
 };

@@ -6,7 +6,7 @@ from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
 from django.conf.urls import url
 from django.forms import modelform_factory
 
-app_name='adsection'
+app_name = 'adsection'
 
 config = DartCMSConfig({
     'model': AdSection,
