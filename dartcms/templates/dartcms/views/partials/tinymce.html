@@ -4,7 +4,7 @@
     function mceInit() {
         var options = {
             {% get_current_language as LANG %}
-            {% if LANG == 'ru-ru' %}
+            {% if LANG == 'ru-ru' or LANG == 'ru' %}
                 language: 'ru',
             {% endif %}
             selector: ".rte",
