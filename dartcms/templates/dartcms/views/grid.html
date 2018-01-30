@@ -115,9 +115,15 @@
                             text: '{% trans 'Delete' %}',
                             iconCls: 'icon-remove',
                             handler: function () {
-                                var selected = grid.datagrid('getSelected');
+                                var selected = grid.datagrid('getSelections');
+                                var ss = [];
+                                for(var i=0; i<selected.length; i++){
+                                    var row = selected[i];
+                                    ss.push(row.pk);
+                                }
                                 if (selected) {
-                                    openFormModal('{{ request.path }}delete/' + selected.pk + '/', function () {
+                                    openFormModal('{{ request.path }}delete/' + ss + '/', function () {
+                                        grid.datagrid('clearSelections');
                                         grid.datagrid('reload');
                                     });
                                 }
@@ -161,7 +167,7 @@
                 queryParams: request.GET,
                 method: 'get',
                 idField: 'pk',
-                singleSelect: true,
+                singleSelect: {{ single_select|yesno:"true,false" }},
                 fitColumn: true,
                 fit: true,
                 pagination: true,

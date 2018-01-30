@@ -37,6 +37,7 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
     additional_grid_actions = []
     model_properties = []
     parent_str = ''
+    single_select = True
 
     def get_search_form_kwargs(self):
         if 'search' in self.request.GET:
@@ -193,7 +194,8 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
             'search_form': self.get_search_form(),
             'date_format': get_date_format(),
             'urls_kwargs': self.kwargs,
-            'parent_str': self.parent_str
+            'parent_str': self.parent_str,
+            'single_select': self.single_select
         })
         return context
 
@@ -320,6 +322,27 @@ class DeleteObjectView(AdminMixin, JSONResponseMixin, DeleteView):
         self.object = self.get_object()
         try:
             self.object.delete()
+        except ProtectedError:
+            return self.render_to_json_response({'result': False, 'error': 'PROTECTED'})
+        return self.render_to_json_response({'result': True, 'action': 'DELETE'})
+
+
+class DeleteMultipleObjectView(AdminMixin, JSONResponseMixin, TemplateView):
+    template_name = 'dartcms/views/delete.html'
+    kwarg_name = 'pks'
+
+    def get(self, request, *args, **kwargs):
+        pks = kwargs.get(self.kwarg_name).split(',')
+        context = self.get_context_data(count_records=len(pks))
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        pks = kwargs.get(self.kwarg_name).split(',')
+        try:
+            self.model.objects.filter(pk__in=pks).delete()
         except ProtectedError:
             return self.render_to_json_response({'result': False, 'error': 'PROTECTED'})
         return self.render_to_json_response({'result': True, 'action': 'DELETE'})
