@@ -1,14 +1,14 @@
-﻿/**
- * jQuery EasyUI 1.4.5
+/**
+ * EasyUI for jQuery 1.5.4.1
  * 
- * Copyright (c) 2009-2016 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
  *
  */
 /**
- * propertygrid - jQuery EasyUI
+ * propertygrid - EasyUI for jQuery
  * 
  * Dependencies:
  * 	 datagrid
@@ -304,7 +304,16 @@
 			var groupIndex;
 			
 			if (!state.data.rows.length){
+				var originalRows = state.originalRows;
+				var updatedRows = state.updatedRows;
+				var insertedRows = state.insertedRows;
+				var deletedRows = state.deletedRows;
 				$(target).datagrid('loadData', [row]);
+				state.originalRows = $.extend([],originalRows);
+				state.updatedRows = $.extend([],updatedRows);
+				state.insertedRows = $.extend([],insertedRows);
+				state.deletedRows = $.extend([],deletedRows);
+				state.insertedRows.push(row);
 				return;
 			}
 			

@@ -1,6 +1,6 @@
 # coding: utf-8
 from dartcms.apps.sitesettings.models import SiteSettings
-from django.forms import ModelForm, Select, TextInput, ChoiceField
+from django.forms import ModelForm, Select, TextInput
 
 FORM_MAP = {
     SiteSettings.OBJECT: ('object_id', ['text_value', 'file_value', 'boolean_value', 'date_value']),

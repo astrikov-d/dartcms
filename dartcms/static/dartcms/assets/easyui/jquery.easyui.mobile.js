@@ -1,7 +1,7 @@
-﻿/**
- * jQuery EasyUI 1.4.5
+/**
+ * EasyUI for jQuery 1.5.4.1
  * 
- * Copyright (c) 2009-2016 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -124,14 +124,18 @@ $.mobile._go(_16,_17,_18);
 },back:function(){
 history.go(-1);
 }};
-$.map(["validatebox","textbox","filebox","searchbox","combo","combobox","combogrid","combotree","datebox","datetimebox","numberbox","spinner","numberspinner","timespinner","datetimespinner"],function(_19){
+$.map(["validatebox","textbox","passwordbox","filebox","searchbox","combo","combobox","combogrid","combotree","combotreegrid","datebox","datetimebox","numberbox","spinner","numberspinner","timespinner","datetimespinner"],function(_19){
 if($.fn[_19]){
-$.extend($.fn[_19].defaults,{height:32,iconWidth:28,tipPosition:"bottom"});
+$.extend($.fn[_19].defaults,{iconWidth:28,tipPosition:"bottom"});
 }
 });
 $.map(["spinner","numberspinner","timespinner","datetimespinner"],function(_1a){
-$.extend($.fn[_1a].defaults,{height:32,iconWidth:56});
+if($.fn[_1a]){
+$.extend($.fn[_1a].defaults,{iconWidth:56,spinAlign:"horizontal"});
+}
 });
+if($.fn.menu){
 $.extend($.fn.menu.defaults,{itemHeight:30,noline:true});
+}
 })(jQuery);
 

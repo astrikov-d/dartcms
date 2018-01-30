@@ -1,14 +1,14 @@
-﻿/**
- * jQuery EasyUI 1.4.5
+/**
+ * EasyUI for jQuery 1.5.4.1
  * 
- * Copyright (c) 2009-2016 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
  *
  */
 /**
- * slider - jQuery EasyUI
+ * slider - EasyUI for jQuery
  * 
  * Dependencies:
  *  draggable
@@ -18,7 +18,7 @@
 	function init(target){
 		var slider = $('<div class="slider">' +
 				'<div class="slider-inner">' +
-				'<a href="javascript:void(0)" class="slider-handle"></a>' +
+				'<a href="javascript:;" class="slider-handle"></a>' +
 				'<span class="slider-tip"></span>' +
 				'</div>' +
 				'<div class="slider-rule"></div>' +
@@ -124,12 +124,12 @@
 		
 		var inner = slider.find('.slider-inner');
 		inner.html(
-			'<a href="javascript:void(0)" class="slider-handle"></a>' +
+			'<a href="javascript:;" class="slider-handle"></a>' +
 			'<span class="slider-tip"></span>'
 		);
 		if (opts.range){
 			inner.append(
-				'<a href="javascript:void(0)" class="slider-handle"></a>' +
+				'<a href="javascript:;" class="slider-handle"></a>' +
 				'<span class="slider-tip"></span>'
 			);
 		}

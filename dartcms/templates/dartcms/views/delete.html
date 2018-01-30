@@ -3,7 +3,11 @@
 <div class="modal">
     <div class="page-header">
         <h1>{{ page_header|capfirst }}
-            <small>{% trans 'Delete Record' %} &laquo;{{ object }}&raquo;</small>
+            {% if object %}
+                <small>{% trans 'Delete Record' %} &laquo;{{ object }}&raquo;</small>
+            {% else %}
+                <small>{% trans 'Delete' %} {{ count_records }} {% trans 'Records' %}</small>
+            {% endif %}
         </h1>
     </div>
     <div class="well well-sm">

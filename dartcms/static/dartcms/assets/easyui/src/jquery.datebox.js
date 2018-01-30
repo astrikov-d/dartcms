@@ -1,14 +1,14 @@
-﻿/**
- * jQuery EasyUI 1.4.5
+/**
+ * EasyUI for jQuery 1.5.4.1
  * 
- * Copyright (c) 2009-2016 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
  *
  */
 /**
- * datebox - jQuery EasyUI
+ * datebox - EasyUI for jQuery
  * 
  * Dependencies:
  * 	 calendar
@@ -65,9 +65,9 @@
 				onSelect:function(date){
 					var target = this.target;
 					var opts = $(target).datebox('options');
+					opts.onSelect.call(target, date);
 					setValue(target, opts.formatter.call(target, date));
 					$(target).combo('hidePanel');
-					opts.onSelect.call(target, date);
 				}
 			});
 		}
@@ -93,7 +93,7 @@
 			for(var i=0; i<opts.buttons.length; i++){
 				var td = $('<td></td>').appendTo(tr);
 				var btn = opts.buttons[i];
-				var t = $('<a class="datebox-button-a" href="javascript:void(0)"></a>').html($.isFunction(btn.text) ? btn.text(target) : btn.text).appendTo(td);
+				var t = $('<a class="datebox-button-a" href="javascript:;"></a>').html($.isFunction(btn.text) ? btn.text(target) : btn.text).appendTo(td);
 				t.attr('datebox-button-index', i);
 			}
 			tr.find('td').css('width', (100/opts.buttons.length)+'%');
@@ -246,12 +246,15 @@
 		buttons:[{
 			text: function(target){return $(target).datebox('options').currentText;},
 			handler: function(target){
+				var opts = $(target).datebox('options');
 				var now = new Date();
+				var current = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 				$(target).datebox('calendar').calendar({
-					year:now.getFullYear(),
-					month:now.getMonth()+1,
-					current:new Date(now.getFullYear(), now.getMonth(), now.getDate())
+					year:current.getFullYear(),
+					month:current.getMonth()+1,
+					current:current
 				});
+				opts.onSelect.call(target, current);
 				doEnter(target);
 			}
 		},{
