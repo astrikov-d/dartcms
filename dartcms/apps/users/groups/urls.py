@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
-                           UpdateObjectView)
-from django.conf.urls import url
 from django.forms.models import modelform_factory
 
-app_name='groups'
+app_name = 'groups'
 
 config = DartCMSConfig({
     'model': UserGroup,
@@ -20,9 +17,4 @@ config = DartCMSConfig({
     }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^insert/$', InsertObjectView.as_view(**config.form), name='insert'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
-]
+urlpatterns = config.get_urls()

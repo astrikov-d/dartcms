@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-31 13:09+0700\n"
+"POT-Creation-Date: 2018-01-31 14:17+0700\n"
 "PO-Revision-Date: 2016-12-14 04:54+0000\n"
 "Last-Translator:   <astrikov.d@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,19 +160,35 @@ msgstr "Автор"
 msgid "Message"
 msgstr "Сообщение"
 
-#: apps/feedback/abstract_models.py:46
+#: apps/feedback/abstract_models.py:43
+msgid "Question message"
+msgstr "Сообщение из формы для вопрооса"
+
+#: apps/feedback/abstract_models.py:44
+msgid "Question messages"
+msgstr "Сообщения из формы для вопрооса"
+
+#: apps/feedback/abstract_models.py:48
 msgid "Answer"
 msgstr "Ответ"
 
-#: apps/feedback/abstract_models.py:47 apps/shop/abstract_models.py:28
+#: apps/feedback/abstract_models.py:49 apps/shop/abstract_models.py:28
 msgid "Is Visible"
 msgstr "Показывать"
 
+#: apps/feedback/abstract_models.py:54
+msgid "Contact message"
+msgstr "Сообщение из формы обратной связи"
+
 #: apps/feedback/abstract_models.py:55
+msgid "Contact messages"
+msgstr "Сообщения из формы обратной связи"
+
+#: apps/feedback/abstract_models.py:59
 msgid "Email"
 msgstr "E-mail"
 
-#: apps/feedback/abstract_models.py:56
+#: apps/feedback/abstract_models.py:60
 msgid "Phone"
 msgstr "Телефон"
 
@@ -402,7 +418,8 @@ msgstr "Права на использование модуля"
 
 #: apps/modules/models.py:55
 msgid "Module permission for {self.user.username}, {str(self.module)}"
-msgstr "Права на использование модуля для {self.user.username}, {str(self.module)}"
+msgstr ""
+"Права на использование модуля для {self.user.username}, {str(self.module)}"
 
 #: apps/modules/models.py:61
 msgid "Can insert data"
@@ -857,10 +874,8 @@ msgid "Value for file"
 msgstr "Значение для типа файл"
 
 #: apps/sitesettings/models.py:69
-#, fuzzy
-#| msgid "Value for file"
 msgid "Value for boolean"
-msgstr "Значение для типа файл"
+msgstr "Значение для бинарного типа"
 
 #: apps/sitesettings/models.py:70
 msgid "Options for select type (use \";\" as separator)"
@@ -893,8 +908,6 @@ msgid "Group name"
 msgstr "Название"
 
 #: apps/users/models.py:30
-#, fuzzy
-#| msgid "CMS Users"
 msgid "CMS User"
 msgstr "Пользователи CMS"
 
@@ -1055,8 +1068,6 @@ msgid "Delete Record"
 msgstr "Удалить запись"
 
 #: templates/dartcms/views/delete.html:9
-#, fuzzy
-#| msgid "View Records"
 msgid "Records"
 msgstr "Посмотреть записи"
 

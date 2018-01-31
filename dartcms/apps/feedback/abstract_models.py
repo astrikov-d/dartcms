@@ -40,6 +40,8 @@ class AbstractBaseMessage(models.Model):
 
 class AbstractQuestionMessage(AbstractBaseMessage):
     class Meta:
+        verbose_name = _('Question message')
+        verbose_name_plural = _('Question messages')
         app_label = 'feedback'
         abstract = True
 
@@ -49,6 +51,8 @@ class AbstractQuestionMessage(AbstractBaseMessage):
 
 class AbstractContactMessage(AbstractBaseMessage):
     class Meta:
+        verbose_name = _('Contact message')
+        verbose_name_plural = _('Contact messages')
         app_label = 'feedback'
         abstract = True
 

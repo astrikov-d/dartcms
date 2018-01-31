@@ -1,12 +1,10 @@
 # coding: utf-8
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import DeleteObjectView, GridView, UpdateObjectView
-from django.conf.urls import url
 
 from .forms import OrderDatailForm
 
-app_name='order_details'
+app_name = 'order_details'
 
 Order = get_model('shop', 'OrderDetail')
 
@@ -27,8 +25,4 @@ config = DartCMSConfig({
     }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
-]
+urlpatterns = config.get_urls(exclude=['insert'])

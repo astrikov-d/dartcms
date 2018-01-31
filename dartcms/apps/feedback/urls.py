@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
-                           UpdateObjectView)
-from django.conf.urls import include, url
-from django.forms import modelform_factory
-
 from .models import FormType
 
-app_name='feedback'
+app_name = 'feedback'
 
 config = DartCMSConfig({
     'model': FormType,
@@ -17,19 +12,9 @@ config = DartCMSConfig({
             {'field': 'slug', 'width': '30%'},
         ],
         'additional_grid_actions': [
-            {'url': 'messages'}
+            {'url': 'messages', 'kwarg_name': 'form_type', 'include_urls': 'dartcms.apps.feedback.messages.urls'}
         ]
     },
-    'form': {
-        'form_class': modelform_factory(FormType, exclude=[]),
-    }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^insert/$', InsertObjectView.as_view(**config.form), name='insert'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
-    url(r'^(?P<children_url>messages)/(?P<form_type>\d+)/',
-        include('dartcms.apps.feedback.messages.urls', namespace='feedback_messages')),
-]
+urlpatterns = config.get_urls()

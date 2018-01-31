@@ -89,7 +89,7 @@ class DartCMSConfig(object):
             else:
                 urls += [url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**self.base), name='delete')]
 
-        if 'additional' not in exclude and 'additional_grid_actions' in self.grid:
+        if 'addition' not in exclude and 'additional_grid_actions' in self.grid:
             for action in self.grid.get('additional_grid_actions', []):
                 urls += [url(r'^(?P<children_url>{url})/(?P<{kwarg_name}>\d+)/'.format(**action),
                              include(action['include_urls'], namespace=action['url']))]

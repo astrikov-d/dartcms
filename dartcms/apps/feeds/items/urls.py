@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
-from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
-                           UpdateObjectView)
-from django.conf.urls import url
 
 from .forms import FeedItemForm
 
@@ -30,9 +27,4 @@ config = DartCMSConfig({
     }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^insert/$', InsertObjectView.as_view(**config.form), name='insert'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
-]
+urlpatterns = config.get_urls()
