@@ -11,7 +11,7 @@ packages = find_packages()
 
 setup(
     name='dartcms',
-    version='0.1.0',
+    version='0.1.1',
     description='DartCMS - open-source content management system for Django',
     long_description='DartCMS is an open-source content management system based on the popular '
                      'Django Framework. It is friendly for developers and end-users.',
@@ -22,7 +22,7 @@ setup(
     include_package_data=True,
     py_modules=['dartcms'],
     install_requires=[
-        'Django>=1.10.4',
+        'Django>=2.0.0',
         'django-autoslug-iplweb>=1.9.4',
         'django-extra-views>=0.7.1',
         'django-form-utils>=1.0.3',
@@ -31,7 +31,7 @@ setup(
         'django-widget-tweaks>=1.4.1',
         'jsonfield>=1.0.3',
         'Pillow>=3.2.0',
-        'pytils==0.3'
+        'pytils>=0.3'
     ],
     license='MIT License',
     zip_safe=False,
@@ -41,7 +41,6 @@ setup(
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
     ]
 )
