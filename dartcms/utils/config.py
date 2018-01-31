@@ -1,7 +1,8 @@
 # coding: utf-8
-from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
+from dartcms.views import (DeleteMultipleObjectView, DeleteObjectView,
+                           GridView, InsertObjectView,
                            InsertObjectWithInlinesView, UpdateObjectView,
-                           UpdateObjectWithInlinesView, DeleteMultipleObjectView)
+                           UpdateObjectWithInlinesView)
 from django.conf.urls import include, url
 from django.forms import modelform_factory
 from django.utils.translation import ugettext as _

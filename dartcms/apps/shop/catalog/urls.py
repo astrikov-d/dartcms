@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .forms import ProductCatalogForm
 
-app_name='catalog'
+app_name = 'catalog'
 
 ProductCatalog = get_model('shop', 'ProductCatalog')
 
@@ -34,5 +34,6 @@ urlpatterns = [
     url(r'^insert/$', InsertObjectView.as_view(**config.form), name='insert'),
     url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
     url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
-    url(r'^(?P<children_url>sections)/(?P<catalog>\d+)/', include('dartcms.apps.shop.section.urls', namespace='sections')),
+    url(r'^(?P<children_url>sections)/(?P<catalog>\d+)/',
+        include('dartcms.apps.shop.section.urls', namespace='sections')),
 ]
