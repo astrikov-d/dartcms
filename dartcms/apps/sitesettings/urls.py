@@ -1,13 +1,11 @@
 # coding: utf-8
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, UpdateObjectView
-from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
-from .forms import SiteSettingsForm as Form
+from .forms import SiteSettingsForm
 from .models import SiteSettings
 
-app_name='sitesettings'
+app_name = 'sitesettings'
 
 config = DartCMSConfig({
     'model': SiteSettings,
@@ -21,11 +19,8 @@ config = DartCMSConfig({
         'model_properties': ['type_display', 'value_for_grid']
     },
     'form': {
-        'form_class': Form,
+        'form_class': SiteSettingsForm,
     }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update')
-]
+urlpatterns = config.get_urls(exclude=['insert', 'delete'])

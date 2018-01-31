@@ -1,13 +1,11 @@
 # coding: utf-8
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, UpdateObjectView
-from django.conf.urls import include, url
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import OrderForm
 
-app_name='orders'
+app_name = 'orders'
 
 Order = get_model('shop', 'Order')
 
@@ -28,7 +26,8 @@ config = DartCMSConfig({
         ],
         'base_grid_actions': ['update'],
         'additional_grid_actions': [
-            {'url': 'details', 'label': _('Details')}
+            {'url': 'details', 'label': _('Details'),
+             'kwarg_name': 'order', 'include_urls': 'dartcms.apps.shop.order_detail.urls'}
         ],
         'model_properties': ['order_number', 'total']
     },
@@ -37,9 +36,4 @@ config = DartCMSConfig({
     }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
-    url(r'^(?P<children_url>details)/(?P<order>\d+)/', include('dartcms.apps.shop.order_detail.urls',
-                                                               namespace='order_datails')),
-]
+urlpatterns = config.get_urls(exclude=['insert', 'delete'])

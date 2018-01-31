@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from .views import (DeleteMessageFormView, InsertMessageFormView,
                     MessagesGridView, UpdateMessageFormView)
 
-app_name='feedback_messages'
+app_name = 'feedback_messages'
 
 config = DartCMSConfig({
     'parent_kwarg_name': 'form_type',

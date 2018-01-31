@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-13 11:08+0700\n"
+"POT-Creation-Date: 2018-01-31 14:17+0700\n"
 "PO-Revision-Date: 2016-12-14 04:54+0000\n"
 "Last-Translator:   <astrikov.d@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,957 +21,946 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: dartcms/apps/ads/abstract_models.py:12
+#: apps/ads/abstract_models.py:12
 msgid "ad place"
 msgstr "Рекламное место"
 
-#: dartcms/apps/ads/abstract_models.py:13
+#: apps/ads/abstract_models.py:13
 msgid "ad places"
 msgstr "Рекламные места"
 
-#: dartcms/apps/ads/abstract_models.py:19
-#: dartcms/apps/ads/abstract_models.py:35
-#: dartcms/apps/ads/abstract_models.py:50
-#: dartcms/apps/feedback/abstract_models.py:21
-#: dartcms/apps/feeds/abstract_models.py:22
-#: dartcms/apps/feeds/abstract_models.py:38 dartcms/apps/modules/models.py:20
-#: dartcms/apps/modules/models.py:37 dartcms/apps/pages/abstract_models.py:25
-#: dartcms/apps/shop/abstract_models.py:25
-#: dartcms/apps/shop/abstract_models.py:153
-#: dartcms/apps/shop/abstract_models.py:174
-#: dartcms/apps/shop/abstract_models.py:194
-#: dartcms/apps/shop/abstract_models.py:275 dartcms/views/__init__.py:31
+#: apps/ads/abstract_models.py:19 apps/ads/abstract_models.py:35
+#: apps/ads/abstract_models.py:50 apps/feedback/abstract_models.py:20
+#: apps/feeds/abstract_models.py:21 apps/feeds/abstract_models.py:37
+#: apps/modules/models.py:20 apps/modules/models.py:38
+#: apps/pages/abstract_models.py:24 apps/shop/abstract_models.py:24
+#: apps/shop/abstract_models.py:157 apps/shop/abstract_models.py:178
+#: apps/shop/abstract_models.py:198 apps/shop/abstract_models.py:279
+#: views/__init__.py:31
 msgid "Name"
 msgstr "Имя"
 
-#: dartcms/apps/ads/abstract_models.py:21
-#: dartcms/apps/ads/abstract_models.py:36
-#: dartcms/apps/ads/abstract_models.py:61 dartcms/apps/modules/models.py:43
-#: dartcms/apps/pages/abstract_models.py:28
-#: dartcms/apps/pages/abstract_models.py:95
+#: apps/ads/abstract_models.py:21 apps/ads/abstract_models.py:36
+#: apps/ads/abstract_models.py:61 apps/modules/models.py:44
+#: apps/pages/abstract_models.py:27 apps/pages/abstract_models.py:95
 msgid "Is Enabled"
 msgstr "Включено"
 
-#: dartcms/apps/ads/abstract_models.py:28
+#: apps/ads/abstract_models.py:28
 msgid "ad section"
 msgstr "Рекламный раздел"
 
-#: dartcms/apps/ads/abstract_models.py:29
+#: apps/ads/abstract_models.py:29
 msgid "ad sections"
 msgstr "Рекламные разделы"
 
-#: dartcms/apps/ads/abstract_models.py:43
+#: apps/ads/abstract_models.py:43
 msgid "ad"
 msgstr "Рекламный баннер"
 
-#: dartcms/apps/ads/abstract_models.py:44
+#: apps/ads/abstract_models.py:44
 msgid "ads"
 msgstr "Рекламные баннеры"
 
-#: dartcms/apps/ads/abstract_models.py:48
+#: apps/ads/abstract_models.py:48
 msgid "Start Date"
 msgstr "Дата начала"
 
-#: dartcms/apps/ads/abstract_models.py:49
+#: apps/ads/abstract_models.py:49
 msgid "End Date"
 msgstr "Дата завершения"
 
-#: dartcms/apps/ads/abstract_models.py:51
+#: apps/ads/abstract_models.py:51
 msgid "Ad Text"
 msgstr "Текст на баннере"
 
-#: dartcms/apps/ads/abstract_models.py:52
+#: apps/ads/abstract_models.py:52
 msgid "Ad Link"
 msgstr "Ссылка"
 
-#: dartcms/apps/ads/abstract_models.py:53
+#: apps/ads/abstract_models.py:53
 msgid "Embed Code"
 msgstr "Код баннера"
 
-#: dartcms/apps/ads/abstract_models.py:54
+#: apps/ads/abstract_models.py:54
 msgid "Background Color"
 msgstr "Цвет фона"
 
-#: dartcms/apps/ads/abstract_models.py:55
+#: apps/ads/abstract_models.py:55
 msgid "Ad Place"
 msgstr "Рекламное место"
 
-#: dartcms/apps/ads/abstract_models.py:57
+#: apps/ads/abstract_models.py:57
 msgid "Views"
 msgstr "Число показов"
 
-#: dartcms/apps/ads/abstract_models.py:58
-#: dartcms/apps/shop/abstract_models.py:115
+#: apps/ads/abstract_models.py:58 apps/shop/abstract_models.py:116
 msgid "Section"
 msgstr "Раздел"
 
-#: dartcms/apps/ads/abstract_models.py:60
-#: dartcms/apps/feeds/abstract_models.py:69
+#: apps/ads/abstract_models.py:60 apps/feeds/abstract_models.py:68
 msgid "Picture"
 msgstr "Изображение"
 
-#: dartcms/apps/ads/apps.py:8 dartcms/apps/pages/abstract_models.py:88
-#: dartcms/apps/pages/forms.py:39 dartcms/apps/pages/forms.py:53
+#: apps/ads/apps.py:8 apps/pages/abstract_models.py:88 apps/pages/forms.py:38
+#: apps/pages/forms.py:52
 msgid "Ads"
 msgstr "Реклама"
 
-#: dartcms/apps/auth/forms.py:8
-#: dartcms/templates/dartcms/apps/auth/login.html:24
+#: apps/auth/forms.py:8 templates/dartcms/apps/auth/login.html:24
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: dartcms/apps/auth/forms.py:9
-#: dartcms/templates/dartcms/apps/auth/login.html:32
+#: apps/auth/forms.py:9 templates/dartcms/apps/auth/login.html:32
 msgid "Password"
 msgstr "Пароль"
 
-#: dartcms/apps/auth/forms.py:19
+#: apps/auth/forms.py:19
 msgid "All fields are required"
 msgstr "Все поля обязательны"
 
-#: dartcms/apps/auth/forms.py:28
+#: apps/auth/forms.py:28
 msgid "Incorrect username of password"
 msgstr "Неверное имя пользователя или пароль"
 
-#: dartcms/apps/auth/forms.py:30
+#: apps/auth/forms.py:30
 msgid "Access denied"
 msgstr "Доступ запрещен"
 
-#: dartcms/apps/feedback/abstract_models.py:8
+#: apps/feedback/abstract_models.py:7
 msgid "Contact form"
 msgstr "Форма для обратной связи"
 
-#: dartcms/apps/feedback/abstract_models.py:9
+#: apps/feedback/abstract_models.py:8
 msgid "Questions form"
 msgstr "Форма для вопроса"
 
-#: dartcms/apps/feedback/abstract_models.py:17
+#: apps/feedback/abstract_models.py:16
 msgid "Form type"
 msgstr "Тип формы"
 
-#: dartcms/apps/feedback/abstract_models.py:18
+#: apps/feedback/abstract_models.py:17
 msgid "Form types"
 msgstr "Типы форм"
 
-#: dartcms/apps/feedback/abstract_models.py:20
+#: apps/feedback/abstract_models.py:19
 msgid "Type ID"
 msgstr "Идентификатор типа"
 
-#: dartcms/apps/feedback/abstract_models.py:36
-#: dartcms/apps/feeds/abstract_models.py:37
-#: dartcms/apps/sitesettings/models.py:53 dartcms/apps/sitesettings/urls.py:16
+#: apps/feedback/abstract_models.py:35 apps/feeds/abstract_models.py:36
+#: apps/sitesettings/models.py:65 apps/sitesettings/urls.py:17
 msgid "Type"
 msgstr "Тип"
 
-#: dartcms/apps/feedback/abstract_models.py:37
-#: dartcms/apps/feedback/messages/urls.py:16
+#: apps/feedback/abstract_models.py:36 apps/feedback/messages/urls.py:17
 msgid "Author"
 msgstr "Автор"
 
-#: dartcms/apps/feedback/abstract_models.py:38
+#: apps/feedback/abstract_models.py:37
 msgid "Message"
 msgstr "Сообщение"
 
-#: dartcms/apps/feedback/abstract_models.py:47
+#: apps/feedback/abstract_models.py:43
+msgid "Question message"
+msgstr "Сообщение из формы для вопрооса"
+
+#: apps/feedback/abstract_models.py:44
+msgid "Question messages"
+msgstr "Сообщения из формы для вопрооса"
+
+#: apps/feedback/abstract_models.py:48
 msgid "Answer"
 msgstr "Ответ"
 
-#: dartcms/apps/feedback/abstract_models.py:48
-#: dartcms/apps/shop/abstract_models.py:29
+#: apps/feedback/abstract_models.py:49 apps/shop/abstract_models.py:28
 msgid "Is Visible"
 msgstr "Показывать"
 
-#: dartcms/apps/feedback/abstract_models.py:56
+#: apps/feedback/abstract_models.py:54
+msgid "Contact message"
+msgstr "Сообщение из формы обратной связи"
+
+#: apps/feedback/abstract_models.py:55
+msgid "Contact messages"
+msgstr "Сообщения из формы обратной связи"
+
+#: apps/feedback/abstract_models.py:59
 msgid "Email"
 msgstr "E-mail"
 
-#: dartcms/apps/feedback/abstract_models.py:57
+#: apps/feedback/abstract_models.py:60
 msgid "Phone"
 msgstr "Телефон"
 
-#: dartcms/apps/feedback/apps.py:8
-#: dartcms/apps/modules/migrations/0004_insert_feedback_module.py:20
-#: dartcms/apps/pages/migrations/0007_feedback_pagemodule.py:16
+#: apps/feedback/apps.py:8
+#: apps/modules/migrations/0004_insert_feedback_module.py:20
+#: apps/pages/migrations/0007_feedback_pagemodule.py:16
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: dartcms/apps/feedback/messages/urls.py:17
+#: apps/feedback/messages/urls.py:18
 msgid "Date_created"
 msgstr "Дата создания"
 
-#: dartcms/apps/feeds/abstract_models.py:16
+#: apps/feeds/abstract_models.py:15
 msgid "Feed type"
 msgstr "Тип ленты"
 
-#: dartcms/apps/feeds/abstract_models.py:17
+#: apps/feeds/abstract_models.py:16
 msgid "Feed types"
 msgstr "Типы лент"
 
-#: dartcms/apps/feeds/abstract_models.py:23 dartcms/apps/modules/models.py:19
-#: dartcms/apps/modules/models.py:40 dartcms/apps/pages/abstract_models.py:24
+#: apps/feeds/abstract_models.py:22 apps/modules/models.py:19
+#: apps/modules/models.py:41 apps/pages/abstract_models.py:23
 msgid "Slug"
 msgstr "Имя для URL"
 
-#: dartcms/apps/feeds/abstract_models.py:31
-#: dartcms/apps/feeds/abstract_models.py:65
+#: apps/feeds/abstract_models.py:30 apps/feeds/abstract_models.py:64
 msgid "Feed"
 msgstr "Лента"
 
-#: dartcms/apps/feeds/abstract_models.py:32 dartcms/apps/feeds/apps.py:8
-#: dartcms/apps/modules/migrations/0002_insert_modules.py:43
-#: dartcms/apps/pages/migrations/0004_insert_pagemodules.py:10
+#: apps/feeds/abstract_models.py:31 apps/feeds/apps.py:8
+#: apps/modules/migrations/0002_insert_modules.py:43
+#: apps/pages/migrations/0004_insert_pagemodules.py:10
 msgid "Feeds"
 msgstr "Ленты"
 
-#: dartcms/apps/feeds/abstract_models.py:54
+#: apps/feeds/abstract_models.py:53
 msgid "Feed item"
 msgstr "Запись ленты"
 
-#: dartcms/apps/feeds/abstract_models.py:55
+#: apps/feeds/abstract_models.py:54
 msgid "Feed items"
 msgstr "Записи ленты"
 
-#: dartcms/apps/feeds/abstract_models.py:64
-#: dartcms/apps/pages/abstract_models.py:72
-#: dartcms/apps/shop/abstract_models.py:41
-#: dartcms/apps/shop/abstract_models.py:53
-#: dartcms/apps/shop/abstract_models.py:67
-#: dartcms/apps/shop/abstract_models.py:102
-#: dartcms/apps/shop/abstract_models.py:114
-#: dartcms/apps/shop/abstract_models.py:152
-#: dartcms/apps/shop/abstract_models.py:173
-#: dartcms/apps/shop/abstract_models.py:193
+#: apps/feeds/abstract_models.py:63 apps/pages/abstract_models.py:72
+#: apps/shop/abstract_models.py:40 apps/shop/abstract_models.py:52
+#: apps/shop/abstract_models.py:66 apps/shop/abstract_models.py:103
+#: apps/shop/abstract_models.py:115 apps/shop/abstract_models.py:156
+#: apps/shop/abstract_models.py:177 apps/shop/abstract_models.py:197
 msgid "URL"
 msgstr "URL"
 
-#: dartcms/apps/feeds/abstract_models.py:66
-#: dartcms/apps/pages/abstract_models.py:66
+#: apps/feeds/abstract_models.py:65 apps/pages/abstract_models.py:66
 msgid "Title"
 msgstr "Заголовок"
 
-#: dartcms/apps/feeds/abstract_models.py:67
+#: apps/feeds/abstract_models.py:66
 msgid "Short Text"
 msgstr "Краткий текст"
 
-#: dartcms/apps/feeds/abstract_models.py:68
+#: apps/feeds/abstract_models.py:67
 msgid "Full Text"
 msgstr "Полный текст"
 
-#: dartcms/apps/feeds/abstract_models.py:71
+#: apps/feeds/abstract_models.py:70
 msgid "Keywords"
 msgstr "Ключевые слова (Keywords)"
 
-#: dartcms/apps/feeds/abstract_models.py:72
+#: apps/feeds/abstract_models.py:71
 msgid "Do not use more than 255 symbols"
 msgstr "Не более 255 символов"
 
-#: dartcms/apps/feeds/abstract_models.py:76 dartcms/apps/modules/models.py:23
-#: dartcms/apps/modules/models.py:39 dartcms/apps/shop/abstract_models.py:26
-#: dartcms/apps/shop/abstract_models.py:154
-#: dartcms/apps/shop/abstract_models.py:175
-#: dartcms/apps/shop/abstract_models.py:195
-#: dartcms/apps/sitesettings/models.py:52
+#: apps/feeds/abstract_models.py:75 apps/modules/models.py:23
+#: apps/modules/models.py:40 apps/shop/abstract_models.py:25
+#: apps/shop/abstract_models.py:158 apps/shop/abstract_models.py:179
+#: apps/shop/abstract_models.py:199 apps/sitesettings/models.py:64
 msgid "Description"
 msgstr "Описание"
 
-#: dartcms/apps/feeds/abstract_models.py:77
+#: apps/feeds/abstract_models.py:76
 msgid "Do not use more than 1024 symbols"
 msgstr "Не более 1024 символов"
 
-#: dartcms/apps/feeds/abstract_models.py:80
+#: apps/feeds/abstract_models.py:79
 msgid "Show on Site"
 msgstr "Показывать на сайте"
 
-#: dartcms/apps/feeds/abstract_models.py:81
+#: apps/feeds/abstract_models.py:80
 msgid "Is Main"
 msgstr "Основное"
 
-#: dartcms/apps/feeds/abstract_models.py:82
+#: apps/feeds/abstract_models.py:81
 msgid "Date of Publication"
 msgstr "Дата публикации"
 
-#: dartcms/apps/feeds/abstract_models.py:83
+#: apps/feeds/abstract_models.py:82
 msgid "Date of Creation"
 msgstr "Дата создания"
 
-#: dartcms/apps/filemanager/apps.py:8
+#: apps/filemanager/apps.py:8
 msgid "FileManager"
 msgstr "Файловый менеджер"
 
-#: dartcms/apps/filemanager/models.py:10
+#: apps/filemanager/models.py:10
 msgid "Folder with this name is already exists"
 msgstr "Такой каталог уже существует"
 
-#: dartcms/apps/modules/apps.py:8
+#: apps/modules/apps.py:8
 msgid "DartCMS Modules"
 msgstr "Модули DartCMS"
 
-#: dartcms/apps/modules/migrations/0002_insert_modules.py:15
+#: apps/modules/migrations/0002_insert_modules.py:15
 msgid "Administration"
 msgstr "Администрирование"
 
-#: dartcms/apps/modules/migrations/0002_insert_modules.py:20
-#: dartcms/apps/users/models.py:30
+#: apps/modules/migrations/0002_insert_modules.py:20 apps/users/models.py:31
 msgid "CMS Users"
 msgstr "Пользователи CMS"
 
-#: dartcms/apps/modules/migrations/0002_insert_modules.py:31
-#: dartcms/apps/pages/forms.py:36
+#: apps/modules/migrations/0002_insert_modules.py:31 apps/pages/forms.py:35
 msgid "Content"
 msgstr "Содержимое"
 
-#: dartcms/apps/modules/migrations/0002_insert_modules.py:36
+#: apps/modules/migrations/0002_insert_modules.py:36
 msgid "Site Structure"
 msgstr "Карта сайта"
 
-#: dartcms/apps/modules/migrations/0002_insert_modules.py:54
+#: apps/modules/migrations/0002_insert_modules.py:54
 msgid "Services"
 msgstr "Сервисы"
 
-#: dartcms/apps/modules/migrations/0003_insert_modules.py:20
-#: dartcms/apps/sitesettings/apps.py:8 dartcms/apps/sitesettings/models.py:31
+#: apps/modules/migrations/0003_insert_modules.py:20
+#: apps/sitesettings/apps.py:8 apps/sitesettings/models.py:37
 msgid "Site settings"
 msgstr "Настройки сайта"
 
-#: dartcms/apps/modules/migrations/0005_insert_modules.py:15
+#: apps/modules/migrations/0005_insert_modules.py:15
 msgid "Advertising"
 msgstr "Реклама"
 
-#: dartcms/apps/modules/migrations/0005_insert_modules.py:20
+#: apps/modules/migrations/0005_insert_modules.py:20
 msgid "Ad banners"
 msgstr "Баннеры"
 
-#: dartcms/apps/modules/migrations/0005_insert_modules.py:27
+#: apps/modules/migrations/0005_insert_modules.py:27
 msgid "Ad places"
 msgstr "Рекламные места"
 
-#: dartcms/apps/modules/migrations/0005_insert_modules.py:34
+#: apps/modules/migrations/0005_insert_modules.py:34
 msgid "Ad sections"
 msgstr "Рекламные разделы"
 
-#: dartcms/apps/modules/migrations/0006_insert_shop_modules.py:14
-#: dartcms/apps/pages/migrations/0004_insert_pagemodules.py:12
-#: dartcms/apps/shop/apps.py:8
+#: apps/modules/migrations/0006_insert_shop_modules.py:14
+#: apps/pages/migrations/0004_insert_pagemodules.py:12 apps/shop/apps.py:8
 msgid "Shop"
 msgstr "Магазин"
 
-#: dartcms/apps/modules/migrations/0006_insert_shop_modules.py:19
+#: apps/modules/migrations/0006_insert_shop_modules.py:19
 msgid "Product catalogs"
 msgstr "Каталоги товаров"
 
-#: dartcms/apps/modules/migrations/0006_insert_shop_modules.py:26
+#: apps/modules/migrations/0006_insert_shop_modules.py:26
 msgid "Product manufacturers"
 msgstr "Производители товаров"
 
-#: dartcms/apps/modules/migrations/0006_insert_shop_modules.py:33
+#: apps/modules/migrations/0006_insert_shop_modules.py:33
 msgid "Product labels"
 msgstr "Метки для товаров"
 
-#: dartcms/apps/modules/migrations/0007_insert_shop_modules.py:20
+#: apps/modules/migrations/0007_insert_shop_modules.py:20
 msgid "Orders"
 msgstr "Заказы"
 
-#: dartcms/apps/modules/migrations/0009_insert_user_group_module.py:20
+#: apps/modules/migrations/0009_insert_user_group_module.py:20
 msgid "CMS User groups"
 msgstr "Группы пользователей CMS"
 
-#: dartcms/apps/modules/migrations/0011_insert_modules.py:20
-#: dartcms/apps/siteusers/models.py:14
-#| msgid "CMS Users"
+#: apps/modules/migrations/0011_insert_modules.py:20
+#: apps/siteusers/models.py:15
 msgid "Site Users"
 msgstr "Пользователи сайта"
 
-#: dartcms/apps/modules/models.py:12
+#: apps/modules/models.py:12
 msgid "Module Groups"
 msgstr "Группы модулей"
 
-#: dartcms/apps/modules/models.py:13
+#: apps/modules/models.py:13
 msgid "Module Group"
 msgstr "Группа модулей"
 
-#: dartcms/apps/modules/models.py:21
+#: apps/modules/models.py:21
 msgid "FontAwesome class"
 msgstr "FontAwesome класс"
 
-#: dartcms/apps/modules/models.py:22 dartcms/apps/modules/models.py:38
+#: apps/modules/models.py:22 apps/modules/models.py:39
 msgid "Sort"
 msgstr "Сортировка"
 
-#: dartcms/apps/modules/models.py:29 dartcms/apps/users/forms.py:15
+#: apps/modules/models.py:29 apps/users/forms.py:14
 msgid "Modules"
 msgstr "Модули"
 
-#: dartcms/apps/modules/models.py:30 dartcms/apps/modules/models.py:56
-#: dartcms/apps/pages/abstract_models.py:77 dartcms/apps/pages/forms.py:52
+#: apps/modules/models.py:30 apps/modules/models.py:57
+#: apps/pages/abstract_models.py:77 apps/pages/forms.py:51
 msgid "Module"
 msgstr "Модуль"
 
-#: dartcms/apps/modules/models.py:36
+#: apps/modules/models.py:36
 msgid "Group"
 msgstr "Группа"
 
-#: dartcms/apps/modules/models.py:41
+#: apps/modules/models.py:42
 msgid "Config"
 msgstr "Конфигурация"
 
-#: dartcms/apps/modules/models.py:42 dartcms/apps/modules/models.py:57
+#: apps/modules/models.py:43 apps/modules/models.py:59
 msgid "User"
 msgstr "Пользователь"
 
-#: dartcms/apps/modules/models.py:49
+#: apps/modules/models.py:50
 msgid "Module permissions"
 msgstr "Права на использование модулей"
 
-#: dartcms/apps/modules/models.py:50
+#: apps/modules/models.py:51
 msgid "Module permission"
 msgstr "Права на использование модуля"
 
-#: dartcms/apps/modules/models.py:54
-#, python-format
-msgid "Module permission for %s, %s"
-msgstr "Права на использование модуля для %s, %s"
+#: apps/modules/models.py:55
+msgid "Module permission for {self.user.username}, {str(self.module)}"
+msgstr ""
+"Права на использование модуля для {self.user.username}, {str(self.module)}"
 
-#: dartcms/apps/modules/models.py:59
+#: apps/modules/models.py:61
 msgid "Can insert data"
 msgstr "Добавление данных"
 
-#: dartcms/apps/modules/models.py:60
+#: apps/modules/models.py:62
 msgid "Can update data"
 msgstr "Изменение данных"
 
-#: dartcms/apps/modules/models.py:61
+#: apps/modules/models.py:63
 msgid "Can delete data"
 msgstr "Удаление данных"
 
-#: dartcms/apps/pages/abstract_models.py:18
+#: apps/pages/abstract_models.py:17
 msgid "modules"
 msgstr "модули"
 
-#: dartcms/apps/pages/abstract_models.py:19
+#: apps/pages/abstract_models.py:18
 msgid "module"
 msgstr "модуль"
 
-#: dartcms/apps/pages/abstract_models.py:26
+#: apps/pages/abstract_models.py:25
 msgid "Related Model"
 msgstr "Связанная модель"
 
-#: dartcms/apps/pages/abstract_models.py:32
+#: apps/pages/abstract_models.py:31
 msgid "Editable for all users"
 msgstr "Редактирование доступно всем пользователям CMS"
 
-#: dartcms/apps/pages/abstract_models.py:33
+#: apps/pages/abstract_models.py:32
 msgid "Based on the parent page"
 msgstr "На основе родительской страницы"
 
-#: dartcms/apps/pages/abstract_models.py:34
+#: apps/pages/abstract_models.py:33
 msgid "Editable for specific groups"
 msgstr "Редактирование доступно определенным группам пользователей CMS"
 
-#: dartcms/apps/pages/abstract_models.py:49
+#: apps/pages/abstract_models.py:48
 msgid "page"
 msgstr "страница"
 
-#: dartcms/apps/pages/abstract_models.py:50
+#: apps/pages/abstract_models.py:49
 msgid "pages"
 msgstr "страницы"
 
-#: dartcms/apps/pages/abstract_models.py:64
+#: apps/pages/abstract_models.py:63
 msgid "Parent Page"
 msgstr "Родительская страница"
 
-#: dartcms/apps/pages/abstract_models.py:66
+#: apps/pages/abstract_models.py:66
 msgid "Shows inside the title tag"
 msgstr "Отображается в теге Title"
 
-#: dartcms/apps/pages/abstract_models.py:67
+#: apps/pages/abstract_models.py:67
 msgid "Page Header"
 msgstr "Заголовок страницы"
 
-#: dartcms/apps/pages/abstract_models.py:69
+#: apps/pages/abstract_models.py:69
 msgid "Menu name"
 msgstr "Заголовок в меню"
 
-#: dartcms/apps/pages/abstract_models.py:70
+#: apps/pages/abstract_models.py:70
 msgid "URL for Redirect"
 msgstr "URL для редиректа"
 
-#: dartcms/apps/pages/abstract_models.py:80
+#: apps/pages/abstract_models.py:80
 msgid "Module parameters"
 msgstr "Параметры модуля"
 
-#: dartcms/apps/pages/abstract_models.py:82
+#: apps/pages/abstract_models.py:82
 msgid "Before Content"
 msgstr "Содержимое перед модулем"
 
-#: dartcms/apps/pages/abstract_models.py:83
+#: apps/pages/abstract_models.py:83
 msgid "After Content"
 msgstr "Содержимое после модуля"
 
-#: dartcms/apps/pages/abstract_models.py:85
-#: dartcms/apps/shop/abstract_models.py:27
+#: apps/pages/abstract_models.py:85 apps/shop/abstract_models.py:26
 msgid "Keywords (meta keywords)"
 msgstr "Ключевые слова (meta keywords)"
 
-#: dartcms/apps/pages/abstract_models.py:86
-#: dartcms/apps/shop/abstract_models.py:28
+#: apps/pages/abstract_models.py:86 apps/shop/abstract_models.py:27
 msgid "Description (meta description)"
 msgstr "Описание (meta description)"
 
-#: dartcms/apps/pages/abstract_models.py:91
+#: apps/pages/abstract_models.py:91
 msgid "Security type"
 msgstr "Режим безопасности"
 
-#: dartcms/apps/pages/abstract_models.py:93 dartcms/apps/pages/forms.py:54
-#: dartcms/apps/users/models.py:16
+#: apps/pages/abstract_models.py:93 apps/pages/forms.py:53
+#: apps/users/models.py:17
 msgid "User groups"
 msgstr "Группы пользователей"
 
-#: dartcms/apps/pages/abstract_models.py:96
+#: apps/pages/abstract_models.py:96
 msgid "Show in Menu"
 msgstr "Показывать в меню"
 
-#: dartcms/apps/pages/apps.py:8
+#: apps/pages/apps.py:8
 msgid "Pages"
 msgstr "Страницы"
 
-#: dartcms/apps/pages/forms.py:32 dartcms/apps/shop/catalog/forms.py:18
-#: dartcms/apps/shop/product/forms.py:23 dartcms/apps/shop/section/forms.py:21
+#: apps/pages/forms.py:31 apps/shop/catalog/forms.py:17
+#: apps/shop/product/forms.py:22 apps/shop/section/forms.py:20
 msgid "Main"
 msgstr "Основное"
 
-#: dartcms/apps/pages/forms.py:43 dartcms/apps/shop/catalog/forms.py:22
-#: dartcms/apps/shop/product/forms.py:27 dartcms/apps/shop/section/forms.py:25
+#: apps/pages/forms.py:42 apps/shop/catalog/forms.py:21
+#: apps/shop/product/forms.py:26 apps/shop/section/forms.py:24
 msgid "SEO"
 msgstr "SEO"
 
-#: dartcms/apps/pages/forms.py:49 dartcms/apps/shop/catalog/forms.py:26
-#: dartcms/apps/shop/product/forms.py:32 dartcms/apps/shop/section/forms.py:29
+#: apps/pages/forms.py:48 apps/shop/catalog/forms.py:25
+#: apps/shop/product/forms.py:31 apps/shop/section/forms.py:28
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: dartcms/apps/pages/migrations/0004_insert_pagemodules.py:11
+#: apps/pages/migrations/0004_insert_pagemodules.py:11
 msgid "Contacts"
 msgstr "Обратная связь"
 
-#: dartcms/apps/pages/migrations/0004_insert_pagemodules.py:13
+#: apps/pages/migrations/0004_insert_pagemodules.py:13
 msgid "Static Page"
 msgstr "Статическая страница"
 
-#: dartcms/apps/pages/migrations/0011_insert_homepage.py:24
-#: dartcms/apps/pages/migrations/0011_insert_homepage.py:29
+#: apps/pages/migrations/0011_insert_homepage.py:23
+#: apps/pages/migrations/0011_insert_homepage.py:28
 msgid "Homepage"
 msgstr "Главная страница"
 
-#: dartcms/apps/shop/abstract_models.py:38
+#: apps/shop/abstract_models.py:37
 msgid "product catalogs"
 msgstr "Каталоги товаров"
 
-#: dartcms/apps/shop/abstract_models.py:39
+#: apps/shop/abstract_models.py:38
 msgid "product catalog"
 msgstr "Каталог товаров"
 
-#: dartcms/apps/shop/abstract_models.py:42
-#: dartcms/apps/shop/abstract_models.py:54
-#: dartcms/apps/shop/abstract_models.py:68
-#: dartcms/apps/shop/abstract_models.py:103
-#: dartcms/apps/shop/abstract_models.py:124
-#: dartcms/apps/shop/abstract_models.py:136
+#: apps/shop/abstract_models.py:41 apps/shop/abstract_models.py:53
+#: apps/shop/abstract_models.py:67 apps/shop/abstract_models.py:104
+#: apps/shop/abstract_models.py:127 apps/shop/abstract_models.py:140
 msgid "Image"
 msgstr "Изображение"
 
-#: dartcms/apps/shop/abstract_models.py:50
+#: apps/shop/abstract_models.py:49
 msgid "product manufacturers"
 msgstr "Производители товаров"
 
-#: dartcms/apps/shop/abstract_models.py:51
+#: apps/shop/abstract_models.py:50
 msgid "product manufacturer"
 msgstr "Производитель товаров"
 
-#: dartcms/apps/shop/abstract_models.py:63
+#: apps/shop/abstract_models.py:62
 msgid "product section"
 msgstr "Секция товаров"
 
-#: dartcms/apps/shop/abstract_models.py:64
+#: apps/shop/abstract_models.py:63
 msgid "product sections"
 msgstr "Секции товаров"
 
-#: dartcms/apps/shop/abstract_models.py:69
+#: apps/shop/abstract_models.py:68
 msgid "Parent Section"
 msgstr "Родительская секция"
 
-#: dartcms/apps/shop/abstract_models.py:70
+#: apps/shop/abstract_models.py:70
 msgid "Product catalog"
 msgstr "Каталог товаров"
 
-#: dartcms/apps/shop/abstract_models.py:99
+#: apps/shop/abstract_models.py:100
 msgid "product labels"
 msgstr "Метки для товаров"
 
-#: dartcms/apps/shop/abstract_models.py:100
+#: apps/shop/abstract_models.py:101
 msgid "product label"
 msgstr "Метка для товара"
 
-#: dartcms/apps/shop/abstract_models.py:111
+#: apps/shop/abstract_models.py:112
 msgid "products"
 msgstr "товары"
 
-#: dartcms/apps/shop/abstract_models.py:112
+#: apps/shop/abstract_models.py:113
 msgid "product"
 msgstr "товар"
 
-#: dartcms/apps/shop/abstract_models.py:116
+#: apps/shop/abstract_models.py:118
 msgid "Manufacturer"
 msgstr "Производитель"
 
-#: dartcms/apps/shop/abstract_models.py:118
+#: apps/shop/abstract_models.py:121
 msgid "Labels"
 msgstr "Метки"
 
-#: dartcms/apps/shop/abstract_models.py:120
-#: dartcms/apps/shop/abstract_models.py:274
+#: apps/shop/abstract_models.py:123 apps/shop/abstract_models.py:278
 msgid "Code"
 msgstr "Артикул"
 
-#: dartcms/apps/shop/abstract_models.py:121
+#: apps/shop/abstract_models.py:124
 msgid "Short description"
 msgstr "Краткое описание"
 
-#: dartcms/apps/shop/abstract_models.py:122
+#: apps/shop/abstract_models.py:125
 msgid "Residue"
 msgstr "Остаток"
 
-#: dartcms/apps/shop/abstract_models.py:123
-#: dartcms/apps/shop/abstract_models.py:276
+#: apps/shop/abstract_models.py:126 apps/shop/abstract_models.py:280
 msgid "Price"
 msgstr "Цена"
 
-#: dartcms/apps/shop/abstract_models.py:131
+#: apps/shop/abstract_models.py:134
 msgid "product picture"
 msgstr "Изображение товара"
 
-#: dartcms/apps/shop/abstract_models.py:132
+#: apps/shop/abstract_models.py:135
 msgid "product pictures"
 msgstr "Изображения товаров"
 
-#: dartcms/apps/shop/abstract_models.py:135
-#: dartcms/apps/shop/abstract_models.py:273
+#: apps/shop/abstract_models.py:138 apps/shop/abstract_models.py:277
 msgid "Product"
 msgstr "Товар"
 
-#: dartcms/apps/shop/abstract_models.py:145
+#: apps/shop/abstract_models.py:149
 msgid "shipping type"
 msgstr "Тип доставки"
 
-#: dartcms/apps/shop/abstract_models.py:146
+#: apps/shop/abstract_models.py:150
 msgid "shipping types"
 msgstr "Типы доставки"
 
-#: dartcms/apps/shop/abstract_models.py:155
-#: dartcms/apps/shop/abstract_models.py:218
+#: apps/shop/abstract_models.py:159 apps/shop/abstract_models.py:222
 msgid "Cost"
 msgstr "Стоимость"
 
-#: dartcms/apps/shop/abstract_models.py:156
-#: dartcms/apps/shop/abstract_models.py:176
-#: dartcms/apps/shop/abstract_models.py:196
+#: apps/shop/abstract_models.py:160 apps/shop/abstract_models.py:180
+#: apps/shop/abstract_models.py:200
 msgid "Is enabled"
 msgstr "Включено"
 
-#: dartcms/apps/shop/abstract_models.py:166
+#: apps/shop/abstract_models.py:170
 msgid "payment type"
 msgstr "Тип платежа"
 
-#: dartcms/apps/shop/abstract_models.py:167
+#: apps/shop/abstract_models.py:171
 msgid "payment types"
 msgstr "Типы платежей"
 
-#: dartcms/apps/shop/abstract_models.py:186
+#: apps/shop/abstract_models.py:190
 msgid "order status"
 msgstr "Статус заказа"
 
-#: dartcms/apps/shop/abstract_models.py:187
+#: apps/shop/abstract_models.py:191
 msgid "order statuses"
 msgstr "Статусы заказа"
 
-#: dartcms/apps/shop/abstract_models.py:206
+#: apps/shop/abstract_models.py:210
 msgid "order"
 msgstr "Заказ"
 
-#: dartcms/apps/shop/abstract_models.py:207
+#: apps/shop/abstract_models.py:211
 msgid "orders"
 msgstr "Заказы"
 
-#: dartcms/apps/shop/abstract_models.py:210
+#: apps/shop/abstract_models.py:214
 msgid "Fullname"
 msgstr "ФИО"
 
-#: dartcms/apps/shop/abstract_models.py:211
+#: apps/shop/abstract_models.py:215
 msgid "E-mail"
 msgstr "E-mail"
 
-#: dartcms/apps/shop/abstract_models.py:212
+#: apps/shop/abstract_models.py:216
 msgid "Shipping address"
 msgstr "Адрес для доставки"
 
-#: dartcms/apps/shop/abstract_models.py:214
+#: apps/shop/abstract_models.py:218
 msgid "Status"
 msgstr "Статусы"
 
-#: dartcms/apps/shop/abstract_models.py:216
+#: apps/shop/abstract_models.py:220
 msgid "Shipping type"
 msgstr "Тип доставки"
 
-#: dartcms/apps/shop/abstract_models.py:219
+#: apps/shop/abstract_models.py:223
 msgid "Payment type"
 msgstr "Тип платежа"
 
-#: dartcms/apps/shop/abstract_models.py:222
+#: apps/shop/abstract_models.py:226
 msgid "Is paid"
 msgstr "Оплачено"
 
-#: dartcms/apps/shop/abstract_models.py:223
+#: apps/shop/abstract_models.py:227
 msgid "Paid sum"
 msgstr "Сумма платежа"
 
-#: dartcms/apps/shop/abstract_models.py:224
+#: apps/shop/abstract_models.py:228
 msgid "Discount"
 msgstr "Скидка"
 
-#: dartcms/apps/shop/abstract_models.py:226 dartcms/views/__init__.py:32
+#: apps/shop/abstract_models.py:230 views/__init__.py:32
 msgid "Date created"
 msgstr "Дата создания"
 
-#: dartcms/apps/shop/abstract_models.py:230
+#: apps/shop/abstract_models.py:234
 msgid "Order #"
 msgstr "Заказ №"
 
-#: dartcms/apps/shop/abstract_models.py:268
+#: apps/shop/abstract_models.py:272
 msgid "order datail"
 msgstr "Детали заказа"
 
-#: dartcms/apps/shop/abstract_models.py:269
+#: apps/shop/abstract_models.py:273
 msgid "order datails"
 msgstr "Детали заказа"
 
-#: dartcms/apps/shop/abstract_models.py:272
+#: apps/shop/abstract_models.py:276
 msgid "Order"
 msgstr "Заказ"
 
-#: dartcms/apps/shop/abstract_models.py:277
+#: apps/shop/abstract_models.py:281
 msgid "Quantity"
 msgstr "Количество"
 
-#: dartcms/apps/shop/catalog/urls.py:23
+#: apps/shop/catalog/urls.py:24
 msgid "Sections"
 msgstr "Разделы"
 
-#: dartcms/apps/shop/migrations/0004_insert_payment_types.py:9
+#: apps/shop/migrations/0004_insert_payment_types.py:9
 msgid "Cash"
 msgstr "Наличный расчет"
 
-#: dartcms/apps/shop/migrations/0004_insert_payment_types.py:10
+#: apps/shop/migrations/0004_insert_payment_types.py:10
 msgid "Cashless"
 msgstr "Безналичный расчет"
 
-#: dartcms/apps/shop/migrations/0004_insert_payment_types.py:11
+#: apps/shop/migrations/0004_insert_payment_types.py:11
 msgid "Credit card"
 msgstr "Кредитная карта"
 
-#: dartcms/apps/shop/migrations/0005_insert_shipping_types.py:9
+#: apps/shop/migrations/0005_insert_shipping_types.py:9
 msgid "Courier"
 msgstr "Курьер"
 
-#: dartcms/apps/shop/migrations/0005_insert_shipping_types.py:10
+#: apps/shop/migrations/0005_insert_shipping_types.py:10
 msgid "Mail"
 msgstr "Почта"
 
-#: dartcms/apps/shop/migrations/0005_insert_shipping_types.py:11
+#: apps/shop/migrations/0005_insert_shipping_types.py:11
 msgid "Delivery service"
 msgstr "Служба доставки"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:9
+#: apps/shop/migrations/0006_insert_order_statuses.py:9
 msgid "Accepted"
 msgstr "Подтвержден"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:10
+#: apps/shop/migrations/0006_insert_order_statuses.py:10
 msgid "Performed"
 msgstr "Выполнен"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:11
+#: apps/shop/migrations/0006_insert_order_statuses.py:11
 msgid "Avaiting payment"
 msgstr "Ожидается платеж"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:12
+#: apps/shop/migrations/0006_insert_order_statuses.py:12
 msgid "Delivered"
 msgstr "Доставлен"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:13
+#: apps/shop/migrations/0006_insert_order_statuses.py:13
 msgid "Ready"
 msgstr "Готов к выдаче"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:14
+#: apps/shop/migrations/0006_insert_order_statuses.py:14
 msgid "Completed"
 msgstr "Завершен"
 
-#: dartcms/apps/shop/migrations/0006_insert_order_statuses.py:15
+#: apps/shop/migrations/0006_insert_order_statuses.py:15
 msgid "Canceled"
 msgstr "Отменен"
 
-#: dartcms/apps/shop/order/urls.py:17
+#: apps/shop/order/urls.py:18
 msgid "#"
 msgstr "№"
 
-#: dartcms/apps/shop/order/urls.py:23
+#: apps/shop/order/urls.py:24
 msgid "Total"
 msgstr "Итого"
 
-#: dartcms/apps/shop/order/urls.py:30
+#: apps/shop/order/urls.py:31
 msgid "Details"
 msgstr "Состав"
 
-#: dartcms/apps/shop/section/urls.py:27
+#: apps/shop/section/urls.py:28
 msgid "Products"
 msgstr "Товары"
 
-#: dartcms/apps/sitesettings/migrations/0002_insert_settings.py:12
+#: apps/sitesettings/migrations/0002_insert_settings.py:12
 msgid "Site name"
 msgstr "Заголовок сайта"
 
-#: dartcms/apps/sitesettings/migrations/0002_insert_settings.py:17
+#: apps/sitesettings/migrations/0002_insert_settings.py:17
 msgid "Email for feedback"
 msgstr "E-mail для обратной связи"
 
-#: dartcms/apps/sitesettings/models.py:20
+#: apps/sitesettings/models.py:24
 msgid "String"
 msgstr "Строка"
 
-#: dartcms/apps/sitesettings/models.py:21
+#: apps/sitesettings/models.py:25
 msgid "Text"
 msgstr "Текст"
 
-#: dartcms/apps/sitesettings/models.py:22
+#: apps/sitesettings/models.py:26
 msgid "Rich Editor"
 msgstr "Редактор Rich"
 
-#: dartcms/apps/sitesettings/models.py:23
+#: apps/sitesettings/models.py:27
 msgid "Select"
 msgstr "Выбор (select)"
 
-#: dartcms/apps/sitesettings/models.py:24
+#: apps/sitesettings/models.py:28
 msgid "Date"
 msgstr "Дата"
 
-#: dartcms/apps/sitesettings/models.py:25
+#: apps/sitesettings/models.py:29
 msgid "File"
 msgstr "Файл"
 
-#: dartcms/apps/sitesettings/models.py:30
+#: apps/sitesettings/models.py:30
+msgid "Object"
+msgstr "Объект"
+
+#: apps/sitesettings/models.py:31
+msgid "Checkbox"
+msgstr "Чекбокс"
+
+#: apps/sitesettings/models.py:36
 msgid "Site setting"
 msgstr "Настройка сайта"
 
-#: dartcms/apps/sitesettings/models.py:51
+#: apps/sitesettings/models.py:63
 msgid "Identifier"
 msgstr "Идентификатор"
 
-#: dartcms/apps/sitesettings/models.py:54
+#: apps/sitesettings/models.py:66
 msgid "Value for text type"
 msgstr "Значение для типа текст"
 
-#: dartcms/apps/sitesettings/models.py:55
+#: apps/sitesettings/models.py:67
 msgid "Value for date type"
 msgstr "Значение для типа дата"
 
-#: dartcms/apps/sitesettings/models.py:56
+#: apps/sitesettings/models.py:68
 msgid "Value for file"
 msgstr "Значение для типа файл"
 
-#: dartcms/apps/sitesettings/models.py:57
+#: apps/sitesettings/models.py:69
+msgid "Value for boolean"
+msgstr "Значение для бинарного типа"
+
+#: apps/sitesettings/models.py:70
 msgid "Options for select type (use \";\" as separator)"
 msgstr "Опции для поля типа выбор (используйте \";\" как разделитель)"
 
-#: dartcms/apps/sitesettings/urls.py:17
+#: apps/sitesettings/urls.py:18
 msgid "Value"
 msgstr "Значение"
 
-#: dartcms/apps/siteusers/models.py:13
-#| msgid "CMS Users"
+#: apps/siteusers/models.py:14
 msgid "Site User"
 msgstr "Пользователь сайта"
 
-#: dartcms/apps/siteusers/urls.py:23 dartcms/apps/users/urls.py:23
-#: dartcms/templates/dartcms/apps/users/change_password.html:7
-#: dartcms/templates/dartcms/apps/users/change_password.html:13
+#: apps/siteusers/urls.py:28 apps/users/urls.py:27
+#: templates/dartcms/apps/users/change_password.html:7
+#: templates/dartcms/apps/users/change_password.html:13
 msgid "Change Password"
 msgstr "Сменить пароль"
 
-#: dartcms/apps/users/forms.py:17
+#: apps/users/forms.py:16
 msgid "Groups"
 msgstr "Группы"
 
-#: dartcms/apps/users/models.py:15
+#: apps/users/models.py:16
 msgid "User group"
 msgstr "Группа пользователя"
 
-#: dartcms/apps/users/models.py:19
+#: apps/users/models.py:20
 msgid "Group name"
 msgstr "Название"
 
-#: dartcms/apps/users/models.py:29
-#, fuzzy
-#| msgid "CMS Users"
+#: apps/users/models.py:30
 msgid "CMS User"
 msgstr "Пользователи CMS"
 
-#: dartcms/apps/users/views.py:14
+#: apps/users/views.py:14
 msgid "Users"
 msgstr "Пользователи"
 
-#: dartcms/templates/dartcms/apps/auth/login.html:39
+#: templates/dartcms/apps/auth/login.html:39
 msgid "Login"
 msgstr "Войти"
 
-#: dartcms/templates/dartcms/apps/dashboard/index.html:7
+#: templates/dartcms/apps/dashboard/index.html:7
 msgid "DartCMS Dashboard"
 msgstr "Панель DartCMS"
 
-#: dartcms/templates/dartcms/apps/dashboard/index.html:12
+#: templates/dartcms/apps/dashboard/index.html:12
 msgid "Welcome to DartCMS, your content management system."
 msgstr "Добро пожаловать в DartCMS, вашу систему управления контентом."
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:28
+#: templates/dartcms/apps/filemanager/index.html:28
 msgid "Rename"
 msgstr "Переименовать"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:31
-#: dartcms/templates/dartcms/apps/pages/grid.html:41
-#: dartcms/templates/dartcms/apps/shop/grid.html:67
-#: dartcms/templates/dartcms/apps/users/partial/modules_widget.html:47
-#: dartcms/templates/dartcms/views/grid.html:115
+#: templates/dartcms/apps/filemanager/index.html:31
+#: templates/dartcms/apps/pages/grid.html:41
+#: templates/dartcms/apps/shop/grid.html:67
+#: templates/dartcms/apps/users/partial/modules_widget.html:47
+#: templates/dartcms/views/delete.html:9 templates/dartcms/views/grid.html:115
 msgid "Delete"
 msgstr "Удалить"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:36
-#: dartcms/templates/dartcms/apps/filemanager/index.html:39
+#: templates/dartcms/apps/filemanager/index.html:36
+#: templates/dartcms/apps/filemanager/index.html:39
 msgid "Create folder"
 msgstr "Создать каталог"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:42
+#: templates/dartcms/apps/filemanager/index.html:42
 msgid "Folder name"
 msgstr "Имя каталога"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:48
+#: templates/dartcms/apps/filemanager/index.html:48
 msgid "Rename folder"
 msgstr "Переименовать каталог"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:51
+#: templates/dartcms/apps/filemanager/index.html:51
 msgid "New folder name"
 msgstr "Новое имя каталога"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:58
+#: templates/dartcms/apps/filemanager/index.html:58
 msgid "Delete folder"
 msgstr "Удалить каталог"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:60
+#: templates/dartcms/apps/filemanager/index.html:60
 msgid ""
 "Are you sure that you want to delete this folder? This action will delete "
 "all files inside it."
@@ -979,157 +968,160 @@ msgstr ""
 "Вы уверены, что хотите удалить этот каталог? Это действие приведет к "
 "удалению всех файлов внутри него."
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:70
+#: templates/dartcms/apps/filemanager/index.html:70
 msgid "Folders"
 msgstr "Каталоги"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:74
+#: templates/dartcms/apps/filemanager/index.html:74
 msgid "DartCMS FileManager"
 msgstr "DartCMS файловый менеджер"
 
-#: dartcms/templates/dartcms/apps/filemanager/index.html:75
+#: templates/dartcms/apps/filemanager/index.html:75
 msgid "Choose folder"
 msgstr "Выберите каталог"
 
-#: dartcms/templates/dartcms/apps/pages/delete.html:9
+#: templates/dartcms/apps/pages/delete.html:9
 msgid "You do not have permission to delete this page."
 msgstr "У вас нет прав для удаления этой страницы"
 
-#: dartcms/templates/dartcms/apps/pages/grid.html:17
-#: dartcms/templates/dartcms/apps/shop/grid.html:25
-#: dartcms/templates/dartcms/apps/users/insert.html:24
-#: dartcms/templates/dartcms/views/grid.html:72
-#: dartcms/templates/dartcms/views/insert.html:20
-#: dartcms/templates/dartcms/views/view.html:20
+#: templates/dartcms/apps/pages/grid.html:17
+#: templates/dartcms/apps/shop/grid.html:25
+#: templates/dartcms/apps/users/insert.html:24
+#: templates/dartcms/views/grid.html:72 templates/dartcms/views/insert.html:20
+#: templates/dartcms/views/view.html:20
 msgid "Add"
 msgstr "Добавить"
 
-#: dartcms/templates/dartcms/apps/pages/grid.html:29
-#: dartcms/templates/dartcms/apps/shop/grid.html:43
-#: dartcms/templates/dartcms/views/grid.html:84
+#: templates/dartcms/apps/pages/grid.html:29
+#: templates/dartcms/apps/shop/grid.html:43
+#: templates/dartcms/views/grid.html:84
 msgid "Edit"
 msgstr "Редактировать"
 
-#: dartcms/templates/dartcms/apps/pages/insert.html:15
+#: templates/dartcms/apps/pages/insert.html:15
 msgid "You do not have permission to add page in this section."
 msgstr "У вас нет прав для добавления страницы в выбранный вами раздел."
 
-#: dartcms/templates/dartcms/apps/pages/update.html:12
+#: templates/dartcms/apps/pages/update.html:12
 msgid "You do not have permission to edit this page."
 msgstr "У вас нет прав для редактирования этой страницы"
 
-#: dartcms/templates/dartcms/apps/shop/grid.html:18
-#: dartcms/templates/dartcms/views/grid.html:62
+#: templates/dartcms/apps/shop/grid.html:18
+#: templates/dartcms/views/grid.html:62
 msgid "Back"
 msgstr "Назад"
 
-#: dartcms/templates/dartcms/apps/users/change_password.html:23
+#: templates/dartcms/apps/users/change_password.html:23
 msgid "Accept Changes"
 msgstr "Подтвердить изменения"
 
-#: dartcms/templates/dartcms/apps/users/change_password.html:24
-#: dartcms/templates/dartcms/apps/users/insert.html:25
-#: dartcms/templates/dartcms/apps/users/update.html:25
-#: dartcms/templates/dartcms/views/delete.html:17
-#: dartcms/templates/dartcms/views/insert.html:21
-#: dartcms/templates/dartcms/views/partials/security_alert.html:7
-#: dartcms/templates/dartcms/views/update.html:21
-#: dartcms/templates/dartcms/views/view.html:21
+#: templates/dartcms/apps/users/change_password.html:24
+#: templates/dartcms/apps/users/insert.html:25
+#: templates/dartcms/apps/users/update.html:25
+#: templates/dartcms/views/delete.html:21
+#: templates/dartcms/views/insert.html:21
+#: templates/dartcms/views/partials/security_alert.html:7
+#: templates/dartcms/views/update.html:21 templates/dartcms/views/view.html:21
 msgid "Cancel"
 msgstr "Отмена"
 
-#: dartcms/templates/dartcms/apps/users/partial/modules_widget.html:15
+#: templates/dartcms/apps/users/partial/modules_widget.html:15
 msgid "toogle all"
 msgstr "включить все"
 
-#: dartcms/templates/dartcms/apps/users/partial/modules_widget.html:22
+#: templates/dartcms/apps/users/partial/modules_widget.html:22
 msgid "Read"
 msgstr "Чтение"
 
-#: dartcms/templates/dartcms/apps/users/partial/modules_widget.html:31
+#: templates/dartcms/apps/users/partial/modules_widget.html:31
 msgid "Create"
 msgstr "Добавление"
 
-#: dartcms/templates/dartcms/apps/users/partial/modules_widget.html:39
-#: dartcms/templates/dartcms/apps/users/update.html:24
-#: dartcms/templates/dartcms/views/update.html:20
+#: templates/dartcms/apps/users/partial/modules_widget.html:39
+#: templates/dartcms/apps/users/update.html:24
+#: templates/dartcms/views/update.html:20
 msgid "Update"
 msgstr "Редактирование"
 
-#: dartcms/templates/dartcms/base/index.html:30
-#: dartcms/templates/dartcms/base/index.html:99
+#: templates/dartcms/base/index.html:30 templates/dartcms/base/index.html:99
 msgid "Dashboard"
 msgstr "Панель"
 
-#: dartcms/templates/dartcms/base/index.html:64
+#: templates/dartcms/base/index.html:64
 msgid "Logout"
 msgstr "Выход"
 
-#: dartcms/templates/dartcms/base/index.html:83
+#: templates/dartcms/base/index.html:83
 msgid "Django administration"
 msgstr "Администрирование Django"
 
-#: dartcms/templates/dartcms/base/index.html:87
+#: templates/dartcms/base/index.html:87
 msgid "Change password"
 msgstr "Сменить пароль"
 
-#: dartcms/templates/dartcms/forms/partial/horizontal_inlines.html:14
+#: templates/dartcms/forms/partial/horizontal_inlines.html:14
 msgid "Add More"
 msgstr "Добавить еще"
 
-#: dartcms/templates/dartcms/views/delete.html:6
+#: templates/dartcms/views/delete.html:7
 msgid "Delete Record"
 msgstr "Удалить запись"
 
-#: dartcms/templates/dartcms/views/delete.html:14
+#: templates/dartcms/views/delete.html:9
+msgid "Records"
+msgstr "Посмотреть записи"
+
+#: templates/dartcms/views/delete.html:18
 msgid "Deletion is permanent. Are you sure?"
 msgstr "Удалить навсегда. Вы уверены?"
 
-#: dartcms/templates/dartcms/views/delete.html:16 dartcms/utils/forms.py:7
+#: templates/dartcms/views/delete.html:20 utils/forms.py:7
 msgid "Yes"
 msgstr "Да"
 
-#: dartcms/templates/dartcms/views/grid.html:97
+#: templates/dartcms/views/grid.html:97
 msgid "View"
 msgstr "Просмотр данных"
 
-#: dartcms/templates/dartcms/views/insert.html:8
-#: dartcms/templates/dartcms/views/view.html:8
+#: templates/dartcms/views/insert.html:8 templates/dartcms/views/view.html:8
 msgid "Add Record"
 msgstr "Добавить запись"
 
-#: dartcms/templates/dartcms/views/partials/grid_search.html:8
+#: templates/dartcms/views/partials/grid_search.html:8
 msgid "Clear"
 msgstr "Очистить"
 
-#: dartcms/templates/dartcms/views/partials/grid_search.html:9
+#: templates/dartcms/views/partials/grid_search.html:9
 msgid "Search"
 msgstr "Поиск"
 
-#: dartcms/templates/dartcms/views/partials/loading_indicator.html:2
+#: templates/dartcms/views/partials/loading_indicator.html:2
 msgid "Loading.."
 msgstr "Загрузка.."
 
-#: dartcms/templates/dartcms/views/update.html:8
+#: templates/dartcms/views/update.html:8
 msgid "View Record"
 msgstr "Подробнее"
 
-#: dartcms/templates/dartcms/views/update.html:8
+#: templates/dartcms/views/update.html:8
 msgid "Update Record"
 msgstr "Редактировать запись"
 
-#: dartcms/utils/config.py:10
+#: utils/config.py:16
 msgid "View Records"
 msgstr "Посмотреть записи"
 
-#: dartcms/utils/forms.py:8
+#: utils/forms.py:8
 msgid "No"
 msgstr "Нет"
 
-#: dartcms/utils/forms.py:39
+#: utils/forms.py:39
 msgid "from"
 msgstr "с"
 
-#: dartcms/utils/forms.py:39
+#: utils/forms.py:39
 msgid "to"
 msgstr "по"
+
+#~ msgid "Module permission for %s, %s"
+#~ msgstr "Права на использование модуля для %s, %s"

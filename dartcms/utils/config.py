@@ -1,4 +1,10 @@
 # coding: utf-8
+from dartcms.views import (DeleteMultipleObjectView, DeleteObjectView,
+                           GridView, InsertObjectView,
+                           InsertObjectWithInlinesView, UpdateObjectView,
+                           UpdateObjectWithInlinesView)
+from django.conf.urls import include, url
+from django.forms import modelform_factory
 from django.utils.translation import ugettext as _
 
 from .db import get_model_field_label, get_model_field_type
@@ -56,4 +62,36 @@ class DartCMSConfig(object):
         config = self.base
         if 'form' in self.config:
             config.update(self.config['form'])
+        elif config.get('model'):
+            config['form_class'] = modelform_factory(config['model'], exclude=[])
         return config
+
+    def get_urls(self, exclude=None):
+        if exclude is None:
+            exclude = []
+        urls = []
+
+        if 'index' not in exclude:
+            urls += [url(r'^$', GridView.as_view(**self.grid), name='index')]
+
+        if 'insert' not in exclude:
+            insert_view = InsertObjectWithInlinesView if 'inlines' in self.form else InsertObjectView
+            urls += [url(r'^insert/$', insert_view.as_view(**self.form), name='insert')]
+
+        if 'update' not in exclude:
+            update_view = UpdateObjectWithInlinesView if 'inlines' in self.form else UpdateObjectView
+            urls += [url(r'^update/(?P<pk>\d+)/$', update_view.as_view(**self.form), name='update')]
+
+        if 'delete' not in exclude:
+            if not self.grid.get('single_select', True):
+                urls += [
+                    url(r'^delete/(?P<pks>[\d,]+)/$', DeleteMultipleObjectView.as_view(**self.base), name='delete')]
+            else:
+                urls += [url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**self.base), name='delete')]
+
+        if 'addition' not in exclude and 'additional_grid_actions' in self.grid:
+            for action in self.grid.get('additional_grid_actions', []):
+                urls += [url(r'^(?P<children_url>{url})/(?P<{kwarg_name}>\d+)/'.format(**action),
+                             include(action['include_urls'], namespace=action['url']))]
+
+        return urls

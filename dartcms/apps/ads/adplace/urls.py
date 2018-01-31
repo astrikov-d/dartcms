@@ -1,11 +1,10 @@
 # coding: utf-8
 from dartcms.apps.ads.models import AdPlace
 from dartcms.utils.config import DartCMSConfig
-from dartcms.views import GridView, UpdateObjectView
-from django.conf.urls import url
+
 from django.forms import modelform_factory
 
-app_name='adplace'
+app_name = 'adplace'
 
 config = DartCMSConfig({
     'model': AdPlace,
@@ -21,7 +20,4 @@ config = DartCMSConfig({
     },
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update')
-]
+urlpatterns = config.get_urls(exclude=['insert', 'delete'])

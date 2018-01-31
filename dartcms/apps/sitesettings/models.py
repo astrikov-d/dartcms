@@ -1,9 +1,9 @@
 # coding: utf-8
 from datetime import datetime
 
-from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _

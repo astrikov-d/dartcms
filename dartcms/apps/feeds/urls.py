@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
-from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
-                           UpdateObjectView)
-from django.conf.urls import include, url
 from django.forms import modelform_factory
 
 app_name = 'feeds'
@@ -18,7 +15,7 @@ config = DartCMSConfig({
             {'field': 'name', 'width': '90%'},
         ],
         'additional_grid_actions': [
-            {'url': 'items'}
+            {'url': 'items', 'kwarg_name': 'feed', 'include_urls': 'dartcms.apps.feeds.items.urls'}
         ]
     },
     'form': {
@@ -26,10 +23,4 @@ config = DartCMSConfig({
     }
 })
 
-urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^insert/$', InsertObjectView.as_view(**config.form), name='insert'),
-    url(r'^update/(?P<pk>\d+)/$', UpdateObjectView.as_view(**config.form), name='update'),
-    url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**config.base), name='delete'),
-    url(r'^(?P<children_url>items)/(?P<feed>\d+)/', include('dartcms.apps.feeds.items.urls', namespace='feed_items')),
-]
+urlpatterns = config.get_urls()
