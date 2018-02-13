@@ -55,3 +55,5 @@ class PageMiddleware:
 
         if hasattr(request, 'page_module') and not hasattr(request, 'page'):
             raise Http404('Attribute "page" is not in request')
+
+        return self.process_request(request)
