@@ -35,7 +35,7 @@ config = DartCMSConfig({
     }
 })
 
-urlpatterns = config.get_urls(exclude=['addition']) + [
+urlpatterns = config.get_urls(exclude=['addition', 'insert', 'update', 'delete']) + [
     url(r'^$', GridView.as_view(**config.grid), name='index'),
     url(r'^insert/$', CMSUserInsertView.as_view(**config.form), name='insert'),
     url(r'^update/(?P<pk>\d+)/$', CMSUserUpdateView.as_view(**config.form), name='update'),

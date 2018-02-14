@@ -52,7 +52,7 @@ class ModulePermission(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return _(f'Module permission for {self.user.username}, {str(self.module)}')
+        return str(_(f'Module permission for {self.user.username}, {str(self.module)}'))
 
     module = models.ForeignKey(Module, verbose_name=_('Module'), related_name='module_permissions',
                                on_delete=models.CASCADE)
