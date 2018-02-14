@@ -1,7 +1,6 @@
 # coding: utf-8
 from dartcms.apps.ads.models import AdPlace
 from dartcms.utils.config import DartCMSConfig
-
 from django.forms import modelform_factory
 
 app_name = 'adplace'

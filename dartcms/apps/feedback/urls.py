@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from dartcms.utils.config import DartCMSConfig
+
 from .models import FormType
 
 app_name = 'feedback'
