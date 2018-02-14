@@ -6,6 +6,7 @@ from dartcms.utils.fields import RteField
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from versatileimagefield.fields import VersatileImageField
 
 
 @python_2_unicode_compatible
@@ -65,7 +66,7 @@ class AbstractFeedItem(models.Model):
     name = models.CharField(max_length=1024, verbose_name=_('Title'))
     short_text = RteField(verbose_name=_('Short Text'))
     full_text = RteField(verbose_name=_('Full Text'))
-    picture = models.ImageField(verbose_name=_('Picture'), upload_to='feeds/%Y/%m/%d', null=True, blank=True)
+    picture = VersatileImageField(verbose_name=_('Picture'), upload_to='feeds/%Y/%m/%d', null=True, blank=True)
     seo_keywords = models.TextField(
         verbose_name=_('Keywords'),
         help_text=_('Do not use more than 255 symbols'),

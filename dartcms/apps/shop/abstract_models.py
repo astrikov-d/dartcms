@@ -10,6 +10,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
+from versatileimagefield.fields import VersatileImageField
 
 
 @python_2_unicode_compatible
@@ -38,7 +39,7 @@ class AbstractProductCatalog(AbstractProductBase):
         verbose_name = _('product catalog')
 
     slug = models.SlugField(_('URL'), unique=True)
-    image = models.ImageField(_('Image'), upload_to='shop/catalog', null=True, blank=True)
+    image = VersatileImageField(_('Image'), upload_to='shop/catalog', null=True, blank=True)
 
 
 class AbstractProductManufacturer(AbstractProductBase):
@@ -50,7 +51,7 @@ class AbstractProductManufacturer(AbstractProductBase):
         verbose_name = _('product manufacturer')
 
     slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
-    image = models.ImageField(_('Image'), upload_to='shop/producer', null=True, blank=True)
+    image = VersatileImageField(_('Image'), upload_to='shop/producer', null=True, blank=True)
 
 
 @python_2_unicode_compatible
@@ -64,7 +65,7 @@ class AbstractProductSection(MPTTModel, AbstractProductBase):
         unique_together = ['catalog', 'slug']
 
     slug = AutoSlugField(_('URL'), populate_from='name', unique=True)
-    image = models.ImageField(_('Image'), upload_to='shop/section', null=True, blank=True)
+    image = VersatileImageField(_('Image'), upload_to='shop/section', null=True, blank=True)
     parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Section'), blank=True,
                             on_delete=models.PROTECT)
     catalog = models.ForeignKey('shop.ProductCatalog', verbose_name=_('Product catalog'), related_name='sections',
@@ -101,7 +102,7 @@ class AbstractProductLabel(AbstractProductBase):
         verbose_name = _('product label')
 
     slug = models.SlugField(_('URL'), unique=True)
-    image = models.ImageField(_('Image'), upload_to='shop/label', null=True, blank=True)
+    image = VersatileImageField(_('Image'), upload_to='shop/label', null=True, blank=True)
 
 
 class AbstractProduct(AbstractProductBase):
@@ -124,7 +125,7 @@ class AbstractProduct(AbstractProductBase):
     short_description = RteField(_('Short description'), blank=True, default='')
     residue = models.IntegerField(_('Residue'), default=1)
     price = models.DecimalField(verbose_name=_('Price'), decimal_places=2, max_digits=10, default=0)
-    image = models.ImageField(_('Image'), upload_to='shop/product/%Y/%m/%d', null=True, blank=True)
+    image = VersatileImageField(_('Image'), upload_to='shop/product/%Y/%m/%d', null=True, blank=True)
 
 
 class AbstractProductImage(models.Model):
@@ -137,7 +138,7 @@ class AbstractProductImage(models.Model):
 
     product = models.ForeignKey('shop.Product', verbose_name=_('Product'), related_name='pictures',
                                 on_delete=models.CASCADE)
-    image = models.ImageField(_('Image'), upload_to='shop/product_images/%Y/%m/%d')
+    image = VersatileImageField(_('Image'), upload_to='shop/product_images/%Y/%m/%d')
     date_created = models.DateTimeField(auto_now_add=True)
 
 
