@@ -58,7 +58,7 @@ class AbstractPage(MPTTModel):
         while parent:
             page_names.append(parent.title)
             parent = parent.parent
-        return ' / '.join(reversed(page_names))
+        return ' / '.join(str(reversed(page_names)))
 
     parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Page'), blank=True,
                             on_delete=models.CASCADE)
