@@ -54,11 +54,11 @@ class AbstractPage(MPTTModel):
         Constructs breadcrumbs-like page name.
         """
         parent = self.parent
-        page_names = [self.title]
+        page_names = [str(self.title)]
         while parent:
             page_names.append(parent.title)
             parent = parent.parent
-        return ' / '.join(str(reversed(page_names)))
+        return ' / '.join(reversed(page_names))
 
     parent = TreeForeignKey('self', null=True, related_name='children', verbose_name=_('Parent Page'), blank=True,
                             on_delete=models.CASCADE)
