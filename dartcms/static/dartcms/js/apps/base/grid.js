@@ -114,7 +114,7 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
         });
     });
 
-    var selects = $('select[multiple="multiple"]', form);
+    var selects = $('select.chosen', form);
     var select_param = {
         allSelectedText: gettext('All selected'),
         nonSelectedText: gettext('None selected'),
