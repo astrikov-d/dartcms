@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from versatileimagefield.fields import VersatileImageField
 
 
 @python_2_unicode_compatible
@@ -57,7 +58,7 @@ class AbstractAd(models.Model):
     views = models.IntegerField(default=0, verbose_name=_('Views'))
     section = models.ManyToManyField('ads.AdSection', verbose_name=_('Section'),
                                      related_name='%(app_label)s_%(class)s_related')
-    picture = models.FileField(upload_to='b/%Y/%m/%d', null=True, blank=True, verbose_name=_('Picture'))
+    picture = VersatileImageField(upload_to='b/%Y/%m/%d', null=True, blank=True, verbose_name=_('Picture'))
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
     date_created = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
