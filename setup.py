@@ -11,12 +11,12 @@ packages = find_packages()
 
 setup(
     name='dartcms',
-    version='0.1.13',
+    version='0.1.14',
     description='DartCMS - open-source content management system for Django',
     long_description='DartCMS is an open-source content management system based on the popular '
                      'Django Framework. It is friendly for developers and end-users.',
-    author='Dmitry Astrikov',
-    author_email='astrikov.d@gmail.com',
+    author='Dmitry Astrikov, Vyacheslav Martsinkevich',
+    author_email='astrikov.d@gmail.com, master@neucom.ru',
     url='https://github.com/astrikov-d/dartcms',
     packages=packages,
     include_package_data=True,
