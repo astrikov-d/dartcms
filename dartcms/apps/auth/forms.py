@@ -1,11 +1,13 @@
 # coding: utf-8
 from django import forms
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
+
+User = get_user_model()
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label=_('Username'))
+    username = forms.CharField(label=User._meta.get_field(User.USERNAME_FIELD).verbose_name.title())
     password = forms.CharField(widget=forms.PasswordInput, label=_('Password'))
     next = forms.CharField(widget=forms.HiddenInput, required=False)
 
