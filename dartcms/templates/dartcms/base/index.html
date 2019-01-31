@@ -15,7 +15,7 @@
                             <img src="{% gravatar_url request.user.email 50 %}" class="img img-circle"/>
                         </div>
                         <div class="user-meta">
-                            <div class="user-name"><i class="fa fa-user"></i> {{ request.user.username }}</div>
+                            <div class="user-name"><i class="fa fa-user"></i> {{ request.user }}</div>
                             {% if request.user.is_superuser %}
                                 <span class="label label-danger">Admin</span>
                             {% elif request.user.is_staff %}
