@@ -14,13 +14,13 @@ config = DartCMSConfig({
     'model': CMSUser,
     'grid': {
         'grid_columns': [
-            {'field': 'username', 'width': '60%'},
+            {'field': CMSUser.USERNAME_FIELD, 'width': '60%'},
             {'field': 'last_login', 'width': '20%'},
             {'field': 'is_staff', 'width': '10%'},
             {'field': 'is_active', 'width': '10%'},
         ],
         'search': [
-            'username', 'email'
+            CMSUser.USERNAME_FIELD, 'email'
         ],
         'additional_grid_actions': [
             {
@@ -28,7 +28,7 @@ config = DartCMSConfig({
                 'required_permissions': '__all__'
             }
         ],
-        'model_properties': ['username']
+        'model_properties': [CMSUser.USERNAME_FIELD]
     },
     'form': {
         'form_class': UserForm
