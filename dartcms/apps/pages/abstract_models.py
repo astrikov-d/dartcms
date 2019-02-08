@@ -48,13 +48,13 @@ class AbstractPage(MPTTModel):
         unique_together = ['module', 'slug']
 
     def __unicode__(self):
-        """
-        Constructs breadcrumbs-like page name.
-        """
         return self.title
 
     @property
     def full_path(self):
+        """
+        Constructs breadcrumbs-like page name.
+        """
         parent = self.parent
         page_names = [self.title]
         while parent:
