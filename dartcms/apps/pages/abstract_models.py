@@ -50,9 +50,14 @@ class AbstractPage(MPTTModel):
         unique_together = ['module', 'slug']
 
     def __str__(self):
+        return self.title
+
+    @property
+    def full_path(self):
         """
         Constructs breadcrumbs-like page name.
         """
+        # todo: There is need to use mptt get_ancestors.
         parent = self.parent
         page_names = [str(self.title)]
         while parent:
