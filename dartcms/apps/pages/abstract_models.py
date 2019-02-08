@@ -51,6 +51,10 @@ class AbstractPage(MPTTModel):
         """
         Constructs breadcrumbs-like page name.
         """
+        return self.title
+
+    @property
+    def full_path(self):
         parent = self.parent
         page_names = [self.title]
         while parent:
