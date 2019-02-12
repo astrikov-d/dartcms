@@ -4,7 +4,8 @@ import sys
 from setuptools import find_packages, setup
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
+    os.system('python3 setup.py sdist')
+    os.system('twine upload dist/*')
     sys.exit()
 
 packages = find_packages()
