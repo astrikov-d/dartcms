@@ -96,7 +96,10 @@ def thumbnail(file, size='220x220'):
         try:
             image.save(miniature_filename, image.format, quality=90, optimize=1)
         except:
-            image.save(miniature_filename, image.format, quality=90)
+            try:
+                image.save(miniature_filename, image.format, quality=90)
+            except:
+                return None
 
     return miniature_url
 
