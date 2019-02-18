@@ -15,9 +15,8 @@ class GetTreeView(GridView, JSONResponseMixin):
         return self.render_to_json_response(context, safe=False, **response_kwargs)
 
     def get_data(self, context):
-        homepage = self.object_list.get(module__slug='homepage')
-        tree = [homepage.serializable_object()]
-        return tree
+        parent_id = self.request.POST.get('id')
+        return [obj.serializable_object for obj in self.object_list.filter(parent_id=parent_id)]
 
 
 class PageFormKwargsMixin(object):
@@ -55,11 +54,31 @@ class InsertPageView(SecurityMixin, PageFormKwargsMixin, InsertObjectView):
     def get_initial(self):
         return {'parent': self.check_object}
 
+    def form_valid(self, form):
+        obj = self.save_object(form)
+        data = {
+            'pk': obj.pk,
+            'title': obj.title,
+            'module': obj.module.name,
+            'url': obj.url
+        }
+        return self.render_to_json_response({'result': True, 'action': 'INSERT', 'data': data})
+
 
 class UpdatePageView(SecurityMixin, PageFormKwargsMixin, UpdateObjectView):
     @cached_property
     def check_object(self):
         return self.object
+
+    def form_valid(self, form):
+        obj = form.save()
+        data = {
+            'title': obj.title,
+            'module': obj.module.name,
+            'url': obj.url
+        }
+        return self.render_to_json_response({'result': True, 'action': 'UPDATE', 'data': data})
+
 
 
 class TreeActionView(SecurityMixin, ModulePermissionsMixin, JSONView):

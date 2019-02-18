@@ -132,6 +132,7 @@ class AbstractPage(MPTTModel):
             return '/'
         return '/%s/%s/' % (self.module.slug, self.slug)
 
+    @property
     def serializable_object(self):
         obj = {
             'pk': self.pk,
@@ -139,8 +140,7 @@ class AbstractPage(MPTTModel):
             'title': self.title,
             'module': str(self.module),
             'url': self.url,
-            'children': []
         }
-        for child in self.get_children():
-            obj['children'].append(child.serializable_object())
+        if not self.is_leaf_node():
+            obj['state'] = 'closed'
         return obj

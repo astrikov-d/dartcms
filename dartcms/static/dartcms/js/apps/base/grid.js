@@ -21,8 +21,9 @@ var openFormModal = function (url, onSubmitSuccess, onSubmitError, onOpen) {
         formModal.css('width', $('.page-content').width());
         $('form', formModal).attr('action', url);
         initModalControls(formModal, onSubmitSuccess, onSubmitError);
-        initDatePickers();
-
+        if (typeof initDatePickers === "function") {
+            initDatePickers();
+        }
         if (onOpen) {
             onOpen(formModal);
         }
@@ -72,7 +73,7 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
                             $.modal.close();
 
                             if (onSubmitSuccess) {
-                                onSubmitSuccess();
+                                onSubmitSuccess(response);
                             }
                         } else {
                             if (response.hasOwnProperty('errors')) {

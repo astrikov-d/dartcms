@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 13:50+0700\n"
+"POT-Creation-Date: 2019-02-18 18:13+0700\n"
 "PO-Revision-Date: 2016-12-14 04:54+0000\n"
 "Last-Translator:   <astrikov.d@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,47 +21,59 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:53
+#: dartcms/static/dartcms/assets/tinymce/tinymce.min.js:8
+msgid "align"
+msgstr ""
+
+#: dartcms/static/dartcms/assets/tinymce/tinymce.min.js:8
+msgid "blockquote"
+msgstr ""
+
+#: dartcms/static/dartcms/assets/tinymce/tinymce.min.js:8
+msgid "p"
+msgstr ""
+
+#: dartcms/static/dartcms/js/apps/base/grid.js:58
 msgid "Record successfully deleted"
 msgstr "Запись успешно удалена"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:57
+#: dartcms/static/dartcms/js/apps/base/grid.js:62
 msgid "Record successfully inserted"
 msgstr "Запись успешно добавлена"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:59
+#: dartcms/static/dartcms/js/apps/base/grid.js:64
 msgid "Record successfully updated"
 msgstr "Запись успешно изменена"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:64
+#: dartcms/static/dartcms/js/apps/base/grid.js:69
 msgid "Success"
 msgstr "Успешно"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:90
-msgid "Error"
-msgstr "Ошибка"
-
-#: dartcms/static/dartcms/js/apps/base/grid.js:91
+#: dartcms/static/dartcms/js/apps/base/grid.js:96
 msgid "Cannot delete the object: related objects exist"
 msgstr "Невозможно удалить объект: существуют дочерние записи"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:111
+#: dartcms/static/dartcms/js/apps/base/grid.js:100
+msgid "Error"
+msgstr "Ошибка"
+
+#: dartcms/static/dartcms/js/apps/base/grid.js:120
 msgid "All selected"
 msgstr "Выбрано всё"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:112
+#: dartcms/static/dartcms/js/apps/base/grid.js:121
 msgid "None selected"
 msgstr "Ничего не выбрано"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:113
+#: dartcms/static/dartcms/js/apps/base/grid.js:122
 msgid " options selected"
 msgstr " выбрано"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:114
+#: dartcms/static/dartcms/js/apps/base/grid.js:123
 msgid "Select all"
 msgstr "Выбрать все"
 
-#: dartcms/static/dartcms/js/apps/base/grid.js:115
+#: dartcms/static/dartcms/js/apps/base/grid.js:124
 msgid "Search..."
 msgstr "Поиск..."
 
@@ -76,6 +88,15 @@ msgstr "Вставить"
 #: dartcms/static/dartcms/js/apps/filemanager/index.js:168
 #: dartcms/static/dartcms/js/apps/filemanager/index.js:211
 #: dartcms/static/dartcms/js/apps/filemanager/index.js:215
+#: dartcms/templates/dartcms/apps/pages/grid.html:86
+#: dartcms/templates/dartcms/apps/pages/grid.html:110
+#: dartcms/templates/dartcms/apps/shop/grid.html:35
+#: dartcms/templates/dartcms/apps/shop/grid.html:49
+#: dartcms/templates/dartcms/apps/shop/grid.html:59
+#: dartcms/templates/dartcms/apps/shop/grid.html:73
+#: dartcms/templates/dartcms/apps/shop/grid.html:83
+#: dartcms/templates/dartcms/apps/shop/grid.html:129
+#: dartcms/templates/dartcms/apps/shop/grid.html:148
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -113,3 +134,41 @@ msgstr "Дата загрузки"
 #: dartcms/static/dartcms/js/apps/filemanager/index.js:215
 msgid "Input folder name"
 msgstr "Введите имя каталога"
+
+#: dartcms/templates/dartcms/apps/pages/grid.html:87
+#: dartcms/templates/dartcms/apps/shop/grid.html:130
+msgid "Page can not be appended to target"
+msgstr "Страница не не может быть добавлена к целевой"
+
+#: dartcms/templates/dartcms/apps/pages/grid.html:92
+#: dartcms/templates/dartcms/apps/pages/grid.html:116
+msgid "Info"
+msgstr "Уведомление"
+
+#: dartcms/templates/dartcms/apps/pages/grid.html:93
+msgid "Page appended to target"
+msgstr "Страница добавлена к целевой"
+
+#: dartcms/templates/dartcms/apps/pages/grid.html:111
+#: dartcms/templates/dartcms/apps/shop/grid.html:149
+msgid "Page can not be moved"
+msgstr "Страница не может быть перемещена"
+
+#: dartcms/templates/dartcms/apps/pages/grid.html:117
+#| msgid "Remove"
+msgid "Page moved"
+msgstr "Страница перемещена"
+
+#: dartcms/templates/dartcms/apps/shop/grid.html:36
+#: dartcms/templates/dartcms/apps/shop/grid.html:60
+#: dartcms/templates/dartcms/apps/shop/grid.html:84
+msgid "You have not selected any record."
+msgstr "Вы не выбрали ни одной записи."
+
+#: dartcms/templates/dartcms/apps/shop/grid.html:50
+msgid "You can not edit Root section."
+msgstr "Вы не можете редактировать корневую секцию."
+
+#: dartcms/templates/dartcms/apps/shop/grid.html:74
+msgid "You can not delete Root section."
+msgstr "Вы не можете удалить корневую секцию."

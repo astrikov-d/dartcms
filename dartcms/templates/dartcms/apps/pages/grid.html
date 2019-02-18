@@ -20,8 +20,11 @@
                         handler: function () {
                             var selected = grid.treegrid('getSelected');
                             if (selected) {
-                                openFormModal('{{ request.path }}insert/?parent=' + selected.pk, function () {
-                                    grid.treegrid('reload');
+                                openFormModal('{{ request.path }}insert/?parent=' + selected.pk, function (res) {
+                                    grid.treegrid('append', {
+                                        parent: selected.pk,
+                                        data: [res.data]
+                                    });
                                 });
                             }
                         }
@@ -32,8 +35,11 @@
                         handler: function () {
                             var selected = grid.treegrid('getSelected');
                             if (selected) {
-                                openFormModal('{{ index_url }}update/' + selected.pk + '/', function () {
-                                    grid.treegrid('reload');
+                                openFormModal('{{ index_url }}update/' + selected.pk + '/', function (res) {
+                                    grid.treegrid('update', {
+                                        id: selected.pk,
+                                        row: res.data
+                                    });
                                 });
                             }
                         }
@@ -45,7 +51,7 @@
                             var selected = grid.treegrid('getSelected');
                             if (selected) {
                                 openFormModal('{{ index_url }}delete/' + selected.pk + '/', function () {
-                                    grid.treegrid('reload');
+                                    grid.treegrid('remove', selected.pk);
                                 });
                             }
                         }
@@ -60,29 +66,47 @@
                 toolbar: gridToolbar,
                 treeField: 'title',
                 url: '{% url 'dartcms:pages:get_tree' %}',
+                {#loader: function(param,success,error){#}
+                {#    console.log(param);#}
+                {#    jQuery.ajax({#}
+                {#        url: '{% url 'dartcms:pages:get_tree' %}',#}
+                {#        type: 'POST',#}
+                {#        data: param,#}
+                {#        success: function(data,textStatus, jqXHR){#}
+                {#            console.log(data);#}
+                {#            success(data);#}
+                {#        }#}
+                {#    });#}
+                {#},#}
                 onLoadSuccess: function (row) {
                     $('.grid-loading-indicator').remove();
                     $('.grid-wrapper').animate({opacity: 1}, 500);
-                    $(this).treegrid('enableDnd', row ? row.pk : null);
+                    $(this).treegrid('enableDnd');
                 },
                 onDrop: function (target, source, point) {
                     var url = '';
                     if (point == 'append') {
                         url = '{% url 'dartcms:pages:append' %}' + '?target=' + target.pk + '&source=' + source.pk;
-
                         $.ajax({
                             dataType: 'json',
                             method: 'POST',
                             url: url
                         }).done(function (response) {
+                            //todo: There is a bug if do not reload tree
+                            grid.treegrid('reload');
                             if (!response.result) {
                                 new PNotify({
                                     title: gettext('Warning'),
                                     text: gettext('Page can not be appended to target'),
                                     icon: 'fa fa-warning'
                                 });
+                            } else {
+                                new PNotify({
+                                    title: gettext('Info'),
+                                    text: gettext('Page appended to target'),
+                                    icon: 'fa fa-info'
+                                });
                             }
-                            grid.treegrid('reload');
                         });
                     } else {
                         var position = point == 'bottom' ? 'right' : 'left';
@@ -94,14 +118,22 @@
                             method: 'POST',
                             url: url
                         }).done(function (response) {
+                            //todo: There is a bug if do not reload tree
+                            grid.treegrid('reload');
+
                             if (!response.result) {
                                 new PNotify({
                                     title: gettext('Warning'),
                                     text: gettext('Page can not be moved'),
                                     icon: 'fa fa-warning'
                                 });
+                            } else {
+                                new PNotify({
+                                    title: gettext('Info'),
+                                    text: gettext('Page moved'),
+                                    icon: 'fa fa-info'
+                                });
                             }
-                            grid.treegrid('reload');
                         });
                     }
                 }
