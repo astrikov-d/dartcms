@@ -25,6 +25,7 @@
                                         parent: selected.pk,
                                         data: [res.data]
                                     });
+                                    grid.treegrid('select', res.data.pk)
                                 });
                             }
                         }
@@ -65,23 +66,20 @@
                 fit: true,
                 toolbar: gridToolbar,
                 treeField: 'title',
-                url: '{% url 'dartcms:pages:get_tree' %}',
-                {#loader: function(param,success,error){#}
-                {#    console.log(param);#}
-                {#    jQuery.ajax({#}
-                {#        url: '{% url 'dartcms:pages:get_tree' %}',#}
-                {#        type: 'POST',#}
-                {#        data: param,#}
-                {#        success: function(data,textStatus, jqXHR){#}
-                {#            console.log(data);#}
-                {#            success(data);#}
-                {#        }#}
-                {#    });#}
-                {#},#}
+                //remoteFilter: true,
+                //loadFilter: function(data, parentId) {
+                //   console.log(parentId, data);
+                //    return data;
+                //},
+                url: '{% url 'dartcms:pages:get_tree' %}{{ search_params_str | safe}}',
                 onLoadSuccess: function (row) {
                     $('.grid-loading-indicator').remove();
                     $('.grid-wrapper').animate({opacity: 1}, 500);
-                    $(this).treegrid('enableDnd');
+                    $(this).treegrid('enableDnd', row?row.pk:null);
+                    if (row == null) {
+                        //$(this).treegrid('expand', 1)
+                    }
+                    $('.search-form-wrapper').css('visibility', 'visible');
                 },
                 onDrop: function (target, source, point) {
                     var url = '';
@@ -92,8 +90,6 @@
                             method: 'POST',
                             url: url
                         }).done(function (response) {
-                            //todo: There is a bug if do not reload tree
-                            grid.treegrid('reload');
                             if (!response.result) {
                                 new PNotify({
                                     title: gettext('Warning'),
@@ -102,25 +98,21 @@
                                 });
                             } else {
                                 new PNotify({
-                                    title: gettext('Info'),
+                                    title: gettext('Success'),
                                     text: gettext('Page appended to target'),
                                     icon: 'fa fa-info'
                                 });
+                                grid.treegrid('reload', target.pk);
                             }
                         });
                     } else {
                         var position = point == 'bottom' ? 'right' : 'left';
-
                         url = '{% url 'dartcms:pages:move' %}' + '?target=' + target.pk + '&source=' + source.pk + '&position=' + position;
-
                         $.ajax({
                             dataType: 'json',
                             method: 'POST',
                             url: url
                         }).done(function (response) {
-                            //todo: There is a bug if do not reload tree
-                            grid.treegrid('reload');
-
                             if (!response.result) {
                                 new PNotify({
                                     title: gettext('Warning'),
@@ -129,7 +121,7 @@
                                 });
                             } else {
                                 new PNotify({
-                                    title: gettext('Info'),
+                                    title: gettext('Success'),
                                     text: gettext('Page moved'),
                                     icon: 'fa fa-info'
                                 });
@@ -139,25 +131,29 @@
                 }
             });
 
-            grid.datagrid('enableFilter', [{
-                field: 'title',
-                type: 'text',
-                op: ['contains']
-            }, {
-                field: 'url',
-                type: 'text',
-                op: ['contains']
-            }, {
-                field: 'module',
-                type: 'text',
-                op: ['contains']
-            }]);
+            //grid.datagrid('enableFilter', [{
+            //    field: 'title',
+            //    type: 'text',
+            //    op: ['contains']
+            //}, {
+            //    field: 'url',
+            //    type: 'text',
+            //    op: ['contains']
+            //}, {
+            //    field: 'module',
+            //    type: 'text',
+            //    op: ['contains']
+            //}]);
         });
     </script>
 {% endblock %}
 
 {% block grid %}
     {% include 'dartcms/views/partials/loading_indicator.html' %}
+    {% if search_form %}
+        {% include 'dartcms/views/partials/grid_search.html' %}
+    {% endif %}
+
     <div class="grid-wrapper" style="opacity: 0;">
         <table id="id-datagrid">
             <thead>

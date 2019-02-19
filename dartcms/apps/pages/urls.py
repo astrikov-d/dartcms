@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
-from dartcms.views import GridView
 from django.conf.urls import url
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import PageForm
 from .views import (AppendPageView, DeletePageView, GetTreeView,
                     InsertPageView, LoadModuleParamsView, MovePageView,
-                    UpdatePageView)
+                    UpdatePageView, PageTreeView)
 
 app_name = 'pages'
 
@@ -22,7 +21,10 @@ config = DartCMSConfig({
             {'field': 'url', 'width': '20%'},
             {'field': 'module', 'width': '20%'},
         ],
-        'template_name': 'dartcms/apps/pages/grid.html'
+        'template_name': 'dartcms/apps/pages/grid.html',
+        'search': [
+            'title', 'url', 'module'
+        ]
     },
     'form': {
         'form_class': PageForm,
@@ -39,8 +41,8 @@ delete_kwargs = config.base.copy()
 delete_kwargs['template_name'] = 'dartcms/apps/pages/delete.html'
 
 urlpatterns = [
-    url(r'^$', GridView.as_view(**config.grid), name='index'),
-    url(r'^get-tree/$', csrf_exempt(GetTreeView.as_view(**config.grid)), name='get_tree'),
+    url(r'^$', PageTreeView.as_view(**config.grid), name='index'),
+    url(r'^get-tree/$', csrf_exempt(GetTreeView.as_view()), name='get_tree'),
     url(r'^insert/$', InsertPageView.as_view(**insert_kwargs), name='insert'),
     url(r'^append/$', csrf_exempt(AppendPageView.as_view()), name='append'),
     url(r'^move/$', csrf_exempt(MovePageView.as_view()), name='move'),
