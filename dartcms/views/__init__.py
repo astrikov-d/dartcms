@@ -40,9 +40,10 @@ class GridView(AdminMixin, JSONResponseMixin, ListView):
     single_select = True
 
     def get_search_form_kwargs(self):
+        kwargs = {'auto_id': 'id_for_search_%s'}
         if 'search' in self.request.GET:
-            return {'initial': self.request.GET}
-        return {}
+            kwargs['initial'] = self.request.GET
+        return kwargs
 
     def get_search_form(self):
         if self.search:

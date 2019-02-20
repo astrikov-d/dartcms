@@ -1,33 +1,72 @@
 # -*- coding: utf-8 -*-
+from django.template.defaultfilters import urlencode
+from django.views.generic import ListView
+from mptt.utils import get_cached_trees
+
 from dartcms.utils.loading import get_model
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            JSONView, UpdateObjectView)
 from dartcms.views.mixins import JSONResponseMixin, ModulePermissionsMixin
 from django.http import Http404
 from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
+
+Page = get_model('pages', 'Page')
+PageModule = get_model('pages', 'PageModule')
+
+
+class PageTreeView(GridView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.GET.get('search'):
+            context['search_params_str'] = '?%s' % "&".join('{!s}={!s}'.format(
+                k, urlencode(v)) for k, v in self.request.GET.items() if k in ['title', 'url', 'module', 'search'])
+            context['parent_str'] = _('Search Results')
+        return context
 
 
 class GetTreeView(GridView, JSONResponseMixin):
+    model = Page
+
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
 
     def render_to_response(self, context, **response_kwargs):
         return self.render_to_json_response(context, safe=False, **response_kwargs)
 
+    def get_search_res(self):
+        qs = self.model.objects.all()
+        if self.request.GET.get('title'):
+            qs = qs.filter(title__icontains=self.request.GET.get('title'))
+        if self.request.GET.get('module'):
+            qs = qs.filter(module_id=self.request.GET.get('module'))
+        if self.request.GET.get('url'):
+            qs = qs.filter(url__icontains=self.request.GET.get('url'))
+
+        if qs.exists():
+            qs = qs.get_ancestors(include_self=True)
+            home = get_cached_trees(qs)[0]
+            return [home.serializable_object_with_children]
+        else:
+            return []
+
     def get_data(self, context):
-        homepage = self.object_list.get(module__slug='homepage')
-        tree = [homepage.serializable_object()]
-        return tree
+        if self.request.GET.get('search'):
+            return self.get_search_res()
+
+        parent_id = self.request.POST.get('id')
+        qs = self.object_list.filter(parent_id=parent_id)
+        return [obj.serializable_object for obj in qs]
 
 
-class PageFormKwargsMixin(object):
+class PageFormKwargsMixin:
     def get_form_kwargs(self):
-        kwargs = super(PageFormKwargsMixin, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
 
 
-class SecurityMixin(object):
+class SecurityMixin:
     def has_perm(self):
         if self.request.user.is_superuser:
             return True
@@ -42,7 +81,7 @@ class SecurityMixin(object):
         raise NotImplemented
 
     def get_context_data(self, *args, **kwargs):
-        context = super(SecurityMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['has_perm'] = self.has_perm()
         return context
 
@@ -55,17 +94,35 @@ class InsertPageView(SecurityMixin, PageFormKwargsMixin, InsertObjectView):
     def get_initial(self):
         return {'parent': self.check_object}
 
+    def form_valid(self, form):
+        obj = self.save_object(form)
+        data = {
+            'pk': obj.pk,
+            'title': obj.title,
+            'module': obj.module.name,
+            'url': obj.url
+        }
+        return self.render_to_json_response({'result': True, 'action': 'INSERT', 'data': data})
+
 
 class UpdatePageView(SecurityMixin, PageFormKwargsMixin, UpdateObjectView):
     @cached_property
     def check_object(self):
         return self.object
 
+    def form_valid(self, form):
+        obj = form.save()
+        data = {
+            'title': obj.title,
+            'module': obj.module.name,
+            'url': obj.url
+        }
+        return self.render_to_json_response({'result': True, 'action': 'UPDATE', 'data': data})
+
 
 class TreeActionView(SecurityMixin, ModulePermissionsMixin, JSONView):
     @cached_property
     def check_object(self):
-        Page = get_model('pages', 'Page')
         return Page.objects.get(pk=self.request.GET.get('source'))
 
     def get_pages(self):
@@ -73,8 +130,6 @@ class TreeActionView(SecurityMixin, ModulePermissionsMixin, JSONView):
         source_id = self.request.GET.get('source')
 
         if target_id and source_id:
-            Page = get_model('pages', 'Page')
-
             target = Page.objects.get(pk=target_id)
             source = Page.objects.get(pk=source_id)
 
@@ -108,9 +163,6 @@ class MovePageView(TreeActionView):
 
 class LoadModuleParamsView(ModulePermissionsMixin, JSONView):
     def get_data(self, context):
-        PageModule = get_model('pages', 'PageModule')
-        Page = get_model('pages', 'Page')
-
         try:
             module = PageModule.objects.get(pk=self.request.GET.get('selected_module'))
         except PageModule.DoesNotExist:

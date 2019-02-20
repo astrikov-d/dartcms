@@ -20,8 +20,12 @@
                         handler: function () {
                             var selected = grid.treegrid('getSelected');
                             if (selected) {
-                                openFormModal('{{ request.path }}insert/?parent=' + selected.pk, function () {
-                                    grid.treegrid('reload');
+                                openFormModal('{{ request.path }}insert/?parent=' + selected.pk, function (res) {
+                                    grid.treegrid('append', {
+                                        parent: selected.pk,
+                                        data: [res.data]
+                                    });
+                                    grid.treegrid('select', res.data.pk)
                                 });
                             }
                         }
@@ -32,8 +36,11 @@
                         handler: function () {
                             var selected = grid.treegrid('getSelected');
                             if (selected) {
-                                openFormModal('{{ index_url }}update/' + selected.pk + '/', function () {
-                                    grid.treegrid('reload');
+                                openFormModal('{{ index_url }}update/' + selected.pk + '/', function (res) {
+                                    grid.treegrid('update', {
+                                        id: selected.pk,
+                                        row: res.data
+                                    });
                                 });
                             }
                         }
@@ -45,7 +52,7 @@
                             var selected = grid.treegrid('getSelected');
                             if (selected) {
                                 openFormModal('{{ index_url }}delete/' + selected.pk + '/', function () {
-                                    grid.treegrid('reload');
+                                    grid.treegrid('remove', selected.pk);
                                 });
                             }
                         }
@@ -59,17 +66,22 @@
                 fit: true,
                 toolbar: gridToolbar,
                 treeField: 'title',
-                url: '{% url 'dartcms:pages:get_tree' %}',
+                url: '{% url 'dartcms:pages:get_tree' %}{{ search_params_str | safe}}',
                 onLoadSuccess: function (row) {
                     $('.grid-loading-indicator').remove();
                     $('.grid-wrapper').animate({opacity: 1}, 500);
-                    $(this).treegrid('enableDnd', row ? row.pk : null);
+                    {% if not search_params_str %}
+                    $(this).treegrid('enableDnd', row?row.pk:null);
+                    {% endif %}
+                    if (row == null) {
+                        $(this).treegrid('expand', 1)
+                    }
+                    $('.search-form-wrapper').css('visibility', 'visible');
                 },
                 onDrop: function (target, source, point) {
                     var url = '';
                     if (point == 'append') {
                         url = '{% url 'dartcms:pages:append' %}' + '?target=' + target.pk + '&source=' + source.pk;
-
                         $.ajax({
                             dataType: 'json',
                             method: 'POST',
@@ -81,14 +93,18 @@
                                     text: gettext('Page can not be appended to target'),
                                     icon: 'fa fa-warning'
                                 });
+                            } else {
+                                new PNotify({
+                                    title: gettext('Success'),
+                                    text: gettext('Page appended to target'),
+                                    icon: 'fa fa-info'
+                                });
+                                grid.treegrid('reload', target.pk);
                             }
-                            grid.treegrid('reload');
                         });
                     } else {
                         var position = point == 'bottom' ? 'right' : 'left';
-
                         url = '{% url 'dartcms:pages:move' %}' + '?target=' + target.pk + '&source=' + source.pk + '&position=' + position;
-
                         $.ajax({
                             dataType: 'json',
                             method: 'POST',
@@ -100,32 +116,28 @@
                                     text: gettext('Page can not be moved'),
                                     icon: 'fa fa-warning'
                                 });
+                            } else {
+                                new PNotify({
+                                    title: gettext('Success'),
+                                    text: gettext('Page moved'),
+                                    icon: 'fa fa-info'
+                                });
                             }
-                            grid.treegrid('reload');
                         });
                     }
                 }
             });
 
-            grid.datagrid('enableFilter', [{
-                field: 'title',
-                type: 'text',
-                op: ['contains']
-            }, {
-                field: 'url',
-                type: 'text',
-                op: ['contains']
-            }, {
-                field: 'module',
-                type: 'text',
-                op: ['contains']
-            }]);
         });
     </script>
 {% endblock %}
 
 {% block grid %}
     {% include 'dartcms/views/partials/loading_indicator.html' %}
+    {% if search_form %}
+        {% include 'dartcms/views/partials/grid_search.html' %}
+    {% endif %}
+
     <div class="grid-wrapper" style="opacity: 0;">
         <table id="id-datagrid">
             <thead>
