@@ -66,18 +66,15 @@
                 fit: true,
                 toolbar: gridToolbar,
                 treeField: 'title',
-                //remoteFilter: true,
-                //loadFilter: function(data, parentId) {
-                //   console.log(parentId, data);
-                //    return data;
-                //},
                 url: '{% url 'dartcms:pages:get_tree' %}{{ search_params_str | safe}}',
                 onLoadSuccess: function (row) {
                     $('.grid-loading-indicator').remove();
                     $('.grid-wrapper').animate({opacity: 1}, 500);
+                    {% if not search_params_str %}
                     $(this).treegrid('enableDnd', row?row.pk:null);
+                    {% endif %}
                     if (row == null) {
-                        //$(this).treegrid('expand', 1)
+                        $(this).treegrid('expand', 1)
                     }
                     $('.search-form-wrapper').css('visibility', 'visible');
                 },
@@ -131,19 +128,6 @@
                 }
             });
 
-            //grid.datagrid('enableFilter', [{
-            //    field: 'title',
-            //    type: 'text',
-            //    op: ['contains']
-            //}, {
-            //    field: 'url',
-            //    type: 'text',
-            //    op: ['contains']
-            //}, {
-            //    field: 'module',
-            //    type: 'text',
-            //    op: ['contains']
-            //}]);
         });
     </script>
 {% endblock %}

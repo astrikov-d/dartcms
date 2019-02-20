@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-18 18:10+0700\n"
+"POT-Creation-Date: 2019-02-20 14:21+0700\n"
 "PO-Revision-Date: 2016-12-14 04:54+0000\n"
 "Last-Translator:   <astrikov.d@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -572,6 +572,11 @@ msgstr "Статическая страница"
 msgid "Homepage"
 msgstr "Главная страница"
 
+#: dartcms/apps/pages/views.py:23
+#| msgid "Search"
+msgid "Search Results"
+msgstr "Результаты поиска"
+
 #: dartcms/apps/shop/abstract_models.py:38
 msgid "product catalogs"
 msgstr "Каталоги товаров"
@@ -1015,7 +1020,7 @@ msgstr "Выберите каталог"
 msgid "You do not have permission to delete this page."
 msgstr "У вас нет прав для удаления этой страницы"
 
-#: dartcms/templates/dartcms/apps/pages/grid.html:18
+#: dartcms/templates/dartcms/apps/pages/grid.html:17
 #: dartcms/templates/dartcms/apps/shop/grid.html:25
 #: dartcms/templates/dartcms/apps/users/insert.html:24
 #: dartcms/templates/dartcms/views/grid.html:72

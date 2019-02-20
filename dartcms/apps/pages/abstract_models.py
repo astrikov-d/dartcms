@@ -144,3 +144,17 @@ class AbstractPage(MPTTModel):
         if not self.is_leaf_node():
             obj['state'] = 'closed'
         return obj
+
+    @property
+    def serializable_object_with_children(self):
+        obj = {
+            'pk': self.pk,
+            'parent_id': self.parent_id,
+            'title': self.title,
+            'module': str(self.module),
+            'url': self.url,
+            'children': []
+        }
+        for child in self.get_children():
+            obj['children'].append(child.serializable_object_with_children)
+        return obj
