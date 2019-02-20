@@ -561,7 +561,7 @@ msgstr "Дополнительно"
 
 #: dartcms/apps/pages/migrations/0004_insert_pagemodules.py:11
 msgid "Contacts"
-msgstr "Обратная связь"
+msgstr "Контакты"
 
 #: dartcms/apps/pages/migrations/0004_insert_pagemodules.py:13
 msgid "Static Page"
