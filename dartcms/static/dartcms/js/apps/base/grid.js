@@ -18,7 +18,9 @@ var openFormModal = function (url, onSubmitSuccess, onSubmitError, onOpen) {
             modalClass: "modal form-modal"
         });
         var formModal = $('.form-modal');
+        formModal.css('top', 0);
         formModal.css('width', $('.page-content').width());
+        formModal.css('min-height', $('.page-content').height());
         $('form', formModal).attr('action', url);
         initModalControls(formModal, onSubmitSuccess, onSubmitError);
         if (typeof initDatePickers === "function") {

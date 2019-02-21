@@ -1,19 +1,48 @@
 {{ form.non_field_errors }}
 
 {% if form.fieldsets %}
-    {% for fieldset in form.fieldsets %}
-        <fieldset class="{{ fieldset.classes }}">
-            {% if fieldset.legend %}
-                <legend>{{ fieldset.legend }}</legend>
-            {% endif %}
-            {% if fieldset.description %}
-                <p class="description">{{ fieldset.description }}</p>
-            {% endif %}
-            {% for field in fieldset %}
-                {% include 'dartcms/forms/partial/horizontal_field.html' %}
-            {% endfor %}
-        </fieldset>
-    {% endfor %}
+    {% if tabs %}
+        <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                {% for fieldset in form.fieldsets %}
+                    <li role="presentation">
+                        <a href="#id_tab_{{ fieldset.name }}" aria-controls="{{ fieldset.name }}" role="tab"
+                           data-toggle="tab">{{ fieldset.legend }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                {% for fieldset in form.fieldsets %}
+                    <div role="tabpanel" class="tab-pane" id="id_tab_{{ fieldset.name }}">
+                        {% if fieldset.description %}
+                            <p class="description">{{ fieldset.description }}</p>
+                        {% endif %}
+                        {% for field in fieldset %}
+                            {% include 'dartcms/forms/partial/horizontal_field.html' %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    {% else %}
+        {% for fieldset in form.fieldsets %}
+            <fieldset class="{{ fieldset.classes }}">
+                {% if fieldset.legend %}
+                    <legend>{{ fieldset.legend }}</legend>
+                {% endif %}
+                {% if fieldset.description %}
+                    <p class="description">{{ fieldset.description }}</p>
+                {% endif %}
+                {% for field in fieldset %}
+                    {% include 'dartcms/forms/partial/horizontal_field.html' %}
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+    {% endif %}
 {% else %}
     <fieldset>
         {% for field in form %}

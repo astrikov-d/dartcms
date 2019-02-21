@@ -46,6 +46,8 @@ class AdminMixin(ModulePermissionsMixin):
 
     page_header = ''
 
+    tabs = False
+
     def dispatch(self, request, *args, **kwargs):
         self.module = get_current_module(request.path)
         if self.module and self.module.config:
@@ -98,6 +100,7 @@ class AdminMixin(ModulePermissionsMixin):
             parent_url = ''
 
         context.update({
+            'tabs': self.tabs,
             'page_header': self.page_header if self.page_header else self.model._meta.verbose_name_plural,
             'parent_kwarg_name': self.parent_kwarg_name,
             'parent_url': parent_url
