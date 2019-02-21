@@ -1,3 +1,6 @@
+import random
+
+from pytils.translit import slugify
 from django.db.models import F, Max
 
 
@@ -7,6 +10,14 @@ def pre_save_handler(sender, **kwargs):
     """
     instance = kwargs.get('instance')
     if instance:
+        if instance.slug == '':
+            slug = slugify(instance.title)
+            try:
+                sender.objects.get(module=instance.module, slug=slug)
+                instance.slug = slug + '-%s' % round(random.random() * 1000)
+            except sender.DoesNotExist:
+                instance.slug = slug
+
         instance.url = instance.page_url
 
         current_level_pages = sender.objects.filter(parent=instance.parent)

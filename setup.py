@@ -4,6 +4,7 @@ import sys
 from setuptools import find_packages, setup
 
 if sys.argv[-1] == 'publish':
+    os.system('rm dist/*')
     os.system('python3 setup.py sdist')
     os.system('twine upload dist/*')
     sys.exit()
@@ -12,7 +13,7 @@ packages = find_packages()
 
 setup(
     name='dartcms',
-    version='0.1.16',
+    version='0.1.17',
     description='DartCMS - open-source content management system for Django',
     long_description='DartCMS is an open-source content management system based on the popular '
                      'Django Framework. It is friendly for developers and end-users.',
@@ -24,7 +25,7 @@ setup(
     py_modules=['dartcms'],
     install_requires=[
         'Django>=2.0.0',
-        'django-autoslug-iplweb>=1.9.4.dev0',
+        'django-autoslug>=1.9.4',
         'django-extra-views>=0.7.1',
         'django-form-utils>=1.0.3',
         'django-gravatar2>=1.4.0',
@@ -32,7 +33,6 @@ setup(
         'django-versatileimagefield>=1.9',
         'django-widget-tweaks>=1.4.1',
         'jsonfield>=1.0.3',
-        'Pillow>=3.2.0,<=5.0.0',
         'pytils>=0.3'
     ],
     license='MIT License',
