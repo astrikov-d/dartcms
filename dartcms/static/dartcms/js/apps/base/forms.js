@@ -1,11 +1,12 @@
 $(function () {
     $.validator.setDefaults({
         errorElement: "span",
-        errorClass: "help-block",
+        errorClass: "error",
         highlight: function (element, errorClass, validClass) {
             $(element).closest('.form-group').addClass('has-error');
         },
         unhighlight: function (element, errorClass, validClass) {
+            $('.errorlist').remove();
             $(element).closest('.form-group').removeClass('has-error');
         },
         errorPlacement: function (error, element) {
@@ -13,6 +14,10 @@ $(function () {
                 error.insertAfter(element.parent());
             } else {
                 error.insertAfter(element);
+            }
+            if ($('.error').length && $('.nav-tabs').length) {
+                var tab_id = $('.error').parents('.tab-pane').attr('id');
+                $('a[href="#' + tab_id + '"]').tab('show');
             }
         }
     });

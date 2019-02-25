@@ -18,7 +18,9 @@ var openFormModal = function (url, onSubmitSuccess, onSubmitError, onOpen) {
             modalClass: "modal form-modal"
         });
         var formModal = $('.form-modal');
+        formModal.css('top', 0);
         formModal.css('width', $('.page-content').width());
+        formModal.css('min-height', $('.page-content').height());
         $('form', formModal).attr('action', url);
         initModalControls(formModal, onSubmitSuccess, onSubmitError);
         if (typeof initDatePickers === "function") {
@@ -77,11 +79,17 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
                             }
                         } else {
                             if (response.hasOwnProperty('errors')) {
+
                                 $.each(response.errors, function (field, errors) {
                                     if (field == '__all__') {
                                         $(form).prepend('<ul class="errorlist"><li>' + errors.join(', ') + '</li></ul>');
                                     } else {
                                         $('#id_' + field).after('<ul class="errorlist"><li>' + errors.join(', ') + '</li></ul>');
+                                    }
+
+                                    if ($('.errorlist').length && $('.nav-tabs').length) {
+                                        var tab_id = $('.errorlist').parents('.tab-pane').attr('id');
+                                        $('a[href="#' + tab_id + '"]').tab('show');
                                     }
                                 });
 

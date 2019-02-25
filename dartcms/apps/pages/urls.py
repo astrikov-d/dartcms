@@ -28,6 +28,7 @@ config = DartCMSConfig({
     },
     'form': {
         'form_class': PageForm,
+        'tabs': True
     }
 })
 

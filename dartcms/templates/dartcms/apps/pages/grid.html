@@ -25,7 +25,10 @@
                                         parent: selected.pk,
                                         data: [res.data]
                                     });
-                                    grid.treegrid('select', res.data.pk)
+                                    grid.treegrid('select', res.data.pk);
+                                    {% if not search_params_str %}
+                                        grid.treegrid('enableDnd', res.data.pk);
+                                    {% endif %}
                                 });
                             }
                         }
