@@ -79,11 +79,17 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
                             }
                         } else {
                             if (response.hasOwnProperty('errors')) {
+
                                 $.each(response.errors, function (field, errors) {
                                     if (field == '__all__') {
                                         $(form).prepend('<ul class="errorlist"><li>' + errors.join(', ') + '</li></ul>');
                                     } else {
                                         $('#id_' + field).after('<ul class="errorlist"><li>' + errors.join(', ') + '</li></ul>');
+                                    }
+
+                                    if ($('.errorlist').length && $('.nav-tabs').length) {
+                                        var tab_id = $('.errorlist').parents('.tab-pane').attr('id');
+                                        $('a[href="#' + tab_id + '"]').tab('show');
                                     }
                                 });
 

@@ -6,7 +6,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 {% for fieldset in form.fieldsets %}
-                    <li role="presentation">
+                    <li role="presentation" {% if forloop.first %}class="active"{% endif %}>
                         <a href="#id_tab_{{ fieldset.name }}" aria-controls="{{ fieldset.name }}" role="tab"
                            data-toggle="tab">{{ fieldset.legend }}</a>
                     </li>
@@ -16,7 +16,7 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 {% for fieldset in form.fieldsets %}
-                    <div role="tabpanel" class="tab-pane" id="id_tab_{{ fieldset.name }}">
+                    <div role="tabpanel" class="tab-pane{% if forloop.first %} active{% endif %}" id="id_tab_{{ fieldset.name }}">
                         {% if fieldset.description %}
                             <p class="description">{{ fieldset.description }}</p>
                         {% endif %}
