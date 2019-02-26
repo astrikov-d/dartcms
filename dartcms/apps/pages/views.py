@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import urlencode
-from django.views.generic import ListView
+from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView, RedirectView
+
 from mptt.utils import get_cached_trees
 
 from dartcms.utils.loading import get_model
 from dartcms.views import (DeleteObjectView, GridView, InsertObjectView,
                            JSONView, UpdateObjectView)
 from dartcms.views.mixins import JSONResponseMixin, ModulePermissionsMixin
-from django.http import Http404
-from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
 
 Page = get_model('pages', 'Page')
 PageModule = get_model('pages', 'PageModule')
@@ -207,3 +210,13 @@ class DeletePageView(SecurityMixin, DeleteObjectView):
     @cached_property
     def check_object(self):
         return self.object
+
+
+class OpenUrlRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        url = get_object_or_404(Page, pk=self.kwargs.get('pk')).url
+        if hasattr(settings, 'APP_URL') and hasattr(settings, 'PORT'):
+            url = '%s:%s%s' % (settings.APP_URL, settings.PORT, url)
+        return url

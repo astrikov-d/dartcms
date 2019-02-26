@@ -3,11 +3,12 @@ from dartcms.utils.config import DartCMSConfig
 from dartcms.utils.loading import get_model
 from django.conf.urls import url
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.translation import ugettext_lazy as _
 
 from .forms import PageForm
 from .views import (AppendPageView, DeletePageView, GetTreeView,
                     InsertPageView, LoadModuleParamsView, MovePageView,
-                    UpdatePageView, PageTreeView)
+                    UpdatePageView, PageTreeView, OpenUrlRedirectView)
 
 app_name = 'pages'
 
@@ -24,6 +25,9 @@ config = DartCMSConfig({
         'template_name': 'dartcms/apps/pages/grid.html',
         'search': [
             'title', 'url', 'module'
+        ],
+        'additional_grid_actions': [
+            {'url': 'open_url', 'kwarg_name': 'pk', 'label': _('Open URL'), 'icon': 'chevron', 'target': '_blank'}
         ]
     },
     'form': {
@@ -43,6 +47,7 @@ delete_kwargs['template_name'] = 'dartcms/apps/pages/delete.html'
 
 urlpatterns = [
     url(r'^$', PageTreeView.as_view(**config.grid), name='index'),
+    url(r'^open_url/(?P<pk>\d+)/$', OpenUrlRedirectView.as_view(), name='open_url'),
     url(r'^get-tree/$', csrf_exempt(GetTreeView.as_view()), name='get_tree'),
     url(r'^insert/$', InsertPageView.as_view(**insert_kwargs), name='insert'),
     url(r'^append/$', csrf_exempt(AppendPageView.as_view()), name='append'),
