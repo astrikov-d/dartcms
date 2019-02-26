@@ -59,7 +59,32 @@
                                 });
                             }
                         }
-                    }
+                    },
+                    {% if additional_grid_actions %}
+                        {% for action in additional_grid_actions %}
+                            {
+                                text: '{{ action.label }}',
+                                iconCls: 'icon-{{ action.icon }}',
+                                handler: function () {
+                                    {% if not action.kwarg_name %}
+                                        var url = '{{ request.path }}{{ action.url }}/';
+                                    {% else %}
+                                        var selected = grid.datagrid('getSelected');
+                                        if (selected) {
+                                            var url = '{{ request.path }}{{ action.url }}/' + selected.pk + '/';
+                                        }
+                                    {% endif %}
+                                    if (url) {
+                                        {% if action.target %}
+                                            window.open(url, '{{ action.target }}');
+                                        {% else %}
+                                            window.location.href = url;
+                                        {% endif %}
+                                    }
+                                }
+                            },
+                        {% endfor %}
+                    {% endif %}
                 ];
 
             grid.treegrid({
