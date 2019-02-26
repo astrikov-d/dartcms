@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import urlencode
@@ -216,7 +216,6 @@ class OpenUrlRedirectView(RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
+        domain = get_current_site(self.request)
         url = get_object_or_404(Page, pk=self.kwargs.get('pk')).url
-        if hasattr(settings, 'APP_URL') and hasattr(settings, 'PORT'):
-            url = '%s:%s%s' % (settings.APP_URL, settings.PORT, url)
-        return url
+        return '//%s%s' % (domain, url)
