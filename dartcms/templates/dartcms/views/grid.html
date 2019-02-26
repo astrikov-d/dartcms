@@ -137,15 +137,20 @@
                                 text: '{{ action.label }}',
                                 iconCls: 'icon-{{ action.icon }}',
                                 handler: function () {
-                                    var selected = grid.datagrid('getSelected');
-                                    if (selected) {
-                                        var url = '{{ request.path }}{{ action.url }}/' + selected.pk + '/';
-                                        {% if action.target %}
-                                            window.open(url, '{{ action.target }}');
-                                        {% else %}
-                                            window.location.href = url;
-                                        {% endif %}
-                                    }
+                                    {% if not action.kwarg_name %}
+                                        var url = '{{ request.path }}{{ action.url }}/';
+                                        window.location.href = url;
+                                    {% else %}
+                                        var selected = grid.datagrid('getSelected');
+                                        if (selected) {
+                                            var url = '{{ request.path }}{{ action.url }}/' + selected.pk + '/';
+                                            {% if action.target %}
+                                                window.open(url, '{{ action.target }}');
+                                            {% else %}
+                                                window.location.href = url;
+                                            {% endif %}
+                                        }
+                                    {% endif %}
                                 }
                             },
                         {% endfor %}

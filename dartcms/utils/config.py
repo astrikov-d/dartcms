@@ -91,7 +91,12 @@ class DartCMSConfig(object):
 
         if 'addition' not in exclude and 'additional_grid_actions' in self.grid:
             for action in self.grid.get('additional_grid_actions', []):
-                urls += [url(r'^(?P<children_url>{url})/(?P<{kwarg_name}>\d+)/'.format(**action),
-                             include(action['include_urls'], namespace=action['url']))]
+                if 'kwarg_name' in action:
+                    urls += [url(r'^(?P<children_url>{url})/(?P<{kwarg_name}>\d+)/'.format(**action),
+                                 include(action['include_urls'], namespace=action['url']))]
+                else:
+                    urls += [url(r'^(?P<children_url>{url})/'.format(**action),
+                                 include(action['include_urls'], namespace=action['url']))]
+
 
         return urls
