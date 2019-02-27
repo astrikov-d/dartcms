@@ -35,7 +35,7 @@ At the moment, only basic configuration is supported:
             "additional_grid_actions": [
                 {
                     "url": "some-action", "label": _("Some action"), "icon": "edit",
-                    "required_permissions": "__all__"
+                    "required_permissions": "__all__", "kwarg_name": "field_name"
                 }
             ],
             "model_properties": ["some_calculated_property"]
