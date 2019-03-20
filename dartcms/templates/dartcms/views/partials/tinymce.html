@@ -7,16 +7,22 @@
             {% if LANG == 'ru-ru' or LANG == 'ru' %}
                 language: 'ru',
             {% endif %}
-            selector: ".rte",
-            content_css: 'https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+            branding: 'false',
+            selector: '.rte',
+            content_css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css, https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
             noneditable_noneditable_class: 'fa',
-            plugins: 'fontawesome noneditable advlist autolink link image lists charmap print preview code table textcolor media',
-            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table | fontsizeselect | forecolor backcolor | fontawesome | media',
+            plugins: 'fontawesome noneditable advlist autolink link image imagetools lists charmap print preview code table textcolor media fullscreen autoresize searchreplace',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor | table | media image | code fullscreen',
             file_browser_callback: filebrowserCallback,
+            extended_valid_elements: 'span[*], script[language|type|src]',
+            autoresize_overflow_padding: 20,
             relative_urls: false,
             remove_script_host: true,
             media_live_embeds: true,
-            extended_valid_elements: 'span[*]',
+            style_formats_merge: true,
+            force_br_newlines: false,
+            force_p_newlines: false,
+            forced_root_block: '',
             setup: function (ed) {
                 var el = $('#' + ed.id);
                 if (el.attr('readonly') || el.attr('disabled'))
