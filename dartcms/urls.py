@@ -16,14 +16,19 @@ urlpatterns = [
     url(r'^', include('dartcms.apps.dashboard.urls', namespace='dashboard')),
     url(r'^auth/', include('dartcms.apps.auth.urls', namespace='auth')),
 
-    url(r'^cms-users/', include('dartcms.apps.users.urls', namespace='users')),
-    url(r'^user-groups/', include('dartcms.apps.users.groups.urls', namespace='user_groups')),
-    url(r'^site-users/', include('dartcms.apps.siteusers.urls', namespace='siteusers')),
-
     url(r'^filemanager/', include('dartcms.apps.filemanager.urls', namespace='filemanager')),
     url(r'^dict-(?P<module_slug>[a-z_-]{3,50})/',
         include('dartcms.apps.dicts.urls', namespace='dicts')),
 ]
+
+if 'dartcms.apps.users.groups' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^user-groups/', include('dartcms.apps.users.groups.urls', namespace='user_groups')), ]
+
+if 'dartcms.apps.siteusers' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^site-users/', include('dartcms.apps.siteusers.urls', namespace='siteusers')), ]
+
+if 'dartcms.apps.users' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^cms-users/', include('dartcms.apps.users.urls', namespace='users')), ]
 
 if 'dartcms.apps.pages' in settings.INSTALLED_APPS:
     urlpatterns += [url(r'^sitemap/', include('dartcms.apps.pages.urls', namespace='pages')), ]

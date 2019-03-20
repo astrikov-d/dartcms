@@ -24,7 +24,7 @@ config = DartCMSConfig({
         'additional_grid_actions': [
             {
                 'url': 'change-password', 'label': _('Change Password'), 'icon': 'edit',
-                'required_permissions': '__all__'
+                'required_permissions': '__all__', 'kwarg_name': 'pk'
             }
         ],
         'model_properties': [SiteUser.USERNAME_FIELD]
