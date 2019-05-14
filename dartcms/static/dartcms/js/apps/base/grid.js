@@ -160,7 +160,5 @@ var initModalControls = function (modal, onSubmitSuccess, onSubmitError) {
             total_forms_count = total_forms_input.val();
             total_forms_input.val(parseInt(total_forms_count) - 1);
         });
-
-
     });
 };
