@@ -2,6 +2,8 @@
 
 {% if inlines %}
     {% for formsets in inlines %}
+        <hr>
+        <h3>{{ formsets.model|attribute:'_meta'|attribute:'verbose_name_plural'|capfirst }}</h3>
         <div class="inlines-wrapper">
             <div class="inlines">
                 {{ formsets.management_form }}
@@ -11,12 +13,13 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
-                    <button type="button" class="btn btn-warning add-more-inlines-btn">{% trans 'Add More' %}</button>
+                    <button type="button" class="btn btn-warning add-more-inlines-btn">{% trans '+' %} {{ formsets.model|attribute:'_meta'|attribute:'verbose_name'|lower }}</button>
                 </div>
             </div>
             <div class="empty-formset-form">
                 {% include 'dartcms/forms/partial/horizontal_form.html' with form=formsets.empty_form %}
             </div>
         </div>
+        {% if forloop.last %}<hr>{% endif %}
     {% endfor %}
 {% endif %}
