@@ -80,21 +80,21 @@ class DartCMSConfig(object):
 
         if 'update' not in exclude:
             update_view = UpdateObjectWithInlinesView if 'inlines' in self.form else UpdateObjectView
-            urls += [url(r'^update/(?P<pk>\d+)/$', update_view.as_view(**self.form), name='update')]
+            urls += [url(r'^update/(?P<pk>[0-9a-f-]+)/$', update_view.as_view(**self.form), name='update')]
 
         if 'delete' not in exclude:
             if not self.grid.get('single_select', True):
                 urls += [
-                    url(r'^delete/(?P<pks>[\d,]+)/$', DeleteMultipleObjectView.as_view(**self.base), name='delete')]
+                    url(r'^delete/(?P<pks>[0-9a-f-,]+)/$', DeleteMultipleObjectView.as_view(**self.base), name='delete')]
             else:
-                urls += [url(r'^delete/(?P<pk>\d+)/$', DeleteObjectView.as_view(**self.base), name='delete')]
+                urls += [url(r'^delete/(?P<pk>[0-9a-f-]+)/$', DeleteObjectView.as_view(**self.base), name='delete')]
 
         if 'addition' not in exclude and 'additional_grid_actions' in self.grid:
             for action in self.grid.get('additional_grid_actions', []):
                 if 'kwarg_name' in action:
-                    pattern = r'^(?P<children_url>{url})/(?P<{kwarg_name}>\d+)/'
+                    pattern = r'^(?P<children_url>{url})/(?P<{kwarg_name}>[0-9a-f-]+)/'
                 else:
-                    pattern = r'^(?P<children_url>{url})/(?P<{kwarg_name}>\d+)/'
+                    pattern = r'^(?P<children_url>{url})/'
 
                 if 'include_urls' in action:
                     urls += [url(pattern.format(**action),
