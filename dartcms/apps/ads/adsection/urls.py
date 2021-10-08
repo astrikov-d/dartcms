@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.apps.ads.models import AdSection
 from dartcms.utils.config import DartCMSConfig
 

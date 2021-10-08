@@ -1,4 +1,3 @@
-# coding: utf-8
 from django.urls import NoReverseMatch, reverse
 
 from .models import Module, ModulePermission

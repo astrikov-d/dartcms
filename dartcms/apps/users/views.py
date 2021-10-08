@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from dartcms.apps.auth.utils import get_user_model
 from dartcms.apps.modules.models import Module, ModuleGroup, ModulePermission
 from dartcms.views import AdminMixin, InsertObjectView, UpdateObjectView

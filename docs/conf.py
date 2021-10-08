@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # DartCMS documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul  8 11:05:21 2016.

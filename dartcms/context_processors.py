@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.apps.modules.functions import get_current_module
 
 

@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.apps.auth.mixins import StaffRequiredMixin
 from django.views.generic import TemplateView
 

@@ -1,7 +1,8 @@
-# coding: utf-8
 import json
 import os
 import types
+import copy
+from collections import OrderedDict
 
 from django import template
 from django.forms import (CheckboxInput, CheckboxSelectMultiple,
@@ -318,3 +319,25 @@ def json_loads(value):
 @register.filter('json_dumps')
 def json_dumps(value):
     return json.dumps(value)
+
+
+@register.simple_tag(name='fieldset_form')
+def fieldset_form(form):
+
+    if hasattr(form.Meta, 'fieldsets'):
+        res = {'fieldsets': []}
+        for fieldset in form.Meta.fieldsets:
+
+            new_form = copy.copy(form)
+            new_form.fields = OrderedDict(
+                [(key, value) for key, value in form.fields.items()
+                 if key in fieldset[1]['fields']]
+            )
+
+            res['fieldsets'].append({
+                'name': fieldset[0],
+                'legend': fieldset[1].get('legend', ''),
+                'fields': new_form,
+            })
+        return res
+    return form

@@ -1,15 +1,12 @@
-# coding: utf-8
 import datetime
 
 from autoslug import AutoSlugField
 from dartcms.utils.fields import RteField
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from versatileimagefield.fields import VersatileImageField
 
 
-@python_2_unicode_compatible
 class FeedType(models.Model):
     class Meta:
         app_label = 'feeds'
@@ -23,7 +20,6 @@ class FeedType(models.Model):
     slug = models.SlugField(verbose_name=_('Slug'))
 
 
-@python_2_unicode_compatible
 class Feed(models.Model):
     class Meta:
         app_label = 'feeds'
@@ -45,7 +41,6 @@ class Feed(models.Model):
             pass
 
 
-@python_2_unicode_compatible
 class AbstractFeedItem(models.Model):
     class Meta:
         app_label = 'feeds'

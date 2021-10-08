@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.apps.sitesettings.models import SiteSettings
 from django.forms import ModelForm, Select, TextInput
 

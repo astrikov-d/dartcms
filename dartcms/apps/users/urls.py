@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import DeleteObjectView, GridView
 from django.conf.urls import url

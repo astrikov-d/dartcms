@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.apps.modules.models import ModulePermission
 from django import template
 

@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
 from django.db import models
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from versatileimagefield.fields import VersatileImageField
 
 
-@python_2_unicode_compatible
 class AdPlace(models.Model):
     class Meta:
         app_label = 'ads'
@@ -22,7 +19,6 @@ class AdPlace(models.Model):
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
 
 
-@python_2_unicode_compatible
 class AdSection(models.Model):
     class Meta:
         app_label = 'ads'
@@ -37,7 +33,6 @@ class AdSection(models.Model):
     is_enabled = models.BooleanField(default=True, verbose_name=_('Is Enabled'))
 
 
-@python_2_unicode_compatible
 class AbstractAd(models.Model):
     class Meta:
         app_label = 'ads'

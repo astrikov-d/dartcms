@@ -1,7 +1,6 @@
-# coding: utf-8
 import sys
+import io
 
-import six
 from django.core.serializers.json import Serializer
 from django.db import models
 from django.utils.encoding import force_text, is_protected_type
@@ -17,7 +16,7 @@ class DartCMSSerializer(Serializer):
 
     def serialize(self, queryset, **options):
         self.options = options
-        self.stream = options.pop('stream', six.StringIO())
+        self.stream = options.pop('stream', io.StringIO())
         self.selected_fields = options.pop('fields', None)
         self.selected_props = options.pop('props', [])
         self.use_natural_keys = options.pop('use_natural_keys', False)

@@ -1,15 +1,12 @@
-# coding: utf-8
 from dartcms.apps.users.models import UserGroup
 from dartcms.utils.fields import RteField
 from django.conf import settings
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-@python_2_unicode_compatible
 class PageModule(models.Model):
     class Meta:
         app_label = 'pages'
@@ -34,7 +31,6 @@ SECURITY_TYPE_CHOICES = (
 )
 
 
-@python_2_unicode_compatible
 class AbstractPage(MPTTModel):
     """
     Base page model. In common cases, you should not re-declare this class, since it have all necessary features.

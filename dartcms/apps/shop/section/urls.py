@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms import get_model
 from dartcms.utils.config import DartCMSConfig
 from dartcms.views import UpdateObjectView

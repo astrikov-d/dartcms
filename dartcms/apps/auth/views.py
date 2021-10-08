@@ -1,4 +1,3 @@
-# coding: utf-8
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.urls import reverse_lazy

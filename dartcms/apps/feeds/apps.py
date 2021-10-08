@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.utils.fields import monkeypatch_versatile_image_field
 from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _

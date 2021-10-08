@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.utils.loading import get_model, is_model_registered
 
 DARTCMS_REQUIRED_APPS = [

@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.apps.modules.models import Module
 from django import forms
 from django.utils.translation import ugettext_lazy as _

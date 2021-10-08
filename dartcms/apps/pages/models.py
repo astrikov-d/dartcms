@@ -1,5 +1,3 @@
-# coding: utf-8
-
 from dartcms.utils.loading import get_model, is_model_registered
 from django.db.models.signals import post_save, pre_delete, pre_save
 

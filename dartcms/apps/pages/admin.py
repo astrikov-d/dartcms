@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from dartcms.utils.loading import get_model
 from django.contrib import admin
 

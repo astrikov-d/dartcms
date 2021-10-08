@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.views import (DeleteMultipleObjectView, DeleteObjectView,
                            GridView, InsertObjectView,
                            InsertObjectWithInlinesView, UpdateObjectView,

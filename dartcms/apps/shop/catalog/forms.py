@@ -1,10 +1,9 @@
-# coding: utf-8
 from dartcms.utils.loading import get_model
 from django.utils.translation import ugettext_lazy as _
-from form_utils.forms import BetterModelForm
+from django.forms import ModelForm
 
 
-class ProductCatalogForm(BetterModelForm):
+class ProductCatalogForm(ModelForm):
     class Meta:
         model = get_model('shop', 'ProductCatalog')
         exclude = []

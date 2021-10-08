@@ -1,4 +1,3 @@
-# coding: utf-8
 from dartcms.utils.config import DartCMSConfig
 from django.utils.translation import ugettext_lazy as _
 

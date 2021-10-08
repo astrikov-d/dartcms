@@ -1,4 +1,3 @@
-# coding: utf-8
 from django.contrib.auth.backends import ModelBackend
 
 from .utils import get_user_model

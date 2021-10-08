@@ -1,9 +1,8 @@
-# coding: utf-8
 from dartcms.utils.loading import get_model
-from form_utils.forms import BetterModelForm
+from django.forms import ModelForm
 
 
-class OrderForm(BetterModelForm):
+class OrderForm(ModelForm):
     class Meta:
         model = get_model('shop', 'Order')
         exclude = ['user']

@@ -1,11 +1,15 @@
+{% load dartcms_helpers %}
+
+{% fieldset_form form as fs_form %}
+
 {{ form.non_field_errors }}
 
-{% if form.fieldsets %}
+{% if fs_form.fieldsets %}
     {% if tabs %}
         <div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                {% for fieldset in form.fieldsets %}
+                {% for fieldset in fs_form.fieldsets %}
                     <li role="presentation" {% if forloop.first %}class="active"{% endif %}>
                         <a href="#id_tab_{{ fieldset.name }}" aria-controls="{{ fieldset.name }}" role="tab"
                            data-toggle="tab">{{ fieldset.legend }}</a>
@@ -15,12 +19,12 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                {% for fieldset in form.fieldsets %}
+                {% for fieldset in fs_form.fieldsets %}
                     <div role="tabpanel" class="tab-pane{% if forloop.first %} active{% endif %}" id="id_tab_{{ fieldset.name }}">
                         {% if fieldset.description %}
                             <p class="description">{{ fieldset.description }}</p>
                         {% endif %}
-                        {% for field in fieldset %}
+                        {% for field in fieldset.fields %}
                             {% include 'dartcms/forms/partial/horizontal_field.html' %}
                         {% endfor %}
                     </div>
@@ -29,7 +33,7 @@
 
         </div>
     {% else %}
-        {% for fieldset in form.fieldsets %}
+        {% for fieldset in fs_form.fieldsets %}
             <fieldset class="{{ fieldset.classes }}">
                 {% if fieldset.legend %}
                     <legend>{{ fieldset.legend }}</legend>
@@ -37,7 +41,7 @@
                 {% if fieldset.description %}
                     <p class="description">{{ fieldset.description }}</p>
                 {% endif %}
-                {% for field in fieldset %}
+                {% for field in fieldset.fields %}
                     {% include 'dartcms/forms/partial/horizontal_field.html' %}
                 {% endfor %}
             </fieldset>

@@ -1,6 +1,4 @@
-# coding: utf-8
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 FORM_TYPES = (
@@ -9,7 +7,6 @@ FORM_TYPES = (
 )
 
 
-@python_2_unicode_compatible
 class FormType(models.Model):
     class Meta:
         app_label = 'feedback'
@@ -23,7 +20,6 @@ class FormType(models.Model):
         return self.name
 
 
-@python_2_unicode_compatible
 class AbstractBaseMessage(models.Model):
     class Meta:
         app_label = 'feedback'

@@ -1,19 +1,14 @@
-# coding: utf-8
-from decimal import Decimal
-
 from autoslug import AutoSlugField
 from dartcms.utils.fields import RteField
 from dartcms.utils.loading import get_model
 from django.db import models
 from django.db.models import F, Sum
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 from versatileimagefield.fields import VersatileImageField
 
 
-@python_2_unicode_compatible
 class AbstractProductBase(models.Model):
     class Meta:
         abstract = True
@@ -54,7 +49,6 @@ class AbstractProductManufacturer(AbstractProductBase):
     image = VersatileImageField(_('Image'), upload_to='shop/producer', null=True, blank=True)
 
 
-@python_2_unicode_compatible
 class AbstractProductSection(MPTTModel, AbstractProductBase):
     class Meta:
         abstract = True
@@ -142,7 +136,6 @@ class AbstractProductImage(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-@python_2_unicode_compatible
 class AbstractOrderShippingType(models.Model):
     class Meta:
         abstract = True
@@ -163,7 +156,6 @@ class AbstractOrderShippingType(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-@python_2_unicode_compatible
 class AbstractOrderPaymentType(models.Model):
     class Meta:
         abstract = True
@@ -183,7 +175,6 @@ class AbstractOrderPaymentType(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-@python_2_unicode_compatible
 class AbstractOrderStatus(models.Model):
     class Meta:
         abstract = True
@@ -203,7 +194,6 @@ class AbstractOrderStatus(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-@python_2_unicode_compatible
 class AbstractOrder(models.Model):
     class Meta:
         abstract = True
@@ -265,7 +255,6 @@ class AbstractOrder(models.Model):
         return self.sum_value + self.shipping_cost - self.discount_value
 
 
-@python_2_unicode_compatible
 class AbstractOrderDetail(models.Model):
     class Meta:
         abstract = True
